@@ -6,7 +6,7 @@ html, body,canvas {
   margin: 0px;
 }
 </style>    
-<canvas  id="canvas" width="100" height="100" onmousemove="MousePos(event)" onmousedown="Repeat()" onmouseup="StopDraw()"></canvas>
+<canvas  id="canvas" width="200" height="200" onmousemove="MousePos(event)"  ontouchup="StopDraw()" onmousedown="Repeat()" onmouseup="StopDraw()"></canvas>
 <!--<h1 id="Fail" style="visibility:hidden;"><font color="red">Fail to send data</font></h1>
 <h1 id="OK" style="visibility:hidden;"><font color="green">Post submited with success</font></h1>-->
 <script>
@@ -38,6 +38,9 @@ window.onload=function(){
             data_matrix[i][j]=0;
         }
     }
+    canvas.addEventListener("touchmove",TouchPos,false);
+    canvas.addEventListener("touchstart",Repeat,false);
+    canvas.addEventListener("touchsend",StopDraw,false);
 }
     
 function MousePos(e){
@@ -48,6 +51,16 @@ function MousePos(e){
         MouseClick(e);
     }*/
 }
+    
+function TouchPos(e){
+    mouse[0]=e.touches[0].clientX;
+    mouse[1]=e.touches[0].clientY;
+    console.log(mouse);
+    /*if (e.type == "mousedown"){
+        MouseClick(e);
+    }*/
+}    
+    
 
 function Repeat(e){
     MouseClick();
