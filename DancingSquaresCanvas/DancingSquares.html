@@ -18,7 +18,7 @@ var canvas=document.getElementById("canvas");
 var context=canvas.getContext("2d");  
 var mouse=[0,0];//x and y
 var sqr_matrix=[];
-var matrix_size=50;
+var matrix_size=100;
 var t;
 canvas.width=window.innerWidth;
 canvas.height=window.innerHeight;
@@ -95,14 +95,14 @@ function ConstructMatrix(){
     var height=window.innerHeight;
     var sizex=Math.round(width/matrix_size);
     var sizey=Math.round(height/matrix_size);
-    for(i=0;i<matrix_size;i++){
+    for(i=0;i<=matrix_size;i++){
         sqr_matrix[i]=[]
-        for(j=0;j<matrix_size;j++){
-            sqr_matrix[i][j]=new Square("rgb(255,255,9)",canvas,i*Math.round(width/matrix_size),j*Math.round(height/matrix_size),i,j,sizex,sizey,0.23);
+        for(j=0;j<=matrix_size;j++){
+            sqr_matrix[i][j]=new Square("rgb(50,150,255)",canvas,i*Math.round(width/matrix_size),j*Math.round(height/matrix_size),i,j,sizex,sizey,0.23);
         }
     }
-    for(i=0;i<matrix_size;i++){
-        for(j=0;j<matrix_size;j++){
+    for(i=0;i<=matrix_size;i++){
+        for(j=0;j<=matrix_size;j++){
             var sqr=sqr_matrix[i][j];
             sqr.Init(sqr_matrix);
         }
@@ -130,7 +130,7 @@ function Main(){
         realx=Math.floor(perc_x*matrix_size);
         realy=Math.floor(perc_y*matrix_size);
         //console.log(realy);
-        if(realx>=0 && realx<matrix_size && realy>=0 && realy<matrix_size){
+        if(realx>=0 && realx<=matrix_size && realy>=0 && realy<=matrix_size){
             var sqr=sqr_matrix[realx][realy];
             sqr.Run();
         }
