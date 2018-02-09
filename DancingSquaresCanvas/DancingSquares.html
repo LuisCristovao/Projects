@@ -1,0 +1,121 @@
+<html>
+<head>
+<title>Dancing Squares</title>    
+</head>
+<style>
+html, body,canvas {
+  width:  100%;
+  height: 100%;
+  margin: 0px;
+}
+</style>
+    
+<canvas  id="canvas"  onmousemove="MousePos(event)"  ></canvas>
+<!--<h1 id="Fail" style="visibility:hidden;"><font color="red">Fail to send data</font></h1>
+<h1 id="OK" style="visibility:hidden;"><font color="green">Post submited with success</font></h1>-->
+<script>
+var canvas=document.getElementById("canvas");
+var context=canvas.getContext("2d");  
+var mouse=[0,0];//x and y
+var sqr_matrix=[];
+var matrix_size=10;
+var t;
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+    
+class Square{
+    constructor(_color,_canvas,x,y,sizex,sizey,activation){
+        this.base_color=_color;
+        this.canvas=_canvas;
+        this.ctx=canvas.getContext("2d");
+        this.x=x;
+        this.y=y;
+        this.sizex=sizex;
+        this.sizey=sizey;
+        this.neighbours=[];
+        this.activation=activation || 0.5;
+    }
+    
+     ToBaseColor(){
+        //this.ctx.fillStyle=this.base_color;
+        this.ctx.fillStyle=this.base_color;
+        this.ctx.fillRect(this.x,this.y,this.sizex,this.sizey);
+    }
+    
+     Draw(){
+        var n=Math.random();
+        if(n>this.activation){
+            this.ctx.fillStyle="rgb("+Math.round(Math.random()*255)+","+Math.round(Math.random()*255)+","+Math.round(Math.random()*255)+")";
+            this.ctx.fillRect(this.x,this.y,this.sizex,this.sizey);
+            //setTimeout(this.ToBaseColor,1000);
+        }
+    }
+     Init(matrix){
+        this.matrix=matrix;
+        if(this.x>0 && this.x<this.matrix.length-1 && this.y>0 && this.y<this.matrix.length-1){ 
+            console.log(this.x,this.y);
+            //right
+           this.neighbours.push(this.matrix[this.x+1][this.y]);
+            //left
+           this.neighbours.push(this.matrix[this.x-1][this.y]);
+            //up
+           this.neighbours.push(this.matrix[this.x][this.y+1]);
+            //down
+           this.neighbours.push(this.matrix[this.x][this.y-1]);
+        }
+    }
+    Run(){
+        
+        this.Draw();
+        /*this.neighbours.forEach(function(neighbour) {
+                neighbour.Draw();
+        });*/
+        
+        
+    }
+}    
+
+function ConstructMatrix(){
+    var width=window.innerWidth;
+    var height=window.innerHeight;
+    var sizex=Math.round(width/matrix_size);
+    var sizey=Math.round(height/matrix_size);
+    for(i=0;i<matrix_size;i++){
+        sqr_matrix[i]=[]
+        for(j=0;j<matrix_size;j++){
+            sqr_matrix[i][j]=new Square("white",canvas,i*Math.round(width/matrix_size),j*Math.round(height/matrix_size),sizex,sizey);
+        }
+    }
+    for(i=0;i<matrix_size;i++){
+        for(j=0;j<matrix_size;j++){
+            var sqr=sqr_matrix[i][j];
+            sqr.Init(sqr_matrix);
+        }
+    }
+}
+function MousePos(e){
+    mouse[0]=e.clientX;
+    mouse[1]=e.clientY;
+    console.log(mouse);
+}   
+    
+function Main(){
+    var X=mouse[0];
+    var Y=mouse[1];
+    perc_x=(X/window.innerWidth);
+    perc_y=(Y/window.innerHeight);
+    
+    realx=Math.round(perc_x*matrix_size);
+    realy=Math.round(perc_y*matrix_size);
+    console.log(realy);
+    if(realx>=0 && realx<matrix_size && realy>=0 && realy<matrix_size){
+        var sqr=sqr_matrix[realx][realy];
+        sqr.Run();
+    }
+    window.requestAnimationFrame(Main);
+}
+ConstructMatrix();    
+window.requestAnimationFrame(Main);
+    
+</script>
+</html>
