@@ -18,58 +18,72 @@ var canvas=document.getElementById("canvas");
 var context=canvas.getContext("2d");  
 var mouse=[0,0];//x and y
 var sqr_matrix=[];
-var matrix_size=20;
+var matrix_size=50;
 var t;
 canvas.width=window.innerWidth;
 canvas.height=window.innerHeight;
-    
+var prevx;
+var prevy;
+
+canvas.addEventListener("touchmove",TouchMove,false);
+function TouchMove(e){
+    mouse[0]=e.touches[0].clientX;
+    mouse[1]=e.touches[0].clientY;
+}    
 class Square{
-    constructor(_color,_canvas,x,y,sizex,sizey,activation){
+    constructor(_color,_canvas,x,y,mx,my,sizex,sizey,activation){
         this.base_color=_color;
         this.canvas=_canvas;
         this.ctx=canvas.getContext("2d");
         this.x=x;
         this.y=y;
+        this.mx=mx;
+        this.my=my;
         this.sizex=sizex;
         this.sizey=sizey;
         this.neighbours=[];
-        this.activation=activation || 0.5;
+        this.activation=activation;
     }
     
      ToBaseColor(){
-        //this.ctx.fillStyle=this.base_color;
         this.ctx.fillStyle=this.base_color;
+        //this.ctx.fillStyle="white";
         this.ctx.fillRect(this.x,this.y,this.sizex,this.sizey);
     }
     
      Draw(){
-        var n=Math.random();
-        if(n>this.activation){
+        
             this.ctx.fillStyle="rgb("+Math.round(Math.random()*255)+","+Math.round(Math.random()*255)+","+Math.round(Math.random()*255)+")";
             this.ctx.fillRect(this.x,this.y,this.sizex,this.sizey);
-            //setTimeout(this.ToBaseColor,1000);
-        }
+            setTimeout(resetColor(this.mx, this.my),500);
+        
     }
      Init(matrix){
         this.matrix=matrix;
-        if(this.x>0 && this.x<this.matrix.length-1 && this.y>0 && this.y<this.matrix.length-1){ 
+        if(this.mx>0 && this.mx<this.matrix.length-1 && this.my>0 && this.my<this.matrix.length-1){ 
             console.log(this.x,this.y);
             //right
-           this.neighbours.push(this.matrix[this.x+1][this.y]);
+           this.neighbours.push(this.matrix[this.mx+1][this.my]);
             //left
-           this.neighbours.push(this.matrix[this.x-1][this.y]);
+           this.neighbours.push(this.matrix[this.mx-1][this.my]);
             //up
-           this.neighbours.push(this.matrix[this.x][this.y+1]);
+           this.neighbours.push(this.matrix[this.mx][this.my+1]);
             //down
-           this.neighbours.push(this.matrix[this.x][this.y-1]);
+           this.neighbours.push(this.matrix[this.mx][this.my-1]);
         }
+         this.ToBaseColor();
     }
+    
     Run(){
-        
+        //this.ToBaseColor();
         this.Draw();
-        /*this.neighbours.forEach(function(neighbour) {
-                neighbour.Draw();
-        });*/
+        this.neighbours.forEach(function(neighbour) {
+                var n=Math.random();
+                if(n<neighbour.activation){
+                    //neighbour.activation=neighbour.activation/2;
+                     neighbour.Run();
+                }
+        });
         
         
     }
@@ -83,7 +97,7 @@ function ConstructMatrix(){
     for(i=0;i<matrix_size;i++){
         sqr_matrix[i]=[]
         for(j=0;j<matrix_size;j++){
-            sqr_matrix[i][j]=new Square("white",canvas,i*Math.round(width/matrix_size),j*Math.round(height/matrix_size),sizex,sizey);
+            sqr_matrix[i][j]=new Square("rgb(255,255,9)",canvas,i*Math.round(width/matrix_size),j*Math.round(height/matrix_size),i,j,sizex,sizey,0.15);
         }
     }
     for(i=0;i<matrix_size;i++){
@@ -97,25 +111,37 @@ function MousePos(e){
     mouse[0]=e.clientX;
     mouse[1]=e.clientY;
     console.log(mouse);
-}   
+} 
+    
+function resetColor(x, y) {
+    return function() {
+        sqr_matrix[x][y].ToBaseColor();
+    }
+}
     
 function Main(){
     var X=mouse[0];
     var Y=mouse[1];
-    perc_x=(X/window.innerWidth);
-    perc_y=(Y/window.innerHeight);
-    
-    realx=Math.floor(perc_x*matrix_size);
-    realy=Math.floor(perc_y*matrix_size);
-    //console.log(realy);
-    if(realx>=0 && realx<matrix_size && realy>=0 && realy<matrix_size){
-        var sqr=sqr_matrix[realx][realy];
-        sqr.Run();
+    if(X!=prevx || prevy!=Y){
+        perc_x=(X/window.innerWidth);
+        perc_y=(Y/window.innerHeight);
+
+        realx=Math.floor(perc_x*matrix_size);
+        realy=Math.floor(perc_y*matrix_size);
+        //console.log(realy);
+        if(realx>=0 && realx<matrix_size && realy>=0 && realy<matrix_size){
+            var sqr=sqr_matrix[realx][realy];
+            sqr.Run();
+        }
     }
+    prevx=X;
+    prevy=Y;
+        
     window.requestAnimationFrame(Main);
+
 }
 ConstructMatrix();    
 window.requestAnimationFrame(Main);
-    
+//setInterval(Main,10);    
 </script>
 </html>
