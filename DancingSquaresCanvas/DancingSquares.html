@@ -81,7 +81,8 @@ class Square{
                 var n=Math.random();
                 if(n<neighbour.activation){
                     //neighbour.activation=neighbour.activation/2;
-                     neighbour.Run();
+                     //setTimeout(neighbour.Run(),Math.floor(Math.random() * 3000));
+                    neighbour.Run()
                 }
         });
         
