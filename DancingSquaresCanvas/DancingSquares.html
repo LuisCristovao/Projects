@@ -18,7 +18,7 @@ var canvas=document.getElementById("canvas");
 var context=canvas.getContext("2d");  
 var mouse=[0,0];//x and y
 var sqr_matrix=[];
-var matrix_size=10;
+var matrix_size=20;
 var t;
 canvas.width=window.innerWidth;
 canvas.height=window.innerHeight;
@@ -105,9 +105,9 @@ function Main(){
     perc_x=(X/window.innerWidth);
     perc_y=(Y/window.innerHeight);
     
-    realx=Math.round(perc_x*matrix_size);
-    realy=Math.round(perc_y*matrix_size);
-    console.log(realy);
+    realx=Math.floor(perc_x*matrix_size);
+    realy=Math.floor(perc_y*matrix_size);
+    //console.log(realy);
     if(realx>=0 && realx<matrix_size && realy>=0 && realy<matrix_size){
         var sqr=sqr_matrix[realx][realy];
         sqr.Run();
