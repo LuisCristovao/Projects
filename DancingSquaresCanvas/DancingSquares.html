@@ -55,7 +55,7 @@ class Square{
         
             this.ctx.fillStyle="rgb("+Math.round(Math.random()*255)+","+Math.round(Math.random()*255)+","+Math.round(Math.random()*255)+")";
             this.ctx.fillRect(this.x,this.y,this.sizex,this.sizey);
-            setTimeout(resetColor(this.mx, this.my),500);
+            setTimeout(resetColor(this.mx, this.my), Math.floor(Math.random() * 1000));
         
     }
      Init(matrix){
@@ -97,7 +97,7 @@ function ConstructMatrix(){
     for(i=0;i<matrix_size;i++){
         sqr_matrix[i]=[]
         for(j=0;j<matrix_size;j++){
-            sqr_matrix[i][j]=new Square("rgb(255,255,9)",canvas,i*Math.round(width/matrix_size),j*Math.round(height/matrix_size),i,j,sizex,sizey,0.15);
+            sqr_matrix[i][j]=new Square("rgb(255,255,9)",canvas,i*Math.round(width/matrix_size),j*Math.round(height/matrix_size),i,j,sizex,sizey,0.23);
         }
     }
     for(i=0;i<matrix_size;i++){
