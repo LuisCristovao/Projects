@@ -24,6 +24,7 @@ canvas.width=window.innerWidth;
 canvas.height=window.innerHeight;
 var prevx;
 var prevy;
+var appearlist=[] 
 
 canvas.addEventListener("touchmove",TouchMove,false);
 function TouchMove(e){
@@ -80,9 +81,9 @@ class Square{
         this.neighbours.forEach(function(neighbour) {
                 var n=Math.random();
                 if(n<neighbour.activation){
-                    //neighbour.activation=neighbour.activation/2;
-                     //setTimeout(neighbour.Run(),Math.floor(Math.random() * 3000));
-                    neighbour.Run()
+                    
+                    //neighbour.Run()
+                    appearlist.push(neighbour);
                 }
         });
         
@@ -98,7 +99,7 @@ function ConstructMatrix(){
     for(i=0;i<=matrix_size;i++){
         sqr_matrix[i]=[]
         for(j=0;j<=matrix_size;j++){
-            sqr_matrix[i][j]=new Square("rgb(50,150,255)",canvas,i*Math.round(width/matrix_size),j*Math.round(height/matrix_size),i,j,sizex,sizey,0.23);
+            sqr_matrix[i][j]=new Square("rgb(50,150,255)",canvas,i*Math.round(width/matrix_size),j*Math.round(height/matrix_size),i,j,sizex,sizey,0.3);
         }
     }
     for(i=0;i<=matrix_size;i++){
@@ -119,6 +120,13 @@ function resetColor(x, y) {
         sqr_matrix[x][y].ToBaseColor();
     }
 }
+function showSquares(maxnumber){
+    for(i=0;i<maxnumber;i++){
+        if(appearlist.length>0)
+            appearlist.pop().Run();
+        
+    }
+}
     
 function Main(){
     var X=mouse[0];
@@ -133,6 +141,7 @@ function Main(){
         if(realx>=0 && realx<=matrix_size && realy>=0 && realy<=matrix_size){
             var sqr=sqr_matrix[realx][realy];
             sqr.Run();
+            showSquares(30)
         }
     }
     prevx=X;
