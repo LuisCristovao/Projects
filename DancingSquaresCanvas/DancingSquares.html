@@ -99,7 +99,7 @@ function ConstructMatrix(){
     for(i=0;i<=matrix_size;i++){
         sqr_matrix[i]=[]
         for(j=0;j<=matrix_size;j++){
-            sqr_matrix[i][j]=new Square("rgb(50,150,255)",canvas,i*Math.round(width/matrix_size),j*Math.round(height/matrix_size),i,j,sizex,sizey,0.3);
+            sqr_matrix[i][j]=new Square("rgb(50,150,255)",canvas,i*Math.round(width/matrix_size),j*Math.round(height/matrix_size),i,j,sizex,sizey,0.25);
         }
     }
     for(i=0;i<=matrix_size;i++){
@@ -141,9 +141,10 @@ function Main(){
         if(realx>=0 && realx<=matrix_size && realy>=0 && realy<=matrix_size){
             var sqr=sqr_matrix[realx][realy];
             sqr.Run();
-            showSquares(30)
+            
         }
     }
+    showSquares(100)
     prevx=X;
     prevy=Y;
         
