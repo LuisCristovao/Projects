@@ -67,8 +67,20 @@ fullscreen,body{
 <span class="btn" style="font-size:30px;cursor:pointer" onclick="openNav()">☰ open</span>
 <div id="mySidenav" class="sidenav">
 <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-Bla1:    <input>
-Bla2:    <input>    
+<table>
+    <tr>
+    <th>Matrix Size:</th><th><input type="range" id="matrix_size"></th><br>
+    </tr>
+    <tr>
+        <th>Propagation:</th><th><input id="propagation" type="range" value="0.24" min="0" max="1" step="0.01"><br> </th>
+    </tr>
+    <tr>
+        <th>Explosion Size:</th><th><input type="range"><br>  </th>
+    </tr>
+    <tr>
+        <th>Duration:</th><th><input type="range">  </th>
+    </tr>
+</table>
 </div>
 <canvas   id="canvas"  onmousemove="MousePos(event)"  > </canvas>
 <!--<button class="btn" style="visibility:hidden;">docjsd</button>-->
@@ -89,6 +101,10 @@ canvas.height=window.innerHeight;
 var prevx;
 var prevy;
 var appearlist=[] 
+var activation_prob=0.24;
+
+document.getElementById("propagation").oninput=function(){activation_prob=this.value;}
+
 
 canvas.addEventListener("touchmove",TouchMove,false);
     
@@ -157,7 +173,7 @@ class Square{
         this.Draw();
         this.neighbours.forEach(function(neighbour) {
                 var n=Math.random();
-                if(n<neighbour.activation){
+                if(n<activation_prob){
                     
                     //neighbour.Run()
                     appearlist.push(neighbour);
