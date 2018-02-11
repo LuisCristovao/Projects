@@ -75,7 +75,7 @@ fullscreen,body{
         <th>Propagation:</th><th><input id="propagation" type="range" value="0.24" min="0" max="0.4" step="0.01"><br> </th>
     </tr>
     <tr>
-        <th>Explosion Size:</th><th><input id type="range"><br>  </th>
+        <th>Explosion Size:</th><th><input id="explosion_size" type="range" value="100" min="1" max="300" step="1"><br>  </th>
     </tr>
     <tr>
         <th>Duration:</th><th><input type="range">  </th>
@@ -101,9 +101,16 @@ canvas.height=window.innerHeight;
 var prevx;
 var prevy;
 var appearlist=[] 
-var activation_prob=0.24;
 
+var activation_prob=0.24;
+var explosion_size=100;
+    
+    
+    
+    
 document.getElementById("propagation").oninput=function(){activation_prob=this.value;}
+document.getElementById("explosion_size").oninput=function(){explosion_size=this.value;}
+
 
 
 canvas.addEventListener("touchmove",TouchMove,false);
@@ -238,7 +245,7 @@ function Main(){
             
         }
     }
-    showSquares(100)
+    showSquares(explosion_size)
     prevx=X;
     prevy=Y;
     console.log(appearlist.length);    
