@@ -69,7 +69,7 @@ fullscreen,body{
 <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
 <table>
     <tr>
-    <th>Matrix Size:</th><th><input type="range" id="matrix_size"></th><br>
+    <th>Matrix Size:</th><th><input type="range" id="matrix_size" value="100" min="5" max="200" step="1"></th><br>
     </tr>
     <tr>
         <th>Propagation:</th><th><input id="propagation" type="range" value="0.24" min="0" max="0.4" step="0.01"><br> </th>
@@ -111,7 +111,7 @@ var duration=1000;
 document.getElementById("propagation").oninput=function(){activation_prob=this.value;}
 document.getElementById("explosion_size").oninput=function(){explosion_size=this.value;}
 document.getElementById("duration").oninput=function(){duration=this.value;}
-
+document.getElementById("matrix_size").oninput=function(){matrix_size=this.value;ConstructMatrix();}
 
 
 canvas.addEventListener("touchmove",TouchMove,false);
@@ -193,6 +193,7 @@ class Square{
 }    
 
 function ConstructMatrix(){
+    sqr_matrix=[];
     var width=window.innerWidth;
     var height=window.innerHeight;
     var sizex=Math.round(width/matrix_size);
