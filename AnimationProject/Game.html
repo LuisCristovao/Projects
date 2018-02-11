@@ -38,7 +38,8 @@ fullscreen,body,html{
     var EvilAttacks=[];
     var EvilDefense=[];
     var EvilEvolve=[];
-    
+    var Intro=[];
+    var Idle=[];
 
 
     function readTextFile(file)
@@ -74,13 +75,18 @@ fullscreen,body,html{
     } 
     
     function loadImage(src) {
-        var img = new Image();
-        img.src = src;
-        img.isReady = false;
-        img.onload = function() {
-            img.isReady = true;
-        };
-        return img;
+        try{
+            var img = new Image();
+            img.src = src;
+            img.isReady = false;
+            img.onload = function() {
+                img.isReady = true;
+            };
+            return img;
+        }
+        catch(err){
+            console.log("Error loading Image");
+        }
     }
 
     function get_all_animations(){
@@ -95,8 +101,16 @@ fullscreen,body,html{
         var adressEvilEvolve="images/EvilEvolve";
         
         //Get Intro Images
-        for(i=0;i<)
-        
+        var number_of_images=parseInt(readTextFile(adressMenu+"/Index.txt"));
+        console.log("Numeber:"+number_of_images);
+        var animation_images=[];
+        var finalAdress;
+        for(i=0;i<number_of_images;i++){
+            finalAdress=adressMenu+"/"+i+".jpg";
+            try{animation_images[i]=loadImage(finalAdress);}
+            catch(err){console.log("Error Loading Image");haveFiles=false;}
+        }
+        Intro.push(animation_images);
         /*s=readTextFile2(adress);
         var saux=s.split(";");
         var adressArray=[];
@@ -120,12 +134,15 @@ fullscreen,body,html{
         }*/
     }    
 
-
+    var image_index=0;
     function Main(){
-
+        //image=Intro[0][i];
+        context.drawImage(Intro[0][image_index],0,0,window.innerWidth,window.innerHeight);
+        image_index=(image_index+1)%Intro[0].length;
         window.requestAnimationFrame(Main);
     }
-
+    get_all_animations();
+   
     window.requestAnimationFrame(Main);
     //setInterval(Main,10);    
 </script>
