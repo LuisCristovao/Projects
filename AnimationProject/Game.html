@@ -91,47 +91,45 @@ fullscreen,body,html{
 
     function get_all_animations(){
         var s=new String();
-        var adressMenu="images/Intro";
-        var adressIdle="images/Idle";
-        var adressGoodAttacks="images/GoodAttacks";
-        var adressGoodDefense="images/GoodDefense";
-        var adressGoodEvolve="images/GoodEvolve";
-        var adressEvilAttacks="images/EvilAttacks";
-        var adressEvilDefense="images/EvilDefense";
-        var adressEvilEvolve="images/EvilEvolve";
+        var adressMenu="images/Intro/";
+        var adressIdle="images/Idle/";
+        var adressGoodAttacks="images/GoodAttacks/";
+        var adressGoodDefense="images/GoodDefense/";
+        var adressGoodEvolve="images/GoodEvolve/";
+        var adressEvilAttacks="images/EvilAttacks/";
+        var adressEvilDefense="images/EvilDefense/";
+        var adressEvilEvolve="images/EvilEvolve/";
         
         //Get Intro Images
-        var number_of_images=parseInt(readTextFile(adressMenu+"/Index.txt"));
-        console.log("Numeber:"+number_of_images);
+        var number_of_folders=parseInt(readTextFile(adressMenu+"/Index.txt"));
+        console.log("Numeber:"+number_of_folders);
         var animation_images=[];
         var finalAdress;
-        for(i=0;i<number_of_images;i++){
-            finalAdress=adressMenu+"/"+i+".jpg";
-            try{animation_images[i]=loadImage(finalAdress);}
-            catch(err){console.log("Error Loading Image");haveFiles=false;}
-        }
-        Intro.push(animation_images);
-        /*s=readTextFile2(adress);
-        var saux=s.split(";");
-        var adressArray=[];
-        var i=0,j=0;
-        for (i=0;i<saux.length;i++){
-            adressArray.push("canvasTest/"+saux[i]+"");
-
-        }
-        for(i=0;i<adressArray.length;i++){
-            adress=adressArray[i]+"/p0.txt";
-            var numOfFrames=readTextFile(adress);
-            adress=adressArray[i]+"/p";
-            var finalAdress=adress;
-            for(var j = 0; j<numOfFrames; j++) {
-                finalAdress = adress+(j+1)+".png";
-                animationImg[j] = loadImage(finalAdress);
+        for(j=0;j<number_of_folders;j++){
+            almost_final_adress=adressMenu+j+"/";
+            number_of_images=parseInt(readTextFile(almost_final_adress+"Index.txt"));
+            for(i=0;i<number_of_images;i++){
+                finalAdress=almost_final_adress+i+".jpg";
+                try{animation_images[i]=loadImage(finalAdress);}
+                catch(err){console.log("Error Loading Image");haveFiles=false;}
             }
-             animationLib.push(animationImg);
-             animationImg=[];
-
-        }*/
+            Intro.push(animation_images);
+        }
+        //Get Idle Images
+        var number_of_folders=parseInt(readTextFile(adressIdle+"/Index.txt"));
+        console.log("Numeber:"+number_of_folders);
+        var animation_images=[];
+        var finalAdress;
+        for(j=0;j<number_of_folders;j++){
+            almost_final_adress=adressIdle+j+"/";
+            number_of_images=parseInt(readTextFile(almost_final_adress+"Index.txt"));
+            for(i=0;i<number_of_images;i++){
+                finalAdress=almost_final_adress+i+".jpg";
+                try{animation_images[i]=loadImage(finalAdress);}
+                catch(err){console.log("Error Loading Image");haveFiles=false;}
+            }
+            Idle.push(animation_images);
+        }
     }    
     var startTime;
     var time=0;
@@ -156,7 +154,7 @@ fullscreen,body,html{
         //image=Intro[0][i];
         //context.drawImage(Intro[0][image_index],0,0,window.innerWidth,window.innerHeight);
         //image_index=(image_index+1)%Intro[0].length;
-        Draw(Intro[0]);
+        Draw(Idle[0]);
         
         window.requestAnimationFrame(Main);
     }
