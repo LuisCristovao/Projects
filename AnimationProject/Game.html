@@ -17,11 +17,17 @@ fullscreen,body,html{
 .fullscreen .btn{
     position: absolute;     
 }
-    
+.fullscreen .text{
+        position: absolute;
+}    
 
 </style>
 <body>
 <canvas   id="canvas"  onmousemove="MousePos(event)"  > </canvas>
+    
+<button class="btn" style="top:40%;left:45%;width:10%;height:10%;">One Player</button>
+<button class="btn" style="top:60%;left:45%;width:10%;height:10%;">Two Players</button>
+<h1 class="text" style="top:30%;left:45%;width:10%;height:10%;"><font color="white">Hi there!</font></h1>    
 </body>
 <script>
     var canvas=document.getElementById("canvas");
@@ -154,7 +160,7 @@ fullscreen,body,html{
         //image=Intro[0][i];
         //context.drawImage(Intro[0][image_index],0,0,window.innerWidth,window.innerHeight);
         //image_index=(image_index+1)%Intro[0].length;
-        Draw(Idle[0]);
+        Draw(Intro[0]);
         
         window.requestAnimationFrame(Main);
     }
