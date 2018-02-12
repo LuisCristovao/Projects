@@ -68,7 +68,7 @@ fullscreen,body,html{
             
             HideButtons();
             time=0
-            actualAnimationRunning=GoodAttacks[0];
+            actualAnimationRunning=Idle[0];
             
         }
        
@@ -217,6 +217,21 @@ fullscreen,body,html{
             }
             EvilAttacks.push(animation_images);
         }
+        //Get GoodDefense Images
+        var number_of_folders=parseInt(readTextFile(adressGoodDefense+"/Index.txt"));
+        console.log("Numeber:"+number_of_folders);
+        var animation_images=[];
+        var finalAdress;
+        for(j=0;j<number_of_folders;j++){
+            almost_final_adress=adressGoodDefense+j+"/";
+            number_of_images=parseInt(readTextFile(almost_final_adress+"Index.txt"));
+            for(i=0;i<number_of_images;i++){
+                finalAdress=almost_final_adress+i+".jpg";
+                try{animation_images[i]=loadImage(finalAdress);}
+                catch(err){console.log("Error Loading Image");haveFiles=false;}
+            }
+            GoodDefense.push(animation_images);
+        }
     }    
    
     function Draw(images_array){
@@ -250,7 +265,7 @@ fullscreen,body,html{
    
     get_all_animations();
     startTime = new Date().getTime();
-    actualAnimationRunning=Idle[0];
+    actualAnimationRunning=Intro[0];
     menu=new Menu();
     
     window.requestAnimationFrame(Main);

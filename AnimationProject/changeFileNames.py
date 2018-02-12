@@ -12,7 +12,7 @@ import cv2
 
 
 
-directory="images/EvilAttacks/0/"
+directory="images/GoodDefense/0/"
 files=os.listdir(directory)
 for i in range(len(files)):
     os.rename(directory+files[i],directory+str(i)+".jpg")
