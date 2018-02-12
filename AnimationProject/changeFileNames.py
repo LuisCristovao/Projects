@@ -15,7 +15,7 @@ import cv2
 directory="images/Intro/"
 files=os.listdir(directory)
 for i in range(len(files)):
-    os.rename(directory+files[i],directory+str(i)+".png")
+    os.rename(directory+files[i],directory+str(i)+".jpg")
     #im = cv2.imread(directory+files[i])
     #cv2.imwrite(directory+str(i)+".jpg",im)
     print(files[i])

@@ -27,7 +27,7 @@ fullscreen,body,html{
     var canvas=document.getElementById("canvas");
     var context=canvas.getContext("2d");  
     var mouse=[0,0];//x and y
-
+    
     canvas.width=window.innerWidth;
     canvas.height=window.innerHeight;
     canvas.addEventListener("touchmove",TouchMove,false);
@@ -133,21 +133,38 @@ fullscreen,body,html{
 
         }*/
     }    
-
-    function Draw(images_array,time){
+    var startTime;
+    var time=0;
+    var dt;
+    function Draw(images_array){
+            dt = 1E-3 * (new Date().getTime() - startTime);
+            startTime = new Date().getTime();
+            time += dt%10000;
         
+            var index=Math.floor((time*60))%(images_array.length);
+            console.log(index);
+            var frame = images_array[index];
+            if(frame.isReady ){
+                context.drawImage(frame,0,0,window.innerWidth,window.innerHeight); 
+            }
+            
     }
     
     
     var image_index=0;
     function Main(){
         //image=Intro[0][i];
-        context.drawImage(Intro[0][image_index],0,0,window.innerWidth,window.innerHeight);
-        image_index=(image_index+1)%Intro[0].length;
+        //context.drawImage(Intro[0][image_index],0,0,window.innerWidth,window.innerHeight);
+        //image_index=(image_index+1)%Intro[0].length;
+        Draw(Intro[0]);
+        
         window.requestAnimationFrame(Main);
     }
-    get_all_animations();
+    
+    //Main________________________________________
    
+    get_all_animations();
+    startTime = new Date().getTime();
     window.requestAnimationFrame(Main);
     //setInterval(Main,10);    
 </script>
