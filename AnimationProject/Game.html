@@ -48,7 +48,9 @@ fullscreen,body,html{
     var Idle=[];
     var actualAnimationRunning;
     var menu;
-    
+    var startTime;
+    var time=0;
+    var dt;
     class Menu{
         
         constructor(){
@@ -65,7 +67,8 @@ fullscreen,body,html{
         OnePlayer(){
             
             HideButtons();
-            actualAnimationRunning=Idle[0];
+            time=0
+            actualAnimationRunning=GoodAttacks[0];
             
         }
        
@@ -182,12 +185,10 @@ fullscreen,body,html{
                 try{animation_images[i]=loadImage(finalAdress);}
                 catch(err){console.log("Error Loading Image");haveFiles=false;}
             }
-            Idle.push(animation_images);
+            GoodAttacks.push(animation_images);
         }
     }    
-    var startTime;
-    var time=0;
-    var dt;
+   
     function Draw(images_array){
             dt = 1E-3 * (new Date().getTime() - startTime);
             startTime = new Date().getTime();
@@ -219,7 +220,7 @@ fullscreen,body,html{
    
     get_all_animations();
     startTime = new Date().getTime();
-    actualAnimationRunning=Intro[0];
+    actualAnimationRunning=Idle[0];
     menu=new Menu();
     
     window.requestAnimationFrame(Main);
