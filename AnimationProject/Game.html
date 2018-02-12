@@ -169,6 +169,21 @@ fullscreen,body,html{
             }
             Idle.push(animation_images);
         }
+        //Get GoodAttacks Images
+        var number_of_folders=parseInt(readTextFile(adressGoodAttacks+"/Index.txt"));
+        console.log("Numeber:"+number_of_folders);
+        var animation_images=[];
+        var finalAdress;
+        for(j=0;j<number_of_folders;j++){
+            almost_final_adress=adressGoodAttacks+j+"/";
+            number_of_images=parseInt(readTextFile(almost_final_adress+"Index.txt"));
+            for(i=0;i<number_of_images;i++){
+                finalAdress=almost_final_adress+i+".jpg";
+                try{animation_images[i]=loadImage(finalAdress);}
+                catch(err){console.log("Error Loading Image");haveFiles=false;}
+            }
+            Idle.push(animation_images);
+        }
     }    
     var startTime;
     var time=0;
