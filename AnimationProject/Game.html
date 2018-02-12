@@ -187,7 +187,7 @@ fullscreen,body,html{
             }
             GoodAttacks.push(animation_images);
         }
-         //Get GoodAttacks Images
+         //Get EvilDefense Images
         var number_of_folders=parseInt(readTextFile(adressEvilDefense+"/Index.txt"));
         console.log("Numeber:"+number_of_folders);
         var animation_images=[];
@@ -201,6 +201,21 @@ fullscreen,body,html{
                 catch(err){console.log("Error Loading Image");haveFiles=false;}
             }
             EvilDefense.push(animation_images);
+        }
+        //Get EvilAttacks Images
+        var number_of_folders=parseInt(readTextFile(adressEvilAttacks+"/Index.txt"));
+        console.log("Numeber:"+number_of_folders);
+        var animation_images=[];
+        var finalAdress;
+        for(j=0;j<number_of_folders;j++){
+            almost_final_adress=adressEvilAttacks+j+"/";
+            number_of_images=parseInt(readTextFile(almost_final_adress+"Index.txt"));
+            for(i=0;i<number_of_images;i++){
+                finalAdress=almost_final_adress+i+".jpg";
+                try{animation_images[i]=loadImage(finalAdress);}
+                catch(err){console.log("Error Loading Image");haveFiles=false;}
+            }
+            EvilAttacks.push(animation_images);
         }
     }    
    
