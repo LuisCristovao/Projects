@@ -1,4 +1,4 @@
-<tnz framecount="130" version="71.0">
+<tnz framecount="115" version="71.0">
   <generator>
     "OpenToonz 1.1.3"
   </generator>
@@ -70,10 +70,6 @@
           25 25 
         </timestretch>
         <formatsProperties>
-          <formatProperties ext="mp4">
-            <property max="100" min="1" name="Quality" type="int" value="90"/>
-            <property max="100" min="1" name="Scale" type="int" value="100"/>
-            </formatProperties>
           <formatProperties ext="tif">
             <property name="Byte Ordering" type="enum" value="IBM PC">
               <item value="IBM PC"/>
@@ -414,7 +410,7 @@
                     0 
                   </numberId>
                   <name>
-                    "LevelColumn AffineFx"
+                    LevelColumn 
                   </name>
                   <fxId>
                     "" 
@@ -476,7 +472,7 @@
                     0 
                   </numberId>
                   <name>
-                    "LevelColumn AffineFx"
+                    LevelColumn 
                   </name>
                   <fxId>
                     "" 
@@ -638,10 +634,10 @@
           <fxnodes>
             <terminal>
               <fxnode>
-                <Toonz_columnFx id='6'/>
+                <Toonz_columnFx id='8'/>
               </fxnode>
               <fxnode>
-                <Toonz_columnFx id='8'/>
+                <Toonz_columnFx id='6'/>
               </fxnode>
               </terminal>
             <xsheet>
@@ -681,7 +677,7 @@
                   0 
                 </numberId>
                 <name>
-                  OutputFx 
+                  Output 
                 </name>
                 <fxId>
                   "" 
@@ -710,7 +706,7 @@
     <folder name="Cast" type="default">
       <folder name="Idle">
         <levels>
-          <level id='1'/><level id='2'/>
+          <level id='2'/><level id='1'/>
         </levels>
         </folder>
       <levels>
@@ -764,67 +760,55 @@
         </status>
         <cells>
           <cell>
-            49 2 <level id='1'/>0010 1 
+            50 2 <level id='1'/>0010 19 
           </cell>
           <cell>
-            51 3 <level id='1'/>0011 0 
+            52 3 <level id='1'/>0029 0 
           </cell>
           <cell>
-            54 4 <level id='1'/>0012 0 
+            55 4 <level id='1'/>0030 0 
           </cell>
           <cell>
-            58 4 <level id='1'/>0013 0 
+            59 4 <level id='1'/>0031 0 
           </cell>
           <cell>
-            62 4 <level id='1'/>0014 0 
+            63 4 <level id='1'/>0032 0 
           </cell>
           <cell>
-            66 4 <level id='1'/>0015 0 
+            67 4 <level id='1'/>0033 0 
           </cell>
           <cell>
-            70 4 <level id='1'/>0016 0 
+            71 4 <level id='1'/>0034 0 
           </cell>
           <cell>
-            74 4 <level id='1'/>0017 0 
+            75 4 <level id='1'/>0035 0 
           </cell>
           <cell>
-            78 4 <level id='1'/>0018 0 
+            79 4 <level id='1'/>0036 0 
           </cell>
           <cell>
-            82 4 <level id='1'/>0019 0 
+            83 4 <level id='1'/>0037 0 
           </cell>
           <cell>
-            86 4 <level id='1'/>0020 0 
+            87 4 <level id='1'/>0038 0 
           </cell>
           <cell>
-            90 4 <level id='1'/>0021 0 
+            91 4 <level id='1'/>0039 0 
           </cell>
           <cell>
-            94 4 <level id='1'/>0022 0 
+            95 4 <level id='1'/>0040 0 
           </cell>
           <cell>
-            98 4 <level id='1'/>0023 0 
+            99 4 <level id='1'/>0041 0 
           </cell>
           <cell>
-            102 4 <level id='1'/>0024 0 
+            103 4 <level id='1'/>0042 0 
           </cell>
           <cell>
-            106 4 <level id='1'/>0025 0 
+            107 4 <level id='1'/>0043 0 
           </cell>
           <cell>
-            110 4 <level id='1'/>0026 0 
-          </cell>
-          <cell>
-            114 4 <level id='1'/>0027 0 
-          </cell>
-          <cell>
-            118 4 <level id='1'/>0028 0 
-          </cell>
-          <cell>
-            122 4 <level id='1'/>0012 0 
-          </cell>
-          <cell>
-            126 4 <level id='1'/>0011 0 
+            111 4 <level id='1'/>0044 0 
           </cell>
           </cells>
         <fx>
@@ -838,7 +822,7 @@
               0 
             </numberId>
             <name>
-              "LevelColumn AffineFx"
+              LevelColumn 
             </name>
             <fxId>
               "" 
@@ -859,55 +843,34 @@
         </status>
         <cells>
           <cell>
-            49 2 <level id='2'/>0010 -8 
+            50 5 <level id='2'/>0001 0 
           </cell>
           <cell>
-            51 4 <level id='2'/>0002 0 
+            55 5 <level id='2'/>0002 0 
           </cell>
           <cell>
-            55 5 <level id='2'/>0003 0 
+            60 5 <level id='2'/>0003 0 
           </cell>
           <cell>
-            60 5 <level id='2'/>0004 0 
+            65 5 <level id='2'/>0004 0 
           </cell>
           <cell>
-            65 5 <level id='2'/>0005 0 
+            70 5 <level id='2'/>0005 0 
           </cell>
           <cell>
-            70 5 <level id='2'/>0006 0 
+            75 5 <level id='2'/>0006 0 
           </cell>
           <cell>
-            75 5 <level id='2'/>0007 0 
+            80 5 <level id='2'/>0007 0 
           </cell>
           <cell>
-            80 5 <level id='2'/>0008 0 
+            85 5 <level id='2'/>0008 0 
           </cell>
           <cell>
-            85 5 <level id='2'/>0009 0 
+            90 5 <level id='2'/>0009 0 
           </cell>
           <cell>
-            90 6 <level id='2'/>0010 0 
-          </cell>
-          <cell>
-            96 5 <level id='2'/>0002 0 
-          </cell>
-          <cell>
-            101 5 <level id='2'/>0003 0 
-          </cell>
-          <cell>
-            106 5 <level id='2'/>0004 0 
-          </cell>
-          <cell>
-            111 5 <level id='2'/>0005 0 
-          </cell>
-          <cell>
-            116 5 <level id='2'/>0006 0 
-          </cell>
-          <cell>
-            121 5 <level id='2'/>0007 0 
-          </cell>
-          <cell>
-            126 4 <level id='2'/>0008 0 
+            95 5 <level id='2'/>0010 0 
           </cell>
           </cells>
         <fx>
@@ -921,7 +884,7 @@
               0 
             </numberId>
             <name>
-              "LevelColumn AffineFx"
+              LevelColumn 
             </name>
             <fxId>
               "" 
@@ -1117,10 +1080,10 @@
           <Toonz_columnFx id='12'/>
         </fxnode>
         <fxnode>
-          <Toonz_columnFx id='16'/>
+          <Toonz_columnFx id='14'/>
         </fxnode>
         <fxnode>
-          <Toonz_columnFx id='14'/>
+          <Toonz_columnFx id='16'/>
         </fxnode>
         </terminal>
       <xsheet>
@@ -1160,7 +1123,7 @@
             0 
           </numberId>
           <name>
-            OutputFx 
+            Output 
           </name>
           <fxId>
             "" 
@@ -1179,6 +1142,6 @@
     </xsheet>
   <history>
     "| #    DATE:       Time:   MACHINE:    USER:           |"
-    "| #1   13 fev 18   09:45   DESKTOP-C8IKSamsung         |"
+    "| #1   13 fev 18   10:44   DESKTOP-C8IKSamsung         |"
   </history>
   </tnz>
