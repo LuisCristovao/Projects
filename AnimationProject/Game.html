@@ -30,32 +30,32 @@
 </style>
 <body>
     <canvas   id="canvas"  onmousemove="MousePos(event)"  > </canvas>
-    <div class="circle" id="goodHealth" style="background-color:green;top:1%;left:0%;visibility:visible;"></div>
-    <h3 class="text" id="goodHealthText" style="top:0%;left:2%;">Ola</h3>
-    <div class="circle" id="goodAttack" style="background-color:red;top:1%;left:10%;visibility:visible;"></div>
-    <h3 class="text" id="goodAttackText" style="top:0%;left:12%;">Ola</h3>
-    <div class="circle" id="goodDefense" style="background-color:blue;top:1%;left:20%;visibility:visible;"></div>
-    <h3 class="text" id="goodDefenseText" style="top:0%;left:22%;">Ola</h3>
-    <div class="circle" id="evilHealth" style="background-color:green;top:1%;left:70%;visibility:visible;"></div>
-    <h3 class="text" id="evilHealthText" style="top:0%;left:72%;">Ola</h3>
-    <div class="circle" id="evilAttack" style="background-color:red;top:1%;left:80%;visibility:visible;"></div>
-    <h3 class="text" id="evilAttackText" style="top:0%;left:82%;">Ola</h3>
-    <div class="circle" id="evilDefense" style="background-color:blue;top:1%;left:90%;visibility:visible;"></div>
-    <h3 class="text" id="evilDefenseText" style="top:0%;left:92%;">Ola</h3>
+    <div class="circle" id="goodHealth" style="background-color:green;top:1%;left:0%;visibility:hidden;"></div>
+    <h3 class="text" id="goodHealthText" style="top:0%;left:2%;visibility:hidden;">100</h3>
+    <div class="circle" id="goodAttack" style="background-color:red;top:1%;left:10%;visibility:hidden;"></div>
+    <h3 class="text" id="goodAttackText" style="top:0%;left:12%;visibility:hidden;">100</h3>
+    <div class="circle" id="goodDefense" style="background-color:blue;top:1%;left:20%;visibility:hidden;"></div>
+    <h3 class="text" id="goodDefenseText" style="top:0%;left:22%;visibility:hidden;">100</h3>
+    <div class="circle" id="evilHealth" style="background-color:green;top:1%;left:70%;visibility:hidden;"></div>
+    <h3 class="text" id="evilHealthText" style="top:0%;left:72%;visibility:hidden;">100</h3>
+    <div class="circle" id="evilAttack" style="background-color:red;top:1%;left:80%;visibility:hidden;"></div>
+    <h3 class="text" id="evilAttackText" style="top:0%;left:82%;visibility:hidden;">100</h3>
+    <div class="circle" id="evilDefense" style="background-color:blue;top:1%;left:90%;visibility:hidden;"></div>
+    <h3 class="text" id="evilDefenseText" style="top:0%;left:92%;visibility:hidden;">100</h3>
     
     <!--<h1 class="text" style="top:30%;left:45%;width:10%;height:10%;"><font color="white"></font></h1>-->
     <!--Now The Game Menus -->
     <button class="btn" id="one_player" style="top:40%;left:45%;width:10%;height:10%;">One Player</button>
     <button class="btn" id="two_players" style="top:60%;left:45%;width:10%;height:10%;">Two Players</button>
     
-    <button class="btn" id="Attack">Attack</button>
-    <button class="btn" id="Defense">Defense</button>
-    <button class="btn" id="Health">Health</button>
-    <button class="btn" id="Evolve">Power Up</button>
+    <button class="btn" id="Attack" style="top:80%;left:10%;width:10%;height:10%;background-color:red;border-color:red;visibility:hidden;">Attack</button>
+    <button class="btn" id="Defense" style="top:80%;left:45%;width:10%;height:10%;background-color:blue;border-color:blue;visibility:hidden;">Defense</button>
+    <button class="btn" id="Health" style="top:80%;left:80%;width:10%;height:10%;background-color:green;border-color:green;visibility:hidden;">Health</button>
+    <button class="btn" id="Evolve" style="top:80%;left:80%;width:10%;height:10%;visibility:hidden;">Power Up</button>
     
-    <button class="btn" id="lv1">lv1</button>
-    <button class="btn" id="lv2">lv2</button>
-    <button class="btn" id="lv3">lv3</button>
+    <button class="btn" id="lv1" style="top:80%;left:10%;width:10%;height:10%;visibility:hidden">lv1</button>
+    <button class="btn" id="lv2" style="top:80%;left:45%;width:10%;height:10%;visibility:hidden">lv2</button>
+    <button class="btn" id="lv3" style="top:80%;left:80%;width:10%;height:10%;visibility:hidden">lv3</button>
 
 </body>
 <script>
@@ -98,7 +98,12 @@
             this.Buttons["evilHealthText"]=document.getElementById("evilHealthText");
             this.Buttons["evilAttackText"]=document.getElementById("evilAttackText");
             this.Buttons["evilDefenseText"]=document.getElementById("evilDefenseText");
+            this.Buttons["Attack"]=document.getElementById("Attack");
+            this.Buttons["Defense"]=document.getElementById("Defense");
+            this.Buttons["Evolve"]=document.getElementById("Evolve");
+            this.Buttons["Health"]=document.getElementById("Health");
             
+            //AddEventListeners
             this.Buttons["OnePlayer"].addEventListener("click",this.OnePlayer,false);
             
             
@@ -113,8 +118,48 @@
             HideButtons();
             time=0
             actualAnimationRunning=Idle[0];
+            menu.Buttons["Attack"].style.visibility="visible";
+            menu.Buttons["Defense"].style.visibility="visible";
+            menu.Buttons["Evolve"].style.visibility="visible";
+            menu.Buttons["goodHealth"].style.visibility="visible";
+            menu.Buttons["goodAttack"].style.visibility="visible";
+            menu.Buttons["goodDefense"].style.visibility="visible";
+            menu.Buttons["goodHealthText"].style.visibility="visible";
+            menu.Buttons["goodAttackText"].style.visibility="visible";
+            menu.Buttons["goodDefenseText"].style.visibility="visible";
+            menu.Buttons["evilHealth"].style.visibility="visible";
+            menu.Buttons["evilAttack"].style.visibility="visible";
+            menu.Buttons["evilDefense"].style.visibility="visible";
+            menu.Buttons["evilHealthText"].style.visibility="visible";
+            menu.Buttons["evilAttackText"].style.visibility="visible";
+            menu.Buttons["evilDefenseText"].style.visibility="visible";
+
             
         }
+        TwoPlayers(){
+            //Afterwars change to work with two players
+            HideButtons();
+            time=0
+            actualAnimationRunning=Idle[0];
+            menu.Buttons["Attack"].style.visibility="visible";
+            menu.Buttons["Defense"].style.visibility="visible";
+            menu.Buttons["Evolve"].style.visibility="visible";
+            menu.Buttons["goodHealth"].style.visibility="visible";
+            menu.Buttons["goodAttack"].style.visibility="visible";
+            menu.Buttons["goodDefense"].style.visibility="visible";
+            menu.Buttons["goodHealthText"].style.visibility="visible";
+            menu.Buttons["goodAttackText"].style.visibility="visible";
+            menu.Buttons["goodDefenseText"].style.visibility="visible";
+            menu.Buttons["evilHealth"].style.visibility="visible";
+            menu.Buttons["evilAttack"].style.visibility="visible";
+            menu.Buttons["evilDefense"].style.visibility="visible";
+            menu.Buttons["evilHealthText"].style.visibility="visible";
+            menu.Buttons["evilAttackText"].style.visibility="visible";
+            menu.Buttons["evilDefenseText"].style.visibility="visible";
+        }
+        
+        
+        
        
     }
     
