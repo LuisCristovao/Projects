@@ -32,17 +32,19 @@
     }
 
     .myBar {
-      width: 100%;
-      height: 16%;
-      background-color: blue;
+        width: 100%;
+        height: 16%;
+        background-color: blue;
+        text-align: center;
         
+        color: white;  
     }
 
 </style>
 <body>
     <div class="rectangle">
         <table >
-            <tr ><div class="myProgress" ><div class="myBar" id="myBar"></div></div></tr>
+            <tr ><div class="myProgress" ><div class="myBar" id="myBar">cdscs</div></div></tr>
             <tr ><h1 style="position:relative;left:45%;">2+2?</h1></tr>
             <tr><input style="position:relative;width:100%;height:20%;" id="answer" type="number"></tr>
             <tr><button style="position:relative;width:100%;height:22%;">Submit</button></tr>
@@ -63,12 +65,13 @@
                 clearInterval(id);
             } else {
                 time-=dt;
-                width=Math.round((time/limit)*100); 
+                width=Math.round((time/limit)*100);
+                elem.innerHTML=Math.round(time/(1000))+"s";
                 elem.style.width = width + '%'; 
             }
         }
         
     }
-    move(1000*60);
+    move(1000*10);
 </script>
 </html>
