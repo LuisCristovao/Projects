@@ -33,8 +33,9 @@
 
     .myBar {
       width: 100%;
-      height: 30px;
+      height: 16%;
       background-color: blue;
+        
     }
 
 </style>
@@ -44,7 +45,7 @@
             <tr ><div class="myProgress" ><div class="myBar" id="myBar"></div></div></tr>
             <tr ><h1 style="position:relative;left:45%;">2+2?</h1></tr>
             <tr><input style="position:relative;width:100%;height:20%;" id="answer" type="number"></tr>
-            <tr><button style="position:relative;width:100%;height:20%;">Submit</button></tr>
+            <tr><button style="position:relative;width:100%;height:22%;">Submit</button></tr>
         </table>        
     </div>   
     
@@ -52,19 +53,22 @@
 </body>
 <script>
     function move(limit) {
-      var elem = document.getElementById("myBar");   
-      var width = 100;
-      var id = setInterval(frame, 10);
-      function frame() {
-        if (width <= 0) {
-          clearInterval(id);
-        } else {
-          width--; 
-          elem.style.width = width + '%'; 
+        var time=limit;
+        var dt=10;//miliseconds
+        var elem = document.getElementById("myBar");   
+        var width = 100;
+        var id = setInterval(frame, dt);
+        function frame() {
+            if (width <= 0) {
+                clearInterval(id);
+            } else {
+                time-=dt;
+                width=Math.round((time/limit)*100); 
+                elem.style.width = width + '%'; 
+            }
         }
-      }
         
     }
-    move();
+    move(1000*60);
 </script>
 </html>
