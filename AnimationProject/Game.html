@@ -45,17 +45,21 @@
     
     <!--<h1 class="text" style="top:30%;left:45%;width:10%;height:10%;"><font color="white"></font></h1>-->
     <!--Now The Game Menus -->
+    <!--First Menu-->
     <button class="btn" id="one_player" style="top:40%;left:45%;width:10%;height:10%;">One Player</button>
     <button class="btn" id="two_players" style="top:60%;left:45%;width:10%;height:10%;">Two Players</button>
-    
+    <!--Game Menu-->
     <button class="btn" id="Attack" style="top:80%;left:10%;width:10%;height:10%;background-color:red;border-color:red;visibility:hidden;">Attack</button>
-    <button class="btn" id="Defense" style="top:80%;left:45%;width:10%;height:10%;background-color:blue;border-color:blue;visibility:hidden;">Defense</button>
+    <button class="btn" id="Defense" style="top:80%;left:45%;width:10%;height:10%;background-color:blue;border-color:blue;color:white;visibility:hidden;">Defense</button>
     <button class="btn" id="Health" style="top:80%;left:80%;width:10%;height:10%;background-color:green;border-color:green;visibility:hidden;">Health</button>
     <button class="btn" id="Evolve" style="top:80%;left:80%;width:10%;height:10%;visibility:hidden;">Power Up</button>
-    
+    <!--Choose level Menu-->
     <button class="btn" id="lv1" style="top:80%;left:10%;width:10%;height:10%;visibility:hidden">lv1</button>
     <button class="btn" id="lv2" style="top:80%;left:45%;width:10%;height:10%;visibility:hidden">lv2</button>
     <button class="btn" id="lv3" style="top:80%;left:80%;width:10%;height:10%;visibility:hidden">lv3</button>
+    <!--Return button-->
+    <button class="btn" id="return" style="top:90%;left:0%;width:5%;height:10%;visibility:hidden">Return</button>
+    
 
 </body>
 <script>
@@ -80,6 +84,13 @@
     var startTime;
     var time=0;
     var dt;
+    
+    //boolean that decides if one or two player mode
+    var oneplayer;
+    //boolean that decides who is the player selecting menus
+    var goodTurn;
+    
+    
     class Menu{
         
         constructor(){
@@ -102,10 +113,11 @@
             this.Buttons["Defense"]=document.getElementById("Defense");
             this.Buttons["Evolve"]=document.getElementById("Evolve");
             this.Buttons["Health"]=document.getElementById("Health");
+            this.Buttons["return"]=document.getElementById("return");
             
             //AddEventListeners
             this.Buttons["OnePlayer"].addEventListener("click",this.OnePlayer,false);
-            
+            this.Buttons["TwoPlayers"].addEventListener("click",this.TwoPlayers,false);
             
             
            
@@ -133,7 +145,7 @@
             menu.Buttons["evilHealthText"].style.visibility="visible";
             menu.Buttons["evilAttackText"].style.visibility="visible";
             menu.Buttons["evilDefenseText"].style.visibility="visible";
-
+            //menu.Buttons["return"].style.visibility="visible";
             
         }
         TwoPlayers(){
