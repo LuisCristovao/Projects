@@ -1,0 +1,56 @@
+<html class="fullscreen">
+<head>
+<title>Game!</title>    
+</head>
+<style>
+    /*html, body,canvas {
+      width:  100%;
+      height: 100%;
+      margin: 0px;
+    }*/
+    fullscreen,body,html{
+        width:  100%;
+        height: 100%;
+        margin: 0px;    
+    }
+
+    .rectangle{
+        position: absolute;
+        box-sizing: content-box; 
+        background-color:hsl(191,0%,93%);
+        top:50%;
+        left:30%;
+        width: 50%;
+        height: 20%;
+           
+        border: 2px solid grey;
+    }
+    
+    .myProgress {
+      width: 100%;
+      background-color: white;
+    }
+
+    .myBar {
+      width: 1%;
+      height: 30px;
+      background-color: blue;
+    }
+
+</style>
+<body>
+    <div class="rectangle">
+        <table >
+            <tr ><div class="myProgress"><div></div></div></tr>
+            <tr ><h1 style="position:relative;left:30%;">Question: 2+2?</h1></tr>
+            <tr><input style="position:relative;width:100%;height:20%;" id="answer" type="number"></tr>
+            <tr><button style="position:relative;width:100%;height:20%;">Submit</button></tr>
+        </table>        
+    </div>   
+    
+
+</body>
+<script>
+    
+</script>
+</html>
