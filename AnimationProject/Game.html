@@ -40,10 +40,10 @@ fullscreen,body,html{
 
     var GoodAttacks=[];
     var GoodDefense=[];
-    var GoodEvolve=[];
+    var GoodEvolve;
     var EvilAttacks=[];
     var EvilDefense=[];
-    var EvilEvolve=[];
+    var EvilEvolve;
     var Intro=[];
     var Idle=[];
     var actualAnimationRunning;
@@ -233,20 +233,54 @@ fullscreen,body,html{
             GoodDefense.push(animation_images);
         }
         //GetGoodPowerUps
-        /*folders=['Health','Attack','Defense'];
-        console.log("Numeber:"+number_of_folders);
+        GoodEvolve={
+            'Health':[],
+            'Defense':[],
+            'Attack':[]
+        };
         var animation_images=[];
         var finalAdress;
-        for(j=0;j<number_of_folders;j++){
-            almost_final_adress=adressGoodDefense+j+"/";
-            number_of_images=parseInt(readTextFile(almost_final_adress+"Index.txt"));
+        var j=0;
+        //
+        for(key in GoodEvolve){
+            
+            almost_final_adress=adressGoodEvolve+key+"/";
+            number_of_folders=parseInt(readTextFile(almost_final_adress));
+            number_of_images=parseInt(readTextFile(almost_final_adress+j+"/Index.txt"));
             for(i=0;i<number_of_images;i++){
-                finalAdress=almost_final_adress+i+".jpg";
+                finalAdress=almost_final_adress+j+"/"+i+".jpg";
                 try{animation_images[i]=loadImage(finalAdress);}
                 catch(err){console.log("Error Loading Image");haveFiles=false;}
             }
-            GoodDefense.push(animation_images);
-        }*/
+            GoodEvolve[key].push(animation_images);
+            if(j<number_of_folders)
+                j++;
+        }
+        
+        //GetEvilPowerUps
+        EvilEvolve={
+            'Health':[],
+            'Defense':[],
+            'Attack':[]
+        };
+        var animation_images=[];
+        var finalAdress;
+        j=0;
+        //
+        for(key in EvilEvolve){
+            
+            almost_final_adress=adressEvilEvolve+key+"/";
+            number_of_folders=parseInt(readTextFile(almost_final_adress));
+            number_of_images=parseInt(readTextFile(almost_final_adress+j+"/Index.txt"));
+            for(i=0;i<number_of_images;i++){
+                finalAdress=almost_final_adress+j+"/"+i+".jpg";
+                try{animation_images[i]=loadImage(finalAdress);}
+                catch(err){console.log("Error Loading Image");haveFiles=false;}
+            }
+            EvilEvolve[key].push(animation_images);
+            if(j<number_of_folders)
+                j++;
+        }
     }    
    
     function Draw(images_array){
