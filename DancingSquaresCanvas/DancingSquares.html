@@ -254,8 +254,23 @@ function Main(){
     window.requestAnimationFrame(Main);
 
 }
+    
+function fullscreen(){
+           var el = document.getElementById('canvas');
+            //el.width=window.innerWidth;
+            //el.height=window.innerHeight;
+ 
+           if(el.webkitRequestFullScreen) {
+               el.webkitRequestFullScreen();
+           }
+          else {
+             el.mozRequestFullScreen();
+          }            
+}
+    
 ConstructMatrix();    
 window.requestAnimationFrame(Main);
+canvas.addEventListener("click",fullscreen,false);  
 //setInterval(Main,10);    
 </script>
 </html>
