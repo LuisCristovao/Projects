@@ -65,7 +65,7 @@
         
         constructor(){
             this.lv1max=11,this.lv1min=-11,this.lv2max=21,this.lv2min=-11,this.lv3max=11,this.lv3min=-11;
-            this.random_level=Math.floor(Math.random()*3);
+            
 
             //var numbers=[];
             this.operations=['+','-','*','/'];//0->+;1->-;2->x;3->/;
@@ -74,9 +74,18 @@
             this.equation_num=[];
             this.out="";
             this.result=0;
+            
+            //this.Submit();
         }
-        
-        move(limit){
+         /*Check(){
+            console.log("answer:"+document.getElementById("answer").value)
+            if(this.result==document.getElementById("answer").value){
+                document.getElementById("feedback").innerHTML="<font color='green'>You Found the Right Answer!</font>"
+            }else{
+                document.getElementById("feedback").innerHTML="<font color='red'>Wrong Answer!</font>"
+            }
+        }*/
+        move(limit,result){
             var time=limit;
             var dt=10;//miliseconds
             var elem = document.getElementById("myBar");   
@@ -85,7 +94,7 @@
             function frame() {
                 if (width <= 0) {
                     clearInterval(id);
-                    Check();
+                    Check(result);
                 } else {
                     time-=dt;
                     width=Math.round((time/limit)*100);
@@ -98,16 +107,9 @@
                 }
             }
         }
-        Check(){
-            console.log("answer:"+document.getElementById("answer").value)
-            if(result==document.getElementById("answer").value){
-                document.getElementById("feedback").innerHTML="<font color='green'>You Found the Right Answer!</font>"
-            }else{
-                document.getElementById("feedback").innerHTML="<font color='red'>Wrong Answer!</font>"
-            }
-        }
+       
         
-        Submit(){
+        /*Submit(){
             var input = document.getElementById("answer");
             // Execute a function when the user releases a key on the keyboard
             input.addEventListener("keyup", function(event) {
@@ -117,9 +119,193 @@
                   if (event.keyCode === 13) {
                     // Trigger the button element with a click
                     //document.getElementById("submit_answer").click();
-                      Check();
+                      this.Check();
                   }
             });
+        }*/
+        
+        Run(level){
+            //Choose level
+            //this.random_level=Math.floor(Math.random()*3);   
+            
+            if(level==0){
+                //this.move(1000*10,this.result);
+                document.getElementById("level").innerHTML="Lv1";
+                var number_of_operations=1+Math.floor(Math.random()*1);
+                for (var i=0;i<=number_of_operations;i++){
+                    var num1=Math.floor(Math.random()*(this.lv1max-this.lv1min)+this.lv1min);
+                    //var num2=Math.floor(Math.random()*(lv1max-lv1min)+lv1min);
+                    if(num1<0){
+                        this.equation_num.push(num1);
+                        this.equation.push("("+num1+")");
+                    }
+                    else{
+                        this.equation_num.push(num1);
+                       this.equation.push(num1); 
+                    }
+
+                    if(i<number_of_operations){
+                        var random_operation=this.operations[Math.floor(Math.random()*2)];//just sum and subtraction
+                        this.equation.push(random_operation);
+                        this.equation_op.push(random_operation);
+                    }
+                }
+                for(var i=0;i<this.equation.length;i++){
+                    this.out+=this.equation[i];
+
+                }
+                var next_operation=[];
+                for(var i=0,  j=0;i<this.equation.length;i++){
+
+                    //is a number
+                    if(this.equation[i]!='+' && this.equation[i]!='-' &&this.equation[i]!='*' && this.equation[i]!='/'){
+                        var op=next_operation.pop();
+                        if(i==0){
+                            this.result+=this.equation_num[i];
+                        }else{
+                            if(op=='+'){
+                                this.result+=this.equation_num[j];   
+                            }
+                            if(op=='-'){
+                                this.result-=this.equation_num[j];
+                            }
+                            if(op=='*'){
+                                this.result*=this.equation_num[j];
+                            }
+                            if(op=='/'){
+                                this.result/=this.equation_num[j];
+                            }
+                        }
+                        j++;
+                    }
+                    else{//operation
+                        next_operation.push(this.equation[i]);
+                    }
+
+                }
+                console.log("result:"+this.result);
+                this.move(1000*10,this.result);
+                document.getElementById("question").innerHTML=this.out+"?";
+            }
+            if(level==1){
+                //this.move(1000*20,this.result);
+                document.getElementById("level").innerHTML="Lv2";
+                var number_of_operations=1+Math.floor(Math.random()*3);
+                for (var i=0;i<=number_of_operations;i++){
+                    var num1=Math.floor(Math.random()*(this.lv2max-this.lv2min)+this.lv2min);
+                    //var num2=Math.floor(Math.random()*(lv1max-lv1min)+lv1min);
+                    if(num1<0){
+                        this.equation_num.push(num1);
+                        this.equation.push("("+num1+")");
+                    }
+                    else{
+                        this.equation_num.push(num1);
+                       this.equation.push(num1); 
+                    }
+
+                    if(i<number_of_operations){
+                        var random_operation=this.operations[Math.floor(Math.random()*2)];//just sum and subtraction
+                        this.equation.push(random_operation);
+                        this.equation_op.push(random_operation);
+                    }
+                }
+                for(var i=0; i<this.equation.length;i++){
+                    this.out+=this.equation[i];
+
+                }
+                var next_operation=[];
+                for(var i=0, j=0;i<this.equation.length;i++){
+
+                    //is a number
+                    if(this.equation[i]!='+' && this.equation[i]!='-' &&this.equation[i]!='*' && this.equation[i]!='/'){
+                        var op=next_operation.pop();
+                        if(i==0){
+                            this.result+=this.equation_num[i];
+                        }else{
+                            if(op=='+'){
+                                this.result+=this.equation_num[j];   
+                            }
+                            if(op=='-'){
+                                this.result-=this.equation_num[j];
+                            }
+                            if(op=='*'){
+                                this.result*=this.equation_num[j];
+                            }
+                            if(op=='/'){
+                                this.result/=this.equation_num[j];
+                            }
+                        }
+                        j++;
+                    }
+                    else{//operation
+                        next_operation.push(this.equation[i]);
+                    }
+
+                }
+                console.log("result:"+this.result);
+                this.move(1000*20,this.result);
+                document.getElementById("question").innerHTML=this.out+"?";
+
+            }
+            if(level==2){
+                //this.move(1000*20,this.result);
+                document.getElementById("level").innerHTML="Lv3";
+                var number_of_operations=1+Math.floor(Math.random()*1);
+                for (var i=0;i<=number_of_operations;i++){
+                    var num1=Math.floor(Math.random()*(this.lv3max-this.lv3min)+this.lv3min);
+                    //var num2=Math.floor(Math.random()*(lv1max-lv1min)+lv1min);
+                    if(num1<0){
+                        this.equation_num.push(num1);
+                        this.equation.push("("+num1+")");
+                    }
+                    else{
+                        this.equation_num.push(num1);
+                       this.equation.push(num1); 
+                    }
+
+                    if(i<number_of_operations){
+                        var random_operation=this.operations[Math.floor(Math.random()*4)];//just sum and subtraction and multiplication
+                        this.equation.push(random_operation);
+                        this.equation_op.push(random_operation);
+                    }
+                }
+                for(var i=0;i<this.equation.length;i++){
+                    this.out+=this.equation[i];
+
+                }
+                var next_operation=[];
+                for(var i=0,j=0;i<this.equation.length;i++){
+
+                    //is a number
+                    if(this.equation[i]!='+' && this.equation[i]!='-' &&this.equation[i]!='*' && this.equation[i]!='/'){
+                        var op=next_operation.pop();
+                        if(i==0){
+                            this.result+=this.equation_num[i];
+                        }else{
+                            if(op=='+'){
+                                this.result+=this.equation_num[j];   
+                            }
+                            if(op=='-'){
+                                this.result-=this.equation_num[j];
+                            }
+                            if(op=='*'){
+                                this.result*=this.equation_num[j];
+                            }
+                            if(op=='/'){
+                                this.result/=this.equation_num[j];
+                            }
+                        }
+                        j++;
+                    }
+                    else{//operation
+                        next_operation.push(this.equation[i]);
+                    }
+
+                }
+                console.log("result:"+this.result);
+                this.move(1000*20,this.result);
+                document.getElementById("question").innerHTML=this.out+"?";
+            }
         }
         
         
@@ -128,7 +314,7 @@
     }
     
     
-    function move(limit) {
+    /*function move(limit) {
         var time=limit;
         var dt=10;//miliseconds
         var elem = document.getElementById("myBar");   
@@ -150,9 +336,9 @@
             }
         }
         
-    }
-    move(1000*10)//*60*1);
-    function Check(){
+    }*/
+    //move(1000*10);//*60*1);
+    function Check(result){
         console.log("answer:"+document.getElementById("answer").value)
         if(result==document.getElementById("answer").value){
             document.getElementById("feedback").innerHTML="<font color='green'>You Found the Right Answer!</font>"
@@ -160,9 +346,29 @@
             document.getElementById("feedback").innerHTML="<font color='red'>Wrong Answer!</font>"
         }
     }
-    var result=0;
+    //var result=0;
     function Main(){
         
+        var calculator=new Calculator();
+        var input = document.getElementById("answer");
+            // Execute a function when the user releases a key on the keyboard
+            input.addEventListener("keyup", function(event) {
+                  // Cancel the default action, if needed
+                  event.preventDefault();
+                  // Number 13 is the "Enter" key on the keyboard
+                  if (event.keyCode === 13) {
+                    // Trigger the button element with a click
+                    //document.getElementById("submit_answer").click();
+                      Check(calculator.result);
+                  }
+            });
+        calculator.Run(Math.floor(Math.random()*3));
+        
+        
+        
+        
+        
+        /*
         var input = document.getElementById("answer");
 
         // Execute a function when the user releases a key on the keyboard
@@ -361,7 +567,7 @@
             document.getElementById("question").innerHTML=out+"?";
         }
         
-        
+      */  
     }
     window.onload=Main();
 </script>
