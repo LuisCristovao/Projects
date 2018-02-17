@@ -48,36 +48,85 @@
 </style>
 <body>
     <h1 id="level"></h1>
-    <h2 id="feedback"></h2>
+    
     <div class="rectangle">
         
             <div class="myProgress" ><div class="myBar" id="myBar">cdscs</div></div>
             <h1 id="question" style="position:relative;left:45%;">2+2?</h1>
             <input style="position:relative;width:100%;height:20%;" id="answer" type="number" >
             <!--<button id="submit_answer" style="position:relative;width:100%;height:22%;visibility='hidden';" onclick="Check()">Submit</button>-->
-               
+             <h2 id="feedback"></h2>  
     </div>   
     
 
 </body>
 <script>
-    var negative=false;
-    function PutNumber(number){
-        if(negative){
-            document.getElementById("answer").value+=-number;
-            negative=false;
+    class Calculator{
+        
+        constructor(){
+            this.lv1max=11,this.lv1min=-11,this.lv2max=21,this.lv2min=-11,this.lv3max=11,this.lv3min=-11;
+            this.random_level=Math.floor(Math.random()*3);
+
+            //var numbers=[];
+            this.operations=['+','-','*','/'];//0->+;1->-;2->x;3->/;
+            this.equation=[];
+            this.equation_op=[];
+            this.equation_num=[];
+            this.out="";
+            this.result=0;
         }
-        else{
-            
-            document.getElementById("answer").value+=number;
+        
+        move(limit){
+            var time=limit;
+            var dt=10;//miliseconds
+            var elem = document.getElementById("myBar");   
+            var width = 100;
+            var id = setInterval(frame, dt);
+            function frame() {
+                if (width <= 0) {
+                    clearInterval(id);
+                    Check();
+                } else {
+                    time-=dt;
+                    width=Math.round((time/limit)*100);
+                    if(time<=1000*60){
+                        elem.innerHTML=Math.round(time/(1000))+"s";
+                    }else{
+                        elem.innerHTML=Math.floor((time/(1000))/60)+"min"+" "+Math.round(time/(1000))+"s";
+                    }
+                    elem.style.width = width + '%'; 
+                }
+            }
         }
+        Check(){
+            console.log("answer:"+document.getElementById("answer").value)
+            if(result==document.getElementById("answer").value){
+                document.getElementById("feedback").innerHTML="<font color='green'>You Found the Right Answer!</font>"
+            }else{
+                document.getElementById("feedback").innerHTML="<font color='red'>Wrong Answer!</font>"
+            }
+        }
+        
+        Submit(){
+            var input = document.getElementById("answer");
+            // Execute a function when the user releases a key on the keyboard
+            input.addEventListener("keyup", function(event) {
+                  // Cancel the default action, if needed
+                  event.preventDefault();
+                  // Number 13 is the "Enter" key on the keyboard
+                  if (event.keyCode === 13) {
+                    // Trigger the button element with a click
+                    //document.getElementById("submit_answer").click();
+                      Check();
+                  }
+            });
+        }
+        
+        
+        
+        
     }
-    function Clear(){
-        document.getElementById("answer").value="";
-    }
-    function Negative(){
-        negative=true;
-    }
+    
     
     function move(limit) {
         var time=limit;
@@ -129,9 +178,9 @@
         });
         
         
-        var lv1max=10,lv1min=-1,lv2max=20,lv2min=-10,lv3max=100,lv3min=-100;
+        var lv1max=11,lv1min=-11,lv2max=21,lv2min=-11,lv3max=11,lv3min=-11;
         var random_level=Math.floor(Math.random()*3);
-        random_level=0;
+        
         //var numbers=[];
         var operations=['+','-','*','/'];//0->+;1->-;2->x;3->/;
         var equation=[];
@@ -141,7 +190,7 @@
         
         if(random_level==0){
             document.getElementById("level").innerHTML="Lv1";
-            var number_of_operations=1+Math.floor(Math.random()*3);
+            var number_of_operations=1+Math.floor(Math.random()*1);
             for (i=0;i<=number_of_operations;i++){
                 var num1=Math.floor(Math.random()*(lv1max-lv1min)+lv1min);
                 //var num2=Math.floor(Math.random()*(lv1max-lv1min)+lv1min);
@@ -256,9 +305,9 @@
         }
         if(random_level==2){
             document.getElementById("level").innerHTML="Lv3";
-            var number_of_operations=1+Math.floor(Math.random()*3);
+            var number_of_operations=1+Math.floor(Math.random()*1);
             for (i=0;i<=number_of_operations;i++){
-                var num1=Math.floor(Math.random()*(lv1max-lv1min)+lv1min);
+                var num1=Math.floor(Math.random()*(lv3max-lv3min)+lv3min);
                 //var num2=Math.floor(Math.random()*(lv1max-lv1min)+lv1min);
                 if(num1<0){
                     equation_num.push(num1);
@@ -270,7 +319,7 @@
                 }
                 
                 if(i<number_of_operations){
-                    var random_operation=operations[Math.floor(Math.random()*2)];//just sum and subtraction
+                    var random_operation=operations[Math.floor(Math.random()*4)];//just sum and subtraction and multiplication
                     equation.push(random_operation);
                     equation_op.push(random_operation);
                 }
