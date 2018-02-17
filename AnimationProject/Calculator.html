@@ -109,7 +109,7 @@
         }
        
         
-        /*Submit(){
+        Submit(result){
             var input = document.getElementById("answer");
             // Execute a function when the user releases a key on the keyboard
             input.addEventListener("keyup", function(event) {
@@ -119,10 +119,10 @@
                   if (event.keyCode === 13) {
                     // Trigger the button element with a click
                     //document.getElementById("submit_answer").click();
-                      this.Check();
+                      Check(result);
                   }
             });
-        }*/
+        }
         
         Run(level){
             //Choose level
@@ -185,6 +185,7 @@
                 }
                 console.log("result:"+this.result);
                 this.move(1000*10,this.result);
+                this.Submit(this.result);
                 document.getElementById("question").innerHTML=this.out+"?";
             }
             if(level==1){
@@ -244,6 +245,7 @@
                 }
                 console.log("result:"+this.result);
                 this.move(1000*20,this.result);
+                this.Submit(this.result);
                 document.getElementById("question").innerHTML=this.out+"?";
 
             }
@@ -304,6 +306,7 @@
                 }
                 console.log("result:"+this.result);
                 this.move(1000*20,this.result);
+                this.Submit(this.result);
                 document.getElementById("question").innerHTML=this.out+"?";
             }
         }
@@ -350,7 +353,7 @@
     function Main(){
         
         var calculator=new Calculator();
-        var input = document.getElementById("answer");
+        /*var input = document.getElementById("answer");
             // Execute a function when the user releases a key on the keyboard
             input.addEventListener("keyup", function(event) {
                   // Cancel the default action, if needed
@@ -361,7 +364,7 @@
                     //document.getElementById("submit_answer").click();
                       Check(calculator.result);
                   }
-            });
+            });*/
         calculator.Run(Math.floor(Math.random()*3));
         
         
