@@ -50,15 +50,17 @@
     <h1 id="level"></h1>
     <h2 id="feedback"></h2>
     <div class="rectangle">
-        <table style="width:100%;height:%;">
-            <tr ><th><div class="myProgress" ><div class="myBar" id="myBar">cdscs</div></div></th></tr>
-            <tr ><th><h1 id="question" style="position:relative;left:35%;">2+2?</h1></th></tr>
-            <tr><th><button class="number" value=9 onclick="PutNumber(this.value)">9</button></th><th><button class="number" value=8 onclick="PutNumber(this.value)">8</button></th><th><button class="number" value=7 onclick="PutNumber(this.value)">7</button></th><th><button class="number" value="-" onclick="Negative()">-</button></th></tr>
-            <tr><th><button class="number" value=6 onclick="PutNumber(this.value)">6</button></th><th><button class="number" value=5 onclick="PutNumber(this.value)">5</button></th><th><button class="number" value=4 onclick="PutNumber(this.value)">4</button></th><th><button class="number"  onclick="Clear()">CE</button></th></tr>
-            <tr><th><button class="number" value=3 onclick="PutNumber(this.value)">3</button></th><th><button class="number" value=2 onclick="PutNumber(this.value)">2</button></th><th><button class="number" value=1 onclick="PutNumber(this.value)">1</button></th><th><button class="number" value=0 onclick="PutNumber(this.value)">0</button></th></tr>
-            <tr ><th ><input style="position:relative;width:100%;height:20%;" id="answer" type="number" ></th></tr>
-            <tr><th><button id="submit_answer" style="position:relative;width:100%;height:22%;" onclick="Check()">Submit</button></th></tr>
-        </table>        
+        
+            <div class="myProgress" ><div class="myBar" id="myBar">cdscs</div></div>
+            <h1 id="question" style="position:relative;left:35%;">2+2?</h1>
+            <div>
+            <button class="number" value=9 onclick="PutNumber(this.value)">9</button><button class="number" value=8 onclick="PutNumber(this.value)">8</button><button class="number" value=7 onclick="PutNumber(this.value)">7</button><button class="number" value="-" onclick="Negative()">-</button>
+            </div>
+            ><button class="number" value=6 onclick="PutNumber(this.value)">6</button><button class="number" value=5 onclick="PutNumber(this.value)">5</button><button class="number" value=4 onclick="PutNumber(this.value)">4</button><button class="number"  onclick="Clear()">CE</button>
+            <button class="number" value=3 onclick="PutNumber(this.value)">3</button><button class="number" value=2 onclick="PutNumber(this.value)">2</button><button class="number" value=1 onclick="PutNumber(this.value)">1</button><button class="number" value=0 onclick="PutNumber(this.value)">0</button>
+            <input style="position:relative;width:100%;height:20%;" id="answer" type="number" >
+            <button id="submit_answer" style="position:relative;width:100%;height:22%;" onclick="Check()">Submit</button>
+               
     </div>   
     
 
