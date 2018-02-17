@@ -74,7 +74,8 @@
             this.equation_num=[];
             this.out="";
             this.result=0;
-            
+            this.end=false;
+            this.time;
             //this.Submit();
         }
          /*Check(){
@@ -85,7 +86,7 @@
                 document.getElementById("feedback").innerHTML="<font color='red'>Wrong Answer!</font>"
             }
         }*/
-        move(limit,result){
+        move(limit,calculator){
             var time=limit;
             var dt=10;//miliseconds
             var elem = document.getElementById("myBar");   
@@ -94,7 +95,7 @@
             function frame() {
                 if (width <= 0) {
                     clearInterval(id);
-                    Check(result);
+                    Check(calculator);
                 } else {
                     time-=dt;
                     width=Math.round((time/limit)*100);
@@ -109,7 +110,7 @@
         }
        
         
-        Submit(result){
+        Submit(calculator){
             var input = document.getElementById("answer");
             // Execute a function when the user releases a key on the keyboard
             input.addEventListener("keyup", function(event) {
@@ -119,7 +120,7 @@
                   if (event.keyCode === 13) {
                     // Trigger the button element with a click
                     //document.getElementById("submit_answer").click();
-                      Check(result);
+                      Check(calculator);
                   }
             });
         }
@@ -130,6 +131,7 @@
             
             if(level==0){
                 //this.move(1000*10,this.result);
+                this.time=10;
                 document.getElementById("level").innerHTML="Lv1";
                 var number_of_operations=1+Math.floor(Math.random()*1);
                 for (var i=0;i<=number_of_operations;i++){
@@ -184,12 +186,13 @@
 
                 }
                 console.log("result:"+this.result);
-                this.move(1000*10,this.result);
-                this.Submit(this.result);
+                this.move(1000*this.time,this);
+                this.Submit(this);
                 document.getElementById("question").innerHTML=this.out+"?";
             }
             if(level==1){
                 //this.move(1000*20,this.result);
+                this.time=20;
                 document.getElementById("level").innerHTML="Lv2";
                 var number_of_operations=1+Math.floor(Math.random()*3);
                 for (var i=0;i<=number_of_operations;i++){
@@ -244,13 +247,14 @@
 
                 }
                 console.log("result:"+this.result);
-                this.move(1000*20,this.result);
-                this.Submit(this.result);
+                this.move(1000*this.time,this);
+                this.Submit(this);
                 document.getElementById("question").innerHTML=this.out+"?";
 
             }
             if(level==2){
                 //this.move(1000*20,this.result);
+                this.time=20;
                 document.getElementById("level").innerHTML="Lv3";
                 var number_of_operations=1+Math.floor(Math.random()*1);
                 for (var i=0;i<=number_of_operations;i++){
@@ -305,8 +309,8 @@
 
                 }
                 console.log("result:"+this.result);
-                this.move(1000*20,this.result);
-                this.Submit(this.result);
+                this.move(1000*this.time,this);
+                this.Submit(this);
                 document.getElementById("question").innerHTML=this.out+"?";
             }
         }
@@ -341,12 +345,14 @@
         
     }*/
     //move(1000*10);//*60*1);
-    function Check(result){
+    function Check(calculator){
         console.log("answer:"+document.getElementById("answer").value)
-        if(result==document.getElementById("answer").value){
+        if(calculator.result==document.getElementById("answer").value){
             document.getElementById("feedback").innerHTML="<font color='green'>You Found the Right Answer!</font>"
+            calculator.end=true;
         }else{
             document.getElementById("feedback").innerHTML="<font color='red'>Wrong Answer!</font>"
+            calculator.end=true;
         }
     }
     //var result=0;
@@ -366,8 +372,8 @@
                   }
             });*/
         calculator.Run(Math.floor(Math.random()*3));
-        
-        
+        //var c2=new Calculator();
+        //setTimeout(c2.Run(),calculator.time*1000);
         
         
         
