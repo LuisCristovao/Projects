@@ -26,10 +26,33 @@
         height: 4%;
         position: absolute;
     }
+    
+    
+    .fullscreen .myProgress {
+        width: 100%;
+        background-color: white;
+        position: absolute;
+        top:40%;
+        height:10%;
+        
+        
+    }
+
+    .fullscreen .myBar {
+        width: 100%;
+        height:100%;
+        background-color: blue;
+        text-align: center;
+        
+        color: white;  
+    }
 
 </style>
 <body>
     <canvas   id="canvas"  onmousemove="MousePos(event)"  > </canvas>
+    
+    <div class="myProgress" id="myProgress"><div class="myBar" id="myBar">cdscs</div></div>
+    
     <div class="circle" id="goodHealth" style="background-color:green;top:1%;left:0%;visibility:hidden;"></div>
     <h3 class="text" id="goodHealthText" style="top:0%;left:2%;visibility:hidden;">100</h3>
     <div class="circle" id="goodAttack" style="background-color:red;top:1%;left:10%;visibility:hidden;"></div>
@@ -114,6 +137,8 @@
             this.Buttons["Evolve"]=document.getElementById("Evolve");
             this.Buttons["Health"]=document.getElementById("Health");
             this.Buttons["return"]=document.getElementById("return");
+            this.Buttons["LoadingBar"]=document.getElementById("myBar");
+            this.Buttons["BarBehind"]=document.getElementById("myProgress");
             
             //AddEventListeners
             this.Buttons["OnePlayer"].addEventListener("click",this.OnePlayer,false);
@@ -122,7 +147,10 @@
             
            
         }
-        
+        moveBar(percentage){
+            this.Buttons['LoadingBar'].innerHTML=percentage+'%';
+            this.Buttons['LoadingBar'].style.width=percentage+"%";
+        }
         
         
         OnePlayer(){
@@ -242,7 +270,8 @@
         var adressEvilAttacks="images/EvilAttacks/";
         var adressEvilDefense="images/EvilDefense/";
         var adressEvilEvolve="images/EvilEvolve/";
-        
+        var loading=100/8;
+        menu.moveBar(0);
         //Get Intro Images
         var number_of_folders=parseInt(readTextFile(adressMenu+"/Index.txt"));
         console.log("Numeber:"+number_of_folders);
@@ -258,6 +287,7 @@
             }
             Intro.push(animation_images);
         }
+        menu.moveBar(loading);
         //Get Idle Images
         var number_of_folders=parseInt(readTextFile(adressIdle+"/Index.txt"));
         console.log("Numeber:"+number_of_folders);
@@ -273,6 +303,7 @@
             }
             Idle.push(animation_images);
         }
+        menu.moveBar(loading*2);
         //Get GoodAttacks Images
         var number_of_folders=parseInt(readTextFile(adressGoodAttacks+"/Index.txt"));
         console.log("Numeber:"+number_of_folders);
@@ -288,6 +319,7 @@
             }
             GoodAttacks.push(animation_images);
         }
+        menu.moveBar(loading*3);
          //Get EvilDefense Images
         var number_of_folders=parseInt(readTextFile(adressEvilDefense+"/Index.txt"));
         console.log("Numeber:"+number_of_folders);
@@ -303,6 +335,7 @@
             }
             EvilDefense.push(animation_images);
         }
+        menu.moveBar(loading*4);
         //Get EvilAttacks Images
         var number_of_folders=parseInt(readTextFile(adressEvilAttacks+"/Index.txt"));
         console.log("Numeber:"+number_of_folders);
@@ -318,6 +351,7 @@
             }
             EvilAttacks.push(animation_images);
         }
+        menu.moveBar(loading*5);
         //Get GoodDefense Images
         var number_of_folders=parseInt(readTextFile(adressGoodDefense+"/Index.txt"));
         console.log("Numeber:"+number_of_folders);
@@ -333,6 +367,7 @@
             }
             GoodDefense.push(animation_images);
         }
+        menu.moveBar(loading*6);
         //GetGoodPowerUps
         GoodEvolve={
             'Health':[],
@@ -357,7 +392,7 @@
             if(j<number_of_folders)
                 j++;
         }
-        
+        menu.moveBar(loading*7);
         //GetEvilPowerUps
         EvilEvolve={
             'Health':[],
@@ -382,6 +417,7 @@
             if(j<number_of_folders)
                 j++;
         }
+        menu.moveBar(100);
     }    
    
     function Draw(images_array){
@@ -410,14 +446,25 @@
         
         window.requestAnimationFrame(Main);
     }
+    function Init(){
+        menu=new Menu();
+        HideButtons();
+        menu.Buttons['BarBehind'].style.visibility="visible";
+        menu.Buttons['LoadingBar'].style.visibility="visible";
+        get_all_animations();
+        menu.Buttons['BarBehind'].style.visibility="hidden";
+        menu.Buttons['LoadingBar'].style.visibility="hidden";
+        menu.Buttons['OnePlayer'].style.visibility="visible";
+        menu.Buttons['TwoPlayers'].style.visibility="visible";
+        startTime = new Date().getTime();
+        actualAnimationRunning=Intro[0];
+    }
     
     //Main________________________________________
    
-    get_all_animations();
-    startTime = new Date().getTime();
-    actualAnimationRunning=Intro[0];
-    menu=new Menu();
     
+    
+    Init();
     window.requestAnimationFrame(Main);
     //setInterval(Main,10);    
 </script>
