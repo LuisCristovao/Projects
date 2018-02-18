@@ -76,6 +76,7 @@
             this.result=0;
             this.end=false;
             this.time;
+            this.bar_width=100;
             //this.Submit();
         }
          /*Check(){
@@ -90,10 +91,10 @@
             var time=limit;
             var dt=10;//miliseconds
             var elem = document.getElementById("myBar");   
-            var width = 100;
+            //var width = 100;
             var id = setInterval(frame, dt);
             function frame() {
-                if (width <= 0 ) {
+                if (calculator.bar_width <= 0 ) {
                     clearInterval(id);
                     Check(calculator);
                 } else {
@@ -103,13 +104,13 @@
                     }*/
                     //else{
                         time-=dt;
-                        width=Math.round((time/limit)*100);
+                        this.bar_width=Math.round((time/limit)*100);
                         if(time<=1000*60){
                             elem.innerHTML=Math.round(time/(1000))+"s";
                         }else{
                             elem.innerHTML=Math.floor((time/(1000))/60)+"min"+" "+Math.round(time/(1000))+"s";
                         }
-                        elem.style.width = width + '%'; 
+                        elem.style.width = this.bar_width + '%'; 
                     //}
                 }
             }
@@ -126,7 +127,8 @@
                   if (event.keyCode === 13) {
                     // Trigger the button element with a click
                     //document.getElementById("submit_answer").click();
-                      Check(calculator);
+                      calculator.bar_width=0;
+                      
                   }
             });
         }
