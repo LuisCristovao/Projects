@@ -104,13 +104,13 @@
                     }*/
                     //else{
                         time-=dt;
-                        this.bar_width=Math.round((time/limit)*100);
+                        calculator.bar_width=Math.round((time/limit)*100);
                         if(time<=1000*60){
                             elem.innerHTML=Math.round(time/(1000))+"s";
                         }else{
                             elem.innerHTML=Math.floor((time/(1000))/60)+"min"+" "+Math.round(time/(1000))+"s";
                         }
-                        elem.style.width = this.bar_width + '%'; 
+                        elem.style.width = calculator.bar_width + '%'; 
                     //}
                 }
             }
