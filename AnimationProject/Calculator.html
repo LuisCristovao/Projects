@@ -95,8 +95,10 @@
             var id = setInterval(frame, dt);
             function frame() {
                 if (calculator.bar_width <= 0 ) {
+                    
                     clearInterval(id);
                     Check(calculator);
+                    document.getElementById("answer").value="";
                 } else {
                     /*if( calculator.end){
                          elem.style.width = 0 + '%'; 
