@@ -101,7 +101,7 @@
                          elem.style.width = 0 + '%'; 
                         //clearInterval(id);
                     }*/
-                    else{
+                    //else{
                         time-=dt;
                         width=Math.round((time/limit)*100);
                         if(time<=1000*60){
@@ -110,7 +110,7 @@
                             elem.innerHTML=Math.floor((time/(1000))/60)+"min"+" "+Math.round(time/(1000))+"s";
                         }
                         elem.style.width = width + '%'; 
-                    }
+                    //}
                 }
             }
         }
