@@ -64,7 +64,7 @@
     class Calculator{
         
         constructor(){
-            this.lv1max=11,this.lv1min=-11,this.lv2max=21,this.lv2min=-11,this.lv3max=11,this.lv3min=-11;
+            this.lv1max=11,this.lv1min=-11,this.lv2max=11,this.lv2min=-11,this.lv3max=101,this.lv3min=-101;
             
 
             //var numbers=[];
@@ -266,7 +266,7 @@
                 //this.move(1000*20,this.result);
                 this.time=20;
                 document.getElementById("level").innerHTML="Lv3";
-                var number_of_operations=1+Math.floor(Math.random()*1);
+                var number_of_operations=1+Math.floor(Math.random()*4);
                 for (var i=0;i<=number_of_operations;i++){
                     var num1=Math.floor(Math.random()*(this.lv3max-this.lv3min)+this.lv3min);
                     //var num2=Math.floor(Math.random()*(lv1max-lv1min)+lv1min);
@@ -280,7 +280,7 @@
                     }
 
                     if(i<number_of_operations){
-                        var random_operation=this.operations[Math.floor(Math.random()*4)];//just sum and subtraction and multiplication
+                        var random_operation=this.operations[Math.floor(Math.random()*2)];//just sum and subtraction 
                         this.equation.push(random_operation);
                         this.equation_op.push(random_operation);
                     }
