@@ -43,7 +43,7 @@
         height:100%;
         background-color: blue;
         text-align: center;
-        
+        font-size: 200%;
         color: white;  
     }
 
@@ -144,7 +144,9 @@
             this.Buttons["OnePlayer"].addEventListener("click",this.OnePlayer,false);
             this.Buttons["TwoPlayers"].addEventListener("click",this.TwoPlayers,false);
             
-            
+            //variables
+            this.oneplayer=false;
+            this.twoplayers=false;
            
         }
         moveBar(percentage){
@@ -173,6 +175,7 @@
             menu.Buttons["evilHealthText"].style.visibility="visible";
             menu.Buttons["evilAttackText"].style.visibility="visible";
             menu.Buttons["evilDefenseText"].style.visibility="visible";
+            menu.oneplayer=true;
             //menu.Buttons["return"].style.visibility="visible";
             
         }
@@ -196,6 +199,7 @@
             menu.Buttons["evilHealthText"].style.visibility="visible";
             menu.Buttons["evilAttackText"].style.visibility="visible";
             menu.Buttons["evilDefenseText"].style.visibility="visible";
+            menu.twoplayers=true;
         }
         
         
@@ -475,6 +479,14 @@
                 menu.Buttons['TwoPlayers'].style.visibility="visible";
                 firstTime=true;
             }
+            if(menu.oneplayer){
+                
+            }
+            if(menu.twoplayers){
+                
+            }
+            
+            
             Draw(actualAnimationRunning);
         }
         
