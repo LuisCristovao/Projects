@@ -1,4 +1,4 @@
-<html class="fullscreen">
+<html id="html" class="fullscreen">
 <head>
 <title>Galculator!</title>    
 </head>
@@ -13,22 +13,24 @@
         height: 100%;
         margin: 0px;    
     }
-    .rectangle{
-        position: absolute;
-        box-sizing: content-box; 
+
+     .rectangle{
+      
+        
         background-color:hsl(191,0%,93%);
-        top:10%;
-        left:30%;
-        width: 50%;
-        height: 40%;
-           
-        border: 2px solid grey;
+        /*top:10%;
+        left:30%;*/
+        width: 100%;
+        height: 100%;
+        /*margin: 0px;*/   
+        /*border: 2px solid grey;*/
     }
     
     .myProgress {
       width: 100%;
       background-color: white;
     }
+
     .myBar {
         width: 100%;
         height: 15%;
@@ -42,27 +44,29 @@
         width:10%,
         height: 10%;
     }
+
 </style>
 <body>
+    <!--<div style="width:100%;height:100%;background-color:hsl(191,0%,93%)"></div>-->
     
-    
-    <div class="rectangle">
-            <h1 id="level" style="position:relative;left:45%;"></h1>
+    <div class="rectangle" >
+            <h1 id="level" style="position:absolute;left:45%;">Lv1</h1>
             <div class="myProgress" ><div class="myBar" id="myBar">cdscs</div></div>
-            <h1 id="question" style="position:relative;left:45%;">2+2?</h1>
-            <input style="position:relative;width:100%;height:15%;font-size:150%;" id="answer" type="number" >
+            <h1 id="question" style="position:absolute;left:45%;">2+2?</h1>
+            <input style="position:absolute;width:100%;height:15%;font-size:150%;" id="answer" type="number" >
             <!--<button id="submit_answer" style="position:relative;width:100%;height:22%;visibility='hidden';" onclick="Check()">Submit</button>-->
-             <h2 id="feedback" style="position:relative;left:40%;"></h2>  
+             <h2 id="feedback" style="position:absolute;left:40%;"></h2>  
     </div>   
     
 
 </body>
-<script>
+<!--<script>
     class Calculator{
         
         constructor(){
             this.lv1max=11,this.lv1min=-11,this.lv2max=11,this.lv2min=-11,this.lv3max=101,this.lv3min=-101;
             
+
             //var numbers=[];
             this.operations=['+','-','*','/'];//0->+;1->-;2->x;3->/;
             this.equation=[];
@@ -151,6 +155,7 @@
                         this.equation_num.push(num1);
                        this.equation.push(num1); 
                     }
+
                     if(i<number_of_operations){
                         var random_operation=this.operations[Math.floor(Math.random()*2)];//just sum and subtraction
                         this.equation.push(random_operation);
@@ -159,9 +164,11 @@
                 }
                 for(var i=0;i<this.equation.length;i++){
                     this.out+=this.equation[i];
+
                 }
                 var next_operation=[];
                 for(var i=0,  j=0;i<this.equation.length;i++){
+
                     //is a number
                     if(this.equation[i]!='+' && this.equation[i]!='-' &&this.equation[i]!='*' && this.equation[i]!='/'){
                         var op=next_operation.pop();
@@ -186,6 +193,7 @@
                     else{//operation
                         next_operation.push(this.equation[i]);
                     }
+
                 }
                 console.log("result:"+this.result);
                 this.move(1000*this.time,this);
@@ -208,6 +216,7 @@
                         this.equation_num.push(num1);
                        this.equation.push(num1); 
                     }
+
                     if(i<number_of_operations){
                         var random_operation=this.operations[Math.floor(Math.random()*2)];//just sum and subtraction
                         this.equation.push(random_operation);
@@ -216,9 +225,11 @@
                 }
                 for(var i=0; i<this.equation.length;i++){
                     this.out+=this.equation[i];
+
                 }
                 var next_operation=[];
                 for(var i=0, j=0;i<this.equation.length;i++){
+
                     //is a number
                     if(this.equation[i]!='+' && this.equation[i]!='-' &&this.equation[i]!='*' && this.equation[i]!='/'){
                         var op=next_operation.pop();
@@ -243,11 +254,13 @@
                     else{//operation
                         next_operation.push(this.equation[i]);
                     }
+
                 }
                 console.log("result:"+this.result);
                 this.move(1000*this.time,this);
                 this.Submit(this);
                 document.getElementById("question").innerHTML=this.out+"?";
+
             }
             if(level==2){
                 //this.move(1000*20,this.result);
@@ -265,6 +278,7 @@
                         this.equation_num.push(num1);
                        this.equation.push(num1); 
                     }
+
                     if(i<number_of_operations){
                         var random_operation=this.operations[Math.floor(Math.random()*2)];//just sum and subtraction 
                         this.equation.push(random_operation);
@@ -273,9 +287,11 @@
                 }
                 for(var i=0;i<this.equation.length;i++){
                     this.out+=this.equation[i];
+
                 }
                 var next_operation=[];
                 for(var i=0,j=0;i<this.equation.length;i++){
+
                     //is a number
                     if(this.equation[i]!='+' && this.equation[i]!='-' &&this.equation[i]!='*' && this.equation[i]!='/'){
                         var op=next_operation.pop();
@@ -300,6 +316,7 @@
                     else{//operation
                         next_operation.push(this.equation[i]);
                     }
+
                 }
                 console.log("result:"+this.result);
                 this.move(1000*this.time,this);
@@ -381,6 +398,7 @@
         
         /*
         var input = document.getElementById("answer");
+
         // Execute a function when the user releases a key on the keyboard
         input.addEventListener("keyup", function(event) {
           // Cancel the default action, if needed
@@ -579,6 +597,8 @@
         
       */  
     }
+    document.getElementById('html').style.width=window.innerWidth;
+    document.getElementById('html').style.height=window.innerHeight;
     window.onload=Main();
-</script>
+</script>-->
 </html>
