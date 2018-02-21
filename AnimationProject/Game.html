@@ -439,7 +439,15 @@
             }
             menu.moveBar(100);
         }
-    }    
+    } 
+    class Game{
+        
+        constructor(){
+            
+        }
+        
+        
+    }
    
     function Draw(images_array){
             dt = 1E-3 * (new Date().getTime() - startTime);
@@ -458,7 +466,7 @@
     
     var image_index=0;
     var stages=0;
-    var firstTime=false;
+    var firstTime=true;
     function Main(){
          canvas.width=window.innerWidth;
         canvas.height=window.innerHeight;
@@ -470,14 +478,14 @@
             //image=Intro[0][i];
             //context.drawImage(Intro[0][image_index],0,0,window.innerWidth,window.innerHeight);
             //image_index=(image_index+1)%Intro[0].length;
-            if(!firstTime){
+            if(firstTime){
                 startTime = new Date().getTime();
                 actualAnimationRunning=Intro[0];
                 menu.Buttons['BarBehind'].style.visibility="hidden";
                 menu.Buttons['LoadingBar'].style.visibility="hidden";
                 menu.Buttons['OnePlayer'].style.visibility="visible";
                 menu.Buttons['TwoPlayers'].style.visibility="visible";
-                firstTime=true;
+                firstTime=false;
             }
             if(menu.oneplayer){
                 
