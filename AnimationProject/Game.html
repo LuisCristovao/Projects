@@ -106,6 +106,7 @@
     var Idle=[];
     var actualAnimationRunning;
     var menu;
+    var game;
     var startTime;
     var time=0;
     var dt;
@@ -263,7 +264,8 @@
             if(menu.twoplayers){
                 // Wait for good player choice
                 if(this.idle_state==1){
-                    this.menu.Buttons['GoodText'].innerHTML='<font color="blue">First Player(Good) Choose Option!</font>';
+                    menu.Buttons['GoodText'].style.visibility="visible";
+                    menu.Buttons['GoodText'].innerHTML='<font color="blue">First Player(Good) Choose Option!</font>';
                     //Just see the first selection menu
                     if(menu.Selected['Attack']){
                         
@@ -619,12 +621,7 @@
                 menu.Buttons['TwoPlayers'].style.visibility="visible";
                 firstTime=false;
             }
-            if(menu.oneplayer){
-                
-            }
-            if(menu.twoplayers){
-                
-            }
+            game.Run();
             
             
             Draw(actualAnimationRunning);
@@ -634,16 +631,11 @@
     }
     function Init(){
         menu=new Menu();
+        game=new Game();
         HideButtons();
         menu.Buttons['BarBehind'].style.visibility="visible";
         menu.Buttons['LoadingBar'].style.visibility="visible";
-        /*get_all_animations();
-        menu.Buttons['BarBehind'].style.visibility="hidden";
-        menu.Buttons['LoadingBar'].style.visibility="hidden";
-        menu.Buttons['OnePlayer'].style.visibility="visible";
-        menu.Buttons['TwoPlayers'].style.visibility="visible";*/
-        //startTime = new Date().getTime();
-        //actualAnimationRunning=Intro[0];
+        
     }
     
     //Main________________________________________
