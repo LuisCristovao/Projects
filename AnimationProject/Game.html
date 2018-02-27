@@ -178,12 +178,11 @@
             this.Buttons['LoadingBar'].style.width=percentage+"%";
         }
         
+        Select(option){
+            menu.Selected[option]=true;
+        }
         
-        OnePlayer(){
-            
-            HideButtons();
-            time=0
-            actualAnimationRunning=Idle[0];
+        ShowIdleMenus(){
             menu.Buttons["Attack"].style.visibility="visible";
             menu.Buttons["Defense"].style.visibility="visible";
             menu.Buttons["Evolve"].style.visibility="visible";
@@ -199,6 +198,14 @@
             menu.Buttons["evilHealthText"].style.visibility="visible";
             menu.Buttons["evilAttackText"].style.visibility="visible";
             menu.Buttons["evilDefenseText"].style.visibility="visible";
+        }
+        
+        OnePlayer(){
+            
+            HideButtons();
+            time=0
+            actualAnimationRunning=Idle[0];
+            menu.ShowIdleMenus();
             menu.oneplayer=true;
             //menu.Buttons["return"].style.visibility="visible";
             
@@ -208,27 +215,11 @@
             HideButtons();
             time=0
             actualAnimationRunning=Idle[0];
-            menu.Buttons["Attack"].style.visibility="visible";
-            menu.Buttons["Defense"].style.visibility="visible";
-            menu.Buttons["Evolve"].style.visibility="visible";
-            menu.Buttons["goodHealth"].style.visibility="visible";
-            menu.Buttons["goodAttack"].style.visibility="visible";
-            menu.Buttons["goodDefense"].style.visibility="visible";
-            menu.Buttons["goodHealthText"].style.visibility="visible";
-            menu.Buttons["goodAttackText"].style.visibility="visible";
-            menu.Buttons["goodDefenseText"].style.visibility="visible";
-            menu.Buttons["evilHealth"].style.visibility="visible";
-            menu.Buttons["evilAttack"].style.visibility="visible";
-            menu.Buttons["evilDefense"].style.visibility="visible";
-            menu.Buttons["evilHealthText"].style.visibility="visible";
-            menu.Buttons["evilAttackText"].style.visibility="visible";
-            menu.Buttons["evilDefenseText"].style.visibility="visible";
+            menu.ShowIdleMenus();
             menu.twoplayers=true;
         }
         
-        Select(option){
-            menu.Selected[option]=true;
-        }
+        
        
     }
     class Game{
@@ -242,7 +233,7 @@
             //
             this.calculator_state=0;
             //
-            this.winningAnimationState=0;
+            this.ActionAnimationState=0;
             //
             this.update_status_state=0;
             
@@ -262,7 +253,7 @@
             
         }
         //
-        WinningAnimation(){
+        ActionAnimation(){
             
         }
         //
@@ -292,7 +283,7 @@
                 this.ProcessWinningChoice();
             }
             if(this.state==3){
-                this.WinningAnimation();
+                this.ActionAnimation();
             }
             if(this.state==4){
                 this.UpDateStatus();
