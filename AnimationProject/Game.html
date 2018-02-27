@@ -206,6 +206,88 @@
         
        
     }
+    class Game{
+        
+        constructor(good_attack,good_defense,good_health,evil_attack,evil_defense,evil_health){
+            //0-idle state, 1-calulator game,2-Process winning choice,3-Do winning animation,
+            //4-Update players status with text and idle animation, 5- is there a winner,
+            this.state=0;
+            //
+            this.idle_state=0;
+            //
+            this.calculator_state=0;
+            //
+            this.winningAnimationState=0;
+            //
+            this.update_status_state=0;
+            
+            
+            this.goodAttack=good_attack;
+            this.goodDefense=good_defense;
+            this.goodHealth=good_health;
+            
+            this.evilAttack=evil_attack;
+            this.evilDefense=evil_defense;
+            this.evilHealth=evil_health;
+        }
+        //
+        Idle(){
+            
+        }
+        //
+        Calculator(){
+            
+        }
+        //
+        ProcessWinningChoice(){
+            
+        }
+        //
+        WinningAnimation(){
+            
+        }
+        //
+        UpDateStatus(){
+            
+        }
+        //
+        CheckWinner(){
+            
+        }
+        //
+        GameOver(){
+            
+        }
+        
+        //Main function of this class that is called once per frame 
+        //does Actions depending on this.state
+        Run(){
+            
+            if(this.state==0){
+                this.Idle();
+            }
+            if(this.state==1){
+                this.Calculator();
+            }
+            if(this.state==2){
+                this.ProcessWinningChoice();
+            }
+            if(this.state==3){
+                this.WinningAnimation();
+            }
+            if(this.state==4){
+                this.UpDateStatus();
+            }
+            if(this.state==5){
+                this.CheckWinner();
+            }
+            if(this.state==6){
+                this.GameOver();
+            }
+            
+        }
+        
+    }
     
     
     function HideButtons(){
@@ -440,14 +522,7 @@
             menu.moveBar(100);
         }
     } 
-    class Game{
-        
-        constructor(){
-            
-        }
-        
-        
-    }
+    
    
     function Draw(images_array){
             dt = 1E-3 * (new Date().getTime() - startTime);
