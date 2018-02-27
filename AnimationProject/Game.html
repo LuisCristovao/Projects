@@ -145,6 +145,8 @@
             this.Buttons['lv2']=document.getElementById("lv2");
             this.Buttons['lv3']=document.getElementById("lv3");
             
+            this.Buttons['GoodText']=document.getElementById("goodText");
+            this.Buttons['EvilText']=document.getElementById("evilText");
             
             //variables
             this.oneplayer=false;
@@ -242,7 +244,22 @@
         }
         //
         Idle(){
-            
+            if(this.menu.oneplayer){
+                
+            }
+            if(this.menu.twoplayers){
+                // Wait for good player choice
+                if(this.idle_state==1){
+                    this.menu.Buttons['GoodText'].innerHTML='<font color="blue">Good Player Choose Option!</font>';
+                    
+                    this.idle_state++;
+                }
+                // Select Idle animation as current
+                if(this.idle_state==0){
+                    actualAnimationRunning=Idle[0];
+                    this.idle_state++;
+                }
+            }
         }
         //
         Calculator(){
