@@ -204,20 +204,20 @@
         
         OnePlayer(){
             
-            HideButtons();
+            /*HideButtons();
             time=0
             actualAnimationRunning=Idle[0];
-            menu.ShowIdleMenus();
+            menu.ShowIdleMenus();*/
             menu.oneplayer=true;
             //menu.Buttons["return"].style.visibility="visible";
             
         }
         TwoPlayers(){
             //Afterwars change to work with two players
-            HideButtons();
+            /*HideButtons();
             time=0
             actualAnimationRunning=Idle[0];
-            menu.ShowIdleMenus();
+            menu.ShowIdleMenus();*/
             menu.twoplayers=true;
         }
         
@@ -226,10 +226,11 @@
     }
     class Game{
         
-        constructor(menu){
+        constructor(){
+            //-1 Nothing State
             //0-idle state, 1-calulator game,2-Process winning choice,3-Do winning animation,
             //4-Update players status with text and idle animation, 5- is there a winner,
-            this.state=0;
+            this.state=-1;
             //
             this.idle_state=0;
             //
@@ -239,24 +240,40 @@
             //
             this.update_status_state=0;
             
-            this.menu=menu;
+            
             
         }
         //
+        Nothing(){
+            // do nothing
+            if(menu.oneplayer){
+                this.state++;
+            }
+            if(menu.twoplayers){
+                this.state++;
+            }
+        }
+        //
         Idle(){
-            if(this.menu.oneplayer){
+            if(menu.oneplayer){
                 
             }
-            if(this.menu.twoplayers){
+            if(menu.twoplayers){
                 // Wait for good player choice
                 if(this.idle_state==1){
-                    this.menu.Buttons['GoodText'].innerHTML='<font color="blue">Good Player Choose Option!</font>';
-                    
+                    this.menu.Buttons['GoodText'].innerHTML='<font color="blue">First Player(Good) Choose Option!</font>';
+                    //Just see the first selection menu
+                    if(menu.Selected['Attack']){
+                        
+                    }
                     this.idle_state++;
                 }
                 // Select Idle animation as current
                 if(this.idle_state==0){
+                    HideButtons();
+                    time=0;
                     actualAnimationRunning=Idle[0];
+                    menu.ShowIdleMenus();
                     this.idle_state++;
                 }
             }
@@ -289,7 +306,9 @@
         //Main function of this class that is called once per frame 
         //does Actions depending on this.state
         Run(){
-            
+            if(this.state==-1){
+                this.Nothing();
+            }
             if(this.state==0){
                 this.Idle();
             }
