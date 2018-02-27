@@ -66,6 +66,8 @@
     <div class="circle" id="evilDefense" style="background-color:blue;top:1%;left:90%;visibility:hidden;"></div>
     <h3 class="text" id="evilDefenseText" style="top:0%;left:92%;visibility:hidden;">100</h3>
     
+    <h3 class="text" id="goodText" style="top:15%;left:30%;visibility:hidden;">Good Text</h3>
+    <h3 class="text" id="evilText" style="top:15%;left:60%;visibility:hidden;">Evil Text</h3>
     <!--<h1 class="text" style="top:30%;left:45%;width:10%;height:10%;"><font color="white"></font></h1>-->
     <!--Now The Game Menus -->
     <!--First Menu-->
@@ -139,18 +141,40 @@
             this.Buttons["return"]=document.getElementById("return");
             this.Buttons["LoadingBar"]=document.getElementById("myBar");
             this.Buttons["BarBehind"]=document.getElementById("myProgress");
+            this.Buttons['lv1']=document.getElementById("lv1");
+            this.Buttons['lv2']=document.getElementById("lv2");
+            this.Buttons['lv3']=document.getElementById("lv3");
             
-            //AddEventListeners
-            this.Buttons["OnePlayer"].addEventListener("click",this.OnePlayer,false);
-            this.Buttons["TwoPlayers"].addEventListener("click",this.TwoPlayers,false);
             
             //variables
             this.oneplayer=false;
             this.twoplayers=false;
            
+            //booleans
+            this.Selected={};
+            this.Selected['Attack']=false;
+            this.Selected['Defense']=false;
+            this.Selected['Evolve']=false;
+            this.Selected['Health']=false;
+            this.Selected['lv1']=false;
+            this.Selected['lv2']=false;
+            this.Selected['lv3']=false;
+            
+            //AddEventListeners
+            this.Buttons["OnePlayer"].addEventListener("click",this.OnePlayer,false);
+            this.Buttons["TwoPlayers"].addEventListener("click",this.TwoPlayers,false);
+            this.Buttons["Attack"].addEventListener("click",function(){menu.Select('Attack')},false);
+            this.Buttons["Defense"].addEventListener("click",function(){menu.Select('Defense')},false);
+            this.Buttons["Evolve"].addEventListener("click",function(){menu.Select('Evolve')},false);
+            this.Buttons["Health"].addEventListener("click",function(){menu.Select('Health')},false);
+            this.Buttons["lv1"].addEventListener("click",function(){menu.Select('lv1')},false);
+            this.Buttons["lv2"].addEventListener("click",function(){menu.Select('lv2')},false);
+            this.Buttons["lv3"].addEventListener("click",function(){menu.Select('lv3')},false);
         }
         moveBar(percentage){
+            //change text
             this.Buttons['LoadingBar'].innerHTML=percentage+'%';
+            //change bar
             this.Buttons['LoadingBar'].style.width=percentage+"%";
         }
         
@@ -202,13 +226,14 @@
             menu.twoplayers=true;
         }
         
-        
-        
+        Select(option){
+            menu.Selected[option]=true;
+        }
        
     }
     class Game{
         
-        constructor(good_attack,good_defense,good_health,evil_attack,evil_defense,evil_health){
+        constructor(menu){
             //0-idle state, 1-calulator game,2-Process winning choice,3-Do winning animation,
             //4-Update players status with text and idle animation, 5- is there a winner,
             this.state=0;
@@ -221,14 +246,8 @@
             //
             this.update_status_state=0;
             
+            this.menu=menu;
             
-            this.goodAttack=good_attack;
-            this.goodDefense=good_defense;
-            this.goodHealth=good_health;
-            
-            this.evilAttack=evil_attack;
-            this.evilDefense=evil_defense;
-            this.evilHealth=evil_health;
         }
         //
         Idle(){
