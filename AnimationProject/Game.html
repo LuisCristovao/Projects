@@ -205,6 +205,19 @@
             menu.Buttons["evilDefenseText"].style.visibility="visible";
         }
         
+        HideButtons(){
+            
+            for(key in menu.Buttons){
+                var value = menu.Buttons[key];
+                /* use key/value for intended purpose */
+                value.style.visibility="hidden";
+            }
+        }
+        
+        DeSelectButtons(){
+            
+        }
+        
         OnePlayer(){
             
             /*HideButtons();
@@ -242,8 +255,10 @@
             this.ActionAnimationState=0;
             //
             this.update_status_state=0;
-            
-            
+            //0-attack;1-Defense;2-Evolve;3-Health;4-lv1;5-lv2;6-lv3
+            this.goodOptions=[];
+            //0-attack;1-Defense;2-Evolve;3-Health;4-lv1;5-lv2;6-lv3
+            this.evilOptions=[];
             
         }
         //
@@ -262,28 +277,57 @@
                 
             }
             if(menu.twoplayers){
+                //change menus
+                if(this.idle_state==2){
+                    var opt=this.goodOptions.pop();
+                    //hide Attack,Defense,evolve buttons
+                    //menu.Buttons['Attack'].style.visibility='hidden';
+                    //menu.Buttons['Defense'].style.visibility='hidden';
+                    menu.Buttons['Evolve'].style.visibility='hidden';
+                    //show return button
+                    menu.Buttons['return'].style.visibility='visible';
+                    //if player selected attack or defense
+                    if(opt==0 || opt==1){
+                        menu.Buttons['Attack'].style.visibility='hidden';
+                        menu.Buttons['Defense'].style.visibility='hidden';
+                        menu.Buttons['lv1'].style.visibility="visible";
+                        menu.Buttons['lv2'].style.visibility="visible";
+                        menu.Buttons['lv3'].style.visibility="visible";
+                        this.idle_state++;
+                    }
+                    //evolve button
+                    else{
+                        //Attack and defense buttons already showing
+                        //only need to show health button
+                        menu.Buttons['Health'].style.visibility='visible';
+                        this.idle_state++;
+                    }
+                    
+                }
                 // Wait for good player choice
                 if(this.idle_state==1){
                     menu.Buttons['GoodText'].style.visibility="visible";
                     menu.Buttons['GoodText'].innerHTML='<font color="blue">First Player(Good) Choose Option!</font>';
                     //Just see the first selection menu
                     if(menu.Selected['Attack']){
+                        this.goodOptions.push(0);//0 means attack
+                        this.idle_state++;
                         
                     }
-                    if(menu.Selected['Attack']){
-                        
+                    if(menu.Selected['Defense']){
+                        this.goodOptions.push(1);//1 means defense
+                        this.idle_state++;
                     }
-                    if(menu.Selected['Attack']){
-                        
+                    if(menu.Selected['Evolve']){
+                        this.goodOptions.push(2);//2 means evolve
+                        this.idle_state++;
                     }
-                    if(menu.Selected['Attack']){
-                        
-                    }
-                    this.idle_state++;
+                    
+                    //this.idle_state++;
                 }
                 // Select Idle animation as current
                 if(this.idle_state==0){
-                    HideButtons();
+                    menu.HideButtons();
                     time=0;
                     actualAnimationRunning=Idle[0];
                     menu.ShowIdleMenus();
@@ -353,7 +397,7 @@
             
             for(key in menu.Buttons){
                 var value = menu.Buttons[key];
-                /* use key/value for intended purpose */
+                // use key/value for intended purpose 
                 value.style.visibility="hidden";
             }
     }
