@@ -161,6 +161,7 @@
             this.Selected['lv1']=false;
             this.Selected['lv2']=false;
             this.Selected['lv3']=false;
+            this.Selected['return']=false;
             
             //AddEventListeners
             this.Buttons["OnePlayer"].addEventListener("click",this.OnePlayer,false);
@@ -172,6 +173,7 @@
             this.Buttons["lv1"].addEventListener("click",function(){menu.Select('lv1')},false);
             this.Buttons["lv2"].addEventListener("click",function(){menu.Select('lv2')},false);
             this.Buttons["lv3"].addEventListener("click",function(){menu.Select('lv3')},false);
+            this.Buttons["return"].addEventListener("click",function(){menu.Select('lv3')},false);
         }
         moveBar(percentage){
             //change text
@@ -263,6 +265,15 @@
                 if(this.idle_state==1){
                     this.menu.Buttons['GoodText'].innerHTML='<font color="blue">First Player(Good) Choose Option!</font>';
                     //Just see the first selection menu
+                    if(menu.Selected['Attack']){
+                        
+                    }
+                    if(menu.Selected['Attack']){
+                        
+                    }
+                    if(menu.Selected['Attack']){
+                        
+                    }
                     if(menu.Selected['Attack']){
                         
                     }
