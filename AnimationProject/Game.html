@@ -174,7 +174,7 @@
             this.Buttons["lv1"].addEventListener("click",function(){menu.Select('lv1')},false);
             this.Buttons["lv2"].addEventListener("click",function(){menu.Select('lv2')},false);
             this.Buttons["lv3"].addEventListener("click",function(){menu.Select('lv3')},false);
-            this.Buttons["return"].addEventListener("click",function(){menu.Select('lv3')},false);
+            this.Buttons["return"].addEventListener("click",function(){menu.Select('return')},false);
         }
         moveBar(percentage){
             //change text
@@ -215,7 +215,11 @@
         }
         
         DeSelectButtons(){
-            
+            for(key in menu.Selected){
+                var value = menu.Selected[key];
+                /* use key/value for intended purpose */
+                value=false;
+            }
         }
         
         OnePlayer(){
@@ -277,12 +281,50 @@
                 
             }
             if(menu.twoplayers){
-                //change menus
+                // wait for Goodplayer second layer menu choice
+                if(this.state==3){
+                    //Deselect previous selected buttons
+                    menu.DeSelectButtons();
+                    if(menu.Selected['return']){
+                       this.idle_state=0;
+                    }
+                    if(menu.Selected['lv1']){
+                         this.goodOptions.push(4);//4 means lv1
+                        this.idle_state++;
+                    }
+                    if(menu.Selected['lv2']){
+                         this.goodOptions.push(5);//5 means lv2
+                        this.idle_state++;
+                    }
+                    if(menu.Selected['lv3']){
+                         this.goodOptions.push(6);//6 means lv3
+                        this.idle_state++;
+                    }
+                    if(menu.Selected['Attack']){
+                        this.goodOptions.push(0);//0 means attack
+                        this.idle_state++;
+                        
+                    }
+                    if(menu.Selected['Defense']){
+                        this.goodOptions.push(1);//1 means defense
+                        this.idle_state++;
+                    }
+                    if(menu.Selected['Health']){
+                        this.goodOptions.push(3);//3 means health
+                        this.idle_state++;
+                        
+                    }
+                    
+                }
+                //change second layer menus
                 if(this.idle_state==2){
                     var opt=this.goodOptions.pop();
-                    //hide Attack,Defense,evolve buttons
-                    //menu.Buttons['Attack'].style.visibility='hidden';
-                    //menu.Buttons['Defense'].style.visibility='hidden';
+                     //every state begin a new
+                    menu.HideButtons();
+                    //show basic menu
+                    menu.ShowIdleMenus();
+                    
+                    //hide evolve button
                     menu.Buttons['Evolve'].style.visibility='hidden';
                     //show return button
                     menu.Buttons['return'].style.visibility='visible';
@@ -293,9 +335,11 @@
                         menu.Buttons['lv1'].style.visibility="visible";
                         menu.Buttons['lv2'].style.visibility="visible";
                         menu.Buttons['lv3'].style.visibility="visible";
+                        
+                        
                         this.idle_state++;
                     }
-                    //evolve button
+                    //if selected evolve/powerup button
                     else{
                         //Attack and defense buttons already showing
                         //only need to show health button
@@ -306,6 +350,13 @@
                 }
                 // Wait for good player choice
                 if(this.idle_state==1){
+                    //every state begin a new
+                    //menu.HideButtons();
+                    //show basic menu
+                    //menu.ShowIdleMenus();
+                    //Deselect previous selected buttons
+                    menu.DeSelectButtons();
+                    
                     menu.Buttons['GoodText'].style.visibility="visible";
                     menu.Buttons['GoodText'].innerHTML='<font color="blue">First Player(Good) Choose Option!</font>';
                     //Just see the first selection menu
@@ -399,6 +450,14 @@
                 var value = menu.Buttons[key];
                 // use key/value for intended purpose 
                 value.style.visibility="hidden";
+            }
+    }
+            
+    function DeSelectButtons(){
+            for(key in menu.Selected){
+                var value = menu.Selected[key];
+                /* use key/value for intended purpose */
+                value=false;
             }
     }
     
