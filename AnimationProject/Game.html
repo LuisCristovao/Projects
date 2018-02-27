@@ -277,16 +277,20 @@
         }
         //
         Idle(){
+            
             if(menu.oneplayer){
                 
             }
             if(menu.twoplayers){
+                console.log('idle state:'+this.idle_state);
                 // wait for Goodplayer second layer menu choice
-                if(this.state==3){
-                    //Deselect previous selected buttons
-                    menu.DeSelectButtons();
+                if(this.idle_state==3){
+                    
                     if(menu.Selected['return']){
-                       this.idle_state=0;
+                        console.log('Return selected');
+                        //empty options array;
+                        this.goodOptions.pop();
+                        this.idle_state=0;
                     }
                     if(menu.Selected['lv1']){
                          this.goodOptions.push(4);//4 means lv1
@@ -323,7 +327,9 @@
                     menu.HideButtons();
                     //show basic menu
                     menu.ShowIdleMenus();
-                    
+                    //Deselect previous selected buttons
+                    //menu.DeSelectButtons();
+                    DeSelectButtons();
                     //hide evolve button
                     menu.Buttons['Evolve'].style.visibility='hidden';
                     //show return button
