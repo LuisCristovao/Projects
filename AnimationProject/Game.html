@@ -371,6 +371,7 @@
             if(this.final_decision_good[0]==0 && (good || two_animations)){
                 //Put in animation stack a random good attack animation
                 this.AnimationStack.push(GoodAttacks[Math.round(Math.random()*GoodAttacks.length)])
+                
             }
             //if good did a defense
             //this if state is like this because it only enters here in case
@@ -378,6 +379,7 @@
             if(this.final_decision_good[0]==1 && (good||two_animations)){
                 //Put in animation stack a random good defense animation
                 this.AnimationStack.push(GoodDefense[Math.round(Math.random()*GoodDefense.length)])
+                
             }
             //if good did a PA
             //this if state is like this because it only enters here in case
@@ -385,6 +387,7 @@
             if(this.final_decision_good[0]==20 && (good||two_animations)){
                 //Put in animation stack a random good defense animation
                 this.AnimationStack.push(GoodEvolve['Attack'][Math.round(Math.random()*GoodEvolve['Attack'].length)]);
+                
             }
              //if good did a PD
             //this if state is like this because it only enters here in case
@@ -708,6 +711,12 @@
                     //if both do defense then the loser is the one who did the highest bet
                     //Do final preparations like animation stack and status text update
                     this.stage++;
+                    //0 position is the text to use
+                    this.status_text_good[0]='Draw!!';
+                    //position 1 is the color of text
+                    this.status_text_good[1]='black';
+                    this.status_text_evil[0]='';
+                    this.status_text_evil[1]='black';
                 }
                 // now the only options are AD|AA|DA
                 else{
@@ -718,6 +727,10 @@
                         //now damage the evil player with result
                         this.evilStatus[2]-=result;//index 2 is health
                         //Now do final preperations and change state
+                        //this function will push the right animations to AnimationStack
+                        //the parameter means that good player won
+                        this.ProcessWrapUp(true);
+                        
                     }
                     //if evil has higher bet
                     if(this.final_decision_good[1]<this.final_decision_evil[1]){
