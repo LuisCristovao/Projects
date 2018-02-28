@@ -262,6 +262,10 @@
             this.goodOptions=[];
             //0-attack;1-Defense;2-Evolve;3-Health;4-lv1;5-lv2;6-lv3
             this.evilOptions=[];
+            //good player status Attack|Defense|Health
+            this.goodStatus=[100,100,100];
+            //evil player status Attack|Defense|Health
+            this.evilStatus=[100,100,100];
             
         }
         //
@@ -282,6 +286,14 @@
             }
             if(menu.twoplayers){
                 console.log('idle state:'+this.idle_state);
+                //Final state, every thing is chosen 
+                if(this.idle_state==8){
+                    //the calculator part needs lots of thinking
+                    //probably need to put in this idle or at least change 
+                    //state to calculator and then return to idle state again
+                    //state 2 is process choices
+                    this.state=2;
+                }
                 //wait for evil player choice in second layer menus
                 if(this.idle_state==7){
                     
@@ -506,8 +518,12 @@
         Calculator(){
             
         }
-        //
+        //State after everybody did his choice
         ProcessWinningChoice(){
+            //initialize idle state to 0 in order for next entry
+            this.idle_state=0;
+            //Hide Menus
+            menu.HideButtons();
             
         }
         //
