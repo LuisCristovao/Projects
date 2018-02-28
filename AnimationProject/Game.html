@@ -277,12 +277,14 @@
             this.goodStatus=[100,100,100];
             //evil player status Attack|Defense|Health
             this.evilStatus=[100,100,100];
-            //good text status. Showned in update status stage
-            this.status_text_good;
-            //evil text status. Showned in update status stage
-            this.status_text_evil;
+            //good text status. Showned in update status state
+            //first position is the text to show, second is the color
+            this.status_text_good=[];
+            //evil text status. Showned in update status state
+            //first position is the text to show, second is the color
+            this.status_text_evil=[];
             
-            //Animation stack will be used in animation stage
+            //Animation stack will be used in animation state
             this.AnimationStack=[];
         }
         consumeResource(good){
@@ -352,6 +354,91 @@
                     }
                 }
             }
+        }
+        //Process state warp up
+        //this function receives the winning player
+        ProcessWrapUp(good){
+            var two_animations=false;
+            //This means that someone did a power up, in this case there will occur two animations
+            if(this.final_decision_good[0]>19 ||this.final_decision_evil[0]>19){
+                two_animations=true;
+            }
+            
+            
+            //if good did an attack
+            //this if state is like this because it only enters here in case
+            //it was good decision and is was the winner or the game needs two animations
+            if(this.final_decision_good[0]==0 && (good || two_animations)){
+                //Put in animation stack a random good attack animation
+                this.AnimationStack.push(GoodAttacks[Math.round(Math.random()*GoodAttacks.length)])
+            }
+            //if good did a defense
+            //this if state is like this because it only enters here in case
+            //it was good decision and is was the winner or the game needs two animations
+            if(this.final_decision_good[0]==1 && (good||two_animations)){
+                //Put in animation stack a random good defense animation
+                this.AnimationStack.push(GoodDefense[Math.round(Math.random()*GoodDefense.length)])
+            }
+            //if good did a PA
+            //this if state is like this because it only enters here in case
+            //it was good decision and is was the winner or the game needs two animations
+            if(this.final_decision_good[0]==20 && (good||two_animations)){
+                //Put in animation stack a random good defense animation
+                this.AnimationStack.push(GoodEvolve['Attack'][Math.round(Math.random()*GoodEvolve['Attack'].length)]);
+            }
+             //if good did a PD
+            //this if state is like this because it only enters here in case
+            //it was good decision and is was the winner or the game needs two animations
+            if(this.final_decision_good[0]==21 && (good||two_animations)){
+                //Put in animation stack a random good defense animation
+                this.AnimationStack.push(GoodEvolve['Defense'][Math.round(Math.random()*GoodEvolve['Defense'].length)]);
+            }
+             //if good did a PH
+            //this if state is like this because it only enters here in case
+            //it was good decision and it was the winner or the game needs two animations
+            if(this.final_decision_good[0]==22 && (good||two_animations)){
+                //Put in animation stack a random good defense animation
+                this.AnimationStack.push(GoodEvolve['Health'][Math.round(Math.random()*GoodEvolve['Health'].length)]);
+            }
+            
+            //Evil if's
+            
+            //if evil did an attack
+            //this if state is like this because it only enters here in case
+            //it was evil decision and it was the winner or the game  needs two animations
+            if(this.final_decision_evil[0]==0 &&(!good||two_animations)){//!good is because evil won
+                //Put in animation stack a random evil attack animation
+                this.AnimationStack.push(EvilAttacks[Math.round(Math.random()*EvilAttacks.length)]);
+            }
+            //if evil did a defense
+            //this if state is like this, because it only enters here in case
+            //it was an evil decision and he was the winner, or the game  needs two animations
+            if(this.final_decision_evil[0]==1 &&(!good||two_animations)){
+                //Put in animation stack a random evil defense animation
+                this.AnimationStack.push(EvilDefense[Math.round(Math.random()*EvilDefense.length)]);
+            }
+            //if evil did a PA
+            //this if state is like this, because it only enters here in case
+            //it was an evil decision and he was the winner, or the game  needs two animations
+            if(this.final_decision_evil[0]==20 &&(!good||two_animations)){
+                //Put in animation stack a random evil defense animation
+                this.AnimationStack.push(EvilEvolve['Attack'][Math.round(Math.random()*EvilEvolve['Attack'].length)]);
+            }
+            //if evil did a PD
+            //this if state is like this, because it only enters here in case
+            //it was an evil decision and he was the winner, or the game  needs two animations
+            if(this.final_decision_evil[0]==21 &&(!good||two_animations)){
+                //Put in animation stack a random evil defense animation
+                this.AnimationStack.push(EvilEvolve['Defense'][Math.round(Math.random()*EvilEvolve['Defense'].length)]);
+            }
+            //if evil did a PH
+            //this if state is like this, because it only enters here in case
+            //it was an evil decision and he was the winner, or the game  needs two animations
+            if(this.final_decision_evil[0]==22 &&(!good||two_animations)){
+                //Put in animation stack a random evil defense animation
+                this.AnimationStack.push(EvilEvolve['Health'][Math.round(Math.random()*EvilEvolve['Health'].length)]);
+            }
+            
         }
         //
         Nothing(){
