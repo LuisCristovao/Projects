@@ -13,6 +13,7 @@
         height: 100%;
         margin: 0px;    
     }
+
     .fullscreen .btn{
         position: absolute;     
     }
@@ -36,6 +37,7 @@
         
         
     }
+
     .fullscreen .myBar {
         width: 100%;
         height:100%;
@@ -44,6 +46,7 @@
         font-size: 200%;
         color: white;  
     }
+
 </style>
 <body>
     <canvas   id="canvas"  onmousemove="MousePos(event)"  > </canvas>
@@ -63,6 +66,8 @@
     <div class="circle" id="evilDefense" style="background-color:blue;top:1%;left:90%;visibility:hidden;"></div>
     <h3 class="text" id="evilDefenseText" style="top:0%;left:92%;visibility:hidden;">100</h3>
     
+    <h3 class="text" id="goodText" style="top:15%;left:30%;visibility:hidden;">Good Text</h3>
+    <h3 class="text" id="evilText" style="top:15%;left:60%;visibility:hidden;">Evil Text</h3>
     <!--<h1 class="text" style="top:30%;left:45%;width:10%;height:10%;"><font color="white"></font></h1>-->
     <!--Now The Game Menus -->
     <!--First Menu-->
@@ -90,6 +95,7 @@
     canvas.width=window.innerWidth;
     canvas.height=window.innerHeight;
     canvas.addEventListener("touchmove",TouchMove,false);
+
     var GoodAttacks=[];
     var GoodDefense=[];
     var GoodEvolve;
@@ -100,6 +106,7 @@
     var Idle=[];
     var actualAnimationRunning;
     var menu;
+    var game;
     var startTime;
     var time=0;
     var dt;
@@ -135,27 +142,52 @@
             this.Buttons["return"]=document.getElementById("return");
             this.Buttons["LoadingBar"]=document.getElementById("myBar");
             this.Buttons["BarBehind"]=document.getElementById("myProgress");
+            this.Buttons['lv1']=document.getElementById("lv1");
+            this.Buttons['lv2']=document.getElementById("lv2");
+            this.Buttons['lv3']=document.getElementById("lv3");
             
-            //AddEventListeners
-            this.Buttons["OnePlayer"].addEventListener("click",this.OnePlayer,false);
-            this.Buttons["TwoPlayers"].addEventListener("click",this.TwoPlayers,false);
+            this.Buttons['GoodText']=document.getElementById("goodText");
+            this.Buttons['EvilText']=document.getElementById("evilText");
             
             //variables
             this.oneplayer=false;
             this.twoplayers=false;
            
+            //booleans
+            this.Selected={};
+            this.Selected['Attack']=false;
+            this.Selected['Defense']=false;
+            this.Selected['Evolve']=false;
+            this.Selected['Health']=false;
+            this.Selected['lv1']=false;
+            this.Selected['lv2']=false;
+            this.Selected['lv3']=false;
+            this.Selected['return']=false;
+            
+            //AddEventListeners
+            this.Buttons["OnePlayer"].addEventListener("click",this.OnePlayer,false);
+            this.Buttons["TwoPlayers"].addEventListener("click",this.TwoPlayers,false);
+            this.Buttons["Attack"].addEventListener("click",function(){menu.Select('Attack')},false);
+            this.Buttons["Defense"].addEventListener("click",function(){menu.Select('Defense')},false);
+            this.Buttons["Evolve"].addEventListener("click",function(){menu.Select('Evolve')},false);
+            this.Buttons["Health"].addEventListener("click",function(){menu.Select('Health')},false);
+            this.Buttons["lv1"].addEventListener("click",function(){menu.Select('lv1')},false);
+            this.Buttons["lv2"].addEventListener("click",function(){menu.Select('lv2')},false);
+            this.Buttons["lv3"].addEventListener("click",function(){menu.Select('lv3')},false);
+            this.Buttons["return"].addEventListener("click",function(){menu.Select('return')},false);
         }
         moveBar(percentage){
+            //change text
             this.Buttons['LoadingBar'].innerHTML=percentage+'%';
+            //change bar
             this.Buttons['LoadingBar'].style.width=percentage+"%";
         }
         
+        Select(option){
+            menu.Selected[option]=true;
+        }
         
-        OnePlayer(){
-            
-            HideButtons();
-            time=0
-            actualAnimationRunning=Idle[0];
+        ShowIdleMenus(){
             menu.Buttons["Attack"].style.visibility="visible";
             menu.Buttons["Defense"].style.visibility="visible";
             menu.Buttons["Evolve"].style.visibility="visible";
@@ -171,36 +203,376 @@
             menu.Buttons["evilHealthText"].style.visibility="visible";
             menu.Buttons["evilAttackText"].style.visibility="visible";
             menu.Buttons["evilDefenseText"].style.visibility="visible";
+        }
+        
+        HideButtons(){
+            
+            for(key in menu.Buttons){
+                var value = menu.Buttons[key];
+                /* use key/value for intended purpose */
+                value.style.visibility="hidden";
+            }
+        }
+        
+        DeSelectButtons(){
+            for(key in menu.Selected){
+               menu.Selected[key]=false;
+               
+            }
+        }
+        
+        OnePlayer(){
+            
+            /*HideButtons();
+            time=0
+            actualAnimationRunning=Idle[0];
+            menu.ShowIdleMenus();*/
             menu.oneplayer=true;
             //menu.Buttons["return"].style.visibility="visible";
             
         }
         TwoPlayers(){
             //Afterwars change to work with two players
-            HideButtons();
+            /*HideButtons();
             time=0
             actualAnimationRunning=Idle[0];
-            menu.Buttons["Attack"].style.visibility="visible";
-            menu.Buttons["Defense"].style.visibility="visible";
-            menu.Buttons["Evolve"].style.visibility="visible";
-            menu.Buttons["goodHealth"].style.visibility="visible";
-            menu.Buttons["goodAttack"].style.visibility="visible";
-            menu.Buttons["goodDefense"].style.visibility="visible";
-            menu.Buttons["goodHealthText"].style.visibility="visible";
-            menu.Buttons["goodAttackText"].style.visibility="visible";
-            menu.Buttons["goodDefenseText"].style.visibility="visible";
-            menu.Buttons["evilHealth"].style.visibility="visible";
-            menu.Buttons["evilAttack"].style.visibility="visible";
-            menu.Buttons["evilDefense"].style.visibility="visible";
-            menu.Buttons["evilHealthText"].style.visibility="visible";
-            menu.Buttons["evilAttackText"].style.visibility="visible";
-            menu.Buttons["evilDefenseText"].style.visibility="visible";
+            menu.ShowIdleMenus();*/
             menu.twoplayers=true;
         }
         
         
-        
        
+    }
+    class Game{
+        
+        constructor(){
+            //-1 Nothing State
+            //0-idle state, 1-calulator game,2-Process winning choice,3-Do winning animation,
+            //4-Update players status with text and idle animation, 5- is there a winner,
+            this.state=-1;
+            //
+            this.idle_state=0;
+            //
+            this.calculator_state=0;
+            //
+            this.ActionAnimationState=0;
+            //
+            this.update_status_state=0;
+            //0-attack;1-Defense;2-Evolve;3-Health;4-lv1;5-lv2;6-lv3
+            this.goodOptions=[];
+            //0-attack;1-Defense;2-Evolve;3-Health;4-lv1;5-lv2;6-lv3
+            this.evilOptions=[];
+            //good player status Attack|Defense|Health
+            this.goodStatus=[100,100,100];
+            //evil player status Attack|Defense|Health
+            this.evilStatus=[100,100,100];
+            
+        }
+        //
+        Nothing(){
+            // do nothing
+            if(menu.oneplayer){
+                this.state++;
+            }
+            if(menu.twoplayers){
+                this.state++;
+            }
+        }
+        //
+        Idle(){
+            
+            if(menu.oneplayer){
+                
+            }
+            if(menu.twoplayers){
+                console.log('idle state:'+this.idle_state);
+                //Final state, every thing is chosen 
+                if(this.idle_state==8){
+                    //the calculator part needs lots of thinking
+                    //probably need to put in this idle or at least change 
+                    //state to calculator and then return to idle state again
+                    //state 2 is process choices
+                    this.state=2;
+                }
+                //wait for evil player choice in second layer menus
+                if(this.idle_state==7){
+                    
+                    if(menu.Selected['return']){
+                        console.log('Return selected');
+                        //empty options array;
+                        this.evilOptions=[];
+                        
+                        this.idle_state=4;
+                    }
+                    if(menu.Selected['lv1']){
+                         this.evilOptions.push(4);//4 means lv1
+                        this.idle_state++;
+                    }
+                    if(menu.Selected['lv2']){
+                         this.evilOptions.push(5);//5 means lv2
+                        this.idle_state++;
+                    }
+                    if(menu.Selected['lv3']){
+                         this.evilOptions.push(6);//6 means lv3
+                        this.idle_state++;
+                    }
+                    if(menu.Selected['Attack']){
+                        this.evilOptions.push(0);//0 means attack
+                        this.idle_state++;
+                        
+                    }
+                    if(menu.Selected['Defense']){
+                        this.evilOptions.push(1);//1 means defense
+                        this.idle_state++;
+                    }
+                    if(menu.Selected['Health']){
+                        this.evilOptions.push(3);//3 means health
+                        this.idle_state++;
+                        
+                    }
+                }
+                //Change to second menu layer for evil player
+                if(this.idle_state==6){
+                    //the player only had made one choice
+                    var opt=this.evilOptions[0];
+                     //every state begin a new
+                    menu.HideButtons();
+                    //show basic menu
+                    menu.ShowIdleMenus();
+                    //Deselect previous selected buttons
+                    menu.DeSelectButtons();
+                    //DeSelectButtons();
+                    
+                    //hide evolve button
+                    menu.Buttons['Evolve'].style.visibility='hidden';
+                    //show return button
+                    menu.Buttons['return'].style.visibility='visible';
+                    //if player selected attack or defense
+                    if(opt==0 || opt==1){
+                        menu.Buttons['Attack'].style.visibility='hidden';
+                        menu.Buttons['Defense'].style.visibility='hidden';
+                        menu.Buttons['lv1'].style.visibility="visible";
+                        menu.Buttons['lv2'].style.visibility="visible";
+                        menu.Buttons['lv3'].style.visibility="visible";
+                        
+                        
+                        this.idle_state++;
+                    }
+                    //if selected evolve/powerup button
+                    else{
+                        //Attack and defense buttons already showing
+                        //only need to show health button
+                        menu.Buttons['Health'].style.visibility='visible';
+                        this.idle_state++;
+                    }
+                    
+                }
+                //Wait for evil player first menu layer choice
+                if(this.idle_state==5){
+                    //Just see the first selection menu
+                    if(menu.Selected['Attack']){
+                        this.evilOptions.push(0);//0 means attack
+                        this.idle_state++;
+                        
+                    }
+                    if(menu.Selected['Defense']){
+                        this.evilOptions.push(1);//1 means defense
+                        this.idle_state++;
+                    }
+                    if(menu.Selected['Evolve']){
+                        this.evilOptions.push(2);//2 means evolve
+                        this.idle_state++;
+                    }
+                }
+                
+                //Now the good player made its final choice goodOptions has two values
+                //Now its evil playr choice, so need to prepare menu for evilplayer
+                if(this.idle_state==4){
+                    //hide previouse menus and show basic menu again
+                    menu.HideButtons();
+                    menu.ShowIdleMenus();
+                    //forget previously touched buttons
+                    menu.DeSelectButtons();
+                    //show evil text I use good text because its more centered
+                    menu.Buttons['GoodText'].style.visibility="visible";
+                    menu.Buttons['GoodText'].innerHTML='<font color="purple">Second Player(Evil) Turn!</font>';
+                    this.idle_state++;
+                    
+                }
+                // wait for Goodplayer second layer menu choice
+                if(this.idle_state==3){
+                   
+                    if(menu.Selected['return']){
+                        console.log('Return selected');
+                        //empty options array;
+                        this.goodOptions=[];
+                        
+                        this.idle_state=0;
+                    }
+                    if(menu.Selected['lv1']){
+                         this.goodOptions.push(4);//4 means lv1
+                        this.idle_state++;
+                    }
+                    if(menu.Selected['lv2']){
+                         this.goodOptions.push(5);//5 means lv2
+                        this.idle_state++;
+                    }
+                    if(menu.Selected['lv3']){
+                         this.goodOptions.push(6);//6 means lv3
+                        this.idle_state++;
+                    }
+                    if(menu.Selected['Attack']){
+                        this.goodOptions.push(0);//0 means attack
+                        this.idle_state++;
+                        
+                    }
+                    if(menu.Selected['Defense']){
+                        this.goodOptions.push(1);//1 means defense
+                        this.idle_state++;
+                    }
+                    if(menu.Selected['Health']){
+                        this.goodOptions.push(3);//3 means health
+                        this.idle_state++;
+                        
+                    }
+                    
+                }
+                //change second layer menus
+                if(this.idle_state==2){
+                    //the player only had made one choice
+                    var opt=this.goodOptions[0];
+                     //every state begin a new
+                    menu.HideButtons();
+                    //show basic menu
+                    menu.ShowIdleMenus();
+                    //Deselect previous selected buttons
+                    menu.DeSelectButtons();
+                    //DeSelectButtons();
+                    
+                    //hide evolve button
+                    menu.Buttons['Evolve'].style.visibility='hidden';
+                    //show return button
+                    menu.Buttons['return'].style.visibility='visible';
+                    //if player selected attack or defense
+                    if(opt==0 || opt==1){
+                        menu.Buttons['Attack'].style.visibility='hidden';
+                        menu.Buttons['Defense'].style.visibility='hidden';
+                        menu.Buttons['lv1'].style.visibility="visible";
+                        menu.Buttons['lv2'].style.visibility="visible";
+                        menu.Buttons['lv3'].style.visibility="visible";
+                        
+                        
+                        this.idle_state++;
+                    }
+                    //if selected evolve/powerup button
+                    else{
+                        //Attack and defense buttons already showing
+                        //only need to show health button
+                        menu.Buttons['Health'].style.visibility='visible';
+                        this.idle_state++;
+                    }
+                    
+                }
+                // Wait for good player choice
+                if(this.idle_state==1){
+                    //every state begin a new
+                    //menu.HideButtons();
+                    //show basic menu
+                    //menu.ShowIdleMenus();
+                    //Deselect previous selected buttons
+                    //menu.DeSelectButtons();
+                    
+                    
+                    menu.Buttons['GoodText'].style.visibility="visible";
+                    menu.Buttons['GoodText'].innerHTML='<font color="blue">First Player(Good) Choose Option!</font>';
+                    //Just see the first selection menu
+                    if(menu.Selected['Attack']){
+                        this.goodOptions.push(0);//0 means attack
+                        this.idle_state++;
+                        
+                    }
+                    if(menu.Selected['Defense']){
+                        this.goodOptions.push(1);//1 means defense
+                        this.idle_state++;
+                    }
+                    if(menu.Selected['Evolve']){
+                        this.goodOptions.push(2);//2 means evolve
+                        this.idle_state++;
+                    }
+                    
+                    //this.idle_state++;
+                }
+                // Select Idle animation as current
+                if(this.idle_state==0){
+                    menu.HideButtons();
+                    time=0;
+                    actualAnimationRunning=Idle[0];
+                    menu.ShowIdleMenus();
+                    //Deselect previous selected buttons
+                    menu.DeSelectButtons();
+                    this.idle_state++;
+                }
+            }
+        }
+        //
+        Calculator(){
+            
+        }
+        //State after everybody did his choice
+        ProcessWinningChoice(){
+            //initialize idle state to 0 in order for next entry
+            this.idle_state=0;
+            //Hide Menus
+            menu.HideButtons();
+            
+        }
+        //
+        ActionAnimation(){
+            
+        }
+        //
+        UpDateStatus(){
+            
+        }
+        //
+        CheckWinner(){
+            
+        }
+        //
+        GameOver(){
+            
+        }
+        
+        //Main function of this class that is called once per frame 
+        //does Actions depending on this.state
+        Run(){
+            if(this.state==-1){
+                this.Nothing();
+            }
+            if(this.state==0){
+                this.Idle();
+            }
+            if(this.state==1){
+                this.Calculator();
+            }
+            if(this.state==2){
+                this.ProcessWinningChoice();
+            }
+            if(this.state==3){
+                this.ActionAnimation();
+            }
+            if(this.state==4){
+                this.UpDateStatus();
+            }
+            if(this.state==5){
+                this.CheckWinner();
+            }
+            if(this.state==6){
+                this.GameOver();
+            }
+            
+        }
+        
     }
     
     
@@ -208,8 +580,14 @@
             
             for(key in menu.Buttons){
                 var value = menu.Buttons[key];
-                /* use key/value for intended purpose */
+                // use key/value for intended purpose 
                 value.style.visibility="hidden";
+            }
+    }
+            
+    function DeSelectButtons(){
+            for(key in menu.Selected){
+               menu.Selected[key]=false;
             }
     }
     
@@ -232,10 +610,13 @@
         rawFile.send(null);
         return rawFile.responseText;
     }    
+
+
     function TouchMove(e){
         mouse[0]=e.touches[0].clientX;
         mouse[1]=e.touches[0].clientY;
     }    
+
     function MousePos(e){
         mouse[0]=e.clientX;
         mouse[1]=e.clientY;
@@ -256,6 +637,7 @@
             console.log("Error loading Image");
         }
     }
+
     function get_all_animations(stages){
         var s=new String();
         var adressMenu="images/Intro/";
@@ -389,6 +771,7 @@
             var j=0;
             //
             for(key in GoodEvolve){
+
                 almost_final_adress=adressGoodEvolve+key+"/";
                 number_of_folders=parseInt(readTextFile(almost_final_adress));
                 number_of_images=parseInt(readTextFile(almost_final_adress+j+"/Index.txt"));
@@ -415,6 +798,7 @@
             j=0;
             //
             for(key in EvilEvolve){
+
                 almost_final_adress=adressEvilEvolve+key+"/";
                 number_of_folders=parseInt(readTextFile(almost_final_adress));
                 number_of_images=parseInt(readTextFile(almost_final_adress+j+"/Index.txt"));
@@ -430,14 +814,7 @@
             menu.moveBar(100);
         }
     } 
-    class Game{
-        
-        constructor(){
-            
-        }
-        
-        
-    }
+    
    
     function Draw(images_array){
             dt = 1E-3 * (new Date().getTime() - startTime);
@@ -477,12 +854,7 @@
                 menu.Buttons['TwoPlayers'].style.visibility="visible";
                 firstTime=false;
             }
-            if(menu.oneplayer){
-                
-            }
-            if(menu.twoplayers){
-                
-            }
+            game.Run();
             
             
             Draw(actualAnimationRunning);
@@ -492,16 +864,11 @@
     }
     function Init(){
         menu=new Menu();
+        game=new Game();
         HideButtons();
         menu.Buttons['BarBehind'].style.visibility="visible";
         menu.Buttons['LoadingBar'].style.visibility="visible";
-        /*get_all_animations();
-        menu.Buttons['BarBehind'].style.visibility="hidden";
-        menu.Buttons['LoadingBar'].style.visibility="hidden";
-        menu.Buttons['OnePlayer'].style.visibility="visible";
-        menu.Buttons['TwoPlayers'].style.visibility="visible";*/
-        //startTime = new Date().getTime();
-        //actualAnimationRunning=Intro[0];
+        
     }
     
     //Main________________________________________
