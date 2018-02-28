@@ -285,6 +285,44 @@
             //Animation stack will be used in animation stage
             this.AnimationStack=[];
         }
+        consumeResource(good){
+            if(good){
+                //if it is a powerUp
+                if(this.final_decision_good[0]>19){
+                    //if it is PAttack
+                    if(this.final_decision_good[0]==20){
+                        //increase attack resources by quantity
+                        this.goodStatus[0]+=this.final_decision_good[1];
+                    }
+                    //if it is PDefense
+                    if(this.final_decision_good[0]==21){
+                        //increase defense resources by quantity
+                        this.goodStatus[1]+=this.final_decision_good[1];
+                    }
+                    //if it is PHealth
+                    if(this.final_decision_good[0]==22){
+                        //increase defense resources by quantity
+                        this.goodStatus[2]+=this.final_decision_good[1];
+                    }
+                }
+                //it is an attack or defense
+                else{
+                    //attack
+                    if(this.final_decision_good[0]==0){
+                        //consume attack resources by quantity
+                        this.goodStatus[0]-=this.final_decision_good[1];
+                    }
+                    //defense
+                    if(this.final_decision_good[0]==1){
+                        //consume attack resources by quantity
+                        this.goodStatus[1]-=this.final_decision_good[1];
+                    }
+                }
+            }
+            else{
+                
+            }
+        }
         //
         Nothing(){
             // do nothing
@@ -537,6 +575,30 @@
         }
         //State after everybody did his choice
         ProcessWinningChoice(){
+            //process result if one of the players has chosen a powerup
+            if(this.processing_choice_state==5){
+                
+            }
+            //process result if the options are  AD|AA|DD|DA
+            if(this.processing_choice_state==4){
+                //consume resources for both players
+                
+            }
+            //here we must decide between two paths
+            if(this.processing_choice_state==3){
+                //select the chosen option for both players
+                var goodChoice=this.final_decision_good[0];
+                var evilChoice=this.final_decision_evil[0];
+                //if at least one player had chosen a powerUp option
+                if(goodChoice>19 || evilChoice>19){
+                    this.processing_choice_state=5;
+                }
+                //if  it enters here there are only these options AD|AA|DD|DA
+                else{
+                    this.processing_choice_state=4;
+                }
+                
+            }
             //calculate evil final decision
             if(this.processing_choice_state==2){
                 //there are only two options now later it can have 3
