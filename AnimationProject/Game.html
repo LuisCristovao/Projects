@@ -279,10 +279,8 @@
             this.evilStatus=[100,100,100];
             //good text status. Showned in update status state
             //first position is the text to show, second is the color
-            this.status_text_good=[];
-            //evil text status. Showned in update status state
-            //first position is the text to show, second is the color
-            this.status_text_evil=[];
+            this.WinnigText=[];
+            
             
             //Animation stack will be used in animation state
             this.AnimationStack=[];
@@ -706,17 +704,17 @@
                 this.consumeResource(true);
                 //consume resources for evil player
                 this.consumeResource(false);
+                
                 //if both players choose Defense option
                 if(this.final_decision_good[0]==1 and this.final_decision_evil[0]==1){
                     //if both do defense then the loser is the one who did the highest bet
                     //Do final preparations like animation stack and status text update
-                    this.stage++;
+                    this.processing_choice_state=6;
                     //0 position is the text to use
-                    this.status_text_good[0]='Draw!!';
+                    this.WinnigText[0]='Both Defense!!';
                     //position 1 is the color of text
-                    this.status_text_good[1]='black';
-                    this.status_text_evil[0]='';
-                    this.status_text_evil[1]='black';
+                    this.WinnigText[1]='black';
+                    
                 }
                 // now the only options are AD|AA|DA
                 else{
@@ -730,7 +728,11 @@
                         //this function will push the right animations to AnimationStack
                         //the parameter means that good player won
                         this.ProcessWrapUp(true);
-                        
+                        //0 position is where it goes the text
+                        this.WinnigText[0]='Good Player Won!!';
+                        //position 1 is the color of text
+                        this.WinnigText[1]='blue';
+                        this.processing_choice_state=6;
                     }
                     //if evil has higher bet
                     if(this.final_decision_good[1]<this.final_decision_evil[1]){
@@ -739,6 +741,11 @@
                         //now damage the evil player with result
                         this.goodStatus[2]-=result;//index 2 is health
                         //Now do final preperations and change state
+                        //0 position is where it goes the text
+                        this.WinnigText[0]='Evil Player Won!!';
+                        //position 1 is the color of text
+                        this.WinnigText[1]='purple';
+                        this.processing_choice_state=6;
                     }
                     //if both have the same bet
                     if(this.final_decision_good[1]==this.final_decision_evil[1]){
@@ -746,6 +753,12 @@
                         //Maybe here penalise the the attacker although he was already penalize for consuming attack power.
                         
                         //Now do final preperations and change state
+                        this.processing_choice_state=6;
+                        //0 position is the text to use
+                        this.WinnigText[0]='Draw!!';
+                        //position 1 is the color of text
+                        this.WinnigText[1]='black';
+                        this.processing_choice_state=6;
                     }
                 }
             }
