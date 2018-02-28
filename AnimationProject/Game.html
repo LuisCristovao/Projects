@@ -612,7 +612,42 @@
             //process result if the options are  AD|AA|DD|DA
             if(this.processing_choice_state==4){
                 //consume resources for both players
-                
+                //consume resources for good player
+                this.consumeResource(true);
+                //consume resources for evil player
+                this.consumeResource(false);
+                //if both players choose Defense option
+                if(this.final_decision_good[0]==1 and this.final_decision_evil[0]==1){
+                    //if both do defense then the loser is the one who did the highest bet
+                    //Do final preparations like animation stack and status text update
+                    this.stage++;
+                }
+                // now the only options are AD|AA|DA
+                else{
+                    //if good player has higher bet
+                    if(this.final_decision_good[1]>this.final_decision_evil[1]){
+                        //do ABS difference
+                        var result=Math.abs(this.final_decision_good[1]-this.final_decision_evil[1]);
+                        //now damage the evil player with result
+                        this.evilStatus[2]-=result;//index 2 is health
+                        //Now do final preperations and change state
+                    }
+                    //if evil has higher bet
+                    if(this.final_decision_good[1]<this.final_decision_evil[1]){
+                        //do ABS difference
+                        var result=Math.abs(this.final_decision_good[1]-this.final_decision_evil[1]);
+                        //now damage the evil player with result
+                        this.goodStatus[2]-=result;//index 2 is health
+                        //Now do final preperations and change state
+                    }
+                    //if both have the same bet
+                    if(this.final_decision_good[1]==this.final_decision_evil[1]){
+                        //do nothing because the result is 0
+                        //Maybe here penalise the the attacker although he was already penalize for consuming attack power.
+                        
+                        //Now do final preperations and change state
+                    }
+                }
             }
             //here we must decide between two paths
             if(this.processing_choice_state==3){
