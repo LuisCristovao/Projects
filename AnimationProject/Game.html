@@ -216,9 +216,8 @@
         
         DeSelectButtons(){
             for(key in menu.Selected){
-                var value = menu.Selected[key];
-                /* use key/value for intended purpose */
-                value=false;
+               menu.Selected[key]=false;
+               
             }
         }
         
@@ -285,11 +284,12 @@
                 console.log('idle state:'+this.idle_state);
                 // wait for Goodplayer second layer menu choice
                 if(this.idle_state==3){
-                    
+                   
                     if(menu.Selected['return']){
                         console.log('Return selected');
                         //empty options array;
                         this.goodOptions.pop();
+                        
                         this.idle_state=0;
                     }
                     if(menu.Selected['lv1']){
@@ -328,8 +328,9 @@
                     //show basic menu
                     menu.ShowIdleMenus();
                     //Deselect previous selected buttons
-                    //menu.DeSelectButtons();
-                    DeSelectButtons();
+                    menu.DeSelectButtons();
+                    //DeSelectButtons();
+                    
                     //hide evolve button
                     menu.Buttons['Evolve'].style.visibility='hidden';
                     //show return button
@@ -361,7 +362,8 @@
                     //show basic menu
                     //menu.ShowIdleMenus();
                     //Deselect previous selected buttons
-                    menu.DeSelectButtons();
+                    //menu.DeSelectButtons();
+                    
                     
                     menu.Buttons['GoodText'].style.visibility="visible";
                     menu.Buttons['GoodText'].innerHTML='<font color="blue">First Player(Good) Choose Option!</font>';
@@ -388,6 +390,8 @@
                     time=0;
                     actualAnimationRunning=Idle[0];
                     menu.ShowIdleMenus();
+                    //Deselect previous selected buttons
+                    menu.DeSelectButtons();
                     this.idle_state++;
                 }
             }
@@ -461,9 +465,7 @@
             
     function DeSelectButtons(){
             for(key in menu.Selected){
-                var value = menu.Selected[key];
-                /* use key/value for intended purpose */
-                value=false;
+               menu.Selected[key]=false;
             }
     }
     
