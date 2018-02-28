@@ -695,7 +695,16 @@
         ProcessWinningChoice(){
             //process result if one of the players has chosen a powerup
             if(this.processing_choice_state==5){
+                //consume resources for good player
+                this.consumeResource(true);
+                //consume resources for evil player
+                this.consumeResource(false);
                 
+                //The consuming part already does half the work
+                //if good player chose an attack 
+                if(this.final_decision_good[0]==0){
+                    
+                }
             }
             //process result if the options are  AD|AA|DD|DA
             if(this.processing_choice_state==4){
