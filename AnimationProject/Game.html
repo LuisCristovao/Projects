@@ -314,13 +314,43 @@
                     }
                     //defense
                     if(this.final_decision_good[0]==1){
-                        //consume attack resources by quantity
+                        //consume defense resources by quantity
                         this.goodStatus[1]-=this.final_decision_good[1];
                     }
                 }
             }
             else{
-                
+                //if it is a powerUp
+                if(this.final_decision_evil[0]>19){
+                    //if it is PAttack
+                    if(this.final_decision_evil[0]==20){
+                        //increase attack resources by quantity
+                        this.evilStatus[0]+=this.final_decision_evil[1];
+                    }
+                    //if it is PDefense
+                    if(this.final_decision_evil[0]==21){
+                        //increase defense resources by quantity
+                        this.evilStatus[1]+=this.final_decision_evil[1];
+                    }
+                    //if it is PHealth
+                    if(this.final_decision_evil[0]==22){
+                        //increase defense resources by quantity
+                        this.evilStatus[2]+=this.final_decision_evil[1];
+                    }
+                }
+                //it is an attack or defense
+                else{
+                    //attack
+                    if(this.final_decision_evil[0]==0){
+                        //consume attack resources by quantity
+                        this.evilStatus[0]-=this.final_decision_evil[1];
+                    }
+                    //defense
+                    if(this.final_decision_evil[0]==1){
+                        //consume defense resources by quantity
+                        this.evilStatus[1]-=this.final_decision_evil[1];
+                    }
+                }
             }
         }
         //
