@@ -282,13 +282,45 @@
             }
             if(menu.twoplayers){
                 console.log('idle state:'+this.idle_state);
+                //Wait for evil player first menu layer choice
+                if(this.idle_state==5){
+                    //Just see the first selection menu
+                    if(menu.Selected['Attack']){
+                        this.evilOptions.push(0);//0 means attack
+                        this.idle_state++;
+                        
+                    }
+                    if(menu.Selected['Defense']){
+                        this.evilOptions.push(1);//1 means defense
+                        this.idle_state++;
+                    }
+                    if(menu.Selected['Evolve']){
+                        this.evilOptions.push(2);//2 means evolve
+                        this.idle_state++;
+                    }
+                }
+                
+                //Now the good player made its final choice goodOptions has two values
+                //Now its evil playr choice, so need to prepare menu for evilplayer
+                if(this.idle_state==4){
+                    //hide previouse menus and show basic menu again
+                    menu.HideButtons();
+                    menu.ShowIdleMenus();
+                    //forget previously touched buttons
+                    menu.DeSelectButtons();
+                    //show evil text I use good text because its more centered
+                    menu.Buttons['GoodText'].style.visibility="visible";
+                    menu.Buttons['GoodText'].innerHTML='<font color="purple">Second Player(Evil) Turn!</font>';
+                    this.idle_state++;
+                    
+                }
                 // wait for Goodplayer second layer menu choice
                 if(this.idle_state==3){
                    
                     if(menu.Selected['return']){
                         console.log('Return selected');
                         //empty options array;
-                        this.goodOptions.pop();
+                        this.goodOptions=[];
                         
                         this.idle_state=0;
                     }
@@ -322,7 +354,8 @@
                 }
                 //change second layer menus
                 if(this.idle_state==2){
-                    var opt=this.goodOptions.pop();
+                    //the player only had made one choice
+                    var opt=this.goodOptions[0];
                      //every state begin a new
                     menu.HideButtons();
                     //show basic menu
