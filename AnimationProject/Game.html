@@ -282,6 +282,79 @@
             }
             if(menu.twoplayers){
                 console.log('idle state:'+this.idle_state);
+                //wait for evil player choice in second layer menus
+                if(this.idle_state==7){
+                    
+                    if(menu.Selected['return']){
+                        console.log('Return selected');
+                        //empty options array;
+                        this.evilOptions=[];
+                        
+                        this.idle_state=4;
+                    }
+                    if(menu.Selected['lv1']){
+                         this.evilOptions.push(4);//4 means lv1
+                        this.idle_state++;
+                    }
+                    if(menu.Selected['lv2']){
+                         this.evilOptions.push(5);//5 means lv2
+                        this.idle_state++;
+                    }
+                    if(menu.Selected['lv3']){
+                         this.evilOptions.push(6);//6 means lv3
+                        this.idle_state++;
+                    }
+                    if(menu.Selected['Attack']){
+                        this.evilOptions.push(0);//0 means attack
+                        this.idle_state++;
+                        
+                    }
+                    if(menu.Selected['Defense']){
+                        this.evilOptions.push(1);//1 means defense
+                        this.idle_state++;
+                    }
+                    if(menu.Selected['Health']){
+                        this.evilOptions.push(3);//3 means health
+                        this.idle_state++;
+                        
+                    }
+                }
+                //Change to second menu layer for evil player
+                if(this.idle_state==6){
+                    //the player only had made one choice
+                    var opt=this.evilOptions[0];
+                     //every state begin a new
+                    menu.HideButtons();
+                    //show basic menu
+                    menu.ShowIdleMenus();
+                    //Deselect previous selected buttons
+                    menu.DeSelectButtons();
+                    //DeSelectButtons();
+                    
+                    //hide evolve button
+                    menu.Buttons['Evolve'].style.visibility='hidden';
+                    //show return button
+                    menu.Buttons['return'].style.visibility='visible';
+                    //if player selected attack or defense
+                    if(opt==0 || opt==1){
+                        menu.Buttons['Attack'].style.visibility='hidden';
+                        menu.Buttons['Defense'].style.visibility='hidden';
+                        menu.Buttons['lv1'].style.visibility="visible";
+                        menu.Buttons['lv2'].style.visibility="visible";
+                        menu.Buttons['lv3'].style.visibility="visible";
+                        
+                        
+                        this.idle_state++;
+                    }
+                    //if selected evolve/powerup button
+                    else{
+                        //Attack and defense buttons already showing
+                        //only need to show health button
+                        menu.Buttons['Health'].style.visibility='visible';
+                        this.idle_state++;
+                    }
+                    
+                }
                 //Wait for evil player first menu layer choice
                 if(this.idle_state==5){
                     //Just see the first selection menu
