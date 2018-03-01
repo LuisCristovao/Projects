@@ -304,6 +304,12 @@
         NextState(){
             game.state++;
         }
+        NextAnimationState(){
+            game.ActionAnimationState++;
+        }
+        NextUpdateStatus(){
+            game.update_status_state++;
+        }
         //changes do action after time
         //need to put this.time=0 and startTime possibly
         Timer(action,duration){
@@ -1129,8 +1135,8 @@
                     //Only need to insert one time this
                     actualAnimationRunning=this.AnimationStack[0];
                     //set timeout function
-                    var myfunction=function(){this.ActionAnimationState++;};
-                    setTimeout(myfunction,time_of_animation);
+                    //var myfunction=function(){this.ActionAnimationState++;};
+                    setTimeout(this.NextAnimationState,time_of_animation);
                     this.firstTime=false;
                 }
             }
