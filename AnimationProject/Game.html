@@ -1526,16 +1526,18 @@
 
                 almost_final_adress=adressGoodEvolve+key+"/";
                 number_of_folders=parseInt(readTextFile(almost_final_adress+"Index.txt"));
-                number_of_images=parseInt(readTextFile(almost_final_adress+j+"/Index.txt"));
-                for(i=0;i<number_of_images;i++){
-                    finalAdress=almost_final_adress+j+"/"+i+".jpg";
-                    try{animation_images[i]=loadImage(finalAdress);}
-                    catch(err){console.log("Error Loading Image");haveFiles=false;}
+                for(j=0;j<number_of_folders;j++){
+                    
+                    number_of_images=parseInt(readTextFile(almost_final_adress+j+"/Index.txt"));
+                    for(i=0;i<number_of_images;i++){
+                        finalAdress=almost_final_adress+j+"/"+i+".jpg";
+                        try{animation_images[i]=loadImage(finalAdress);}
+                        catch(err){console.log("Error Loading Image");haveFiles=false;}
+                    }
+                    GoodEvolve[key].push(animation_images);
+                    animation_images=[];
                 }
-                GoodEvolve[key].push(animation_images);
-                animation_images=[];
-                //if(j<number_of_folders)
-                    //j++;
+                
             }
         }
         if(stages==7){
@@ -1554,16 +1556,18 @@
 
                 almost_final_adress=adressEvilEvolve+key+"/";
                 number_of_folders=parseInt(readTextFile(almost_final_adress+"Index.txt"));
-                number_of_images=parseInt(readTextFile(almost_final_adress+j+"/Index.txt"));
-                for(i=0;i<number_of_images;i++){
-                    finalAdress=almost_final_adress+j+"/"+i+".jpg";
-                    try{animation_images[i]=loadImage(finalAdress);}
-                    catch(err){console.log("Error Loading Image");haveFiles=false;}
+                for(j=0;j<number_of_folders;j++){
+                    
+                    number_of_images=parseInt(readTextFile(almost_final_adress+j+"/Index.txt"));
+                    for(i=0;i<number_of_images;i++){
+                        finalAdress=almost_final_adress+j+"/"+i+".jpg";
+                        try{animation_images[i]=loadImage(finalAdress);}
+                        catch(err){console.log("Error Loading Image");haveFiles=false;}
+                    }
+                    EvilEvolve[key].push(animation_images);
+                    animation_images=[];
                 }
-                EvilEvolve[key].push(animation_images);
-                animation_images=[];
-                //if(j<number_of_folders)
-                    //j++;
+                
             }
             menu.moveBar(100);
         }
