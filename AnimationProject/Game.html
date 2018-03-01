@@ -289,10 +289,31 @@
             this.WinnigText=[];
             //global class var to make use for access control
             this.firstTime=true;
-            
+            /*dt = 1E-3 * (new Date().getTime() - startTime);
+            startTime = new Date().getTime();
+            time += dt%10000;*/
+            //timer vars
+            this.time=0;
+            this.dt;
+            this.startTime=new Date().getTime();
             
             //Animation stack will be used in animation state
             this.AnimationStack=[];
+        }
+        //changes do action after time
+        //need to put this.time=0 and startTime possibly
+        
+        Timer(action,duration){
+            //
+            if(this.firstTime){
+                this.firstTime=false;
+                this.time=0;
+                this.startTime=new Date().getTime();
+            }
+            
+            this.dt=1E-3*(new Date().getTime()-this.startTime);
+            this.startTime=new Date().getTime();
+            this.time+= this.dt%10000;
         }
         consumeResource(good){
             if(good){
