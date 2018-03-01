@@ -1533,8 +1533,9 @@
                     catch(err){console.log("Error Loading Image");haveFiles=false;}
                 }
                 GoodEvolve[key].push(animation_images);
-                if(j<number_of_folders)
-                    j++;
+                animation_images=[];
+                //if(j<number_of_folders)
+                    //j++;
             }
         }
         if(stages==7){
@@ -1560,8 +1561,9 @@
                     catch(err){console.log("Error Loading Image");haveFiles=false;}
                 }
                 EvilEvolve[key].push(animation_images);
-                if(j<number_of_folders)
-                    j++;
+                animation_images=[];
+                //if(j<number_of_folders)
+                    //j++;
             }
             menu.moveBar(100);
         }
