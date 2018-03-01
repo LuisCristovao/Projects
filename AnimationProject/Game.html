@@ -1099,8 +1099,8 @@
                     //Just need to insert this one time
                     actualAnimationRunning=this.AnimationStack[1];
                     //set timer
-                    var myfunction=function(){this.ActionAnimationState++;};
-                    setTimeout(myfunction,time_of_animation);
+                    //var myfunction=function(){this.ActionAnimationState++;};
+                    setTimeout(this.NextAnimationState,time_of_animation);
                     this.firstTime=false;
                     
                 }
