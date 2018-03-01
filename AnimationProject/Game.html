@@ -1008,9 +1008,13 @@
         //
         ActionAnimation(){
             
-            
-            
-            
+            //final stage 
+            if(this.ActionAnimationState==4){
+                this.firstTime=true;
+                //put my own state equal to zero is what I should have done everytime.
+                this.ActionAnimationState=0;
+                this.state++;
+            }
             //Play Second Animation if exists
             if(this.ActionAnimationState==3){
                 //duration in seconds of animation is total number of frames dividing per fps
@@ -1067,6 +1071,8 @@
             }
             //Initialization state
             if(this.ActionAnimationState==0){
+                //put the state of previous stage to zero
+                this.processing_choice_state=0;
                 //put this var to true to be ready to use
                 this.firstTime=true;
                 //hide menus to just see animations
