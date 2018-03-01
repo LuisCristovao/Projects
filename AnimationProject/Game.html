@@ -703,7 +703,7 @@
         
         //State after everybody did his choice
         ProcessWinningChoice(){
-            
+    
             //print the result for 3 seconds
             if(this.processing_choice_state==6){
                 //Show Winning Text for 3 s
@@ -797,7 +797,7 @@
                 this.consumeResource(false);
                 
                 //if both players choose Defense option
-                if(this.final_decision_good[0]==1 and this.final_decision_evil[0]==1){
+                if(this.final_decision_good[0]==1 && this.final_decision_evil[0]==1){
                     //if both do defense then the loser is the one who did the highest bet
                     //Do final preparations like animation stack and status text update
                     this.processing_choice_state=6;
