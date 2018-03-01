@@ -1525,7 +1525,7 @@
             for(key in GoodEvolve){
 
                 almost_final_adress=adressGoodEvolve+key+"/";
-                number_of_folders=parseInt(readTextFile(almost_final_adress));
+                number_of_folders=parseInt(readTextFile(almost_final_adress+"Index.txt"));
                 number_of_images=parseInt(readTextFile(almost_final_adress+j+"/Index.txt"));
                 for(i=0;i<number_of_images;i++){
                     finalAdress=almost_final_adress+j+"/"+i+".jpg";
@@ -1552,7 +1552,7 @@
             for(key in EvilEvolve){
 
                 almost_final_adress=adressEvilEvolve+key+"/";
-                number_of_folders=parseInt(readTextFile(almost_final_adress));
+                number_of_folders=parseInt(readTextFile(almost_final_adress+"Index.txt"));
                 number_of_images=parseInt(readTextFile(almost_final_adress+j+"/Index.txt"));
                 for(i=0;i<number_of_images;i++){
                     finalAdress=almost_final_adress+j+"/"+i+".jpg";
