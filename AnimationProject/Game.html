@@ -300,9 +300,12 @@
             //Animation stack will be used in animation state
             this.AnimationStack=[];
         }
+        
+        NextState(){
+            game.state++;
+        }
         //changes do action after time
         //need to put this.time=0 and startTime possibly
-        
         Timer(action,duration){
             //
             if(this.firstTime){
@@ -742,13 +745,13 @@
                 //only change state after 3 s =3000 ms
                 /*if(this.firstTime){
                     var myfunction=function(){this.state++;};
-                    setTimeout(myfunction,3000);
+                    setTimeout(this.NextState,3000);
                     //in next state turn this var to true
                     this.firstTime=false;
                 }*/
                 //IMPORTANT THIS.FIRSTTIME NEEDS TO BE EQUAL TRUE IN ORDER TO TIMER WORK
                 //3 Seconds
-                this.Timer(function(){this.state++;},3);
+                this.Timer(this.NextState,3);
                 
             }
             //process result if one of the players has chosen a powerup
