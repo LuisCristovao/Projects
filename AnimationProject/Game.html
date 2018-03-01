@@ -277,9 +277,14 @@
             this.goodStatus=[100,100,100];
             //evil player status Attack|Defense|Health
             this.evilStatus=[100,100,100];
+            //previously save player status
+            this.pre_goodStatus=[100,100,100];
+            this.pre_evilStatus=[100,100,100];
             //good text status. Showned in update status state
             //first position is the text to show, second is the color
             this.WinnigText=[];
+            //global class var to make use for access control
+            this.firstTime=true;
             
             
             //Animation stack will be used in animation state
@@ -691,10 +696,26 @@
         Calculator(){
             
         }
+        
         //State after everybody did his choice
         ProcessWinningChoice(){
+            
+            //print the result for 3 seconds
+            if(this.processing_choice_state==6){
+                //Show Winning Text for 3 s
+                menu.Buttons['GoodText'].style.visibility='visible';
+                menu.Buttons['GoodText'].innerHTML='<font color="'+this.WinnigText[1]+'">'+this.WinnigText[0]+'</font>';
+                //only change state after 3 s =3000 ms
+                if(firstTime){
+                    var myfunction=function(){this.state++;};
+                    setTimeout(myfunction,3000);
+                    //in next state turn this var to true
+                    firstTime=false;
+                }
+            }
             //process result if one of the players has chosen a powerup
             if(this.processing_choice_state==5){
+                var entered=0;
                 //consume resources for good player
                 this.consumeResource(true);
                 //consume resources for evil player
@@ -703,8 +724,65 @@
                 //The consuming part already does half the work
                 //if good player chose an attack 
                 if(this.final_decision_good[0]==0){
-                    
+                    //good player gives evil damage
+                    this.evilStatus[2]-=this.final_decision_good[1];
+                    //here we put the animations on AnimationsStack
+                    // I put true because here I am saying the game
+                    // to play two animations the attack animation from good
+                    //and powerUp animation from evil
+                    this.ProcessWrapUp(true);
+                    entered++;
+                    //0 position is the text to use
+                    this.WinnigText[0]='Good Player Attack!!';
+                    //position 1 is the color of text
+                    this.WinnigText[1]='blue';
                 }
+                //if good player chose an defense
+                if(this.final_decision_good[0]==1){
+                    //Nothing happens
+                    //0 position is the text to use
+                    this.WinnigText[0]='Good Player Defense in Vain!!';
+                    //position 1 is the color of text
+                    this.WinnigText[1]='blue';
+                }
+                //The consuming part already does half the work
+                //if good player chose an attack 
+                if(this.final_decision_evil[0]==0){
+                    //evil damages good
+                    this.goodStatus[2]-=this.final_decision_evil[1];
+                    //here we put the animations on AnimationsStack
+                    // I put true because here I am saying the game
+                    // to play two animations the attack animation from evil
+                    //and powerUp animation from good
+                    this.ProcessWrapUp(false);
+                    entered++;
+                    //0 position is the text to use
+                    this.WinnigText[0]='Evil Player Attack!!';
+                    //position 1 is the color of text
+                    this.WinnigText[1]='purple';
+                }
+                //if evil player chose an defense
+                if(this.final_decision_evil[0]==1){
+                    //Nothing happens
+                    //0 position is the text to use
+                    this.WinnigText[0]='Evil Player Defense in Vain!!';
+                    //position 1 is the color of text
+                    this.WinnigText[1]='purple';
+                }
+                
+                //this means it did not inserted animations 
+                //which means both players are doing powerUps
+                if(entered==0){
+                    //it is irrelevant if the input param is true or false
+                    // because it will do two animations
+                    this.ProcessWrapUp(false);
+                    //0 position is the text to use
+                    this.WinnigText[0]='Both players PowerUp!!';
+                    //position 1 is the color of text
+                    this.WinnigText[1]='black';
+                }
+                //MOve to next state
+                this.processing_choice_state=6;
             }
             //process result if the options are  AD|AA|DD|DA
             if(this.processing_choice_state==4){
@@ -736,12 +814,13 @@
                         //Now do final preperations and change state
                         //this function will push the right animations to AnimationStack
                         //the parameter means that good player won
+                        //which means just one animation needs to be played
                         this.ProcessWrapUp(true);
                         //0 position is where it goes the text
                         this.WinnigText[0]='Good Player Won!!';
                         //position 1 is the color of text
                         this.WinnigText[1]='blue';
-                        this.processing_choice_state=6;
+                        
                     }
                     //if evil has higher bet
                     if(this.final_decision_good[1]<this.final_decision_evil[1]){
@@ -754,7 +833,11 @@
                         this.WinnigText[0]='Evil Player Won!!';
                         //position 1 is the color of text
                         this.WinnigText[1]='purple';
-                        this.processing_choice_state=6;
+                        
+                        //this function will put in the animation stack just one animation
+                        //an animation for evil attack or defense
+                        this.ProcessWrapUp(false);
+                        
                     }
                     //if both have the same bet
                     if(this.final_decision_good[1]==this.final_decision_evil[1]){
@@ -767,9 +850,11 @@
                         this.WinnigText[0]='Draw!!';
                         //position 1 is the color of text
                         this.WinnigText[1]='black';
-                        this.processing_choice_state=6;
+                        
                     }
                 }
+                //Change state at the end of curse!
+                this.processing_choice_state=6;
             }
             //here we must decide between two paths
             if(this.processing_choice_state==3){
