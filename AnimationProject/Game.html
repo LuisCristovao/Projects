@@ -260,6 +260,10 @@
             this.update_status_state=0;
             //
             this.processing_choice_state=0;
+            //
+            this.check_winner_state=0;
+            //
+            
             
             
             //0-attack;1-Defense;2-Evolve;3-Health;4-lv1;5-lv2;6-lv3
@@ -1014,8 +1018,7 @@
                 //play Idle Animation
                 time=0;
                 actualAnimationRunning=Idle[0];
-                //put my own state equal to zero is what I should have done everytime.
-                this.ActionAnimationState=0;
+                
                 this.state++;
             }
             //Play Second Animation if exists
@@ -1085,9 +1088,35 @@
         }
         //
         UpDateStatus(){
-            
+            if(this.update_status_state==2){
+                this.firstTime=true;
+                //update of previouse status
+                this.prev_goodStatus=this.goodStatus;
+                this.prev_evilStatus=this.evilStatus;
+                this.state++;
+                
+            }
+            //Wait 2 Seconds
+            if(this.update_status_state==1){
+                if(this.firstTime){
+                    var myfunction=function (){this.update_status_state++;};
+                    setTimeout(myfunction,2000);
+                    this.firstTime=false;
+                }
+                else{
+                    //do nothing...
+                }
+            }
             //first stage 
+            //See difference between previous status and now and prints it on screen
             if(this.update_status_state==0){
+                
+                //Initialize previouse state
+                //Only possible to do here because if I did in prev state it would have done for 
+                //One frame an error.
+                this.ActionAnimationState=0;
+                
+                
                 var attack_diff_good;var defense_diff_good;
                 var health_diff_good;
                 
@@ -1142,10 +1171,58 @@
                     //-attack... is because I want to show the difference from the previous status
                     menu.Buttons['EvilText'].innerHTML='<font color="green">'+(-attack_diff_evil)+' Health</font>';
                 }
+                
+                this.update_status_state++;
             }
         }
         //
         CheckWinner(){
+            
+            //initialize prev state
+            this.update_status_state=0;
+            //see if there is a loser
+            if(this.goodStatus[2]<=0){
+                //Good Player Lose
+                //In future show animation or not
+                menu.HideButtons();
+               //purple backGround
+                context.fillStyle('purple');
+                context.fillRect(0,0,canvas.width,canvas.height);
+                var font_size;
+                //more or less 30% font canvas width the font size
+                //pick smaller size and ajust
+                //vertical phone
+                font_size=Math.round(0.3*canvas.width);
+                context.font=font_size+"px Comic Sans MS";
+                context.fillStyle = "black";
+                context.textAlign = "center";
+                context.fillText("Evil Wins!", canvas.width/2, canvas.height/2);
+            }
+            else{
+                
+                if(this.evilStatus[2]<=0){
+                    //Evil Player Lose
+                    //In future show animation or not
+                    menu.HideButtons();
+                   //purple backGround
+                    context.fillStyle('cyan');
+                    context.fillRect(0,0,canvas.width,canvas.height);
+                    var font_size;
+                    //more or less 30% font canvas width the font size
+                    //pick smaller size and ajust
+                    //vertical phone
+                    font_size=Math.round(0.3*canvas.width);
+                    context.font=font_size+"px Comic Sans MS";
+                    context.fillStyle = "blue";
+                    context.textAlign = "center";
+                    context.fillText("Goodness Wins!", canvas.width/2, canvas.height/2);
+                }
+                //No one had lost 
+                else{
+                    this.state=0;
+                }
+            }
+            
             
         }
         //
