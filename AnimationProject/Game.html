@@ -1126,6 +1126,22 @@
                     menu.Buttons['GoodText'].innerHTML='<font color="green">'+(-attack_diff_good)+' Health</font>';
                 }
                 
+                //evil
+                //if there was a change in attack status of good player
+                if(attack_diff_evil!=0){
+                    //-attack... is because I want to show the difference from the previous status
+                    menu.Buttons['EvilText'].innerHTML='<font color="red">'+(-attack_diff_evil)+' Attack</font>';
+                }
+                //if there was a change in defense status of evil player
+                if(defense_diff_evil!=0){
+                    //-defense... is because I want to show the difference from the previous status
+                    menu.Buttons['EvilText'].innerHTML='<font color="blue">'+(-defense_diff_evil)+' Defense</font>';
+                }
+                //if there was a change in health status of evil player
+                if(health_diff_evil!=0){
+                    //-attack... is because I want to show the difference from the previous status
+                    menu.Buttons['EvilText'].innerHTML='<font color="green">'+(-attack_diff_evil)+' Health</font>';
+                }
             }
         }
         //
