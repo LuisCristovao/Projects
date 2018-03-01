@@ -307,13 +307,21 @@
             //
             if(this.firstTime){
                 this.firstTime=false;
-                this.time=0;
+                //this.time=0;
                 this.startTime=new Date().getTime();
             }
             
             this.dt=1E-3*(new Date().getTime()-this.startTime);
             this.startTime=new Date().getTime();
-            this.time+= this.dt%10000;
+            this.time+= this.dt;
+            
+            if(this.time>duration){
+               this.time=0;
+                //do action
+                action();
+            }
+            
+            
         }
         consumeResource(good){
             if(good){
@@ -732,12 +740,16 @@
                 menu.Buttons['GoodText'].style.visibility='visible';
                 menu.Buttons['GoodText'].innerHTML='<font color="'+this.WinnigText[1]+'">'+this.WinnigText[0]+'</font>';
                 //only change state after 3 s =3000 ms
-                if(this.firstTime){
+                /*if(this.firstTime){
                     var myfunction=function(){this.state++;};
                     setTimeout(myfunction,3000);
                     //in next state turn this var to true
                     this.firstTime=false;
-                }
+                }*/
+                //IMPORTANT THIS.FIRSTTIME NEEDS TO BE EQUAL TRUE IN ORDER TO TIMER WORK
+                //3 Seconds
+                this.Timer(function(){this.state++;},3);
+                
             }
             //process result if one of the players has chosen a powerup
             if(this.processing_choice_state==5){
