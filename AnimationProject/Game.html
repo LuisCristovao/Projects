@@ -1094,20 +1094,37 @@
                 var attack_diff_evil;var defense_diff_evil;
                 var health_diff_evil;
                 //attack difference
-                attack_diff_good=Math.abs(this.goodStatus[0]-this.pre_goodStatus[0]);
+                attack_diff_good=this.goodStatus[0]-this.pre_goodStatus[0];
                 //defense difference
-                defense_diff_good = Math.abs(this.goodStatus[1]-this.pre_goodStatus[1]);
+                defense_diff_good = this.goodStatus[1]-this.pre_goodStatus[1];
                 //health difference
-                health_diff_good=Math.abs(this.goodStatus[2]-this.pre_goodStatus[2]);
+                health_diff_good=this.goodStatus[2]-this.pre_goodStatus[2];
                 
                 //evil part
                 //attack difference
-                attack_diff_evil=Math.abs(this.evilStatus[0]-this.pre_evilStatus[0]);
+                attack_diff_evil=this.evilStatus[0]-this.pre_evilStatus[0];
                 //defense difference
-                defense_diff_evil = Math.abs(this.evilStatus[1]-this.pre_evilStatus[1]);
+                defense_diff_evil = this.evilStatus[1]-this.pre_evilStatus[1];
                 //health difference
-                health_diff_evil=Math.abs(this.evilStatus[2]-this.pre_evilStatus[2]);
+                health_diff_evil=this.evilStatus[2]-this.pre_evilStatus[2];
                 
+                //write the texts so that in the next state will just wait x seconds
+                //if it works well it will pass throgh at least two if's
+                //if there was a change in attack status of good player
+                if(attack_diff_good!=0){
+                    //-attack... is because I want to show the difference from the previous status
+                    menu.Buttons['GoodText'].innerHTML='<font color="red">'+(-attack_diff_good)+' Attack</font>';
+                }
+                //if there was a change in defense status of good player
+                if(defense_diff_good!=0){
+                    //-defense... is because I want to show the difference from the previous status
+                    menu.Buttons['GoodText'].innerHTML='<font color="blue">'+(-defense_diff_good)+' Defense</font>';
+                }
+                //if there was a change in health status of good player
+                if(health_diff_good!=0){
+                    //-attack... is because I want to show the difference from the previous status
+                    menu.Buttons['GoodText'].innerHTML='<font color="green">'+(-attack_diff_good)+' Health</font>';
+                }
                 
             }
         }
