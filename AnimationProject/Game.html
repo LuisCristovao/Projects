@@ -1011,6 +1011,9 @@
             //final stage 
             if(this.ActionAnimationState==4){
                 this.firstTime=true;
+                //play Idle Animation
+                time=0;
+                actualAnimationRunning=Idle[0];
                 //put my own state equal to zero is what I should have done everytime.
                 this.ActionAnimationState=0;
                 this.state++;
@@ -1083,6 +1086,30 @@
         //
         UpDateStatus(){
             
+            //first stage 
+            if(this.update_status_state==0){
+                var attack_diff_good;var defense_diff_good;
+                var health_diff_good;
+                
+                var attack_diff_evil;var defense_diff_evil;
+                var health_diff_evil;
+                //attack difference
+                attack_diff_good=Math.abs(this.goodStatus[0]-this.pre_goodStatus[0]);
+                //defense difference
+                defense_diff_good = Math.abs(this.goodStatus[1]-this.pre_goodStatus[1]);
+                //health difference
+                health_diff_good=Math.abs(this.goodStatus[2]-this.pre_goodStatus[2]);
+                
+                //evil part
+                //attack difference
+                attack_diff_evil=Math.abs(this.evilStatus[0]-this.pre_evilStatus[0]);
+                //defense difference
+                defense_diff_evil = Math.abs(this.evilStatus[1]-this.pre_evilStatus[1]);
+                //health difference
+                health_diff_evil=Math.abs(this.evilStatus[2]-this.pre_evilStatus[2]);
+                
+                
+            }
         }
         //
         CheckWinner(){
