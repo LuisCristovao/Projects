@@ -110,7 +110,7 @@
     var startTime;
     var time=0;
     var dt;
-    
+    var fps=60;
     //integer with only two values 0,1 that decides if one or two player mode
     var oneplayer;
     //integer with only two values 0,1 that decides who is the player selecting menus
@@ -706,11 +706,11 @@
                 menu.Buttons['GoodText'].style.visibility='visible';
                 menu.Buttons['GoodText'].innerHTML='<font color="'+this.WinnigText[1]+'">'+this.WinnigText[0]+'</font>';
                 //only change state after 3 s =3000 ms
-                if(firstTime){
+                if(this.firstTime){
                     var myfunction=function(){this.state++;};
                     setTimeout(myfunction,3000);
                     //in next state turn this var to true
-                    firstTime=false;
+                    this.firstTime=false;
                 }
             }
             //process result if one of the players has chosen a powerup
@@ -1008,6 +1008,71 @@
         //
         ActionAnimation(){
             
+            
+            
+            
+            //Play Second Animation if exists
+            if(this.ActionAnimationState==3){
+                //duration in seconds of animation is total number of frames dividing per fps
+                var time_of_animation=this.AnimationStack[1].length/fps;
+                time_of_animation=time_of_animation*1000;//turn seconds to miliseconds
+                
+                //Just set one  timer
+                if(this.firstTime){
+                    //time=0 is to play the animation from the beginning
+                    time=0;
+                    //Just need to insert this one time
+                    actualAnimationRunning=this.AnimationStack[1];
+                    //set timer
+                    var myfunction=function(){this.ActionAnimationState++;};
+                    setTimeout(myfunction,time_of_animation);
+                    this.firstTime=false;
+                    
+                }
+            }
+            //in between animations state
+            if(this.ActionAnimationState==2){
+                this.firstTime=true;
+                //see if there is another animation to be played
+                //if there is one then go to next state
+                if(this.AnimationStack[1]!=null){
+                    this.ActionAnimationState++;   
+                }
+                //else play idle animation and go to state 4
+                else{
+                    //time=0 is to play the animation from the beginning
+                    time=0;
+                    actualAnimationRunning=Idle[0];
+                    this.ActionAnimationState=4;
+                }
+                
+            }
+            //Do the first animations which will always happen
+            if(this.ActionAnimationState==1){
+                //duration in seconds of animation is total number of frames dividing per fps
+                var time_of_animation=this.AnimationStack[0].length/fps;
+                time_of_animation=time_of_animation*1000;//turn seconds to miliseconds
+                
+                
+                if(this.firstTime){
+                    //time=0 is to play the animation from the beginning
+                    time=0;
+                    //Only need to insert one time this
+                    actualAnimationRunning=this.AnimationStack[0];
+                    //set timeout function
+                    var myfunction=function(){this.ActionAnimationState++;};
+                    setTimeout(myfunction,time_of_animation);
+                    this.firstTime=false;
+                }
+            }
+            //Initialization state
+            if(this.ActionAnimationState==0){
+                //put this var to true to be ready to use
+                this.firstTime=true;
+                //hide menus to just see animations
+                menu.HideButtons();
+                this.ActionAnimationState++;
+            }
         }
         //
         UpDateStatus(){
@@ -1299,8 +1364,8 @@
             dt = 1E-3 * (new Date().getTime() - startTime);
             startTime = new Date().getTime();
             time += dt%10000;
-        
-            var index=Math.floor((time*60))%(images_array.length);
+            //fps=60
+            var index=Math.floor((time*fps))%(images_array.length);
             //console.log(index);
             var frame = images_array[index];
             if(frame.isReady ){
