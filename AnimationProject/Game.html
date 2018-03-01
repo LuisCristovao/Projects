@@ -409,7 +409,7 @@
             //it was good decision and is was the winner or the game needs two animations
             if(this.final_decision_good[0]==0 && (good || two_animations)){
                 //Put in animation stack a random good attack animation
-                this.AnimationStack.push(GoodAttacks[Math.round(Math.random()*GoodAttacks.length)])
+                this.AnimationStack.push(GoodAttacks[Math.floor(Math.random()*GoodAttacks.length)])
                 
             }
             //if good did a defense
@@ -417,7 +417,7 @@
             //it was good decision and is was the winner or the game needs two animations
             if(this.final_decision_good[0]==1 && (good||two_animations)){
                 //Put in animation stack a random good defense animation
-                this.AnimationStack.push(GoodDefense[Math.round(Math.random()*GoodDefense.length)])
+                this.AnimationStack.push(GoodDefense[Math.floor(Math.random()*GoodDefense.length)])
                 
             }
             //if good did a PA
@@ -425,7 +425,7 @@
             //it was good decision and is was the winner or the game needs two animations
             if(this.final_decision_good[0]==20 && (good||two_animations)){
                 //Put in animation stack a random good defense animation
-                this.AnimationStack.push(GoodEvolve['Attack'][Math.round(Math.random()*GoodEvolve['Attack'].length)]);
+                this.AnimationStack.push(GoodEvolve['Attack'][Math.floor(Math.random()*GoodEvolve['Attack'].length)]);
                 
             }
              //if good did a PD
@@ -433,14 +433,14 @@
             //it was good decision and is was the winner or the game needs two animations
             if(this.final_decision_good[0]==21 && (good||two_animations)){
                 //Put in animation stack a random good defense animation
-                this.AnimationStack.push(GoodEvolve['Defense'][Math.round(Math.random()*GoodEvolve['Defense'].length)]);
+                this.AnimationStack.push(GoodEvolve['Defense'][Math.floor(Math.random()*GoodEvolve['Defense'].length)]);
             }
              //if good did a PH
             //this if state is like this because it only enters here in case
             //it was good decision and it was the winner or the game needs two animations
             if(this.final_decision_good[0]==22 && (good||two_animations)){
                 //Put in animation stack a random good defense animation
-                this.AnimationStack.push(GoodEvolve['Health'][Math.round(Math.random()*GoodEvolve['Health'].length)]);
+                this.AnimationStack.push(GoodEvolve['Health'][Math.floor(Math.random()*GoodEvolve['Health'].length)]);
             }
             
             //Evil if's
@@ -450,35 +450,35 @@
             //it was evil decision and it was the winner or the game  needs two animations
             if(this.final_decision_evil[0]==0 &&(!good||two_animations)){//!good is because evil won
                 //Put in animation stack a random evil attack animation
-                this.AnimationStack.push(EvilAttacks[Math.round(Math.random()*EvilAttacks.length)]);
+                this.AnimationStack.push(EvilAttacks[Math.floor(Math.random()*EvilAttacks.length)]);
             }
             //if evil did a defense
             //this if state is like this, because it only enters here in case
             //it was an evil decision and he was the winner, or the game  needs two animations
             if(this.final_decision_evil[0]==1 &&(!good||two_animations)){
                 //Put in animation stack a random evil defense animation
-                this.AnimationStack.push(EvilDefense[Math.round(Math.random()*EvilDefense.length)]);
+                this.AnimationStack.push(EvilDefense[Math.floor(Math.random()*EvilDefense.length)]);
             }
             //if evil did a PA
             //this if state is like this, because it only enters here in case
             //it was an evil decision and he was the winner, or the game  needs two animations
             if(this.final_decision_evil[0]==20 &&(!good||two_animations)){
                 //Put in animation stack a random evil defense animation
-                this.AnimationStack.push(EvilEvolve['Attack'][Math.round(Math.random()*EvilEvolve['Attack'].length)]);
+                this.AnimationStack.push(EvilEvolve['Attack'][Math.floor(Math.random()*EvilEvolve['Attack'].length)]);
             }
             //if evil did a PD
             //this if state is like this, because it only enters here in case
             //it was an evil decision and he was the winner, or the game  needs two animations
             if(this.final_decision_evil[0]==21 &&(!good||two_animations)){
                 //Put in animation stack a random evil defense animation
-                this.AnimationStack.push(EvilEvolve['Defense'][Math.round(Math.random()*EvilEvolve['Defense'].length)]);
+                this.AnimationStack.push(EvilEvolve['Defense'][Math.floor(Math.random()*EvilEvolve['Defense'].length)]);
             }
             //if evil did a PH
             //this if state is like this, because it only enters here in case
             //it was an evil decision and he was the winner, or the game  needs two animations
             if(this.final_decision_evil[0]==22 &&(!good||two_animations)){
                 //Put in animation stack a random evil defense animation
-                this.AnimationStack.push(EvilEvolve['Health'][Math.round(Math.random()*EvilEvolve['Health'].length)]);
+                this.AnimationStack.push(EvilEvolve['Health'][Math.floor(Math.random()*EvilEvolve['Health'].length)]);
             }
             
         }
@@ -882,7 +882,7 @@
                     }
                     //if both have the same bet
                     if(this.final_decision_good[1]==this.final_decision_evil[1]){
-                        //do nothing because the result is 0
+                        //Its not Draw need to see who did attack or defense and decide winner
                         //Maybe here penalise the the attacker although he was already penalize for consuming attack power.
                         
                         //Now do final preperations and change state
