@@ -848,7 +848,8 @@
                     this.WinnigText[0]='Both Defense!!';
                     //position 1 is the color of text
                     this.WinnigText[1]='black';
-                    
+                    //Put animation in stack so that in next stage it does not break
+                    this.AnimationStack.push(Idle[0]);
                 }
                 // now the only options are AD|AA|DA
                 else{
@@ -1158,9 +1159,16 @@
             if(this.update_status_state==2){
                 this.firstTime=true;
                 //update of previouse status
-                this.prev_goodStatus=this.goodStatus;
-                this.prev_evilStatus=this.evilStatus;
+                //this is not working because of pointers 
+                //this.pre_goodStatus=this.goodStatus;
+                //this.pre_evilStatus=this.evilStatus;
+                this.pre_goodStatus[0]=this.goodStatus[0];
+                this.pre_goodStatus[1]=this.goodStatus[1];
+                this.pre_goodStatus[2]=this.goodStatus[2];
                 
+                this.pre_evilStatus[0]=this.evilStatus[0];
+                this.pre_evilStatus[1]=this.evilStatus[1];
+                this.pre_evilStatus[2]=this.evilStatus[2];
                 //change status texts
                 menu.Buttons["goodHealthText"].innerHTML=this.goodStatus[2];
                 menu.Buttons["goodAttackText"].innerHTML=this.goodStatus[0];
