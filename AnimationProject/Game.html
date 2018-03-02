@@ -1160,6 +1160,17 @@
                 //update of previouse status
                 this.prev_goodStatus=this.goodStatus;
                 this.prev_evilStatus=this.evilStatus;
+                
+                //change status texts
+                menu.Buttons["goodHealthText"].innerHTML=this.goodStatus[2];
+                menu.Buttons["goodAttackText"].innerHTML=this.goodStatus[0];
+                menu.Buttons["goodDefenseText"].innerHTML=this.goodStatus[1];
+                menu.Buttons["evilHealthText"].innerHTML=this.evilStatus[2];
+                menu.Buttons["evilAttackText"].innerHTML=this.evilStatus[0];
+                menu.Buttons["evilDefenseText"].innerHTML=this.evilStatus[1];
+                
+                
+                
                 this.state++;
                 
             }
@@ -1208,37 +1219,40 @@
                 //if it works well it will pass throgh at least two if's
                 //if there was a change in attack status of good player
                 if(attack_diff_good!=0){
-                    //-attack... is because I want to show the difference from the previous status
-                    menu.Buttons['GoodText'].innerHTML='<font color="red">'+(-attack_diff_good)+' Attack</font>';
+                    
+                    
+                    menu.Buttons['GoodText'].innerHTML='<font color="red">'+(attack_diff_good)+' Attack</font>';
                 }
                 //if there was a change in defense status of good player
                 if(defense_diff_good!=0){
-                    //-defense... is because I want to show the difference from the previous status
-                    menu.Buttons['GoodText'].innerHTML='<font color="blue">'+(-defense_diff_good)+' Defense</font>';
+                    
+                    menu.Buttons['GoodText'].innerHTML='<font color="blue">'+(defense_diff_good)+' Defense</font>';
                 }
                 //if there was a change in health status of good player
                 if(health_diff_good!=0){
-                    //-attack... is because I want to show the difference from the previous status
-                    menu.Buttons['GoodText'].innerHTML='<font color="green">'+(-attack_diff_good)+' Health</font>';
+                    
+                    menu.Buttons['GoodText'].innerHTML='<font color="green">'+(health_diff_good)+' Health</font>';
                 }
                 
                 //evil
                 //if there was a change in attack status of good player
                 if(attack_diff_evil!=0){
-                    //-attack... is because I want to show the difference from the previous status
-                    menu.Buttons['EvilText'].innerHTML='<font color="red">'+(-attack_diff_evil)+' Attack</font>';
+                    
+                    menu.Buttons['EvilText'].innerHTML='<font color="red">'+(attack_diff_evil)+' Attack</font>';
                 }
                 //if there was a change in defense status of evil player
                 if(defense_diff_evil!=0){
-                    //-defense... is because I want to show the difference from the previous status
-                    menu.Buttons['EvilText'].innerHTML='<font color="blue">'+(-defense_diff_evil)+' Defense</font>';
+                    
+                    menu.Buttons['EvilText'].innerHTML='<font color="blue">'+(defense_diff_evil)+' Defense</font>';
                 }
                 //if there was a change in health status of evil player
                 if(health_diff_evil!=0){
-                    //-attack... is because I want to show the difference from the previous status
-                    menu.Buttons['EvilText'].innerHTML='<font color="green">'+(-attack_diff_evil)+' Health</font>';
+                    
+                    menu.Buttons['EvilText'].innerHTML='<font color="green">'+(health_diff_evil)+' Health</font>';
                 }
-                
+                //After changing texts lets say that they change always
+                menu.Buttons['GoodText'].style.visibility='visible';
+                menu.Buttons['EvilText'].style.visibility='visible';
                 this.update_status_state++;
             }
         }
