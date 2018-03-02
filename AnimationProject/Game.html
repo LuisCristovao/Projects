@@ -110,7 +110,7 @@
     var startTime;
     var time=0;
     var dt;
-    
+    var fps=60;
     //integer with only two values 0,1 that decides if one or two player mode
     var oneplayer;
     //integer with only two values 0,1 that decides who is the player selecting menus
@@ -258,14 +258,234 @@
             this.ActionAnimationState=0;
             //
             this.update_status_state=0;
+            //
+            this.processing_choice_state=0;
+            //
+            this.check_winner_state=0;
+            //
+            
+            
+            
             //0-attack;1-Defense;2-Evolve;3-Health;4-lv1;5-lv2;6-lv3
             this.goodOptions=[];
             //0-attack;1-Defense;2-Evolve;3-Health;4-lv1;5-lv2;6-lv3
             this.evilOptions=[];
+            //pos 0-> actual decision;pos 1-> quantity
+            //pos 0->0-Attack,1-Defense,20-Powerup Attack,21-PD,22-PH
+            this.final_decision_good=[];
+            //pos 0-> actual decision;pos 1-> quantity
+            //pos 0->0-Attack,1-Defense,20-Powerup Attack,21-PD,22-PH
+            this.final_decision_evil=[];
+            
             //good player status Attack|Defense|Health
             this.goodStatus=[100,100,100];
             //evil player status Attack|Defense|Health
             this.evilStatus=[100,100,100];
+            //previously save player status
+            this.pre_goodStatus=[100,100,100];
+            this.pre_evilStatus=[100,100,100];
+            //good text status. Showned in update status state
+            //first position is the text to show, second is the color
+            this.WinnigText=[];
+            //global class var to make use for access control
+            this.firstTime=true;
+            /*dt = 1E-3 * (new Date().getTime() - startTime);
+            startTime = new Date().getTime();
+            time += dt%10000;*/
+            //timer vars
+            this.time=0;
+            this.dt;
+            this.startTime=new Date().getTime();
+            
+            //Animation stack will be used in animation state
+            this.AnimationStack=[];
+        }
+        
+        NextState(){
+            game.state++;
+        }
+        NextAnimationState(){
+            game.ActionAnimationState++;
+        }
+        NextUpdateStatus(){
+            game.update_status_state++;
+        }
+        //changes do action after time
+        //need to put this.time=0 and startTime possibly
+        Timer(action,duration){
+            //
+            if(this.firstTime){
+                this.firstTime=false;
+                //this.time=0;
+                this.startTime=new Date().getTime();
+            }
+            
+            this.dt=1E-3*(new Date().getTime()-this.startTime);
+            this.startTime=new Date().getTime();
+            this.time+= this.dt;
+            
+            if(this.time>duration){
+               this.time=0;
+                //do action
+                action();
+            }
+            
+            
+        }
+        consumeResource(good){
+            if(good){
+                //if it is a powerUp
+                if(this.final_decision_good[0]>19){
+                    //if it is PAttack
+                    if(this.final_decision_good[0]==20){
+                        //increase attack resources by quantity
+                        this.goodStatus[0]+=this.final_decision_good[1];
+                    }
+                    //if it is PDefense
+                    if(this.final_decision_good[0]==21){
+                        //increase defense resources by quantity
+                        this.goodStatus[1]+=this.final_decision_good[1];
+                    }
+                    //if it is PHealth
+                    if(this.final_decision_good[0]==22){
+                        //increase defense resources by quantity
+                        this.goodStatus[2]+=this.final_decision_good[1];
+                    }
+                }
+                //it is an attack or defense
+                else{
+                    //attack
+                    if(this.final_decision_good[0]==0){
+                        //consume attack resources by quantity
+                        this.goodStatus[0]-=this.final_decision_good[1];
+                    }
+                    //defense
+                    if(this.final_decision_good[0]==1){
+                        //consume defense resources by quantity
+                        this.goodStatus[1]-=this.final_decision_good[1];
+                    }
+                }
+            }
+            else{
+                //if it is a powerUp
+                if(this.final_decision_evil[0]>19){
+                    //if it is PAttack
+                    if(this.final_decision_evil[0]==20){
+                        //increase attack resources by quantity
+                        this.evilStatus[0]+=this.final_decision_evil[1];
+                    }
+                    //if it is PDefense
+                    if(this.final_decision_evil[0]==21){
+                        //increase defense resources by quantity
+                        this.evilStatus[1]+=this.final_decision_evil[1];
+                    }
+                    //if it is PHealth
+                    if(this.final_decision_evil[0]==22){
+                        //increase defense resources by quantity
+                        this.evilStatus[2]+=this.final_decision_evil[1];
+                    }
+                }
+                //it is an attack or defense
+                else{
+                    //attack
+                    if(this.final_decision_evil[0]==0){
+                        //consume attack resources by quantity
+                        this.evilStatus[0]-=this.final_decision_evil[1];
+                    }
+                    //defense
+                    if(this.final_decision_evil[0]==1){
+                        //consume defense resources by quantity
+                        this.evilStatus[1]-=this.final_decision_evil[1];
+                    }
+                }
+            }
+        }
+        //Process state warp up
+        //this function receives the winning player
+        ProcessWrapUp(good){
+            var two_animations=false;
+            //This means that someone did a power up, in this case there will occur two animations
+            if(this.final_decision_good[0]>19 ||this.final_decision_evil[0]>19){
+                two_animations=true;
+            }
+            
+            
+            //if good did an attack
+            //this if state is like this because it only enters here in case
+            //it was good decision and is was the winner or the game needs two animations
+            if(this.final_decision_good[0]==0 && (good || two_animations)){
+                //Put in animation stack a random good attack animation
+                this.AnimationStack.push(GoodAttacks[Math.floor(Math.random()*GoodAttacks.length)])
+                
+            }
+            //if good did a defense
+            //this if state is like this because it only enters here in case
+            //it was good decision and is was the winner or the game needs two animations
+            if(this.final_decision_good[0]==1 && (good||two_animations)){
+                //Put in animation stack a random good defense animation
+                this.AnimationStack.push(GoodDefense[Math.floor(Math.random()*GoodDefense.length)])
+                
+            }
+            //if good did a PA
+            //this if state is like this because it only enters here in case
+            //it was good decision and is was the winner or the game needs two animations
+            if(this.final_decision_good[0]==20 && (good||two_animations)){
+                //Put in animation stack a random good defense animation
+                this.AnimationStack.push(GoodEvolve['Attack'][Math.floor(Math.random()*GoodEvolve['Attack'].length)]);
+                
+            }
+             //if good did a PD
+            //this if state is like this because it only enters here in case
+            //it was good decision and is was the winner or the game needs two animations
+            if(this.final_decision_good[0]==21 && (good||two_animations)){
+                //Put in animation stack a random good defense animation
+                this.AnimationStack.push(GoodEvolve['Defense'][Math.floor(Math.random()*GoodEvolve['Defense'].length)]);
+            }
+             //if good did a PH
+            //this if state is like this because it only enters here in case
+            //it was good decision and it was the winner or the game needs two animations
+            if(this.final_decision_good[0]==22 && (good||two_animations)){
+                //Put in animation stack a random good defense animation
+                this.AnimationStack.push(GoodEvolve['Health'][Math.floor(Math.random()*GoodEvolve['Health'].length)]);
+            }
+            
+            //Evil if's
+            
+            //if evil did an attack
+            //this if state is like this because it only enters here in case
+            //it was evil decision and it was the winner or the game  needs two animations
+            if(this.final_decision_evil[0]==0 &&(!good||two_animations)){//!good is because evil won
+                //Put in animation stack a random evil attack animation
+                this.AnimationStack.push(EvilAttacks[Math.floor(Math.random()*EvilAttacks.length)]);
+            }
+            //if evil did a defense
+            //this if state is like this, because it only enters here in case
+            //it was an evil decision and he was the winner, or the game  needs two animations
+            if(this.final_decision_evil[0]==1 &&(!good||two_animations)){
+                //Put in animation stack a random evil defense animation
+                this.AnimationStack.push(EvilDefense[Math.floor(Math.random()*EvilDefense.length)]);
+            }
+            //if evil did a PA
+            //this if state is like this, because it only enters here in case
+            //it was an evil decision and he was the winner, or the game  needs two animations
+            if(this.final_decision_evil[0]==20 &&(!good||two_animations)){
+                //Put in animation stack a random evil defense animation
+                this.AnimationStack.push(EvilEvolve['Attack'][Math.floor(Math.random()*EvilEvolve['Attack'].length)]);
+            }
+            //if evil did a PD
+            //this if state is like this, because it only enters here in case
+            //it was an evil decision and he was the winner, or the game  needs two animations
+            if(this.final_decision_evil[0]==21 &&(!good||two_animations)){
+                //Put in animation stack a random evil defense animation
+                this.AnimationStack.push(EvilEvolve['Defense'][Math.floor(Math.random()*EvilEvolve['Defense'].length)]);
+            }
+            //if evil did a PH
+            //this if state is like this, because it only enters here in case
+            //it was an evil decision and he was the winner, or the game  needs two animations
+            if(this.final_decision_evil[0]==22 &&(!good||two_animations)){
+                //Put in animation stack a random evil defense animation
+                this.AnimationStack.push(EvilEvolve['Health'][Math.floor(Math.random()*EvilEvolve['Health'].length)]);
+            }
             
         }
         //
@@ -518,24 +738,590 @@
         Calculator(){
             
         }
+        
         //State after everybody did his choice
         ProcessWinningChoice(){
-            //initialize idle state to 0 in order for next entry
-            this.idle_state=0;
-            //Hide Menus
-            menu.HideButtons();
+            console.log('Process choice state:'+this.processing_choice_state);
+            console.log('Actual State:'+this.state);
+            //print the result for 3 seconds
+            if(this.processing_choice_state==6){
+                //Show Winning Text for 3 s
+                menu.Buttons['GoodText'].style.visibility='visible';
+                menu.Buttons['GoodText'].innerHTML='<font color="'+this.WinnigText[1]+'">'+this.WinnigText[0]+'</font>';
+                //only change state after 3 s =3000 ms
+                if(this.firstTime){
+                    var myfunction=function(){this.state++;};
+                    setTimeout(this.NextState,3000);
+                    //in next state turn this var to true
+                    this.firstTime=false;
+                }
+                //IMPORTANT THIS.FIRSTTIME NEEDS TO BE EQUAL TRUE IN ORDER TO TIMER WORK
+                //3 Seconds
+                //this.Timer(this.NextState,3);
+                
+            }
+            //process result if one of the players has chosen a powerup
+            if(this.processing_choice_state==5){
+                var entered=0;
+                //consume resources for good player
+                this.consumeResource(true);
+                //consume resources for evil player
+                this.consumeResource(false);
+                
+                //The consuming part already does half the work
+                //if good player chose an attack 
+                if(this.final_decision_good[0]==0){
+                    //good player gives evil damage
+                    this.evilStatus[2]-=this.final_decision_good[1];
+                    //here we put the animations on AnimationsStack
+                    // I put true because here I am saying the game
+                    // to play two animations the attack animation from good
+                    //and powerUp animation from evil
+                    this.ProcessWrapUp(true);
+                    entered++;
+                    //0 position is the text to use
+                    this.WinnigText[0]='Good Player Attack!!';
+                    //position 1 is the color of text
+                    this.WinnigText[1]='blue';
+                }
+                //if good player chose an defense
+                if(this.final_decision_good[0]==1){
+                    //Nothing happens
+                    //0 position is the text to use
+                    this.WinnigText[0]='Good Player Defense in Vain!!';
+                    //position 1 is the color of text
+                    this.WinnigText[1]='blue';
+                }
+                //The consuming part already does half the work
+                //if good player chose an attack 
+                if(this.final_decision_evil[0]==0){
+                    //evil damages good
+                    this.goodStatus[2]-=this.final_decision_evil[1];
+                    //here we put the animations on AnimationsStack
+                    // I put true because here I am saying the game
+                    // to play two animations the attack animation from evil
+                    //and powerUp animation from good
+                    this.ProcessWrapUp(false);
+                    entered++;
+                    //0 position is the text to use
+                    this.WinnigText[0]='Evil Player Attack!!';
+                    //position 1 is the color of text
+                    this.WinnigText[1]='purple';
+                }
+                //if evil player chose an defense
+                if(this.final_decision_evil[0]==1){
+                    //Nothing happens
+                    //0 position is the text to use
+                    this.WinnigText[0]='Evil Player Defense in Vain!!';
+                    //position 1 is the color of text
+                    this.WinnigText[1]='purple';
+                }
+                
+                //this means it did not inserted animations 
+                //which means both players are doing powerUps
+                if(entered==0){
+                    //it is irrelevant if the input param is true or false
+                    // because it will do two animations
+                    this.ProcessWrapUp(false);
+                    //0 position is the text to use
+                    this.WinnigText[0]='Both players PowerUp!!';
+                    //position 1 is the color of text
+                    this.WinnigText[1]='black';
+                }
+                //MOve to next state
+                this.processing_choice_state=6;
+            }
+            //process result if the options are  AD|AA|DD|DA
+            if(this.processing_choice_state==4){
+                //consume resources for both players
+                //consume resources for good player
+                this.consumeResource(true);
+                //consume resources for evil player
+                this.consumeResource(false);
+                
+                //if both players choose Defense option
+                if(this.final_decision_good[0]==1 && this.final_decision_evil[0]==1){
+                    //if both do defense then the loser is the one who did the highest bet
+                    //Do final preparations like animation stack and status text update
+                    this.processing_choice_state=6;
+                    //0 position is the text to use
+                    this.WinnigText[0]='Both Defense!!';
+                    //position 1 is the color of text
+                    this.WinnigText[1]='black';
+                    //Put animation in stack so that in next stage it does not break
+                    this.AnimationStack.push(Idle[0]);
+                }
+                // now the only options are AD|AA|DA
+                else{
+                    //if good player has higher bet
+                    if(this.final_decision_good[1]>this.final_decision_evil[1]){
+                        //do ABS difference
+                        var result=Math.abs(this.final_decision_good[1]-this.final_decision_evil[1]);
+                        //now damage the evil player with result
+                        this.evilStatus[2]-=result;//index 2 is health
+                        //Now do final preperations and change state
+                        //this function will push the right animations to AnimationStack
+                        //the parameter means that good player won
+                        //which means just one animation needs to be played
+                        this.ProcessWrapUp(true);
+                        //0 position is where it goes the text
+                        this.WinnigText[0]='Good Player Won!!';
+                        //position 1 is the color of text
+                        this.WinnigText[1]='blue';
+                        
+                    }
+                    //if evil has higher bet
+                    if(this.final_decision_good[1]<this.final_decision_evil[1]){
+                        //do ABS difference
+                        var result=Math.abs(this.final_decision_good[1]-this.final_decision_evil[1]);
+                        //now damage the evil player with result
+                        this.goodStatus[2]-=result;//index 2 is health
+                        //Now do final preperations and change state
+                        //0 position is where it goes the text
+                        this.WinnigText[0]='Evil Player Won!!';
+                        //position 1 is the color of text
+                        this.WinnigText[1]='purple';
+                        
+                        //this function will put in the animation stack just one animation
+                        //an animation for evil attack or defense
+                        this.ProcessWrapUp(false);
+                        
+                    }
+                    //if both have the same bet
+                    if(this.final_decision_good[1]==this.final_decision_evil[1]){
+                        //Its not Draw need to see who did attack or defense and decide winner
+                        //Maybe here penalise the the attacker although he was already penalize for consuming attack power.
+                        
+                        //Good wins but actually is draw but need to put animation
+                        if(this.final_decision_good[0]==1){
+                            this.ProcessWrapUp(true);
+                            //0 position is the text to use
+                            this.WinnigText[0]='Draw!!';
+                            //position 1 is the color of text
+                            this.WinnigText[1]='black';
+                        }
+                        //evil wins but actually is draw but need to put animation
+                        if(this.final_decision_evil[0]==1){
+                            this.ProcessWrapUp(false);
+                            //0 position is the text to use
+                            this.WinnigText[0]='Draw!!';
+                            //position 1 is the color of text
+                            this.WinnigText[1]='black';
+                        }
+                        //last option is both Atttack
+                        if(this.final_decision_evil[0]==0 &&this.final_decision_good[0]==0){
+                            //0 position is the text to use
+                            this.WinnigText[0]='Both did attack from same Level!!';
+                            //position 1 is the color of text
+                            this.WinnigText[1]='black';
+                            //Put animation in stack so that in next stage it does not break
+                            this.AnimationStack.push(Idle[0]);
+                        }
+                        
+                        
+                        //Now do final preperations and change state
+                        this.processing_choice_state=6;
+                        
+                        
+                    }
+                }
+                //Change state at the end of curse!
+                this.processing_choice_state=6;
+            }
+            //here we must decide between two paths
+            if(this.processing_choice_state==3){
+                //select the chosen option for both players
+                var goodChoice=this.final_decision_good[0];
+                var evilChoice=this.final_decision_evil[0];
+                //if at least one player had chosen a powerUp option
+                if(goodChoice>19 || evilChoice>19){
+                    this.processing_choice_state=5;
+                }
+                //if  it enters here there are only these options AD|AA|DD|DA
+                else{
+                    this.processing_choice_state=4;
+                }
+                
+            }
+            //calculate evil final decision
+            if(this.processing_choice_state==2){
+                //there are only two options now later it can have 3
+                //0-attack;1-Defense;2-Evolve;3-Health;4-lv1;5-lv2;6-lv3
+                
+                //Evil
+                //if attack
+                if(this.evilOptions[0]==0){
+                    //if lv1
+                    if(this.evilOptions[1]==4){
+                        this.final_decision_evil.push(0);//0 means attack)
+                        this.final_decision_evil.push(10);//evil attacks with 10 points 
+                    }
+                    //if lv2
+                    if(this.evilOptions[1]==5){
+                        this.final_decision_evil.push(0);//0 means attack)
+                        this.final_decision_evil.push(20);//evil attacks with 20 points 
+                    }
+                    //if lv3
+                    if(this.evilOptions[1]==6){
+                        this.final_decision_evil.push(0);//0 means attack)
+                        this.final_decision_evil.push(30);//evil attacks with 30 points 
+                    }
+                }
+                //if defense
+                if(this.evilOptions[0]==1){
+                    //if lv1
+                    if(this.evilOptions[1]==4){
+                        this.final_decision_evil.push(1);//1 means defense)
+                        this.final_decision_evil.push(10);//evil attacks with 10 points 
+                    }
+                    //if lv2
+                    if(this.evilOptions[1]==5){
+                        this.final_decision_evil.push(1);//1 means defense)
+                        this.final_decision_evil.push(20);//evil attacks with 20 points 
+                    }
+                    //if lv3
+                    if(this.evilOptions[1]==6){
+                        this.final_decision_evil.push(1);//1 means defense)
+                        this.final_decision_evil.push(30);//evil attacks with 30 points 
+                    }
+                }
+                //if powerUp
+                if(this.evilOptions[0]==2){
+                    //if powerUp attack
+                    if(this.evilOptions[1]==0){
+                        this.final_decision_evil.push(20);//20 means PA(powerup attack)
+                        this.final_decision_evil.push(10);//evil gains 10 points of attack
+                    }
+                    //if powerUp defense
+                    if(this.evilOptions[1]==1){
+                        this.final_decision_evil.push(21);//21 means PD(powerup defense)
+                        this.final_decision_evil.push(10);//evil gains 10 points of defense
+                    }
+                    //if powerUp health
+                    if(this.evilOptions[1]==3){
+                        this.final_decision_evil.push(22);//22 means PH(powerup health)
+                        this.final_decision_evil.push(10);//evil gains 10 points of health
+                    }
+                }
+                this.processing_choice_state++;
+            }
+            //calculate good final decision
+            if(this.processing_choice_state==1){
+                //there are only two options now later it can have 3
+                //0-attack;1-Defense;2-Evolve;3-Health;4-lv1;5-lv2;6-lv3
+                
+                //Good First
+                //if attack
+                if(this.goodOptions[0]==0){
+                    //if lv1
+                    if(this.goodOptions[1]==4){
+                        this.final_decision_good.push(0);//0 means attack)
+                        this.final_decision_good.push(10);//good attacks with 10 points 
+                    }
+                    //if lv2
+                    if(this.goodOptions[1]==5){
+                        this.final_decision_good.push(0);//0 means attack)
+                        this.final_decision_good.push(20);//good attacks with 20 points 
+                    }
+                    //if lv3
+                    if(this.goodOptions[1]==6){
+                        this.final_decision_good.push(0);//0 means attack)
+                        this.final_decision_good.push(30);//good attacks with 30 points 
+                    }
+                }
+                //if defense
+                if(this.goodOptions[0]==1){
+                    //if lv1
+                    if(this.goodOptions[1]==4){
+                        this.final_decision_good.push(1);//1 means defense)
+                        this.final_decision_good.push(10);//good attacks with 10 points 
+                    }
+                    //if lv2
+                    if(this.goodOptions[1]==5){
+                        this.final_decision_good.push(1);//1 means defense)
+                        this.final_decision_good.push(20);//good attacks with 20 points 
+                    }
+                    //if lv3
+                    if(this.goodOptions[1]==6){
+                        this.final_decision_good.push(1);//1 means defense)
+                        this.final_decision_good.push(30);//good attacks with 30 points 
+                    }
+                }
+                //if powerUp
+                if(this.goodOptions[0]==2){
+                    //if powerUp attack
+                    if(this.goodOptions[1]==0){
+                        this.final_decision_good.push(20);//20 means PA(powerup attack)
+                        this.final_decision_good.push(10);//good gains 10 points of attack
+                    }
+                    //if powerUp defense
+                    if(this.goodOptions[1]==1){
+                        this.final_decision_good.push(21);//21 means PD(powerup defense)
+                        this.final_decision_good.push(10);//good gains 10 points of defense
+                    }
+                    //if powerUp health
+                    if(this.goodOptions[1]==3){
+                        this.final_decision_good.push(22);//22 means PH(powerup health)
+                        this.final_decision_good.push(10);//good gains 10 points of health
+                    }
+                }
+                this.processing_choice_state++;
+            }
+            //initialize stuff
+            if(this.processing_choice_state==0){
+                //initialize idle state to 0 in order for next entry
+                this.idle_state=0;
+                //Hide Menus
+                menu.HideButtons();
+                this.processing_choice_state++;
+            }
             
         }
         //
         ActionAnimation(){
             
+            //final stage 
+            if(this.ActionAnimationState==4){
+                this.firstTime=true;
+                //play Idle Animation
+                time=0;
+                actualAnimationRunning=Idle[0];
+                
+                this.state++;
+            }
+            //Play Second Animation if exists
+            if(this.ActionAnimationState==3){
+                //duration in seconds of animation is total number of frames dividing per fps
+                var time_of_animation=this.AnimationStack[1].length/fps;
+                time_of_animation=time_of_animation*1000;//turn seconds to miliseconds
+                
+                //Just set one  timer
+                if(this.firstTime){
+                    //time=0 is to play the animation from the beginning
+                    time=0;
+                    //Just need to insert this one time
+                    actualAnimationRunning=this.AnimationStack[1];
+                    //set timer
+                    //var myfunction=function(){this.ActionAnimationState++;};
+                    setTimeout(this.NextAnimationState,time_of_animation);
+                    this.firstTime=false;
+                    
+                }
+            }
+            //in between animations state
+            if(this.ActionAnimationState==2){
+                this.firstTime=true;
+                //see if there is another animation to be played
+                //if there is one then go to next state
+                if(this.AnimationStack[1]!=null){
+                    this.ActionAnimationState++;   
+                }
+                //else play idle animation and go to state 4
+                else{
+                    //time=0 is to play the animation from the beginning
+                    time=0;
+                    actualAnimationRunning=Idle[0];
+                    this.ActionAnimationState=4;
+                }
+                
+            }
+            //Do the first animations which will always happen
+            if(this.ActionAnimationState==1){
+                //duration in seconds of animation is total number of frames dividing per fps
+                var time_of_animation=this.AnimationStack[0].length/fps;
+                time_of_animation=time_of_animation*1000;//turn seconds to miliseconds
+                
+                
+                if(this.firstTime){
+                    //time=0 is to play the animation from the beginning
+                    time=0;
+                    //Only need to insert one time this
+                    actualAnimationRunning=this.AnimationStack[0];
+                    //set timeout function
+                    //var myfunction=function(){this.ActionAnimationState++;};
+                    setTimeout(this.NextAnimationState,time_of_animation);
+                    this.firstTime=false;
+                }
+            }
+            //Initialization state
+            if(this.ActionAnimationState==0){
+                //put the state of previous stage to zero
+                this.processing_choice_state=0;
+                //put this var to true to be ready to use
+                this.firstTime=true;
+                //hide menus to just see animations
+                menu.HideButtons();
+                this.ActionAnimationState++;
+            }
         }
         //
         UpDateStatus(){
-            
+            if(this.update_status_state==2){
+                this.firstTime=true;
+                //update of previouse status
+                //this is not working because of pointers 
+                //this.pre_goodStatus=this.goodStatus;
+                //this.pre_evilStatus=this.evilStatus;
+                this.pre_goodStatus[0]=this.goodStatus[0];
+                this.pre_goodStatus[1]=this.goodStatus[1];
+                this.pre_goodStatus[2]=this.goodStatus[2];
+                
+                this.pre_evilStatus[0]=this.evilStatus[0];
+                this.pre_evilStatus[1]=this.evilStatus[1];
+                this.pre_evilStatus[2]=this.evilStatus[2];
+                //change status texts
+                menu.Buttons["goodHealthText"].innerHTML=this.goodStatus[2];
+                menu.Buttons["goodAttackText"].innerHTML=this.goodStatus[0];
+                menu.Buttons["goodDefenseText"].innerHTML=this.goodStatus[1];
+                menu.Buttons["evilHealthText"].innerHTML=this.evilStatus[2];
+                menu.Buttons["evilAttackText"].innerHTML=this.evilStatus[0];
+                menu.Buttons["evilDefenseText"].innerHTML=this.evilStatus[1];
+                
+                
+                
+                this.state++;
+                
+            }
+            //Wait 2 Seconds
+            if(this.update_status_state==1){
+                if(this.firstTime){
+                    //var myfunction=function (){this.update_status_state++;};
+                    setTimeout(this.NextUpdateStatus,2000);
+                    this.firstTime=false;
+                }
+                else{
+                    //do nothing...
+                }
+            }
+            //first stage 
+            //See difference between previous status and now and prints it on screen
+            if(this.update_status_state==0){
+                
+                //Initialize previouse state
+                //Only possible to do here because if I did in prev state it would have done for 
+                //One frame an error.
+                this.ActionAnimationState=0;
+                
+                
+                var attack_diff_good;var defense_diff_good;
+                var health_diff_good;
+                
+                var attack_diff_evil;var defense_diff_evil;
+                var health_diff_evil;
+                //attack difference
+                attack_diff_good=this.goodStatus[0]-this.pre_goodStatus[0];
+                //defense difference
+                defense_diff_good = this.goodStatus[1]-this.pre_goodStatus[1];
+                //health difference
+                health_diff_good=this.goodStatus[2]-this.pre_goodStatus[2];
+                
+                //evil part
+                //attack difference
+                attack_diff_evil=this.evilStatus[0]-this.pre_evilStatus[0];
+                //defense difference
+                defense_diff_evil = this.evilStatus[1]-this.pre_evilStatus[1];
+                //health difference
+                health_diff_evil=this.evilStatus[2]-this.pre_evilStatus[2];
+                
+                //write the texts so that in the next state will just wait x seconds
+                //if it works well it will pass throgh at least two if's
+                //if there was a change in attack status of good player
+                if(attack_diff_good!=0){
+                    
+                    
+                    menu.Buttons['GoodText'].innerHTML='<font color="red">'+(attack_diff_good)+' Attack</font>';
+                }
+                //if there was a change in defense status of good player
+                if(defense_diff_good!=0){
+                    
+                    menu.Buttons['GoodText'].innerHTML='<font color="blue">'+(defense_diff_good)+' Defense</font>';
+                }
+                //if there was a change in health status of good player
+                if(health_diff_good!=0){
+                    
+                    menu.Buttons['GoodText'].innerHTML='<font color="green">'+(health_diff_good)+' Health</font>';
+                }
+                
+                //evil
+                //if there was a change in attack status of good player
+                if(attack_diff_evil!=0){
+                    
+                    menu.Buttons['EvilText'].innerHTML='<font color="red">'+(attack_diff_evil)+' Attack</font>';
+                }
+                //if there was a change in defense status of evil player
+                if(defense_diff_evil!=0){
+                    
+                    menu.Buttons['EvilText'].innerHTML='<font color="blue">'+(defense_diff_evil)+' Defense</font>';
+                }
+                //if there was a change in health status of evil player
+                if(health_diff_evil!=0){
+                    
+                    menu.Buttons['EvilText'].innerHTML='<font color="green">'+(health_diff_evil)+' Health</font>';
+                }
+                //After changing texts lets say that they change always
+                menu.Buttons['GoodText'].style.visibility='visible';
+                menu.Buttons['EvilText'].style.visibility='visible';
+                this.update_status_state++;
+            }
         }
         //
         CheckWinner(){
+            
+            //initialize prev state
+            this.update_status_state=0;
+            
+            //initialize options
+            this.goodOptions=[];
+            this.final_decision_good=[];
+            
+            this.evilOptions=[];
+            this.final_decision_evil=[];
+            
+            this.AnimationStack=[];
+            
+            //see if there is a loser
+            if(this.goodStatus[2]<=0){
+                //Good Player Lose
+                //In future show animation or not
+                menu.HideButtons();
+               //purple backGround
+                context.fillStyle('purple');
+                context.fillRect(0,0,canvas.width,canvas.height);
+                var font_size;
+                //more or less 30% font canvas width the font size
+                //pick smaller size and ajust
+                //vertical phone
+                font_size=Math.round(0.3*canvas.width);
+                context.font=font_size+"px Comic Sans MS";
+                context.fillStyle = "black";
+                context.textAlign = "center";
+                context.fillText("Evil Wins!", canvas.width/2, canvas.height/2);
+            }
+            else{
+                
+                if(this.evilStatus[2]<=0){
+                    //Evil Player Lose
+                    //In future show animation or not
+                    menu.HideButtons();
+                   //purple backGround
+                    context.fillStyle('cyan');
+                    context.fillRect(0,0,canvas.width,canvas.height);
+                    var font_size;
+                    //more or less 30% font canvas width the font size
+                    //pick smaller size and ajust
+                    //vertical phone
+                    font_size=Math.round(0.3*canvas.width);
+                    context.font=font_size+"px Comic Sans MS";
+                    context.fillStyle = "blue";
+                    context.textAlign = "center";
+                    context.fillText("Goodness Wins!", canvas.width/2, canvas.height/2);
+                }
+                //No one had lost 
+                else{
+                    this.state=0;
+                }
+            }
+            
             
         }
         //
@@ -773,16 +1559,19 @@
             for(key in GoodEvolve){
 
                 almost_final_adress=adressGoodEvolve+key+"/";
-                number_of_folders=parseInt(readTextFile(almost_final_adress));
-                number_of_images=parseInt(readTextFile(almost_final_adress+j+"/Index.txt"));
-                for(i=0;i<number_of_images;i++){
-                    finalAdress=almost_final_adress+j+"/"+i+".jpg";
-                    try{animation_images[i]=loadImage(finalAdress);}
-                    catch(err){console.log("Error Loading Image");haveFiles=false;}
+                number_of_folders=parseInt(readTextFile(almost_final_adress+"Index.txt"));
+                for(j=0;j<number_of_folders;j++){
+                    
+                    number_of_images=parseInt(readTextFile(almost_final_adress+j+"/Index.txt"));
+                    for(i=0;i<number_of_images;i++){
+                        finalAdress=almost_final_adress+j+"/"+i+".jpg";
+                        try{animation_images[i]=loadImage(finalAdress);}
+                        catch(err){console.log("Error Loading Image");haveFiles=false;}
+                    }
+                    GoodEvolve[key].push(animation_images);
+                    animation_images=[];
                 }
-                GoodEvolve[key].push(animation_images);
-                if(j<number_of_folders)
-                    j++;
+                
             }
         }
         if(stages==7){
@@ -800,16 +1589,19 @@
             for(key in EvilEvolve){
 
                 almost_final_adress=adressEvilEvolve+key+"/";
-                number_of_folders=parseInt(readTextFile(almost_final_adress));
-                number_of_images=parseInt(readTextFile(almost_final_adress+j+"/Index.txt"));
-                for(i=0;i<number_of_images;i++){
-                    finalAdress=almost_final_adress+j+"/"+i+".jpg";
-                    try{animation_images[i]=loadImage(finalAdress);}
-                    catch(err){console.log("Error Loading Image");haveFiles=false;}
+                number_of_folders=parseInt(readTextFile(almost_final_adress+"Index.txt"));
+                for(j=0;j<number_of_folders;j++){
+                    
+                    number_of_images=parseInt(readTextFile(almost_final_adress+j+"/Index.txt"));
+                    for(i=0;i<number_of_images;i++){
+                        finalAdress=almost_final_adress+j+"/"+i+".jpg";
+                        try{animation_images[i]=loadImage(finalAdress);}
+                        catch(err){console.log("Error Loading Image");haveFiles=false;}
+                    }
+                    EvilEvolve[key].push(animation_images);
+                    animation_images=[];
                 }
-                EvilEvolve[key].push(animation_images);
-                if(j<number_of_folders)
-                    j++;
+                
             }
             menu.moveBar(100);
         }
@@ -820,8 +1612,8 @@
             dt = 1E-3 * (new Date().getTime() - startTime);
             startTime = new Date().getTime();
             time += dt%10000;
-        
-            var index=Math.floor((time*60))%(images_array.length);
+            //fps=60
+            var index=Math.floor((time*fps))%(images_array.length);
             //console.log(index);
             var frame = images_array[index];
             if(frame.isReady ){
