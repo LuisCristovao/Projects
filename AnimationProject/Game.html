@@ -1285,17 +1285,20 @@
                 //In future show animation or not
                 menu.HideButtons();
                //purple backGround
-                context.fillStyle('purple');
+                context.fillStyle='purple';
                 context.fillRect(0,0,canvas.width,canvas.height);
                 var font_size;
                 //more or less 30% font canvas width the font size
                 //pick smaller size and ajust
                 //vertical phone
-                font_size=Math.round(0.3*canvas.width);
+                font_size=Math.round(0.1*canvas.width);
                 context.font=font_size+"px Comic Sans MS";
                 context.fillStyle = "black";
                 context.textAlign = "center";
                 context.fillText("Evil Wins!", canvas.width/2, canvas.height/2);
+                
+                //
+                endGame=true;
             }
             else{
                 
@@ -1304,17 +1307,19 @@
                     //In future show animation or not
                     menu.HideButtons();
                    //purple backGround
-                    context.fillStyle('cyan');
+                    context.fillStyle='cyan';
                     context.fillRect(0,0,canvas.width,canvas.height);
                     var font_size;
                     //more or less 30% font canvas width the font size
                     //pick smaller size and ajust
                     //vertical phone
-                    font_size=Math.round(0.3*canvas.width);
+                    font_size=Math.round(0.1*canvas.width);
                     context.font=font_size+"px Comic Sans MS";
                     context.fillStyle = "blue";
                     context.textAlign = "center";
                     context.fillText("Goodness Wins!", canvas.width/2, canvas.height/2);
+                    //
+                    endGame=true;
                 }
                 //No one had lost 
                 else{
@@ -1626,6 +1631,7 @@
     var image_index=0;
     var stages=0;
     var firstTime=true;
+    var endGame=false;
     function Main(){
          canvas.width=window.innerWidth;
         canvas.height=window.innerHeight;
@@ -1648,8 +1654,9 @@
             }
             game.Run();
             
-            
-            Draw(actualAnimationRunning);
+            if(!endGame){
+                Draw(actualAnimationRunning);
+            }
         }
         
         window.requestAnimationFrame(Main);
