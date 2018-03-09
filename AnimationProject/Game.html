@@ -358,11 +358,19 @@
                     if(this.final_decision_good[0]==0){
                         //consume attack resources by quantity
                         this.goodStatus[0]-=this.final_decision_good[1];
+                        //if resources are lower than zero takes life from player
+                        if(this.goodStatus[0]<0){
+                            this.goodStatus[2]+=this.goodStatus[0];
+                        }
                     }
                     //defense
                     if(this.final_decision_good[0]==1){
                         //consume defense resources by quantity
                         this.goodStatus[1]-=this.final_decision_good[1];
+                        //if resources are lower than zero takes life from player
+                        if(this.goodStatus[1]<0){
+                            this.goodStatus[2]+=this.goodStatus[1];
+                        }
                     }
                 }
             }
@@ -391,11 +399,19 @@
                     if(this.final_decision_evil[0]==0){
                         //consume attack resources by quantity
                         this.evilStatus[0]-=this.final_decision_evil[1];
+                        //if resources are lower than zero takes life from player
+                        if(this.evilStatus[0]<0){
+                            this.evilStatus[2]+=this.evilStatus[0];
+                        }
                     }
                     //defense
                     if(this.final_decision_evil[0]==1){
                         //consume defense resources by quantity
                         this.evilStatus[1]-=this.final_decision_evil[1];
+                        //if resources are lower than zero takes life from player
+                        if(this.evilStatus[1]<0){
+                            this.evilStatus[2]+=this.evilStatus[1];
+                        }
                     }
                 }
             }
