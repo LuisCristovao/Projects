@@ -204,8 +204,8 @@ class Game{
         
     }
     BotPlay(state){
-        //Get best play
-        var play= this.brain.SelectBestPlay();
+        //second param is the percentage for playing random 
+        var play=this.brain.Play(state,0.5);
         
     }
     Play(){
