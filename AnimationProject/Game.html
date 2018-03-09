@@ -358,11 +358,19 @@
                     if(this.final_decision_good[0]==0){
                         //consume attack resources by quantity
                         this.goodStatus[0]-=this.final_decision_good[1];
+                        //if resources are lower than zero takes life from player
+                        if(this.goodStatus[0]<0){
+                            this.goodStatus[2]+=this.goodStatus[0];
+                        }
                     }
                     //defense
                     if(this.final_decision_good[0]==1){
                         //consume defense resources by quantity
                         this.goodStatus[1]-=this.final_decision_good[1];
+                        //if resources are lower than zero takes life from player
+                        if(this.goodStatus[1]<0){
+                            this.goodStatus[2]+=this.goodStatus[1];
+                        }
                     }
                 }
             }
@@ -391,11 +399,19 @@
                     if(this.final_decision_evil[0]==0){
                         //consume attack resources by quantity
                         this.evilStatus[0]-=this.final_decision_evil[1];
+                        //if resources are lower than zero takes life from player
+                        if(this.evilStatus[0]<0){
+                            this.evilStatus[2]+=this.evilStatus[0];
+                        }
                     }
                     //defense
                     if(this.final_decision_evil[0]==1){
                         //consume defense resources by quantity
                         this.evilStatus[1]-=this.final_decision_evil[1];
+                        //if resources are lower than zero takes life from player
+                        if(this.evilStatus[1]<0){
+                            this.evilStatus[2]+=this.evilStatus[1];
+                        }
                     }
                 }
             }
@@ -415,7 +431,7 @@
             //it was good decision and is was the winner or the game needs two animations
             if(this.final_decision_good[0]==0 && (good || two_animations)){
                 //Put in animation stack a random good attack animation
-                this.AnimationStack.push(GoodAttacks[Math.floor(Math.random()*GoodAttacks.length)])
+                this.AnimationStack.push(GoodAttacks[Math.floor(Math.random()*GoodAttacks.length)]);
                 
             }
             //if good did a defense
@@ -423,7 +439,7 @@
             //it was good decision and is was the winner or the game needs two animations
             if(this.final_decision_good[0]==1 && (good||two_animations)){
                 //Put in animation stack a random good defense animation
-                this.AnimationStack.push(GoodDefense[Math.floor(Math.random()*GoodDefense.length)])
+                this.AnimationStack.push(GoodDefense[Math.floor(Math.random()*GoodDefense.length)]);
                 
             }
             //if good did a PA
@@ -790,7 +806,25 @@
                     //0 position is the text to use
                     this.WinnigText[0]='Good Player Defense in Vain!!';
                     //position 1 is the color of text
-                    this.WinnigText[1]='blue';
+                    this.WinnigText[1]='purple';
+                    entered++;
+                    //If we enter this particular if it means
+                    //that evil player will do a power up
+                    //So we need to see what power up evil did and
+                    //put it in Animation Stack
+                    if(this.final_decision_evil[0]==20){
+                        //Put random Evil attack power up 
+                        this.AnimationStack.push(EvilEvolve['Attack'][Math.floor(Math.random()*EvilEvolve['Attack'].length)]);
+                    }
+                    if(this.final_decision_evil[0]==21){
+                        //Put random Evil defense power up 
+                        this.AnimationStack.push(EvilEvolve['Defense'][Math.floor(Math.random()*EvilEvolve['Defense'].length)]);
+                    }
+                    if(this.final_decision_evil[0]==22){
+                        //Put random Evil health power up 
+                        this.AnimationStack.push(EvilEvolve['Health'][Math.floor(Math.random()*EvilEvolve['Health'].length)]);
+                    }
+                    
                 }
                 //The consuming part already does half the work
                 //if good player chose an attack 
@@ -808,13 +842,30 @@
                     //position 1 is the color of text
                     this.WinnigText[1]='purple';
                 }
-                //if evil player chose an defense
+                //if evil player chose a defense
                 if(this.final_decision_evil[0]==1){
                     //Nothing happens
                     //0 position is the text to use
                     this.WinnigText[0]='Evil Player Defense in Vain!!';
                     //position 1 is the color of text
-                    this.WinnigText[1]='purple';
+                    this.WinnigText[1]='blue';
+                    entered++;
+                    //If we enter this particular if it means
+                    //that good player will do a power up
+                    //So we need to see what power up good player did and
+                    //put it in Animation Stack
+                    if(this.final_decision_good[0]==20){
+                        //Put random good attack power up 
+                        this.AnimationStack.push(GoodEvolve['Attack'][Math.floor(Math.random()*GoodEvolve['Attack'].length)]);
+                    }
+                    if(this.final_decision_good[0]==21){
+                        //Put random Good defense power up 
+                        this.AnimationStack.push(GoodEvolve['Defense'][Math.floor(Math.random()*GoodEvolve['Defense'].length)]);
+                    }
+                    if(this.final_decision_good[0]==22){
+                        //Put random Good health power up 
+                        this.AnimationStack.push(GoodEvolve['Health'][Math.floor(Math.random()*GoodEvolve['Health'].length)]);
+                    }
                 }
                 
                 //this means it did not inserted animations 
@@ -1198,7 +1249,7 @@
             if(this.update_status_state==0){
                 
                 //Initialize previouse state
-                //Only possible to do here because if I did in prev state it would have done for 
+                //Only possible to do here because if I did in prev state it would not exit the other state
                 //One frame an error.
                 this.ActionAnimationState=0;
                 
@@ -1288,7 +1339,7 @@
                 context.fillStyle='purple';
                 context.fillRect(0,0,canvas.width,canvas.height);
                 var font_size;
-                //more or less 30% font canvas width the font size
+                //more or less 10% font canvas width the font size
                 //pick smaller size and ajust
                 //vertical phone
                 font_size=Math.round(0.1*canvas.width);
@@ -1310,7 +1361,7 @@
                     context.fillStyle='cyan';
                     context.fillRect(0,0,canvas.width,canvas.height);
                     var font_size;
-                    //more or less 30% font canvas width the font size
+                    //more or less 10% font canvas width the font size
                     //pick smaller size and ajust
                     //vertical phone
                     font_size=Math.round(0.1*canvas.width);
