@@ -276,6 +276,10 @@
             //pos 0-> actual decision;pos 1-> quantity
             //pos 0->0-Attack,1-Defense,20-Powerup Attack,21-PD,22-PH
             this.final_decision_evil=[];
+            //This will save all the changes that happened to player status
+            this.update_good_status_stack=[];
+            ////This will save all the changes that happened to player status
+            this.update_evil_status_stack=[];
             
             //good player status Attack|Defense|Health
             this.goodStatus=[100,100,100];
@@ -1207,7 +1211,7 @@
         }
         //
         UpDateStatus(){
-            if(this.update_status_state==2){
+            if(this.update_status_state==4){
                 this.firstTime=true;
                 //update of previouse status
                 //this is not working because of pointers 
@@ -1233,8 +1237,33 @@
                 this.state++;
                 
             }
+            //Detects if there is still text to show
+            //if there is shows else ends
+            if(this.update_status_state==3){
+                this.firstTime=true;
+                var goodtext=this.update_good_status_stack.pop();
+                var eviltext=this.update_evil_status_stack.pop();
+                var count=0;
+                if(goodtext!=null){
+                    menu.Buttons['GoodText'].innerHTML=goodtext;
+                    //return to previous state in order to show for two seconds
+                    this.update_status_state--;
+                    count++;
+                }
+                if(eviltext!=null){
+                    menu.Buttons['EvilText'].innerHTML=eviltext;
+                    //return to previous state in order to show for two seconds
+                    this.update_status_state--;
+                    count++;
+                }
+                //if No player has nothing to show
+                if(count==0){
+                    this.update_status_state++;
+                }
+                
+            }
             //Wait 2 Seconds
-            if(this.update_status_state==1){
+            if(this.update_status_state==2){
                 if(this.firstTime){
                     //var myfunction=function (){this.update_status_state++;};
                     setTimeout(this.NextUpdateStatus,2000);
@@ -1243,6 +1272,15 @@
                 else{
                     //do nothing...
                 }
+            }
+            //Show first update status text
+            if(this.update_status_state==1){
+                var goodtext=this.update_good_status_stack.pop();
+                var eviltext=this.update_evil_status_stack.pop();
+                
+                menu.Buttons['GoodText'].innerHTML=goodtext;
+                menu.Buttons['EvilText'].innerHTML=eviltext;
+                this.update_status_state++;
             }
             //first stage 
             //See difference between previous status and now and prints it on screen
@@ -1279,35 +1317,35 @@
                 //if there was a change in attack status of good player
                 if(attack_diff_good!=0){
                     
-                    
-                    menu.Buttons['GoodText'].innerHTML='<font color="red">'+(attack_diff_good)+' Attack</font>';
+                    this.update_good_status_stack.push('<font color="red">'+(attack_diff_good)+' Attack</font>');
+                    //menu.Buttons['GoodText'].innerHTML='<font color="red">'+(attack_diff_good)+' Attack</font>';
                 }
                 //if there was a change in defense status of good player
                 if(defense_diff_good!=0){
-                    
-                    menu.Buttons['GoodText'].innerHTML='<font color="blue">'+(defense_diff_good)+' Defense</font>';
+                    this.update_good_status_stack.push('<font color="blue">'+(defense_diff_good)+' Defense</font>');
+                    //menu.Buttons['GoodText'].innerHTML='<font color="blue">'+(defense_diff_good)+' Defense</font>';
                 }
                 //if there was a change in health status of good player
                 if(health_diff_good!=0){
-                    
-                    menu.Buttons['GoodText'].innerHTML='<font color="green">'+(health_diff_good)+' Health</font>';
+                    this.update_good_status_stack.push('<font color="green">'+(health_diff_good)+' Health</font>');
+                    //menu.Buttons['GoodText'].innerHTML='<font color="green">'+(health_diff_good)+' Health</font>';
                 }
                 
                 //evil
                 //if there was a change in attack status of good player
                 if(attack_diff_evil!=0){
-                    
-                    menu.Buttons['EvilText'].innerHTML='<font color="red">'+(attack_diff_evil)+' Attack</font>';
+                    this.update_evil_status_stack.push('<font color="red">'+(attack_diff_evil)+' Attack</font>');
+                    //menu.Buttons['EvilText'].innerHTML='<font color="red">'+(attack_diff_evil)+' Attack</font>';
                 }
                 //if there was a change in defense status of evil player
                 if(defense_diff_evil!=0){
-                    
-                    menu.Buttons['EvilText'].innerHTML='<font color="blue">'+(defense_diff_evil)+' Defense</font>';
+                    this.update_evil_status_stack.push('<font color="blue">'+(defense_diff_evil)+' Defense</font>');
+                    //menu.Buttons['EvilText'].innerHTML='<font color="blue">'+(defense_diff_evil)+' Defense</font>';
                 }
                 //if there was a change in health status of evil player
                 if(health_diff_evil!=0){
-                    
-                    menu.Buttons['EvilText'].innerHTML='<font color="green">'+(health_diff_evil)+' Health</font>';
+                    this.update_evil_status_stack.push('<font color="green">'+(health_diff_evil)+' Health</font>');
+                    //menu.Buttons['EvilText'].innerHTML='<font color="green">'+(health_diff_evil)+' Health</font>';
                 }
                 //After changing texts lets say that they change always
                 menu.Buttons['GoodText'].style.visibility='visible';
