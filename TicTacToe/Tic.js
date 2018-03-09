@@ -20,6 +20,7 @@ class Brain{
     static SelectBestPlay(plays){
         //0-reward;1-play
         //initialize with 0 because all rewards are higher than 0
+        
         var max_play=[0];
         for(play in plays){
             if(plays[play]>max_play[0]){
@@ -29,12 +30,15 @@ class Brain{
         }
         return max_play[1];
     }
-    static GenerateRandomPlay(){
+    static GenerateRandomPlay(state){
         var possibilities=['0','1'];
         var result='';
         for(i=0;i<10;i++){
             //n equals 0 or 1;
-            var n=Math.round(Math,random());
+            var n=Math.random();
+            if(){
+               
+            }
             result+=possibilities[n];
         }
         return result;
@@ -73,25 +77,33 @@ class Brain{
         var n=Math.random();
         //play random play
         if(n<=percentage){
-            return GenerateRandomPlay();
+            return this.GenerateRandomPlay(state);
         }
         //select best option from Brain
         else{
-            //select closer state in brain to the received state
-            var best_state= this.SelectBest(state);
-            var plays= this.states[best_state];
-            //select best play
-            return SelectBestPlay(plays);
+            //if dictionary is empty
+            if(Object.keys(this.states).length>0){
+                
+                //select closer state in brain to the received state
+                var best_state= this.SelectBest(state);
+                var plays= this.states[best_state];
+                //select best play
+                return this.SelectBestPlay(plays);
+            }
+            else{
+                return this.GenerateRandomPlay(state);
+            }
             
         }
         
     }
 }
 class Square{
-    constructor(x,y,size){
+    constructor(x,y,xsize,ysize){
         this.x=x;
         this.y=y;
-        this.size=size;
+        this.xsize=xsize;
+        this.ysize=ysize;
     }
 }
 
@@ -103,19 +115,25 @@ class DrawCanvas{
         this.matrix=[];
     }
     Initialize(){
-        for(i=0;i<this.matrix_size;i++){
-            for(j=0;j<this.matrix_size;j++){
-                
-            }
-        }
-    }
-    //access matrix position like pixels
-    Draw(x,y){
         var width=this.c.width;
         var height=this.c.height;
         var xsize=width/this.matrix_size;
         var ysize=height/this.matrix_size;
+        //Make matrix with squares
+        for(i=0;i<this.matrix_size;i++){
+            this.matrix[i]=[];
+            for(j=0;j<this.matrix_size;j++){
+                this.matrix[i]=[];
+                this.matrix[i][j]=new Square(i*xsize,j*ysize,xsize,ysize);
+            }
+        }
         
+    }
+    //access matrix position like pixels
+    Draw(x,y,color){
+        var square=this.matrix[x][y];
+        this.fillStyle=color;
+        this.ctx.fillRect(square.x,square.y,square.xsize,square.ysize)
     }
     
     
@@ -133,14 +151,17 @@ class Game{
         this.TwoMatrix=[];
         this.brain=brain;
         this.matrix_size=matrix_size;
+        this.draw_canvas=new DrawCanvas(matrix_size);
     }
     Initialize(){
         for(i=0;i<this.matrix_size;i++){
+            this.OneMatrix[i]=[];
             for (j=0;j<this.matrix_size;j++){
                 this.OneMatrix[i][j]='0';
             }    
         }
         for(i=0;i<this.matrix_size;i++){
+            this.TwoMatrix[i]=[];
             for (j=0;j<this.matrix_size;j++){
                 this.TwoMatrix[i][j]='0';
             }    
@@ -182,8 +203,10 @@ class Game{
     GetHumanPlayerPlay(){
         
     }
-    BotPlay(){
+    BotPlay(state){
+        //Get best play
         var play= this.brain.SelectBestPlay();
+        
     }
     Play(){
         //Player One time to play
