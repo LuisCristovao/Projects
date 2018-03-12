@@ -246,12 +246,32 @@ class Game{
         //winner[0]=true if player one is winner
         //winner[1]=true if player two is winner
         //if both are false than is still game on!
+        var ones=[];
+        var twos=[];
         var winner=[];
+        var count=0;
+        //pushing ones and twos to list
         for(i=0;i<this.matrix_size;i++){
                 for(j=0;j<this.matrix_size;j++){
-                    
+                    if(this.OneMatrix[i][j]=='1'){
+                        ones.push([i,j]);
+                    }
+                    if(this.OneMatrix[i][j]=='2'){
+                        twos.push([i,j]);
+                    }
                 }
         }
+        //Now run algorithm that sees if player one wins
+        for (i=0;i<ones.length;i++){
+            one_pos=ones[i];
+            //if '1' have similar neighbour
+            
+        }
+        //Algorithm that sees if player two winned
+        for (i=0;i<twos.length;i++){
+            
+        }
+        
     }
     
 
