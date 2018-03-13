@@ -536,7 +536,8 @@
                 }
                 //wait for evil player choice in second layer menus
                 if(this.idle_state==7){
-                    
+                    //menu.Buttons['GoodText'].style.visibility="visible";
+                    //menu.Buttons['GoodText'].innerHTML='<font color="purple">Choose resource quantity to consume</font>';
                     if(menu.Selected['return']){
                         console.log('Return selected');
                         //empty options array;
@@ -641,7 +642,8 @@
                 }
                 // wait for Goodplayer second layer menu choice
                 if(this.idle_state==3){
-                   
+                    //menu.Buttons['GoodText'].style.visibility="visible";
+                    //menu.Buttons['GoodText'].innerHTML='<font color="blue">Choose resource quantity consumption.</font>';
                     if(menu.Selected['return']){
                         console.log('Return selected');
                         //empty options array;
@@ -924,6 +926,7 @@
                         //position 1 is the color of text
                         this.WinnigText[1]='blue';
                         
+                        
                     }
                     //if evil has higher bet
                     if(this.final_decision_good[1]<this.final_decision_evil[1]){
@@ -947,21 +950,28 @@
                         //Its not Draw need to see who did attack or defense and decide winner
                         //Maybe here penalise the the attacker although he was already penalize for consuming attack power.
                         
-                        //Good wins but actually is draw but need to put animation
+                        //Good wins because he has defended
                         if(this.final_decision_good[0]==1){
+                            //put just one animation the good animation
                             this.ProcessWrapUp(true);
                             //0 position is the text to use
-                            this.WinnigText[0]='Draw!!';
+                            this.WinnigText[0]='Good Player has Defended Attack!';
                             //position 1 is the color of text
-                            this.WinnigText[1]='black';
+                            this.WinnigText[1]='blue';
+                            //the player that attacked must be punished by its bet
+                            this.evilStatus[2]-=this.final_decision_evil[1];
                         }
-                        //evil wins but actually is draw but need to put animation
+                        //evil wins because he has defended
                         if(this.final_decision_evil[0]==1){
+                            //show just evil animation (one animation)
                             this.ProcessWrapUp(false);
                             //0 position is the text to use
-                            this.WinnigText[0]='Draw!!';
+                            this.WinnigText[0]='Evil player has Defended Attack!';
                             //position 1 is the color of text
-                            this.WinnigText[1]='black';
+                            this.WinnigText[1]='purple';
+                            //the player that attacked must be punished by its bet
+                            this.goodStatus[2]-=this.final_decision_good[1];
+                            
                         }
                         //last option is both Atttack
                         if(this.final_decision_evil[0]==0 &&this.final_decision_good[0]==0){
