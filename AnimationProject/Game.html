@@ -536,7 +536,8 @@
                 }
                 //wait for evil player choice in second layer menus
                 if(this.idle_state==7){
-                    
+                    //menu.Buttons['GoodText'].style.visibility="visible";
+                    //menu.Buttons['GoodText'].innerHTML='<font color="purple">Choose resource quantity to consume</font>';
                     if(menu.Selected['return']){
                         console.log('Return selected');
                         //empty options array;
@@ -641,7 +642,8 @@
                 }
                 // wait for Goodplayer second layer menu choice
                 if(this.idle_state==3){
-                   
+                    //menu.Buttons['GoodText'].style.visibility="visible";
+                    //menu.Buttons['GoodText'].innerHTML='<font color="blue">Choose resource quantity consumption.</font>';
                     if(menu.Selected['return']){
                         console.log('Return selected');
                         //empty options array;
@@ -924,6 +926,7 @@
                         //position 1 is the color of text
                         this.WinnigText[1]='blue';
                         
+                        
                     }
                     //if evil has higher bet
                     if(this.final_decision_good[1]<this.final_decision_evil[1]){
@@ -975,6 +978,17 @@
                         
                         
                         //Now do final preperations and change state
+                        //See who did attack or defense
+                        //if good defended and evil attacked
+                        if(this.final_decision_good[0]==1 && this.final_decision_evil[0]==0 ){
+                            //the player that attacked must be punished by its bet
+                            this.evilStatus[2]-=this.final_decision_evil[1];
+                        }
+                        //if good attacked and evil defended
+                        if(this.final_decision_good[0]==0 && this.final_decision_evil[0]==1 ){
+                            //the player that attacked must be punished by its bet
+                            this.goodStatus[2]-=this.final_decision_good[1];
+                        }
                         this.processing_choice_state=6;
                         
                         
