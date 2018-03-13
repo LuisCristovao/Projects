@@ -242,7 +242,7 @@ class Game{
                 }
             }
     }
-    CheckWinnner(){
+    /*CheckWinnner(){
         //winner[0]=true if player one is winner
         //winner[1]=true if player two is winner
         //if both are false than is still game on!
@@ -250,6 +250,7 @@ class Game{
         var twos=[];
         var winner=[];
         var count=0;
+        var neighbourstack=[];
         //pushing ones and twos to list
         for(i=0;i<this.matrix_size;i++){
                 for(j=0;j<this.matrix_size;j++){
@@ -263,8 +264,19 @@ class Game{
         }
         //Now run algorithm that sees if player one wins
         for (i=0;i<ones.length;i++){
-            one_pos=ones[i];
+            var one_pos=ones[i];
+            var dir=[];
             //if '1' have similar neighbour
+            //put its neighbours in stack
+            for(j=i+1;j<ones.length;j++){
+                var neigh_pos=ones[j];
+                //if the distance on x or y between the two '1' positions
+                if(Math.abs(one_pos[0]-neigh_pos[0])==1 || Math.abs(one_pos[1]-neigh_pos[1])==1){
+                    neighbourstack.push(neigh_pos);
+                }
+            }
+            //Now we have one_pos neighbours lets see if there neighbours have other neighbours
+            while
             
         }
         //Algorithm that sees if player two winned
@@ -272,7 +284,7 @@ class Game{
             
         }
         
-    }
+    }*/
     
 
     GetHumanPlayerPlay(){
