@@ -49,9 +49,24 @@ class DrawCanvas{
 
 function InsertLayout(){
     var out = "<h1 id='info'></h1>";
-    out+="<canvas id='canvas'></canvas>";
+    out+="<canvas id='canvas' width='500' height='500' onmousemove='MouseMove(event)' onmousedown='MouseClick()' onmouseup='MouseCancel()' style='border:1px solid #000000;'></canvas>";
     document.body.innerHTML=out;
 }
+function MouseMove(e){
+    mouse[0]=e.clientX;
+    mouse[1]=e.clientY;
+    console.log(mouse);
+}
+function MouseClick(){
+    console.log("Clicked on button"+' '+mouse[2]);
+    mouse[2]=true;
+}
+function MouseCancel(){
+    console.log("Stopped clicking!!"+' '+mouse[2]);
+    mouse[2]=false;
+}
+
+
 function PlayerVsPlayer(){
     InsertLayout();
     
@@ -77,11 +92,14 @@ function Start(){
     var pb_btn=document.getElementById('pb');
     var bb_btn=document.getElementById('bb');
     var tb_btn=document.getElementById('tb');
+    var pp_btn=document.getElementById('pp');
     pb_btn.addEventListener('click',PlayerVsBot);
     bb_btn.addEventListener('click',BotVsBot);
+    pp_btn.addEventListener('click',PlayerVsPlayer);
 }
 
 
 //Main-----------------------------------
-
+//mouse[0]=x,mouse[1]=y,mouse[2]=true or false meaning it was pressed
+var mouse=[];
 window.onload=Start();
