@@ -785,21 +785,18 @@
             //process result if one of the players has chosen a powerup
             if(this.processing_choice_state==5){
                 var entered=0;
-                //consume resources for good player
-                this.consumeResource(true);
-                //consume resources for evil player
-                this.consumeResource(false);
+               
                 
-                //The consuming part already does half the work
-                //if good player chose an attack 
+                
+                //if good player chose an attack, meaning evil power Up has no effect
                 if(this.final_decision_good[0]==0){
                     //good player gives evil damage
                     this.evilStatus[2]-=this.final_decision_good[1];
+                    //good player consumes attack status
+                    this.goodStatus[0]-=this.final_decision_good[1];
                     //here we put the animations on AnimationsStack
-                    // I put true because here I am saying the game
-                    // to play two animations the attack animation from good
-                    //and powerUp animation from evil
-                    this.ProcessWrapUp(true);
+                    //Just need to put good attack animation
+                    this.AnimationStack.push(GoodAttacks[Math.floor(Math.random()*GoodAttacks.length)]);
                     entered++;
                     //0 position is the text to use
                     this.WinnigText[0]='Good Player Attack!!';
@@ -807,8 +804,15 @@
                     this.WinnigText[1]='blue';
                 }
                 //if good player chose an defense
+                //The evil player will only benefit from power up if the good
+                // Did a defense
                 if(this.final_decision_good[0]==1){
-                    //Nothing happens
+                    //Here we now that good player defended and evil did power up
+                    //consume resources for good player
+                    this.consumeResource(true);
+                    //As evil player did power up, the consume resources 
+                    //function will increase evil player status
+                    this.consumeResource(false);
                     //0 position is the text to use
                     this.WinnigText[0]='Good Player Defense in Vain!!';
                     //position 1 is the color of text
@@ -832,16 +836,16 @@
                     }
                     
                 }
-                //The consuming part already does half the work
-                //if good player chose an attack 
+               
+                //if evil player chose an attack, meaning good powerUp has no effect
                 if(this.final_decision_evil[0]==0){
                     //evil damages good
                     this.goodStatus[2]-=this.final_decision_evil[1];
+                    //evil player consumes attack status
+                    this.evilStatus[0]-=this.final_decision_evil[1];
                     //here we put the animations on AnimationsStack
-                    // I put true because here I am saying the game
-                    // to play two animations the attack animation from evil
-                    //and powerUp animation from good
-                    this.ProcessWrapUp(false);
+                    //Just need to put one animation from the attack
+                    this.AnimationStack.push(EvilAttacks[Math.floor(Math.random()*EvilAttacks.length)]);
                     entered++;
                     //0 position is the text to use
                     this.WinnigText[0]='Evil Player Attack!!';
@@ -850,7 +854,12 @@
                 }
                 //if evil player chose a defense
                 if(this.final_decision_evil[0]==1){
-                    //Nothing happens
+                    //Here we now that evil player defended and good did power up
+                    //consume resources for evil player
+                    this.consumeResource(false);
+                    //As good player did power up, the consume resources 
+                    //function will increase good player status
+                    this.consumeResource(true);
                     //0 position is the text to use
                     this.WinnigText[0]='Evil Player Defense in Vain!!';
                     //position 1 is the color of text
@@ -877,6 +886,10 @@
                 //this means it did not inserted animations 
                 //which means both players are doing powerUps
                 if(entered==0){
+                    //give resources to good player because he did powerup
+                    this.consumeResource(true);
+                    //give resources to evil player because he did powerup
+                    this.consumeResource(false);
                     //it is irrelevant if the input param is true or false
                     // because it will do two animations
                     this.ProcessWrapUp(false);
