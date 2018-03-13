@@ -1560,13 +1560,13 @@
             
             this.AnimationStack=[];
             
-            //see if there is a loser
-            if(this.goodStatus[2]<=0){
-                //Good Player Lose
+            //check if Draw
+            if(this.goodStatus[2]<=0 && this.evilStatus[2]<=0){
+                //Draw
                 //In future show animation or not
                 menu.HideButtons();
-               //purple backGround
-                context.fillStyle='purple';
+               //white backGround
+                context.fillStyle='white';
                 context.fillRect(0,0,canvas.width,canvas.height);
                 var font_size;
                 //more or less 10% font canvas width the font size
@@ -1576,19 +1576,20 @@
                 context.font=font_size+"px Comic Sans MS";
                 context.fillStyle = "black";
                 context.textAlign = "center";
-                context.fillText("Evil Wins!", canvas.width/2, canvas.height/2);
+                context.fillText("It's a Tie!", canvas.width/2, canvas.height/2);
                 
                 //
                 endGame=true;
             }
             else{
                 
-                if(this.evilStatus[2]<=0){
-                    //Evil Player Lose
+                //see if there is a loser
+                if(this.goodStatus[2]<=0){
+                    //Good Player Lose
                     //In future show animation or not
                     menu.HideButtons();
                    //purple backGround
-                    context.fillStyle='cyan';
+                    context.fillStyle='purple';
                     context.fillRect(0,0,canvas.width,canvas.height);
                     var font_size;
                     //more or less 10% font canvas width the font size
@@ -1596,15 +1597,39 @@
                     //vertical phone
                     font_size=Math.round(0.1*canvas.width);
                     context.font=font_size+"px Comic Sans MS";
-                    context.fillStyle = "blue";
+                    context.fillStyle = "black";
                     context.textAlign = "center";
-                    context.fillText("Goodness Wins!", canvas.width/2, canvas.height/2);
+                    context.fillText("Evil Wins!", canvas.width/2, canvas.height/2);
+
                     //
                     endGame=true;
                 }
-                //No one had lost 
                 else{
-                    this.state=0;
+
+                    if(this.evilStatus[2]<=0){
+                        //Evil Player Lose
+                        //In future show animation or not
+                        menu.HideButtons();
+                       //purple backGround
+                        context.fillStyle='cyan';
+                        context.fillRect(0,0,canvas.width,canvas.height);
+                        var font_size;
+                        //more or less 10% font canvas width the font size
+                        //pick smaller size and ajust
+                        //vertical phone
+                        font_size=Math.round(0.1*canvas.width);
+                        context.font=font_size+"px Comic Sans MS";
+                        context.fillStyle = "blue";
+                        context.textAlign = "center";
+                        context.fillText("Goodness Wins!", canvas.width/2, canvas.height/2);
+                        //
+                        endGame=true;
+                    }
+                    //No one had lost 
+                    else{
+                        //return to the begining of state machine
+                        this.state=0;
+                    }
                 }
             }
             
