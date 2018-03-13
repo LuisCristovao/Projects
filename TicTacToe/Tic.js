@@ -359,7 +359,7 @@ function PlayerVsBot(){
     
 }
 function BotVsBot(){
-    
+    var out = "Info ";
 }
 
 function Start(){
@@ -378,4 +378,5 @@ function Start(){
 
 
 //Main-----------------------------------
+
 window.onload=Start();
