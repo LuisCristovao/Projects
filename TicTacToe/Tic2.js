@@ -45,8 +45,34 @@ class DrawCanvas{
     }
     
     
+    
 }
-
+class Game{
+    
+    constructor(msize){
+        this.matrix_size=msize;
+        this.draw_canvas=new DrawCanvas(msize);
+        this.game_matrix=[];
+    }
+    Initialize(){
+        for(i=0;i<this.matrix_size;i++){
+            this.game_matrix[i]=[];
+            for(j=0;j<=this.matrix_size;j++){
+                this.game_matrix[i][j]=0;
+            }
+        }
+        console.log(this.game_matrix);
+    }
+    
+}
+function MapMouseToSquare(canvas,x,y,matrix_size){
+    var sqx,sqy,sq_sizex,sq_sizey;
+    sq_sizex=Math.round(canvas.width/matrix_size);
+    sq_sizey=Math.round(canvas.height/matrix_size);
+    sqx=Math.floor(sq_sizex/x)
+    sqy=Math.floor(sq_sizey/y)
+    return [sqx,sqy]
+}
 function InsertLayout(){
     var out = "<h1 id='info'></h1>";
     out+="<canvas id='canvas' width='500' height='500' onmousemove='MouseMove(event)' onmousedown='MouseClick()' onmouseup='MouseCancel()' style='border:1px solid #000000;'></canvas>";
@@ -60,6 +86,8 @@ function MouseMove(e){
 function MouseClick(){
     console.log("Clicked on button"+' '+mouse[2]);
     mouse[2]=true;
+    xy=MapMouseToSquare(draw_canvas.c,mouse[0],mouse[1],draw_canvas.matrix_size);
+    draw_canvas.
 }
 function MouseCancel(){
     console.log("Stopped clicking!!"+' '+mouse[2]);
@@ -102,4 +130,5 @@ function Start(){
 //Main-----------------------------------
 //mouse[0]=x,mouse[1]=y,mouse[2]=true or false meaning it was pressed
 var mouse=[];
+var draw_canvas=new DrawCanvas(3);
 window.onload=Start();
