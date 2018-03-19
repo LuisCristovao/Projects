@@ -1749,6 +1749,8 @@
         
         if(stages==0){
             menu.moveBar(loading*stages);
+            menu.Buttons['GoodText'].style.visibility="visible";
+            menu.Buttons['GoodText'].innerHTML="LOADING...";
             //Get Intro Images
             var number_of_folders=parseInt(readTextFile(adressMenu+"/Index.txt"));
             console.log("Numeber:"+number_of_folders);
@@ -1915,6 +1917,7 @@
                 
             }
             menu.moveBar(100);
+            menu.Buttons['GoodText'].style.visibility="hidden";
         }
     } 
     
