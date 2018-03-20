@@ -1,0 +1,35 @@
+<div class="row">
+    <div class="col-sm-4">
+      <h3>Column 4</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+    </div>
+    <div class="col-sm-4">
+      <h3>Column 5</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+    </div>
+    <div class="col-sm-4">
+      <h3>Column 6</h3>        
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+    </div>
+</div>
+##########
+<div class="row">
+    <div class="col-sm-4">
+      <h3>Column 7</h3>
+      <p>Lorem ipsAAAAAAAAAAAAAAA adipisicing elit...</p>
+      <p>Ut enim ad minim veniam,CCCCCCCCCCCCCCCmco laboris...</p>
+    </div>
+    <div class="col-sm-4">
+      <h3>Column 8</h3>
+      <p>Lorem ipsDDDDDDDDDDDDDDonsectetur adipisicing elit...</p>
+      <p>U999999999999999citation ullamco laboris...</p>
+    </div>
+    <div class="col-sm-4">
+      <h3>Column 9</h3>        
+      <p>Lorem ipsDFGGGGGGGGGGGGGGGGGGGGGetur adipisicing elit...</p>
+      <p>Ut enimSSSSSSSSSSSSSSSSSSSSSsOOOOOOOOOOOOo laboris...</p>
+    </div>
+  </div>

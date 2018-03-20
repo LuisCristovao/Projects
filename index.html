@@ -130,9 +130,32 @@
         <div class="bar3"></div>
     </div>
     <script>
+        var allBD;
         function Start(){
             document.getElementById('burguer').style.position="absolute";
             document.getElementById('burguer').style.left="50%";
+            allBD=readTextFile('SiteFolder/DB/DB.txt');
+            allBD=allBD.split('##########');
+        }
+        function readTextFile(file)
+        {
+            var rawFile = new XMLHttpRequest();
+            var allText;
+            rawFile.open("GET", file, false);
+            rawFile.onreadystatechange = function ()
+            {
+                if(rawFile.readyState === 4)
+                {
+                    if(rawFile.status === 200 || rawFile.status == 0)
+                    {
+                         allText= rawFile.responseText;
+                        //alert(allText);
+                        
+                    }
+                }
+            }
+            rawFile.send(null);
+            return allText;
         }
         window.onload=Start();
         var toggle_nav=false;
@@ -193,7 +216,7 @@
     <h3 style="text-align: center"><font color="white">Load More Projects</font></h3>
 </div>    
 <script>
-    
+    var loaded_projects=0;
     function highLight(obj){
       
         obj.style.backgroundColor="blue";
@@ -213,7 +236,11 @@
         setTimeout(function(){
             $('#footer').html('<h3 style="text-align: center"><font color="white">Load More Projects</font></h3>');
         },1000);
-        $('#SiteBody').append('<div class="row"><div class="col-sm-4"><h3>Column 1</h3><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p></div><div class="col-sm-4"><h3>Column 2</h3><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p></div><div class="col-sm-4"><h3>Column 3</h3>        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p></div></div>');
+        $('#SiteBody').append(allBD[loaded_projects]);
+        if(loaded_projects<allBD.length){
+            
+            loaded_projects++;
+        }
         window.scrollTo(0,document.body.scrollHeight);
     }
 </script>
