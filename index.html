@@ -2,13 +2,23 @@
 <html lang="en">
 <head>
     <title>Luis Cristóvão Webpage</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">-->
     <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
     
 </head>
+    <style>
+        fullscreen,body,html{
+            width:  100%;
+            height: 100%;
+            margin: 0px;    
+        }
+        .fullscreen .container{
+            width:100%;
+        }
+    </style>
     <!--Burguer Style-->    
     <style>
 
@@ -35,7 +45,7 @@
     <!--Top Down Menu Style-->
     <style>
         
-        html .topnav {
+        .fullscreen .topnav {
             height: 0%;
             width: 100%;
             position: fixed;
@@ -115,7 +125,7 @@
         </div>
 
     </div>
-<div class="jumbotron text-center" style="background-color:cornflowerblue">
+<div class="container" style="background-color:cornflowerblue">
     <h1><font color="white">Luís Cristóvão GitHub Site</font></h1>
     <p><font color="white">See Some of my Projects!</font></p>
     <div id="burguer"  onclick="openNav(this)">
@@ -163,42 +173,44 @@
 </div>
   
     <div id="SiteBody" class="container">
-        <div class="row">
-            <div class="col-sm-4">
-              <h3>Column 1</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-              <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
-            </div>
-            <div class="col-sm-4">
-              <h3>Column 2</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-              <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
-            </div>
-            <div class="col-sm-4">
-              <h3>Column 3</h3>        
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-              <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
-            </div>
-
-        </div>
-        <div class="row">
-            <div class="col-sm-4">
-              <h3>Column 1</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-              <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
-            </div>
-            <div class="col-sm-4">
-              <h3>Column 2</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-              <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
-            </div>
-            <div class="col-sm-4">
-              <h3>Column 3</h3>        
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-              <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
-            </div>
-
-        </div>
+        <table>
+            <tr>
+                <th >
+                  <h3>Column 1</h3>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+                  <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+                </th>
+                <th >
+                  <h3>Column 2</h3>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+                  <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+                </th>
+                <th>
+                  <h3>Column 3</h3>        
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+                  <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+                </th>
+           </tr> 
+        
+            <tr>
+                <th>
+                  <h3>Column 1</h3>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+                  <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+                </th>
+                <th>
+                  <h3>Column 2</h3>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+                  <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+                </th>
+                <th>
+                  <h3>Column 3</h3>        
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+                  <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+                </th>
+            </tr>    
+        
+        </table>
         
     </div>
     <div id="load_more"  style="background-color: cornflowerblue;opacity:0.5;width=100%;" onclick="LoadProjects()">
