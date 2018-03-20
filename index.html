@@ -35,7 +35,7 @@
     <!--Top Down Menu Style-->
     <style>
         
-        .topnav {
+        html .topnav {
             height: 0%;
             width: 100%;
             position: fixed;
@@ -43,7 +43,7 @@
             top: 0;
             left: 0;
             background-color: rgb(0,0,0);
-            opacity: 0.6;
+            opacity: 1;
 
             overflow-x: hidden;
             transition: 0.5s;
@@ -54,13 +54,14 @@
             position: relative;
             top: 25%;
             width: 100%;
+            font-size: 36px;
             text-align: center;
             margin-top: 30px;
         }
         .topnav .a {
             padding: 8px 8px 8px 32px;
             text-decoration: none;
-            font-size: 50px;
+            font-size: 200px;
             color: rgb(0,0,0);
             display: block;
             transition: 1s;
@@ -73,20 +74,20 @@
             position: absolute;
             top: 0;
             right: 25px;
-            font-size: 36px;
+            font-size: 50px;
             margin-left: 50px;
         }
     </style>    
     
 <body>
-    <div class="container" style="visibility: collapse">
+    <div  style="visibility: collapse">
         <div id="myNav" class="topnav">    
-          <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+          <!--<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>-->
           <div class="content">
-            <a href="#">About</a>
-            <a href="#">Services</a>
-            <a href="#">Clients</a>
-            <a href="#">Contact</a>
+            <a href="#">About</a><br>
+            <a href="#">Services</a><br>
+            <a href="#">Clients</a><br>
+            <a href="#">Contact</a><br>
           </div>
         </div>
 
@@ -100,21 +101,33 @@
         <div class="bar3"></div>
     </div>
     <script>
+        var toggle_nav=false;
         function openNav(x) {
-            x.classList.toggle("change");
-            document.getElementById("myNav").style.visibility = "visible";
-            document.getElementById("myNav").style.height = "100%";
+            toggle_nav=!toggle_nav;
+            if(toggle_nav){
+                x.classList.toggle("change");
+                document.getElementById("myNav").style.visibility = "visible";
+                document.getElementById("myNav").style.height = "100%";
+                $('#SiteBody').slideUp('fast');
+            }
+            else{
+                x.classList.toggle("change");
+                document.getElementById("myNav").style.visibility = "collapse";
+                document.getElementById("myNav").style.height = "0%";
+                $('#SiteBody').slideDown('fast');    
+            }
         }
-        function closeNav() {
+        /*function closeNav() {
             document.getElementById("myNav").style.visibility = "collapse";
             document.getElementById("myNav").style.height = "0%";
+            $('#SiteBody').slideDown('fast');
             
-        }
+        }*/
     </script>
     
 </div>
   
-<div class="container">
+<div id="SiteBody" class="container">
   <div class="row">
     <div class="col-sm-4">
       <h3>Column 1</h3>
