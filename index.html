@@ -185,11 +185,23 @@
     </div>
   </div>
 </div>
-<div id="footer" class="navbar navbar-fixed-bottom " style="background-color: cornflowerblue;">
+<div id="footer" class="navbar navbar-fixed-bottom " style="background-color: cornflowerblue;" onmouseover="highLight(this)" onmouseout="normal(this)" onclick="LoadProjects()">
     <h3 style="position: relative; left: 42%;"><font color="white">Load More Projects</font></h3>
 </div>    
 <script>
     
+    function highLight(obj){
+      
+        obj.style.backgroundColor="blue";
+        
+    }
+    function normal(obj){
+        obj.style.backgroundColor="cornflowerblue";
+    }
+    function LoadProjects(){
+        $('#SiteBody').append('bla<br>');
+        window.scrollTo(0,document.body.scrollHeight);
+    }
 </script>
 </body>
 </html>
