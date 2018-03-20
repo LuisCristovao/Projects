@@ -4,9 +4,9 @@
     <title>Luis Cristóvão Webpage</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
     
 </head>
     <!--Burguer Style-->    
@@ -77,9 +77,31 @@
             font-size: 50px;
             margin-left: 50px;
         }
-    </style>    
+    </style> 
+    <!--Load Icon -->
+    <style>
+        .loader {
+              border: 10px solid #f3f3f3;
+              border-radius: 50%;
+              border-top: 10px solid #3498db;
+              width: 50px;
+              height: 50px;
+              -webkit-animation: spin 2s linear infinite; /* Safari */
+              animation: spin 2s linear infinite;
+        }
+        /* Safari */
+        @-webkit-keyframes spin {
+          0% { -webkit-transform: rotate(0deg); }
+          100% { -webkit-transform: rotate(360deg); }
+        }
+
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+    </style>
     
-<body>
+<body style="height:100%;">
     <div  style="visibility: collapse">
         <div id="myNav" class="topnav">    
           <!--<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>-->
@@ -140,25 +162,55 @@
     <br>
 </div>
   
-<div id="SiteBody" class="container">
-  <div class="row">
-    <div class="col-sm-4">
-      <h3>Column 1</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
-    </div>
-    <div class="col-sm-4">
-      <h3>Column 2</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
-    </div>
-    <div class="col-sm-4">
-      <h3>Column 3</h3>        
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
-    </div>
-  </div>
-</div>
+    <div id="SiteBody" class="container">
+        <div class="row">
+            <div class="col-sm-4">
+              <h3>Column 1</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+              <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+            </div>
+            <div class="col-sm-4">
+              <h3>Column 2</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+              <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+            </div>
+            <div class="col-sm-4">
+              <h3>Column 3</h3>        
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+              <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+            </div>
 
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+              <h3>Column 1</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+              <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+            </div>
+            <div class="col-sm-4">
+              <h3>Column 2</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+              <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+            </div>
+            <div class="col-sm-4">
+              <h3>Column 3</h3>        
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+              <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+            </div>
+
+        </div>
+        
+    </div>
+    <div id="load_more"  style="background-color: cornflowerblue;opacity:0.5;width=100%;" onclick="LoadProjects()">
+                <p><font color="black">Load More Projects</font></p>
+                <!--<div class="loader" style="visibility: collapse"></div>-->
+    <script>
+            function LoadProjects(){
+
+                $('#load_more').html('<div class="loader" ></div>');
+                $('#SiteBody').append('<p>Bal</p>');
+            }
+        </script>
+    </div>
 </body>
 </html>
