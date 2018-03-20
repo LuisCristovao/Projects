@@ -94,24 +94,36 @@
     </div>
 <div class="jumbotron text-center" style="background-color:cornflowerblue">
     <h1><font color="white">Luís Cristóvão GitHub Site</font></h1>
-    <p><font color="white">See Some of my Projects!</font></p> 
-    <div class="container" style="position: relative;left: 40%;" onclick="openNav(this)">
+    <p><font color="white">See Some of my Projects!</font></p>
+    <div id="burguer"  onclick="openNav(this)">
         <div class="bar1"></div>
         <div class="bar2"></div>
         <div class="bar3"></div>
     </div>
     <script>
+        function Start(){
+            document.getElementById('burguer').style.position="absolute";
+            document.getElementById('burguer').style.left="50%";
+        }
+        window.onload=Start();
         var toggle_nav=false;
         function openNav(x) {
             toggle_nav=!toggle_nav;
             if(toggle_nav){
                 x.classList.toggle("change");
+                x.style.position="absolute";
+                x.style.top="15%";
+                x.style.left="49%";
+                //x.style.hover="color:white";
                 document.getElementById("myNav").style.visibility = "visible";
                 document.getElementById("myNav").style.height = "100%";
                 $('#SiteBody').slideUp('fast');
             }
             else{
                 x.classList.toggle("change");
+                x.style.position="absolute";
+                x.style.top="auto";
+                x.style.left="50%";
                 document.getElementById("myNav").style.visibility = "collapse";
                 document.getElementById("myNav").style.height = "0%";
                 $('#SiteBody').slideDown('fast');    
@@ -124,7 +136,7 @@
             
         }*/
     </script>
-    
+    <br>
 </div>
   
 <div id="SiteBody" class="container">
