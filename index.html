@@ -203,9 +203,15 @@
         obj.style.backgroundColor="cornflowerblue";
     }
     function LoadProjects(){
-        $('#footer').html('<div style="position: relative; left: 50%;" class="loader"></div>');
+        if(window.innerWidth>window.innerHeight){
+            
+            $('#footer').html('<div style="position: relative; left: 50%;" class="loader"></div>');
+        }
+        else{
+            $('#footer').html('<div style="position: relative; left: 40%;" class="loader"></div>');
+        }
         setTimeout(function(){
-            $('#footer').html('<h3 style="position: relative; left: 42%;"><font color="white">Load More Projects</font></h3>');
+            $('#footer').html('<h3 style="text-align: center"><font color="white">Load More Projects</font></h3>');
         },1000);
         $('#SiteBody').append('<div class="row"><div class="col-sm-4"><h3>Column 1</h3><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p></div><div class="col-sm-4"><h3>Column 2</h3><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p></div><div class="col-sm-4"><h3>Column 3</h3>        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p></div></div>');
         window.scrollTo(0,document.body.scrollHeight);
