@@ -80,7 +80,7 @@
             margin-left: 50px;
         }
     </style> 
-    <!--Lader Icon-->
+    <!--Loader Icon-->
     <style>
         .loader {
           border: 10px solid #f3f3f3;
@@ -102,6 +102,10 @@
           0% { transform: rotate(0deg); }
           100% { transform: rotate(360deg); }
         }
+    </style>
+    <!--This is important to footer dont cover text-->
+    <style>
+        body { padding-bottom: 70px; }
     </style>
 <body>
     <div  style="visibility: collapse">
@@ -199,7 +203,11 @@
         obj.style.backgroundColor="cornflowerblue";
     }
     function LoadProjects(){
-        $('#SiteBody').append('bla<br>');
+        $('#footer').html('<div style="position: relative; left: 50%;" class="loader"></div>');
+        setTimeout(function(){
+            $('#footer').html('<h3 style="position: relative; left: 42%;"><font color="white">Load More Projects</font></h3>');
+        },1000);
+        $('#SiteBody').append('<div class="row"><div class="col-sm-4"><h3>Column 1</h3><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p></div><div class="col-sm-4"><h3>Column 2</h3><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p></div><div class="col-sm-4"><h3>Column 3</h3>        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p></div></div>');
         window.scrollTo(0,document.body.scrollHeight);
     }
 </script>
