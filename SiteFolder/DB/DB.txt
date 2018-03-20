@@ -33,3 +33,10 @@
       <p>Ut enimSSSSSSSSSSSSSSSSSSSSSsOOOOOOOOOOOOo laboris...</p>
     </div>
   </div>
+##########
+<div class="row">
+	<div class="col-sm-4">
+      		<h3>Column 10</h3>
+      		<img src="SiteFolder/Images/giphy.gif">
+    	</div>
+</div>
