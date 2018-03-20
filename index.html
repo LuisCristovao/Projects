@@ -23,6 +23,7 @@
         .change .bar1 {
             -webkit-transform: rotate(-45deg) translate(-9px, 6px);
             transform: rotate(-45deg) translate(-9px, 6px);
+            background-color: white;
         }
 
         .change .bar2 {opacity: 0;}
@@ -30,12 +31,13 @@
         .change .bar3 {
             -webkit-transform: rotate(45deg) translate(-8px, -8px);
             transform: rotate(45deg) translate(-8px, -8px);
+            background-color: white;
         }
     </style>    
     <!--Top Down Menu Style-->
     <style>
         
-        html .topnav {
+         .topnav {
             height: 0%;
             width: 100%;
             position: fixed;
@@ -77,8 +79,30 @@
             font-size: 50px;
             margin-left: 50px;
         }
-    </style>    
-    
+    </style> 
+    <!--Lader Icon-->
+    <style>
+        .loader {
+          border: 10px solid #f3f3f3;
+          border-radius: 50%;
+          border-top: 10px solid blue;
+          border-bottom: 10px solid blue;
+          width: 50px;
+          height: 50px;
+          -webkit-animation: spin 2s linear infinite;
+          animation: spin 2s linear infinite;
+        }
+
+        @-webkit-keyframes spin {
+          0% { -webkit-transform: rotate(0deg); }
+          100% { -webkit-transform: rotate(360deg); }
+        }
+
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+    </style>
 <body>
     <div  style="visibility: collapse">
         <div id="myNav" class="topnav">    
@@ -119,6 +143,7 @@
                 document.getElementById("myNav").style.visibility = "visible";
                 document.getElementById("myNav").style.height = "100%";
                 $('#SiteBody').slideUp('fast');
+                $('#footer').slideUp('fast');
             }
             else{
                 x.classList.toggle("change");
@@ -127,7 +152,8 @@
                 x.style.left="50%";
                 document.getElementById("myNav").style.visibility = "collapse";
                 document.getElementById("myNav").style.height = "0%";
-                $('#SiteBody').slideDown('fast');    
+                $('#SiteBody').slideDown('fast');   
+                $('#footer').slideDown('fast');
             }
         }
         /*function closeNav() {
@@ -159,6 +185,11 @@
     </div>
   </div>
 </div>
-
+<div id="footer" class="navbar navbar-fixed-bottom " style="background-color: cornflowerblue;">
+    <h3 style="position: relative; left: 42%;"><font color="white">Load More Projects</font></h3>
+</div>    
+<script>
+    
+</script>
 </body>
 </html>
