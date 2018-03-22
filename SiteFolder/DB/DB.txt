@@ -20,7 +20,7 @@
     <div class="col-sm-4">
       <h3>Column 7</h3>
       <p>Lorem ipsAAAAAAAAAAAAAAA adipisicing elit...</p>
-      <p>Ut enim ad minim veniam,CCCCCCCCCCCCCCCmco laboris...</p>
+      <p>Ut enim ad minim veniam,CCCCCCC CCCCCCCCmco laboris...</p>
     </div>
     <div class="col-sm-4">
       <h3>Column 8</h3>
@@ -29,14 +29,14 @@
     </div>
     <div class="col-sm-4">
       <h3>Column 9</h3>        
-      <p>Lorem ipsDFGGGGGGGGGGGGGGGGGGGGGetur adipisicing elit...</p>
-      <p>Ut enimSSSSSSSSSSSSSSSSSSSSSsOOOOOOOOOOOOo laboris...</p>
+      <p>Lorem ipsDFGGGGG GGGGG GGGGGG GGGGGetur adipisicing elit...</p>
+      <p>Ut enimSSSS SSSSSSS SSSSSSS SSSsOOO OOOOOOOOOo laboris...</p>
     </div>
   </div>
 ##########
 <div class="row">
 	<div class="col-sm-4">
       		<h3>Column 10</h3>
-      		<img src="SiteFolder/Images/giphy.gif">
+      		<img src="SiteFolder/Images/giphy.gif" style="width:100%">
     	</div>
 </div>
