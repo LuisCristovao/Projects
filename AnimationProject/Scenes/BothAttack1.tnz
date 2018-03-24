@@ -1,4 +1,4 @@
-<tnz framecount="95" version="71.0">
+<tnz framecount="105" version="71.0">
   <generator>
     "OpenToonz 1.1.2"
   </generator>
@@ -792,7 +792,7 @@
         </levels>
         </folder>
       <levels>
-        <level id='13'/><level id='14'/><level id='15'/><level id='18'/><level id='17'/><level id='11'/><level id='12'/><level id='16'/><childLevel id='3'/>
+        <level id='18'/><level id='12'/><level id='13'/><level id='14'/><level id='15'/><level id='16'/><level id='17'/><level id='11'/><childLevel id='3'/>
       </levels>
       </folder>
     <folder name="Audio">
@@ -840,7 +840,19 @@
             86 4 <level id='1'/>0053 0 
           </cell>
           <cell>
-            90 5 <level id='1'/>0054 1 
+            90 3 <level id='1'/>0054 0 
+          </cell>
+          <cell>
+            93 3 <level id='1'/>0055 0 
+          </cell>
+          <cell>
+            96 3 <level id='1'/>0056 0 
+          </cell>
+          <cell>
+            99 3 <level id='1'/>0057 0 
+          </cell>
+          <cell>
+            102 3 <level id='1'/>0058 0 
           </cell>
           </cells>
         <fx>
@@ -908,7 +920,16 @@
             86 4 <level id='18'/>0010 0 
           </cell>
           <cell>
-            90 4 <level id='18'/>0011 1 
+            90 3 <level id='18'/>0011 0 
+          </cell>
+          <cell>
+            93 3 <level id='18'/>0012 0 
+          </cell>
+          <cell>
+            96 3 <level id='18'/>0013 0 
+          </cell>
+          <cell>
+            99 3 <level id='18'/>0014 0 
           </cell>
           </cells>
         <fx>
@@ -976,7 +997,19 @@
             86 4 <level id='2'/>0031 0 
           </cell>
           <cell>
-            90 5 <level id='2'/>0032 1 
+            90 3 <level id='2'/>0032 0 
+          </cell>
+          <cell>
+            93 3 <level id='2'/>0033 0 
+          </cell>
+          <cell>
+            96 3 <level id='2'/>0034 0 
+          </cell>
+          <cell>
+            99 3 <level id='2'/>0035 0 
+          </cell>
+          <cell>
+            102 3 <level id='2'/>0036 0 
           </cell>
           </cells>
         <fx>
@@ -1453,13 +1486,13 @@
     <fxnodes>
       <terminal>
         <fxnode>
+          <Toonz_columnFx id='20'/>
+        </fxnode>
+        <fxnode>
           <Toonz_columnFx id='24'/>
         </fxnode>
         <fxnode>
           <Toonz_columnFx id='22'/>
-        </fxnode>
-        <fxnode>
-          <Toonz_columnFx id='20'/>
         </fxnode>
         </terminal>
       <xsheet>
@@ -1528,5 +1561,6 @@
     "| #2   24 mar 18   13:12   DESKTOP-C8IKSamsung         |"
     "| #3   24 mar 18   14:00   DESKTOP-C8IKSamsung         |"
     "| #4   24 mar 18   15:39   DESKTOP-C8IKSamsung         |"
+    "| #5   24 mar 18   21:35   DESKTOP-C8IKSamsung         |"
   </history>
   </tnz>
