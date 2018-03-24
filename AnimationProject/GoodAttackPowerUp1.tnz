@@ -872,6 +872,15 @@
           <cell>
             95 5 <level id='2'/>0010 0 
           </cell>
+          <cell>
+            100 5 <level id='2'/>0001 0 
+          </cell>
+          <cell>
+            105 5 <level id='2'/>0002 0 
+          </cell>
+          <cell>
+            110 5 <level id='2'/>0003 0 
+          </cell>
           </cells>
         <fx>
           <Toonz_columnFx id='16'>
@@ -1077,10 +1086,10 @@
     <fxnodes>
       <terminal>
         <fxnode>
-          <Toonz_columnFx id='12'/>
+          <Toonz_columnFx id='14'/>
         </fxnode>
         <fxnode>
-          <Toonz_columnFx id='14'/>
+          <Toonz_columnFx id='12'/>
         </fxnode>
         <fxnode>
           <Toonz_columnFx id='16'/>
@@ -1143,5 +1152,6 @@
   <history>
     "| #    DATE:       Time:   MACHINE:    USER:           |"
     "| #1   13 fev 18   10:49   DESKTOP-C8IKSamsung         |"
+    "| #2   24 mar 18   10:59   DESKTOP-C8IKSamsung         |"
   </history>
   </tnz>
