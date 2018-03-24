@@ -70,6 +70,10 @@
           25 25 
         </timestretch>
         <formatsProperties>
+          <formatProperties ext="mp4">
+            <property max="100" min="1" name="Quality" type="int" value="90"/>
+            <property max="100" min="1" name="Scale" type="int" value="100"/>
+            </formatProperties>
           <formatProperties ext="tif">
             <property name="Byte Ordering" type="enum" value="IBM PC">
               <item value="IBM PC"/>
@@ -410,7 +414,7 @@
                     0 
                   </numberId>
                   <name>
-                    LevelColumn 
+                    "LevelColumn AffineFx"
                   </name>
                   <fxId>
                     "" 
@@ -472,7 +476,7 @@
                     0 
                   </numberId>
                   <name>
-                    LevelColumn 
+                    "LevelColumn AffineFx"
                   </name>
                   <fxId>
                     "" 
@@ -677,7 +681,7 @@
                   0 
                 </numberId>
                 <name>
-                  Output 
+                  OutputFx 
                 </name>
                 <fxId>
                   "" 
@@ -822,7 +826,7 @@
               0 
             </numberId>
             <name>
-              LevelColumn 
+              "LevelColumn AffineFx"
             </name>
             <fxId>
               "" 
@@ -893,7 +897,7 @@
               0 
             </numberId>
             <name>
-              LevelColumn 
+              "LevelColumn AffineFx"
             </name>
             <fxId>
               "" 
@@ -1132,7 +1136,7 @@
             0 
           </numberId>
           <name>
-            Output 
+            OutputFx 
           </name>
           <fxId>
             "" 
