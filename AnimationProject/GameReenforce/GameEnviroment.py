@@ -11,6 +11,8 @@ class Enviroment:
     
     def __init__(self):
         #0-Attack,1-Defense,2-Health
+        self.prev_goodStatus=[100,100,100]
+        self.prev_evilStatus=[100,100,100]
         self.goodStatus=[100,100,100]
         self.evilStatus=[100,100,100]
         self.goodWins=False
