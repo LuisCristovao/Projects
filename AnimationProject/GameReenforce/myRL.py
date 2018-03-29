@@ -78,13 +78,13 @@ class Brain:
                        selected_state=brain_state
            
            print('min_dif:',min_difference) 
-           if(min_difference>300):
+           if(min_difference>600):
                return (selected_state,False)
            else:
                return (selected_state,True)
        
     def SelectBestAction(self,state):
-        print('nearest state output',self.SelectNearestState(state))
+        #print('nearest state output',self.SelectNearestState(state))
         nearest_state,viable=self.SelectNearestState(state) #error here
         if viable:
             actions=self.brain[nearest_state]
@@ -110,7 +110,7 @@ class Brain:
             if(random.random()<rand_percentage):
                 return random.randint(0,8) 
             else:
-                print('Selecting best action')
+                #print('Selecting best action')
                 action=self.SelectBestAction(state)
                 return action.action 
 
@@ -185,13 +185,14 @@ while Game:
         game_state=(game_enviroment.goodStatus[0],game_enviroment.goodStatus[1],game_enviroment.goodStatus[2],game_enviroment.evilStatus[0],game_enviroment.evilStatus[1],game_enviroment.evilStatus[2])
         print(game_state)
         #0-8
-        p1_action=int(input("Move: "))#A:0-2;D:3-5;P:A:6,D:7,8:H;
-        #p1_action=brain1.DoAction(game_state,1)
-        p2_action=brain2.DoAction(game_state,0.1)
+        #p1_action=int(input("Move: "))#A:0-2;D:3-5;P:A:6,D:7,8:H;
+        p1_action=brain1.DoAction(game_state,0.3)
+        p2_action=brain2.DoAction(game_state,0.3)
         #save prev state
         game_enviroment.prev_goodStatus=[game_enviroment.goodStatus[0],game_enviroment.goodStatus[1],game_enviroment.goodStatus[2]]
         game_enviroment.prev_evilStatus=[game_enviroment.evilStatus[0],game_enviroment.evilStatus[1],game_enviroment.evilStatus[2]]
         
+        print('GM:',p1_action,'EM:',p2_action)
         game_enviroment.Run(p1_action,p2_action)
         
         #Evaluate actions
@@ -215,7 +216,7 @@ while Game:
         if(game_enviroment.goodStatus[2]<=0 or game_enviroment.evilStatus[2]<=0 ):
             Game=False
             
-
+'''
 #save brain1 memories in brain2           
 for game_state in brain1.brain:
     value=brain1.brain[game_state]
@@ -223,15 +224,15 @@ for game_state in brain1.brain:
         a=Action(value[i].action)
         brain2.SaveMemory(game_state,a)
 
+'''
 
-
-'''            
+         
 print('\n')           
 for key in brain1.brain:
     value=brain1.brain[key]
     for i in range(len(value)):
         print(key,value[i].action,value[i].reward)
-'''        
+       
 print('\n')         
 for key in brain2.brain:
     value=brain2.brain[key]
