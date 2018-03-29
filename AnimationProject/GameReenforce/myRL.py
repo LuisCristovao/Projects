@@ -77,23 +77,29 @@ class Brain:
                        min_difference=Sum
                        selected_state=brain_state
            
-           print('min_dif:',min_difference)             
-           return selected_state
+           print('min_dif:',min_difference) 
+           if(min_difference>300):
+               return (selected_state,False)
+           else:
+               return (selected_state,True)
        
     def SelectBestAction(self,state):
-        nearest_state=self.SelectNearestState(state)
-        actions=self.brain[nearest_state]
-        #get action with highest reward
-        for i in range(len(actions)):
-            if i==0:
-                max_reward=actions[i].reward
-                best_action=actions[i]
-            else:
-                if actions[i].reward>max_reward:
-                   max_reward=actions[i].reward
-                   best_action=actions[i] 
-        
-        return best_action
+        (nearest_state,viable)=self.SelectNearestState(state)
+        if viable:
+            actions=self.brain[nearest_state]
+            #get action with highest reward
+            for i in range(len(actions)):
+                if i==0:
+                    max_reward=actions[i].reward
+                    best_action=actions[i]
+                else:
+                    if actions[i].reward>max_reward:
+                       max_reward=actions[i].reward
+                       best_action=actions[i] 
+            
+            return best_action
+        else:
+            return random.randint(0,8)
        
     def DoAction(self,state, rand_percentage):
         if len(self.brain)==0:
