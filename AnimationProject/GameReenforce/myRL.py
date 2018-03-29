@@ -53,9 +53,9 @@ class Brain:
     #state=int[]
     def SelectNearestState(self,state):
         
-        
+      #if exact state exists in brain  
       if(self.brain.get(state)!=None):
-          return state
+          return (state,True)
       else:
            Sum=0
            min_difference=0
@@ -84,7 +84,8 @@ class Brain:
                return (selected_state,True)
        
     def SelectBestAction(self,state):
-        (nearest_state,viable)=self.SelectNearestState(state)
+        print('nearest state output',self.SelectNearestState(state))
+        nearest_state,viable=self.SelectNearestState(state) #error here
         if viable:
             actions=self.brain[nearest_state]
             #get action with highest reward
@@ -99,7 +100,7 @@ class Brain:
             
             return best_action
         else:
-            return random.randint(0,8)
+            return Action(random.randint(0,8))
        
     def DoAction(self,state, rand_percentage):
         if len(self.brain)==0:
@@ -109,6 +110,7 @@ class Brain:
             if(random.random()<rand_percentage):
                 return random.randint(0,8) 
             else:
+                print('Selecting best action')
                 action=self.SelectBestAction(state)
                 return action.action 
 
