@@ -59,6 +59,7 @@ class Brain:
           return (state,True)
       else:
            Sum=0
+           print(Sum)
            min_difference=0
            j=0
            selected_state=state
@@ -179,55 +180,57 @@ def Evaluate(status1,status2):
             return True
 '''        
 n_games=0
-max_games_num=10
-Game=True
-game_enviroment=Env.Enviroment()
-while Game:
-        
-        #
-        game_state=(game_enviroment.goodStatus[0],game_enviroment.goodStatus[1],game_enviroment.goodStatus[2],game_enviroment.evilStatus[0],game_enviroment.evilStatus[1],game_enviroment.evilStatus[2])
-        print(game_state)
-        #0-8
-        p1_action=int(input("Move: "))#A:0-2;D:3-5;P:A:6,D:7,8:H;
-        #p1_action=brain1.DoAction(game_state,0.1)
-        p2_action=brain2.DoAction(game_state,0.1)
-        #save prev state
-        game_enviroment.prev_goodStatus=[game_enviroment.goodStatus[0],game_enviroment.goodStatus[1],game_enviroment.goodStatus[2]]
-        game_enviroment.prev_evilStatus=[game_enviroment.evilStatus[0],game_enviroment.evilStatus[1],game_enviroment.evilStatus[2]]
-        
-        print('GM:',p1_action,'EM:',p2_action)
-        game_enviroment.Run(p1_action,p2_action)
-        
-        #Evaluate actions
-        brain1.EvaluateAction(p1_action,game_enviroment.prev_goodStatus,game_enviroment.goodStatus,game_enviroment.prev_evilStatus,game_enviroment.evilStatus)
-        #change good status with evil status because good is opposed to evil xD
-        brain2.EvaluateAction(p2_action,game_enviroment.prev_evilStatus,game_enviroment.evilStatus,game_enviroment.prev_goodStatus,game_enviroment.goodStatus)
-        '''
-        print('prev_good',game_enviroment.prev_goodStatus)
-        print('prev_evil',game_enviroment.prev_evilStatus)
-        
-        print('actual_good',game_enviroment.goodStatus)
-        print('actual_evil',game_enviroment.evilStatus)
-       
-        if(Evaluate(game_enviroment.goodStatus,game_enviroment.evilStatus)):
-            a=Action(p2_action)
-            brain2.SaveMemory(game_state,a) 
-        else:
-            a=Action(p1_action)
-            brain1.SaveMemory(game_state,a) 
-        '''    
-        if(game_enviroment.goodStatus[2]<=0 or game_enviroment.evilStatus[2]<=0 ):
-            Game=False
+max_games_num=1000
+while n_games<max_games_num:
+    Game=True
+    game_enviroment=Env.Enviroment()
+    while Game:
             
-
-#save brain1 memories in brain2           
-for game_state in brain1.brain:
-    value=brain1.brain[game_state]
-    for i in range(len(value)):
-        a=Action(value[i].action)
-        brain2.SaveMemory(game_state,a)
-
-
+            #
+            game_state=(game_enviroment.goodStatus[0],game_enviroment.goodStatus[1],game_enviroment.goodStatus[2],game_enviroment.evilStatus[0],game_enviroment.evilStatus[1],game_enviroment.evilStatus[2])
+            print(game_state)
+            #0-8
+            #p1_action=int(input("Move: "))#A:0-2;D:3-5;P:A:6,D:7,8:H;
+            p1_action=brain1.DoAction(game_state,0.1)
+            p2_action=brain2.DoAction(game_state,0.1)
+            #save prev state
+            game_enviroment.prev_goodStatus=[game_enviroment.goodStatus[0],game_enviroment.goodStatus[1],game_enviroment.goodStatus[2]]
+            game_enviroment.prev_evilStatus=[game_enviroment.evilStatus[0],game_enviroment.evilStatus[1],game_enviroment.evilStatus[2]]
+            
+            print('GM:',p1_action,'EM:',p2_action)
+            game_enviroment.Run(p1_action,p2_action)
+            
+            #Evaluate actions
+            brain1.EvaluateAction(p1_action,game_enviroment.prev_goodStatus,game_enviroment.goodStatus,game_enviroment.prev_evilStatus,game_enviroment.evilStatus)
+            #change good status with evil status because good is opposed to evil xD
+            brain2.EvaluateAction(p2_action,game_enviroment.prev_evilStatus,game_enviroment.evilStatus,game_enviroment.prev_goodStatus,game_enviroment.goodStatus)
+            '''
+            print('prev_good',game_enviroment.prev_goodStatus)
+            print('prev_evil',game_enviroment.prev_evilStatus)
+            
+            print('actual_good',game_enviroment.goodStatus)
+            print('actual_evil',game_enviroment.evilStatus)
+           
+            if(Evaluate(game_enviroment.goodStatus,game_enviroment.evilStatus)):
+                a=Action(p2_action)
+                brain2.SaveMemory(game_state,a) 
+            else:
+                a=Action(p1_action)
+                brain1.SaveMemory(game_state,a) 
+            '''    
+            if(game_enviroment.goodStatus[2]<=0 or game_enviroment.evilStatus[2]<=0 ):
+                Game=False
+                
+    
+    #save brain1 memories in brain2           
+    for game_state in brain1.brain:
+        value=brain1.brain[game_state]
+        for i in range(len(value)):
+            a=Action(value[i].action)
+            brain2.SaveMemory(game_state,a)
+    
+    n_games+=1
+    print('\nNewGame\n',n_games)
 
          
 print('\n')           
