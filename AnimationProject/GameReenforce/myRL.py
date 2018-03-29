@@ -103,15 +103,50 @@ class Brain:
                 return random.randint(0,8) 
             else:
                 action=self.SelectBestAction(state)
-                return action.action              
+                return action.action 
 
+    def EvaluateAction(self,my_action,my_prev_status,my_status,opponent_prev_status,opponent_status):
+        #Actual attack status minus previous attack status
+        my_dA=my_status[0]-my_prev_status[0]
+        #Actual defense status minus previous defense status
+        my_dD=my_status[1]-my_prev_status[1]
+        #Actual health status minus previous health status
+        my_dH=my_status[2]-my_prev_status[2]             
+        
+        #Actual attack status minus previous attack status
+        op_dA=opponent_status[0]-opponent_prev_status[0]
+        #Actual defense status minus previous defense status
+        op_dD=opponent_status[1]-opponent_prev_status[1]
+        #Actual health status minus previous health status
+        op_dH=opponent_status[2]-opponent_prev_status[2] 
+
+        if my_dH>op_dH:
+            #save action
+            a=Action(my_action)
+            #save memory with prev state of course
+            self.SaveMemory(my_prev_status,a)
+        else:
+            if my_dH<op_dH:
+                #dont save
+                pass
+            else:# this means no one gain or lose health
+                D1=my_dA+my_dD
+                D2=op_dA+op_dD
+                if D1>D2:
+                    #save action
+                    a=Action(my_action)
+                    #save memory with prev state of course
+                    self.SaveMemory(my_prev_status,a)
+                else:
+                    pass
+                
 #Main--------------------------------
 brain1=Brain()
 brain2=Brain()                
-Game=True
+
 
 game_enviroment=Env.Enviroment()
-
+'''
 def Evaluate(status1,status2):
     
     if status1[2]==status2[2]:
@@ -126,9 +161,11 @@ def Evaluate(status1,status2):
             return False
         else:
             return True
-        
+'''        
 n_games=0
 max_games_num=10
+Game=True
+game_enviroment=Env.Enviroment()
 while Game:
         
         #
@@ -144,13 +181,13 @@ while Game:
         
         game_enviroment.Run(p1_action,p2_action)
         
-  
+        '''
         print('prev_good',game_enviroment.prev_goodStatus)
         print('prev_evil',game_enviroment.prev_evilStatus)
         
         print('actual_good',game_enviroment.goodStatus)
         print('actual_evil',game_enviroment.evilStatus)
-        
+        '''
         if(Evaluate(game_enviroment.goodStatus,game_enviroment.evilStatus)):
             a=Action(p2_action)
             brain2.SaveMemory(game_state,a) 
