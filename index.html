@@ -256,7 +256,11 @@
         window.scrollTo(0,document.body.scrollHeight);
     }
     //only show footer when scroll to bottom
-    $(window).scroll(function() {
+    
+    $(document.body).on('touchmove', onScroll); // for mobile
+    $(window).on('scroll', onScroll); 
+    function onScroll(){
+        
        if($(window).scrollTop() + $(window).height() == $(document).height()) {
            //alert("bottom!");
            //console.log($(window).scrollTop() + $(window).height());
@@ -266,7 +270,8 @@
         else{
             document.getElementById('footer').style.visibility="collapse";
         }
-    });
+    }
+    
     //make disapear footer when scroll to top
     /*$(window).scroll(function() {
        if($(window).scrollTop() < ($(document).height()*0.9)) {
