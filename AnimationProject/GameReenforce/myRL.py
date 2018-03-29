@@ -185,9 +185,9 @@ while Game:
         game_state=(game_enviroment.goodStatus[0],game_enviroment.goodStatus[1],game_enviroment.goodStatus[2],game_enviroment.evilStatus[0],game_enviroment.evilStatus[1],game_enviroment.evilStatus[2])
         print(game_state)
         #0-8
-        #p1_action=int(input("Move: "))#A:0-2;D:3-5;P:A:6,D:7,8:H;
-        p1_action=brain1.DoAction(game_state,0.3)
-        p2_action=brain2.DoAction(game_state,0.3)
+        p1_action=int(input("Move: "))#A:0-2;D:3-5;P:A:6,D:7,8:H;
+        #p1_action=brain1.DoAction(game_state,0.1)
+        p2_action=brain2.DoAction(game_state,0.1)
         #save prev state
         game_enviroment.prev_goodStatus=[game_enviroment.goodStatus[0],game_enviroment.goodStatus[1],game_enviroment.goodStatus[2]]
         game_enviroment.prev_evilStatus=[game_enviroment.evilStatus[0],game_enviroment.evilStatus[1],game_enviroment.evilStatus[2]]
