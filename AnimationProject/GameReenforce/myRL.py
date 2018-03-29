@@ -76,7 +76,8 @@ class Brain:
                    if Sum<min_difference:
                        min_difference=Sum
                        selected_state=brain_state
-       
+           
+           print('min_dif:',min_difference)             
            return selected_state
        
     def SelectBestAction(self,state):
@@ -149,7 +150,7 @@ brain1=Brain()
 brain2=Brain()                
 
 
-game_enviroment=Env.Enviroment()
+#game_enviroment=Env.Enviroment()
 '''
 def Evaluate(status1,status2):
     
