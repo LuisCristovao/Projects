@@ -55,11 +55,11 @@ class Brain:
         
       #if exact state exists in brain  
       if(self.brain.get(state)!=None):
-          print('exact same state found')
+          #print('exact same state found')
           return (state,True)
       else:
            Sum=0
-           print(Sum)
+           #print(Sum)
            min_difference=0
            j=0
            selected_state=state
@@ -79,7 +79,7 @@ class Brain:
                        min_difference=Sum
                        selected_state=brain_state
            
-           print('min_dif:',min_difference) 
+           #print('min_dif:',min_difference) 
            #if the difference between the nearest state and actual is this 
            #big it is not worth it
            if(min_difference>1200):
@@ -180,7 +180,7 @@ def Evaluate(status1,status2):
             return True
 '''        
 n_games=0
-max_games_num=1000
+max_games_num=2000
 while n_games<max_games_num:
     Game=True
     game_enviroment=Env.Enviroment()
@@ -190,8 +190,8 @@ while n_games<max_games_num:
             game_state=(game_enviroment.goodStatus[0],game_enviroment.goodStatus[1],game_enviroment.goodStatus[2],game_enviroment.evilStatus[0],game_enviroment.evilStatus[1],game_enviroment.evilStatus[2])
             print(game_state)
             #0-8
-            #p1_action=int(input("Move: "))#A:0-2;D:3-5;P:A:6,D:7,8:H;
-            p1_action=brain1.DoAction(game_state,0.1)
+            p1_action=int(input("Move: "))#A:0-2;D:3-5;P:A:6,D:7,8:H;
+            #p1_action=brain1.DoAction(game_state,0.5)
             p2_action=brain2.DoAction(game_state,0.1)
             #save prev state
             game_enviroment.prev_goodStatus=[game_enviroment.goodStatus[0],game_enviroment.goodStatus[1],game_enviroment.goodStatus[2]]
@@ -230,9 +230,9 @@ while n_games<max_games_num:
             brain2.SaveMemory(game_state,a)
     
     n_games+=1
-    print('\nNewGame\n',n_games)
+    print('\nNewGame',n_games)
 
-         
+'''         
 print('\n')           
 for key in brain1.brain:
     value=brain1.brain[key]
@@ -244,6 +244,6 @@ for key in brain2.brain:
     value=brain2.brain[key]
     for i in range(len(value)):
         print(key,value[i].action,value[i].reward)        
-
+'''
 
         
