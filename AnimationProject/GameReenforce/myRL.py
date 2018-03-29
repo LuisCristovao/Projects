@@ -55,6 +55,7 @@ class Brain:
         
       #if exact state exists in brain  
       if(self.brain.get(state)!=None):
+          print('exact same state found')
           return (state,True)
       else:
            Sum=0
@@ -78,14 +79,16 @@ class Brain:
                        selected_state=brain_state
            
            print('min_dif:',min_difference) 
-           if(min_difference>600):
+           #if the difference between the nearest state and actual is this 
+           #big it is not worth it
+           if(min_difference>1200):
                return (selected_state,False)
            else:
                return (selected_state,True)
        
     def SelectBestAction(self,state):
         #print('nearest state output',self.SelectNearestState(state))
-        nearest_state,viable=self.SelectNearestState(state) #error here
+        nearest_state,viable=self.SelectNearestState(state) 
         if viable:
             actions=self.brain[nearest_state]
             #get action with highest reward
@@ -216,7 +219,7 @@ while Game:
         if(game_enviroment.goodStatus[2]<=0 or game_enviroment.evilStatus[2]<=0 ):
             Game=False
             
-'''
+
 #save brain1 memories in brain2           
 for game_state in brain1.brain:
     value=brain1.brain[game_state]
@@ -224,7 +227,7 @@ for game_state in brain1.brain:
         a=Action(value[i].action)
         brain2.SaveMemory(game_state,a)
 
-'''
+
 
          
 print('\n')           
