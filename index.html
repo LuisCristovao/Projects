@@ -182,6 +182,14 @@
                     burguer.style.left='50%';
                 }
             }
+            //change images size
+            var imgs = document.getElementsByTagName("img");
+            for(i=0;i<imgs.length;i++){
+                if(i!=0){
+                    imgs[i].width=imgs[0].width;
+                    imgs[i].height=imgs[0].height;    
+                }
+            }
         }
         
         document.body.onresize=function(){align_burguer(toggle_nav)};
