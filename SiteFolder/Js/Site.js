@@ -125,7 +125,7 @@
     //only show footer when scroll to bottom
     $(window).scroll(function() {
         console.log($(window).scrollTop() + $(window).height());
-       if($(window).scrollTop() + $(window).height() >= ($(document).height()*(1-0.01))) {
+       if($(window).scrollTop() + $(window).height() >= ($(document).height()*(1-0.05))) {
            //alert("bottom!");
            //console.log($(window).scrollTop() + $(window).height());
            //$('footer').slideUp('fast');
