@@ -107,7 +107,7 @@
     <style>
         body { padding-bottom: 70px; }
     </style>
-<body onresize="align_burguer()">
+<body >
     <div  style="visibility: collapse">
         <div id="myNav" class="topnav">    
           <!--<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>-->
@@ -135,7 +135,7 @@
         var allBD;
         function Start(){
             document.getElementById('burguer').style.position="absolute";
-            align_burguer();
+            align_burguer('not panel');
             allBD=readTextFile('SiteFolder/DB/DB.txt');
             allBD=allBD.split('##########');
             //Click in Button to load projects
@@ -163,16 +163,28 @@
         }
         
         
-        function align_burguer(){
+        function align_burguer(panel){
             var burguer=document.getElementById('burguer');
-            if(window.innerWidth<window.innerHeight){
-                burguer.style.left='45%';
+            if(panel){
+                if(window.innerWidth<window.innerHeight){
+                    burguer.style.left='46%';
+                }
+                else{
+                    burguer.style.left='49%';
+                }
             }
             else{
-                burguer.style.left='50%';
+                
+                if(window.innerWidth<window.innerHeight){
+                    burguer.style.left='45%';
+                }
+                else{
+                    burguer.style.left='50%';
+                }
             }
         }
         
+        document.body.onresize=function(){align_burguer(toggle_nav)};
         
         var toggle_nav=false;
         function openNav(x) {
@@ -181,8 +193,8 @@
                 x.classList.toggle("change");
                 x.style.position="absolute";
                 x.style.top="15%";
-                x.style.left="49%";
-                //align_burguer();
+                //x.style.left="49%";
+                align_burguer(toggle_nav);
                 //x.style.hover="color:white";
                 document.getElementById("myNav").style.visibility = "visible";
                 document.getElementById("myNav").style.height = "100%";
@@ -193,7 +205,7 @@
                 x.classList.toggle("change");
                 x.style.position="absolute";
                 x.style.top="auto";
-                align_burguer();
+                align_burguer(toggle_nav);
                 document.getElementById("myNav").style.visibility = "collapse";
                 document.getElementById("myNav").style.height = "0%";
                 $('#SiteBody').slideDown('fast');   
