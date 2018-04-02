@@ -8,9 +8,8 @@
       <a href="https://luiscristovao.github.io/Projects/DancingSquaresCanvas/DancingSquares.html"><img src="SiteFolder/Images/DancingSquaresLowRes2.gif" style="width:100%"></a>
     </div>
     <div class="col-sm-4">
-      <h3>Column 3</h3>        
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+      <h3>Calculator Game!</h3>        
+      <a href="https://luiscristovao.github.io/Projects/AnimationProject/Calculator2.html"><img src="SiteFolder/Images/Calculator.gif" style="width:100%"></a>
     </div>
   </div>
 ##########
