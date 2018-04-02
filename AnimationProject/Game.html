@@ -104,6 +104,7 @@
     var EvilEvolve;
     var Intro=[];
     var Idle=[];
+    var BothAttack=[];
     var actualAnimationRunning;
     var menu;
     var game;
@@ -1151,7 +1152,7 @@
                             //position 1 is the color of text
                             this.WinnigText[1]='black';
                             //Put animation in stack so that in next stage it does not break
-                            this.AnimationStack.push(Idle[0]);
+                            this.AnimationStack.push(BothAttack[Math.floor(Math.random()*BothAttack.length)]);
                         }
                         
                         
@@ -1745,10 +1746,11 @@
         var adressEvilAttacks="images/EvilAttacks/";
         var adressEvilDefense="images/EvilDefense/";
         var adressEvilEvolve="images/EvilEvolve/";
-        var loading=100/8;
+        var adressBothAttack="images/BothAttack/"
+        var loading=100/9;
         
         if(stages==0){
-            menu.moveBar(loading*stages);
+            menu.moveBar(Math.round(loading*stages));
             menu.Buttons['GoodText'].style.visibility="visible";
             menu.Buttons['GoodText'].innerHTML="LOADING...";
             //Get Intro Images
@@ -1768,7 +1770,7 @@
             }
         }
         if(stages==1){
-            menu.moveBar(loading*stages);
+            menu.moveBar(Math.round(loading*stages));
             //Get Idle Images
             var number_of_folders=parseInt(readTextFile(adressIdle+"/Index.txt"));
             console.log("Numeber:"+number_of_folders);
@@ -1786,7 +1788,7 @@
             }
         }
         if(stages==2){
-            menu.moveBar(loading*stages);
+            menu.moveBar(Math.round(loading*stages));
             //Get GoodAttacks Images
             var number_of_folders=parseInt(readTextFile(adressGoodAttacks+"/Index.txt"));
             console.log("Numeber:"+number_of_folders);
@@ -1804,7 +1806,7 @@
             }
         }
         if(stages==3){
-            menu.moveBar(loading*stages);
+            menu.moveBar(Math.round(loading*stages));
              //Get EvilDefense Images
             var number_of_folders=parseInt(readTextFile(adressEvilDefense+"/Index.txt"));
             console.log("Numeber:"+number_of_folders);
@@ -1822,7 +1824,7 @@
             }
         }
         if(stages==4){
-            menu.moveBar(loading*4);
+            menu.moveBar(Math.round(loading*stages));
             //Get EvilAttacks Images
             var number_of_folders=parseInt(readTextFile(adressEvilAttacks+"/Index.txt"));
             console.log("Numeber:"+number_of_folders);
@@ -1840,7 +1842,7 @@
             }
         }
         if(stages==5){
-            menu.moveBar(loading*stages);
+            menu.moveBar(Math.round(loading*stages));
             //Get GoodDefense Images
             var number_of_folders=parseInt(readTextFile(adressGoodDefense+"/Index.txt"));
             console.log("Numeber:"+number_of_folders);
@@ -1858,7 +1860,7 @@
             }
         }
         if(stages==6){
-            menu.moveBar(loading*stages);
+            menu.moveBar(Math.round(loading*stages));
             //GetGoodPowerUps
             GoodEvolve={
                 'Health':[],
@@ -1888,7 +1890,7 @@
             }
         }
         if(stages==7){
-            menu.moveBar(loading*stages);
+            menu.moveBar(Math.round(loading*stages));
             //GetEvilPowerUps
             EvilEvolve={
                 'Health':[],
@@ -1916,9 +1918,32 @@
                 }
                 
             }
-            menu.moveBar(100);
-            menu.Buttons['GoodText'].style.visibility="hidden";
+            
         }
+        if(stages==8){
+            menu.moveBar(Math.round(loading*stages));
+            menu.Buttons['GoodText'].style.visibility="visible";
+            menu.Buttons['GoodText'].innerHTML="LOADING...";
+            //Get Intro Images
+            var number_of_folders=parseInt(readTextFile(adressBothAttack+"/Index.txt"));
+            console.log("Numeber:"+number_of_folders);
+            var animation_images=[];
+            var finalAdress;
+            for(j=0;j<number_of_folders;j++){
+                almost_final_adress=adressBothAttack+j+"/";
+                number_of_images=parseInt(readTextFile(almost_final_adress+"Index.txt"));
+                for(i=0;i<number_of_images;i++){
+                    finalAdress=almost_final_adress+i+".jpg";
+                    try{animation_images[i]=loadImage(finalAdress);}
+                    catch(err){console.log("Error Loading Image");haveFiles=false;}
+                }
+                BothAttack.push(animation_images);
+            }
+            menu.moveBar(100);
+        }
+        //end of loading
+        
+        menu.Buttons['GoodText'].style.visibility="hidden";
     } 
     
    
@@ -1944,7 +1969,7 @@
     function Main(){
         canvas.width=window.innerWidth;
         canvas.height=window.innerHeight;
-        if(stages<8){
+        if(stages<9){
             get_all_animations(stages);
             stages++;
         }
