@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-sm-4">
       <h3>Good vs Evil HTML Game!</h3>
-      <a href="https://luiscristovao.github.io/Projects/AnimationProject/Game.html"><img src="SiteFolder/Images/GoodVsEvil.gif" style="width:100%"></a>
+      <a href="https://luiscristovao.github.io/Projects/AnimationProject/Game.html"><img src="SiteFolder/Images/GoodVsEvilLowRes.gif" style="width:100%"></a>
     </div>
     <div class="col-sm-4">
       <h3>Column 2</h3>
