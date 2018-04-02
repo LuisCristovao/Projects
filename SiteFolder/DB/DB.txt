@@ -4,7 +4,7 @@
       <a href="https://luiscristovao.github.io/Projects/AnimationProject/Game.html"><img src="SiteFolder/Images/GoodVsEvilLowRes.gif" style="width:100%"></a>
     </div>
     <div class="col-sm-4">
-      <h3>Fun HTML Canvas Simulation.</h3>
+      <h3>HTML Canvas Simulation.</h3>
       <a href="https://luiscristovao.github.io/Projects/DancingSquaresCanvas/DancingSquares.html"><img src="SiteFolder/Images/DancingSquaresLowRes.gif" style="width:100%"></a>
     </div>
     <div class="col-sm-4">
