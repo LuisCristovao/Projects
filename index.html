@@ -177,7 +177,8 @@
                 x.classList.toggle("change");
                 x.style.position="absolute";
                 x.style.top="15%";
-                align_burguer();
+                x.style.left="49%";
+                //align_burguer();
                 //x.style.hover="color:white";
                 document.getElementById("myNav").style.visibility = "visible";
                 document.getElementById("myNav").style.height = "100%";
@@ -257,7 +258,8 @@
     }
     //only show footer when scroll to bottom
     $(window).scroll(function() {
-       if($(window).scrollTop() + $(window).height() == $(document).height()) {
+        console.log($(window).scrollTop() + $(window).height());
+       if($(window).scrollTop() + $(window).height() >= ($(document).height()*(1-0.1))) {
            //alert("bottom!");
            //console.log($(window).scrollTop() + $(window).height());
            //$('footer').slideUp('fast');
