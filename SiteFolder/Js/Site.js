@@ -91,8 +91,6 @@ function openNav(x) {
 }
 
 
-
-
 function highLight(obj){
 
     obj.style.backgroundColor="blue";
@@ -122,7 +120,7 @@ function LoadProjects(){
 }
 //only show footer when scroll to bottom
 $(window).scroll(function() {
-    console.log($(window).scrollTop() + $(window).height());
+    //console.log($(window).scrollTop() + $(window).height());
    if($(window).scrollTop() + $(window).height() >= ($(document).height()*(1-0.1))) {
        //alert("bottom!");
        //console.log($(window).scrollTop() + $(window).height());
@@ -142,6 +140,9 @@ var loaded_projects=0;
 
 window.onload=Start();
 document.body.onresize=function(){align_burguer(toggle_nav)};
+
+
+//code to resize images after load////////////////////////////
 var imgs = document.images,
     len = imgs.length,
     counter = 0;
@@ -157,5 +158,5 @@ function incrementCounter() {
         align_burguer(false);
     }
 }
-
+/////////////////////////////////////////////////////
 
