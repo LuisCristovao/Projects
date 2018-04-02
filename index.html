@@ -130,12 +130,16 @@
         <div class="bar3"></div>
     </div>
     <script>
+        //On site open do Start function
+        window.onload=Start();
         var allBD;
         function Start(){
             document.getElementById('burguer').style.position="absolute";
             align_burguer();
             allBD=readTextFile('SiteFolder/DB/DB.txt');
             allBD=allBD.split('##########');
+            //Click in Button to load projects
+           
         }
         function readTextFile(file)
         {
@@ -157,7 +161,7 @@
             rawFile.send(null);
             return allText;
         }
-        window.onload=Start();
+        
         
         function align_burguer(){
             var burguer=document.getElementById('burguer');
@@ -196,6 +200,7 @@
                 $('#footer').slideDown('fast');
             }
         }
+        
         /*function closeNav() {
             document.getElementById("myNav").style.visibility = "collapse";
             document.getElementById("myNav").style.height = "0%";
@@ -207,29 +212,17 @@
 </div>
   
 <div id="SiteBody" class="container">
-  <div class="row">
-    <div class="col-sm-4">
-      <h3>Column 1</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
-    </div>
-    <div class="col-sm-4">
-      <h3>Column 2</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
-    </div>
-    <div class="col-sm-4">
-      <h3>Column 3</h3>        
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
-    </div>
-  </div>
+  
 </div>
 <div id="footer" class="navbar navbar-fixed-bottom " style=" background-color: cornflowerblue;" onmouseover="highLight(this)" onmouseout="normal(this)" onclick="LoadProjects()">
     <h3 style="text-align: center"><font color="white">Load More Projects</font></h3>
 </div>    
 <script>
     var loaded_projects=0;
+    //Load first projects
+    LoadProjects();
+    
+    
     function highLight(obj){
       
         obj.style.backgroundColor="blue";
