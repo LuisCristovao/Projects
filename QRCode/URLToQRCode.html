@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>URL TO QRCode</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  
+  
+</head>
+<body>
+
+<h1 id=label_1 > Put the URL to generate the QRcode</h1>
+<div class="container">
+  
+  
+    <div class="form-group">
+      <label for="usr">URL</label>
+      <input type="text" class="form-control" id="usr">
+    </div>
+    
+	
+	<button id ="qr"  class="btn btn-default btn-lg">Generate QR Code</button>
+	
+	
+<script type="text/javascript" src="QRGen.js"></script>
+</div>
+<p id="output"></p>
+<div class="container">
+<img id="qr_img" src="https://api.qrserver.com/v1/create-qr-code/?data=HelloWorld&amp;size=100x100" alt="" title="" style="Display:none"  />
+</div>
+ </body>
+
+</html>
