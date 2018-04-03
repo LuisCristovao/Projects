@@ -9,7 +9,7 @@
     </div>
     <div class="col-sm-4">
       <h3>Calculator Game!</h3>        
-      <a href="https://luiscristovao.github.io/Projects/AnimationProject/Calculator2.html"><video autoplay loop muted style="width:100%"><source src="SiteFolder/Videos/Calculator2.mp4" ></video></a>
+      <a href="https://luiscristovao.github.io/Projects/AnimationProject/Calculator2.html"><video autoplay loop muted style="width:100%"><source src="SiteFolder/Videos/CalculatorSlice.mp4" ></video></a>
     </div>
   </div>
 ##########
