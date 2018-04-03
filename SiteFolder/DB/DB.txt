@@ -5,7 +5,7 @@
     </div>
     <div class="col-sm-4">
       <h3>HTML Canvas Simulation.</h3>
-      <a href="https://luiscristovao.github.io/Projects/DancingSquaresCanvas/DancingSquares.html"><video autoplay loop muted style="width:100%"><source type="video/webm" src="SiteFolder/Videos/DancingSquaresLowRes.mp4" ></video></a>
+      <a href="https://luiscristovao.github.io/Projects/DancingSquaresCanvas/DancingSquares.html"><video autoplay loop muted style="width:100%"><source src="SiteFolder/Videos/DancingSquaresSlice2.mp4" ></video></a>
     </div>
     <div class="col-sm-4">
       <h3>Calculator Game!</h3>        
