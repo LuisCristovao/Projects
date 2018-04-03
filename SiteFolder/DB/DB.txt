@@ -15,9 +15,8 @@
 ##########
 <div class="row">
     <div class="col-sm-4">
-      <h3>Column 4</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+      <h3>URL to QRCode</h3>
+      <a href="https://luiscristovao.github.io/Projects/QRCode/URLToQRCode.html"><video autoplay loop muted style="width:100%"><source src="SiteFolder/Videos/QRCode.mp4" ></video></a>
     </div>
     <div class="col-sm-4">
       <h3>Column 5</h3>
