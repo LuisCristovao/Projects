@@ -26,7 +26,8 @@ function Copy(){
   copyText.select();
   document.execCommand("Copy");
   $('#copy').html('Copied Text!');
-  setTimeout(function(){ $('#copy').html('Copy Text'); }, 2000);
+  $('#copy').css('color:green');
+  setTimeout(function(){ $('#copy').html('Copy Text');$('#copy').attr('btn btn-default'); }, 1000);
 
 }
 
