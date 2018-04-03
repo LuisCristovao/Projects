@@ -143,12 +143,12 @@ document.body.onresize=function(){align_burguer(toggle_nav)};
 
 
 //code to resize images after load////////////////////////////
-var imgs = document.images,
-    len = imgs.length,
+var videos = document.getElementsByTagName('video'),
+    len = videos.length,
     counter = 0;
 
-[].forEach.call( imgs, function( img ) {
-    img.addEventListener( 'load', incrementCounter, false );
+[].forEach.call( videos, function( video ) {
+    video.addEventListener( 'load', incrementCounter, false );
 } );
 
 function incrementCounter() {
