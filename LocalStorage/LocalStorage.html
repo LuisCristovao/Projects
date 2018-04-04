@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Store</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  
+</head>
+<body>
+
+
+
+
+<h1 id=label_1 > Create your Store!!!</h1>
+<div class="container">
+  <h2>Put the name and price of your products</h2>
+  <!-- <p>The form below contains two input elements; one of type text and one of type password:</p> -->
+    <table width="100%">
+        <tr>
+            <th>
+                <div class="form-group">
+                    <label for="usr">Name Product:</label>
+                    <input type="text" class="form-control" id="usr">
+                </div> 
+                <div class="form-group">		
+                    <label for="pwd">Price:                           (USE A"." FOR DECIMAL NUMBERS) </label>
+                    <input type="number" class="form-control" id="pwd">		
+                </div>
+            </th>
+            <th>
+                <select id="item_list"  multiple class="form-control" style="width=100%">
+                    <!-- <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>-->
+                </select>
+                <button id ="delete_item"  style="display: none" class="btn btn-default btn-lg">Delete Item</button>
+            </th>
+        </tr>
+    </table>
+    
+  <!--<table style="width=100%">
+      <tr>
+          <th>
+              <div class="form-group">
+                  <label for="usr">Name Product:</label>
+                  <input type="text" class="form-control" id="usr">
+              </div>          
+              <div class="form-group">		
+                  <label for="pwd">Price:                           (USE A"." FOR DECIMAL NUMBERS) </label>
+                  <input type="number" class="form-control" id="pwd">		
+              </div>
+          </th>
+          <th>
+              <select multiple class="form-control" style="width=100%">
+                <option>133333333333333333333333333333333333333</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+          </th>
+      </tr>
+  </table>-->
+	<button id ="submit"  class="btn btn-default btn-lg">Submit</button>
+	
+    <a id ="next" href="GeneratedStore.html" class="btn btn-default btn-lg">Generate Page</a>
+	<button id ="qr"  class="btn btn-default btn-lg">Generate QR Code for store</button>
+	<button id="clear" class="btn btn-default ">Clear Previouse Storage</button>
+	
+  <script type="text/javascript" src="LocalStorage.js"></script>
+</div>
+<p id="output"></p>
+<div class="container">
+<img id="qr_img" src="https://api.qrserver.com/v1/create-qr-code/?data=HelloWorld&amp;size=100x100" alt="" title="" style="Display:none"  />
+</div>
+ </body>
+
+</html>
