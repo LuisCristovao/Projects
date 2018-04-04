@@ -43,5 +43,16 @@
     <h3 style="text-align: center"><font color="white">Load More Projects</font></h3>
 </div>    
 <script src="SiteFolder/Js/Site.js"></script>
+<script>
+    var time=0;
+    var dt=0;
+    var startTime=new Date().getTime();
+    function Fps(){
+        dt = 1E-3 * (new Date().getTime() - startTime);
+        startTime = new Date().getTime();
+        time += dt%10000;
+    }
+    window.requestAnimationFrame(Fps);
+</script>
 </body>
 </html>
