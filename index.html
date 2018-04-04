@@ -50,7 +50,9 @@
     function Fps(){
         dt = 1E-3 * (new Date().getTime() - startTime);
         startTime = new Date().getTime();
-        time += dt%10000;
+        //time += dt%10000;
+        console.log(dt);
+        window.requestAnimationFrame(Fps);
     }
     window.requestAnimationFrame(Fps);
 </script>
