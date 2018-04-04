@@ -51,11 +51,11 @@ function align_burguer(panel){
         }
     }
     //change images size
-    var imgs = document.getElementsByTagName("img");
-    for(i=0;i<imgs.length;i++){
+    var objs = document.getElementsByTagName("img");
+    for(i=0;i<objs.length;i++){
         if(i!=0){
-            imgs[i].width=imgs[0].width;
-            imgs[i].height=imgs[0].height;    
+            objs[i].width=objs[0].width;
+            objs[i].height=objs[0].height;    
         }
     }
 }
@@ -143,12 +143,12 @@ document.body.onresize=function(){align_burguer(toggle_nav)};
 
 
 //code to resize images after load////////////////////////////
-var videos = document.getElementsByTagName('video'),
-    len = videos.length,
+var objs = document.getElementsByTagName('img'),
+    len = objs.length,
     counter = 0;
 
-[].forEach.call( videos, function( video ) {
-    video.addEventListener( 'load', incrementCounter, false );
+[].forEach.call( objs, function( obj ) {
+    obj.addEventListener( 'load', incrementCounter, false );
 } );
 
 function incrementCounter() {
