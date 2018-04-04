@@ -155,6 +155,8 @@ function incrementCounter() {
     counter++;
     if ( counter === len ) {
         console.log( 'All images loaded!' );
+        document.getElementById('debug').innerHTML="All gifs loaded!";
+        setTimeout(function(){document.getElementById('debug').innerHTML="<font color='white'>See Some of my Projects!</font>"},5000);
         align_burguer(false);
     }
 }
