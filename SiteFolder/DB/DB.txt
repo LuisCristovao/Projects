@@ -37,5 +37,10 @@
       <h3>Local Pass Manager</h3>
       <a href="https://github.com/LuisCristovao/Local_Password_Manager_Server"><img src="SiteFolder/Images/PassManager.gif" style="width:100%"></a>
     </div>
+    <div class="col-sm-4">
+      <h3>Old GitHub Projects</h3>
+      <p>Go check out mainly my projects with Basic Video/Image Processing with JS.</p>
+      <a href="https://secretid2.github.io/Projects">Click Here To Go There!</a>
+    </div>
     
 ##########
