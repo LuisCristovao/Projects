@@ -30,25 +30,12 @@
 ##########
 <div class="row">
     <div class="col-sm-4">
-      <h3>Column 7</h3>
-      <p>Lorem ipsAAAAAAAAAAAAAAA adipisicing elit...</p>
-      <p>Ut enim ad minim veniam,CCCCCCC CCCCCCCCmco laboris...</p>
+      <h3>Master Thesis Project</h3>
+      <a href="#"><img src="SiteFolder/Images/Master_Thesis.gif" style="width:100%"></a>
     </div>
     <div class="col-sm-4">
-      <h3>Column 8</h3>
-      <p>Lorem ipsDDDDDDDDDDDDDDonsectetur adipisicing elit...</p>
-      <p>U999999999999999citation ullamco laboris...</p>
+      <h3>Local Pass Manager</h3>
+      <a href="https://github.com/LuisCristovao/Local_Password_Manager_Server"><img src="SiteFolder/Images/PassManager.gif" style="width:100%"></a>
     </div>
-    <div class="col-sm-4">
-      <h3>Column 9</h3>        
-      <p>Lorem ipsDFGGGGG GGGGG GGGGGG GGGGGetur adipisicing elit...</p>
-      <p>Ut enimSSSS SSSSSSS SSSSSSS SSSsOOO OOOOOOOOOo laboris...</p>
-    </div>
-  </div>
+    
 ##########
-<div class="row">
-	<div class="col-sm-4">
-      		<h3>Column 10</h3>
-      		<img src="SiteFolder/Images/giphy.gif" style="width:100%">
-    	</div>
-</div>
