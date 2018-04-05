@@ -23,9 +23,8 @@
       <a href="https://luiscristovao.github.io/Projects/LocalStorage/LocalStorage.html"><img src="SiteFolder/Images/LocalStore.gif" style="width:100%"></a>
     </div>
     <div class="col-sm-4">
-      <h3>Column 6</h3>        
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+      <h3>Old GitHub Game</h3>        
+      <a href="https://secretid2.github.io/Projects/DashGame/DashGame.html"><img src="SiteFolder/Images/DashGame.gif" style="width:100%"></a>
     </div>
 </div>
 ##########

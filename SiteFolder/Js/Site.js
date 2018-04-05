@@ -115,7 +115,7 @@ function LoadProjects(){
 
         loaded_projects++;
     }
-    //setTimeout(function(){window.scrollTo(0,window.innerHeight)},200);
+    setTimeout(function(){window.scrollTo(0,window.innerHeight)},200);
     align_burguer(false);
 }
 //only show footer when scroll to bottom
@@ -178,8 +178,8 @@ function incrementCounter() {
     counter++;
     if ( counter === len ) {
         console.log( 'All images loaded!' );
-        document.getElementById('debug').innerHTML="All "+counter+" gifs loaded!";
-        setTimeout(function(){document.getElementById('debug').innerHTML="<font color='white'>See Some of my Projects!</font>"},5000);
+        /*document.getElementById('debug').innerHTML="All "+counter+" gifs loaded!";
+        setTimeout(function(){document.getElementById('debug').innerHTML="<font color='white'>See Some of my Projects!</font>"},5000);*/
         align_burguer(false);
     }
 }
