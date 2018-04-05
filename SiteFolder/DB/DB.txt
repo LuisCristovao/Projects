@@ -31,7 +31,7 @@
 <div class="row">
     <div class="col-sm-4">
       <h3>Master Thesis Project</h3>
-      <a href="#"><img src="SiteFolder/Images/Master_Thesis.gif" style="width:100%"></a>
+      <a href="https://www.youtube.com/watch?v=tR6-5OFh-kg"><img src="SiteFolder/Images/Master_Thesis.gif" style="width:100%"></a>
     </div>
     <div class="col-sm-4">
       <h3>Local Pass Manager</h3>
