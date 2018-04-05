@@ -115,7 +115,7 @@ function LoadProjects(){
 
         loaded_projects++;
     }
-    setTimeout(function(){window.scrollTo(0,window.innerHeight)},200);
+    setTimeout(function(){window.scrollTo(0,$(document).height())},300);
     align_burguer(false);
 }
 //only show footer when scroll to bottom
