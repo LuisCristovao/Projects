@@ -115,7 +115,7 @@ function LoadProjects(){
 
         loaded_projects++;
     }
-    setTimeout(function(){window.scrollTo(0,window.innerHeight)},200);
+    //setTimeout(function(){window.scrollTo(0,window.innerHeight)},200);
     align_burguer(false);
 }
 //only show footer when scroll to bottom
@@ -131,7 +131,30 @@ $(window).scroll(function() {
         document.getElementById('footer').style.visibility="collapse";
     }
 });
-
+class Image{
+    constructor(gif_src,img_src=null){
+        this.gif_src=gif_src;
+        this.img_src=img_src;
+        this.Init();
+    }
+    Init(){
+        
+    }
+}
+class FPS{
+    constructor(){
+        this.dt=0;
+        this.start_time=new Date().getTime();
+        this.Run();
+    }
+    Run(){
+        this.dt = 1E-3 * (new Date().getTime() - this.startTime);
+        this.startTime = new Date().getTime();
+        //time += dt%10000;
+        console.log(this.dt);
+        window.requestAnimationFrame(this.Run());
+    }
+}
 //Main--------------------------------
 //On site open do Start function
 var allBD;
@@ -140,9 +163,9 @@ var loaded_projects=0;
 
 window.onload=Start();
 document.body.onresize=function(){align_burguer(toggle_nav)};
+//var fps=new FPS();
 
-
-//code to resize images after load////////////////////////////
+/////////////////code to resize images after load////////////////////////////
 var objs = document.getElementsByTagName('img'),
     len = objs.length,
     counter = 0;
@@ -155,10 +178,10 @@ function incrementCounter() {
     counter++;
     if ( counter === len ) {
         console.log( 'All images loaded!' );
-        document.getElementById('debug').innerHTML="All gifs loaded!";
+        document.getElementById('debug').innerHTML="All "+counter+" gifs loaded!";
         setTimeout(function(){document.getElementById('debug').innerHTML="<font color='white'>See Some of my Projects!</font>"},5000);
         align_burguer(false);
     }
 }
-/////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 
