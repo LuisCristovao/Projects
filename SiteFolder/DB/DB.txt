@@ -1,5 +1,17 @@
 <div class="row">
     <div class="col-sm-4">
+      <h3>Basic Machine Learning Server</h3>
+      <a href="https://basic-ml-server.herokuapp.com"><img  src="SiteFolder/Images/MLServer.gif" style="width:100%;"></a>
+    </div>
+    <div class="col-sm-4">
+      <h3>File Upload Server.</h3>
+      <a href="https://upload-server-bottle.herokuapp.com"><img src="SiteFolder/Images/UploadFilesServer.gif" style="width:100%"></a>
+    </div>
+    
+  </div>
+##########
+<div class="row">
+    <div class="col-sm-4">
       <h3>Good vs Evil HTML Game!</h3>
       <a href="https://luiscristovao.github.io/Projects/AnimationProject/Game.html"><img  src="SiteFolder/Images/GoodVsEvilLowRes.gif" style="width:100%;"></a>
     </div>
