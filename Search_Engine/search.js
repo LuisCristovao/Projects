@@ -22,7 +22,13 @@ class ProWords{
 }*/
 
 
-
+/*function supercompare(original,tocompare){
+    if(original.localeCompare(tocompare)==0){
+        return 100;
+    }else{
+        
+    }
+}*/
 
 function Show(text){
     console.log(text.value);
