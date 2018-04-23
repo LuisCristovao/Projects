@@ -28,6 +28,7 @@ function Show(text){
     console.log(text.value);
 }
 function WordArray(text){
+    words=[];
     lines=text.value.split("\n");
     lines.forEach(function(line){
         line.split(' ').forEach(function(word){
