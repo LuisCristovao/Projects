@@ -5,7 +5,7 @@ function Show(text){
     console.log(text.value);
 }
 function WordArray(text){
-    words=text.split(" ");
+    words=text.value.split(" ");
 }
 all_text.addEventListener("input",function(){WordArray(all_text)});
 search.addEventListener("input",function(){Show(search)});
