@@ -34,11 +34,9 @@ function supercompare(search_word,word){
             if(search_word[i]==word[i]){
                 matches++;
             }
-            else{
-                break;
-            }
+            
         }
-        var compare_index=Math.round(matches/(word.length+dif));
+        var compare_index=matches/(word.length);
         return compare_index;
     }
 }
@@ -81,7 +79,7 @@ function liveSearch(){
         for(key in words){
             compare_index=supercompare(search_text,key.toLowerCase())
             //console.log("Compare index: "+compare_index);
-            if(compare_index==1){
+            if(compare_index>0.5){
                 console.log(key);
                 console.log()
                 //if key is already on liveserarch bar
