@@ -25,9 +25,9 @@ class ProWords{
 
 function supercompare(search_word,word){
     
-    if(search_word.localeCompare(word)==0){
+    /*if(search_word.localeCompare(word)==0){
         return 1; //comparation index
-    }else{
+    }else{*/
         var dif=Math.abs(search_word.length-word.length);
         var matches=0;
         for(i=0;i<word.length;i++){
@@ -38,7 +38,7 @@ function supercompare(search_word,word){
         }
         var compare_index=matches/(word.length+dif);
         return compare_index;
-    }
+    //}
 }
 
 function Show(text){
