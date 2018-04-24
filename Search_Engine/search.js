@@ -23,13 +23,25 @@ class ProWords{
 }*/
 
 
-/*function supercompare(original,tocompare){
+function supercompare(search_word,word){
+    
     if(original.localeCompare(tocompare)==0){
-        return 100;
+        return 100; //comparation index
     }else{
-        
+        var dif=Math.abs(search_word.length-word.length);
+        var matches=0;
+        for(i=0;i<word.length;i++){
+            if(search_word[i]==word[i]){
+                matches++;
+            }
+            else{
+                break;
+            }
+        }
+        var compare_index=Math.round(Math.abs(matches-dif)/word.length);
+        return compare_index;
     }
-}*/
+}
 
 function Show(text){
     console.log(text.value);
