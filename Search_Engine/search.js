@@ -36,7 +36,7 @@ function supercompare(search_word,word){
             }
             
         }
-        var compare_index=matches/(word.length);
+        var compare_index=matches/(word.length+dif);
         return compare_index;
     }
 }
@@ -79,16 +79,16 @@ function liveSearch(){
         for(key in words){
             compare_index=supercompare(search_text,key.toLowerCase())
             //console.log("Compare index: "+compare_index);
-            if(compare_index>0.5){
-                console.log(key);
-                console.log()
+            if(compare_index>0.3){
+                //console.log(key);
+                //console.log()
                 //if key is already on liveserarch bar
                 if(key in prev_words){
                     //do nothing
                 }else{
                     
                         prev_words[key]=key;
-                        $('#live_search').append('<p onmouseover="on(this,\'rgb(170,170,170)\')"  onmouseout="on(this,\'rgb(255,255,255)\')" onclick="put(this)">'+key+'</p>');
+                        $('#live_search').append('<p onmouseover="on(this,\'rgb(170,170,170)\')"  onmouseout="on(this,\'rgb(255,255,255)\')" onclick="put(this)">'+key+' -> '+compare_index+'</p>');
 
                 }        
             }
