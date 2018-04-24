@@ -61,23 +61,22 @@ function liveSearch(){
             
             if(search_text.localeCompare(key.toLowerCase())==0){
                 console.log(key);
-                /*for(prev_word in prev_words){
-                    var count=0;
-                    if(key.localeCompare(prev_word)!=0){
-                        count++;
-                    }
-                    if(count==Object.keys(prev_words).length){*/
-                        
+                //if key is already on liveserarch bar
+                if(key in prev_words){
+                    //do nothing
+                }else{
+                    
                         prev_words[key]=key;
                         $('#live_search').append('<p onmouseover="on(this,\'rgb(170,170,170)\')"  onmouseout="on(this,\'rgb(255,255,255)\')" onclick="put(this)">'+key+'</p>');
-                    //}
-                }
-                
+
+                }        
             }
+                
         }
     }
+}
     
-//}
+
 function on(element,color_str){
     element.style.backgroundColor=color_str;
 }
