@@ -39,6 +39,11 @@ function WordArray(text){
     lines=text.value.split("\n");
     lines.forEach(function(line){
         line.split(' ').forEach(function(word){
+            word=word.replace(',','');
+            word=word.replace('.','');
+            word=word.replace(';','');
+            word=word.replace(':','');
+            word=word.replace('...','');
             words[word]=word;
         });
     });
