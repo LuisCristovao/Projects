@@ -25,8 +25,8 @@ class ProWords{
 
 function supercompare(search_word,word){
     
-    if(original.localeCompare(tocompare)==0){
-        return 100; //comparation index
+    if(search_word.localeCompare(word)==0){
+        return 1; //comparation index
     }else{
         var dif=Math.abs(search_word.length-word.length);
         var matches=0;
@@ -38,7 +38,7 @@ function supercompare(search_word,word){
                 break;
             }
         }
-        var compare_index=Math.round(Math.abs(matches-dif)/word.length);
+        var compare_index=Math.round(matches/(word.length+dif));
         return compare_index;
     }
 }
@@ -79,9 +79,11 @@ function liveSearch(){
     else{
         
         for(key in words){
-            
-            if(search_text.localeCompare(key.toLowerCase())==0){
+            compare_index=supercompare(search_text,key.toLowerCase())
+            //console.log("Compare index: "+compare_index);
+            if(compare_index==1){
                 console.log(key);
+                console.log()
                 //if key is already on liveserarch bar
                 if(key in prev_words){
                     //do nothing
