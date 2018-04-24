@@ -67,17 +67,15 @@ function liveSearch(){
     var search_list={};
     var compare_list={};
     //order from best to worst
-    order_list=[];
+    var order_list=[];
     
     $('#live_search').html("");
-        prev_words={};
-        prev_words['']='';
+        
     
     search_text=search.value.toLowerCase();
     if(search.value==""){
         $('#live_search').html("");
-        prev_words={};
-        prev_words['']='';
+        
     }
     else{
         
@@ -85,50 +83,33 @@ function liveSearch(){
             compare_index=supercompare(search_text,key.toLowerCase())
             //console.log("Compare index: "+compare_index);
             if(compare_index>0.3){
-                //console.log(key);
-                //console.log()
-                //if key is already on liveserarch bar
-                if(key in prev_words){
-                    //do nothing
-                }else{
-                        prev_words[key]=key;
-                        if(search_list[key]==null){
-                            //does not exist in search list
-                            if(compare_index>=max){
-                                /*old_list=$.extend({}, search_list);
-                                old_compare=$.extend({}, compare_list);
-                                search_list={};
-                                compare_list={};
-                                search_list[key]=key;
-                                compare_list[key]=compare_index;
-                                //Object.assign({}, o1, o2, o3);
-                                search_list=Object.assign(search_list,old_list);
-                                compare_list=Object.assign(compare_list,old_compare);
-                                max=compare_index;*/
-                                old_order=order_list.slice(0);//clone array
-                                order_list=[];
-                                order_list.push([key,compare_index]);
-                                order_list.concat(old_order);
-                                search_list[key]=key;
-                                compare_list[key]=compare_index
-                                max=compare_index;
-                            }
-                            else{
-                                order_list.push([key,compare_index]);
-                                search_list[key]=key;
-                                compare_list[key]=compare_index;
-                            }
-                        }
+                //prev_words[key]=key;
+                if(search_list[key]==null){
+                    //does not exist in search list
+                        search_list[key]=compare_index;
                         
-                        //$('#live_search').append('<p onmouseover="on(this,\'rgb(170,170,170)\')"  onmouseout="on(this,\'rgb(255,255,255)\')" onclick="put(this)">'+key+' -> '+compare_index+'</p>');
-
-                }        
+                }
             }
-            
-                
+                        
+        }        
+          
+        //dictionary to array
+        for(key in search_list){
+            order_list.push([key,search_list[key]]);
         }
-        
-        
+        //order array
+        for(i=0;i<order_list.length;i++){
+            var value=order_list[i][1];
+            for(j=0;j<order_list.length;j++){
+                if(order_list[j][1]<value){
+                    auxj=order_list[j];
+                    auxi=order_list[i];
+                    order_list[i]=auxj;
+                    order_list[j]=auxi;
+                    
+                }
+            }
+        }
         for(i=0;i<order_list.length;i++){
                 $('#live_search').append('<p onmouseover="on(this,\'rgb(170,170,170)\')"  onmouseout="on(this,\'rgb(255,255,255)\')" onclick="put(this)">'+order_list[i][0]+' -> '+order_list[i][1]+'</p>');
         }
