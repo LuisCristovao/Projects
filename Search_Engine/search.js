@@ -1,6 +1,6 @@
 var all_text=document.getElementById("text");
 var search=document.getElementById("search");
-var words=[];
+var words={};
 
 /*class ProLetter{
     contructor(letter,percentage){
@@ -34,11 +34,11 @@ function Show(text){
     console.log(text.value);
 }
 function WordArray(text){
-    words=[];
+    words={};
     lines=text.value.split("\n");
     lines.forEach(function(line){
         line.split(' ').forEach(function(word){
-            words.push(word);
+            words[word]=word;
         });
     });
         
@@ -57,19 +57,19 @@ function liveSearch(){
     }
     else{
         
-        for(i=0;i<words.length ;i++){
+        for(key in words){
             
-            if(search_text.localeCompare(words[i].toLowerCase())==0){
-                console.log(words[i]);
+            if(search_text.localeCompare(key.toLowerCase())==0){
+                console.log(key);
                 prev_words.forEach(function(prev_word){
                     var count=0;
-                    if(words[i].localeCompare(prev_word)!=0){
+                    if(key.localeCompare(prev_word)!=0){
                         count++;
                     }
                     if(count==prev_words.length){
                         
-                        prev_words.push(words[i]);
-                        $('#live_search').append('<p onmouseover="on(this,\'rgb(170,170,170)\')"  onmouseout="on(this,\'rgb(255,255,255)\')" onclick="put(this)">'+words[i]+'</p>');
+                        prev_words.push(key);
+                        $('#live_search').append('<p onmouseover="on(this,\'rgb(170,170,170)\')"  onmouseout="on(this,\'rgb(255,255,255)\')" onclick="put(this)">'+key+'</p>');
                     }
                 });
                 
