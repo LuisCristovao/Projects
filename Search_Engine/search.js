@@ -49,6 +49,10 @@ function liveSearch(){
     //$('#live_search').append('<p onmouseover="on(this,\'rgb(170,170,170)\')"  onmouseout="on(this,\'rgb(255,255,255)\')" onclick="put(this)">Bla1</p>');
     //$('#live_search').append('<p onmouseover="on(this,\'rgb(170,170,170)\')"  onmouseout="on(this,\'rgb(255,255,255)\')" onclick="put(this)">Bla333</p>');
     
+    $('#live_search').html("");
+        prev_words={};
+        prev_words['']='';
+    
     search_text=search.value.toLowerCase();
     if(search.value==""){
         $('#live_search').html("");
