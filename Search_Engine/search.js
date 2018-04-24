@@ -66,6 +66,9 @@ function liveSearch(){
     var max=0;
     var search_list={};
     var compare_list={};
+    //order from best to worst
+    order_list=[];
+    
     $('#live_search').html("");
         prev_words={};
         prev_words['']='';
@@ -92,7 +95,7 @@ function liveSearch(){
                         if(search_list[key]==null){
                             //does not exist in search list
                             if(compare_index>=max){
-                                old_list=$.extend({}, search_list);
+                                /*old_list=$.extend({}, search_list);
                                 old_compare=$.extend({}, compare_list);
                                 search_list={};
                                 compare_list={};
@@ -101,9 +104,17 @@ function liveSearch(){
                                 //Object.assign({}, o1, o2, o3);
                                 search_list=Object.assign(search_list,old_list);
                                 compare_list=Object.assign(compare_list,old_compare);
+                                max=compare_index;*/
+                                old_order=order_list.slice(0);//clone array
+                                order_list=[];
+                                order_list.push([key,compare_index]);
+                                order_list.concat(old_order);
+                                search_list[key]=key;
+                                compare_list[key]=compare_index
                                 max=compare_index;
                             }
                             else{
+                                order_list.push([key,compare_index]);
                                 search_list[key]=key;
                                 compare_list[key]=compare_index;
                             }
@@ -116,8 +127,10 @@ function liveSearch(){
             
                 
         }
-        for(key in compare_list){
-                $('#live_search').append('<p onmouseover="on(this,\'rgb(170,170,170)\')"  onmouseout="on(this,\'rgb(255,255,255)\')" onclick="put(this)">'+key+' -> '+compare_list[key]+'</p>');
+        
+        
+        for(i=0;i<order_list.length;i++){
+                $('#live_search').append('<p onmouseover="on(this,\'rgb(170,170,170)\')"  onmouseout="on(this,\'rgb(255,255,255)\')" onclick="put(this)">'+order_list[i][0]+' -> '+order_list[i][1]+'</p>');
         }
     }
 }
