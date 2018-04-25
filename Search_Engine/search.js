@@ -24,21 +24,62 @@ class ProWords{
 
 
 function supercompare(search_word,word){
-    
-    /*if(search_word.localeCompare(word)==0){
-        return 1; //comparation index
-    }else{*/
-        var dif=Math.abs(search_word.length-word.length);
-        var matches=0;
-        for(i=0;i<word.length;i++){
-            if(search_word[i]==word[i]){
-                matches++;
-            }
-            
+    //first method
+    var dif=Math.abs(search_word.length-word.length);
+    var matches=0;
+    var word_freq={};
+    var search_freq={}
+    for(i=0;i<word.length;i++){
+        if(search_word[i]==word[i]){
+            matches++;
         }
-        var compare_index=matches/(word.length+dif);
-        return compare_index;
-    //}
+
+    }
+    var compare_index1=matches/(word.length+dif);
+    //Second methods
+    for(i=0;i<word.length;i++){
+        //if not exists
+        if(word_freq[word[i]]==null){
+            word_freq[word[i]]=1;
+        }//already exists
+        else{
+            var count=word_freq[word[i]];
+            count++;
+            word_freq[word[i]]=count;
+        }
+    }
+    for(i=0;i<search_word.length;i++){
+        //if not exists
+        if(search_freq[search_word[i]]==null){
+            search_freq[search_word[i]]=1;
+        }//already exists
+        else{
+            var count=search_freq[search_word[i]];
+            count++;
+            search_freq[search_word[i]]=count;
+        }
+    }
+    //
+    matches=0;
+    for(var key in search_freq){
+        //both have same letter
+        if(search_freq[key]!=null && word_freq[key]!=null){
+            //
+            if(search_freq[key]==word_freq[key]){
+                matches+=search_freq[key];
+            }
+            else{
+                //give the lowest value of matches
+                matches+=(search_freq[key]<word_freq[key])? search_freq[key] : word_freq[key];
+            }
+        }
+    }
+    var compare_index2=matches/word.length;
+    var compare_index=(compare_index1+compare_index2)/2;
+    
+    //
+    return compare_index;
+   
 }
 
 function Show(text){
@@ -82,7 +123,7 @@ function liveSearch(){
         for(key in words){
             compare_index=supercompare(search_text,key.toLowerCase())
             //console.log("Compare index: "+compare_index);
-            if(compare_index>0.3){
+            if(compare_index>0.5){
                 //prev_words[key]=key;
                 if(search_list[key]==null){
                     //does not exist in search list
