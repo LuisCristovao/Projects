@@ -6,7 +6,8 @@ var words={};
 var prev_words={};
 var wordArrayIndex=0;
 var wordArrayLines=0;
-var step_div=100;
+//var step_div=100;
+var wordcount=0;
 prev_words['']='';
 /*class ProLetter{
     contructor(letter,percentage){
@@ -107,31 +108,44 @@ function supercompare(search_word,word){
 function Show(text){
     console.log(text.value);
 }
-function WordArray(text){
+function WordArray(){
     
     
     
         var line=wordArrayLines[wordArrayIndex];
-        var percentage=Math.round((wordArrayIndex/(wordArrayLines.length))*100);
-        var step=Math.round(wordArrayLines.length/step_div);
+        var percentage=Math.floor((wordArrayIndex/(wordArrayLines.length))*100);
+        var step=Math.round(wordArrayLines.length/Math.ceil(0.1*wordArrayLines.length));
         Loading(percentage.toString()+'%');
-        next_step=wordArrayIndex+step;
-        for(;wordArrayIndex<next_step;wordArrayIndex++)
-        line.split(' ').forEach(function(word){
-            word=word.replace(',','');
-            word=word.replace('.','');
-            word=word.replace(';','');
-            word=word.replace(':','');
-            word=word.replace('...','');
-            word=word.replace('?','');
-            word=word.replace('"','');
-            word=word.replace('(','');
-            word=word.replace(')','');
-            words[word]=word;
-        });
-        wordArrayIndex++;
+        if(percentage<100){
+            
+            
+
+            next_step=wordArrayIndex+step;
+            if(next_step>wordArrayLines.length){
+                next_step=wordArrayLines.length;
+            }
+            for(;wordArrayIndex<next_step;wordArrayIndex++)
+            line.split(' ').forEach(function(word){
+                word=word.replace(',','');
+                word=word.replace('.','');
+                word=word.replace(';','');
+                word=word.replace(':','');
+                word=word.replace('...','');
+                word=word.replace('?','');
+                word=word.replace('"','');
+                word=word.replace('(','');
+                word=word.replace(')','');
+                words[word]=word;
+                wordcount++;
+            });
+            //wordArrayIndex++;
+
+            window.requestAnimationFrame(WordArray);
+        }
+        else{
+            window.cancelAnimationFrame(WordArray);
+        }
     
-        window.requestAnimationFrame(WordArray);
     
 }
 function liveSearch(){
