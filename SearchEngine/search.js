@@ -4,6 +4,9 @@ var load_bible=document.getElementById("lb");
 var filter=document.getElementById("filter");
 var words={};
 var prev_words={};
+var wordArrayIndex=0;
+var wordArrayLines=0;
+var step_div=100;
 prev_words['']='';
 /*class ProLetter{
     contructor(letter,percentage){
@@ -26,13 +29,18 @@ class ProWords{
 
 //percentage is a string in form '10%'
 function Loading(percentage){
-    $('#myBar').html(percentage);
-    $('#myBar').css('width',percentage);
-    if(percentage.localeCompare('100%')==0){
-        setTimeout(function(){
-            $('#myBar').html('0%');
-            $('#myBar').css('width','0%');
-        },1000);
+    real_percentage=parseInt(percentage.split('%')[0]);
+    if(real_percentage<=100){
+        
+        $('#myBar').html(percentage);
+        $('#myBar').css('width',percentage);
+
+        if(real_percentage>=100){
+            setTimeout(function(){
+                $('#myBar').html('0%');
+                $('#myBar').css('width','0%');
+            },1000);
+        }
     }
 }
 
@@ -100,11 +108,15 @@ function Show(text){
     console.log(text.value);
 }
 function WordArray(text){
-    words={};
-    lines=text.value.split("\n");
-    var i=0;
-    lines.forEach(function(line){
-        Loading(Math.round((i/lines.length))*100+'%');
+    
+    
+    
+        var line=wordArrayLines[wordArrayIndex];
+        var percentage=Math.round((wordArrayIndex/(wordArrayLines.length))*100);
+        var step=Math.round(wordArrayLines.length/step_div);
+        Loading(percentage.toString()+'%');
+        next_step=wordArrayIndex+step;
+        for(;wordArrayIndex<next_step;wordArrayIndex++)
         line.split(' ').forEach(function(word){
             word=word.replace(',','');
             word=word.replace('.','');
@@ -117,9 +129,9 @@ function WordArray(text){
             word=word.replace(')','');
             words[word]=word;
         });
-        i++;
-    });
-        
+        wordArrayIndex++;
+    
+        window.requestAnimationFrame(WordArray);
     
 }
 function liveSearch(){
@@ -196,7 +208,11 @@ function LoadBible(){
         if (this.readyState == 4 && this.status == 200) {
             load_bible.innerHTML="<h3>Finished!</h3>";
             all_text.value=this.responseText;
-            WordArray(all_text);
+            //initialize stuff
+            words={};
+            wordArrayIndex=0;
+            wordArrayLines=all_text.value.split('\n');
+            window.requestAnimationFrame(WordArray);
         }
     };
       xhttp.open('get', 'https://raw.githubusercontent.com/mxw/grmr/master/src/finaltests/bible.txt', true);
@@ -204,6 +220,11 @@ function LoadBible(){
 }
 
 
-all_text.addEventListener("input",function(){WordArray(all_text);});
+all_text.addEventListener("input",function(){
+    words={};
+    wordArrayIndex=0;
+    wordArrayLines=all_text.value.split('\n');
+    window.requestAnimationFrame(WordArray);
+});
 search.addEventListener("input",function(){liveSearch();});
 load_bible.addEventListener("click",LoadBible);
