@@ -6,7 +6,7 @@
 	</head>
     <style>
         #myProgress {
-          width: 100%;
+          width: 500px;
           background-color: #dddd;
         }
 
@@ -21,9 +21,10 @@
         
 </style>
 	<body>
-		<i class="fa fa-search" aria-hidden="true"></i><input id="search" placeholder="Type word to search"><div id="live_search" style="border: 1px solid rgb(165, 172, 178);"></div><br><br>
-        <h2>Insert Text here To Search</h2>
-		<textarea id="text" style="width:500px;height:500px;"></textarea>
+		<i class="fa fa-search" aria-hidden="true"></i><input id="search" placeholder="Type word to search"><input id="filter" value="0.5" type="number" max="1" min="0.1" step="0.1">Similarity Percentage<br><div id="live_search" style="border: 1px solid rgb(165, 172, 178);"></div><br><br>
+        <a id="lb" href="#"><h3>Click Here to load text from bible.</h3></a>
+        <h2>Insert Text Here &darr; To Start Searching</h2>
+		<textarea id="text" style="width:500px;height:200px;"></textarea>
         <div id="myProgress">
             <div id="myBar">0%</div>
         </div>

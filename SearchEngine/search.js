@@ -1,5 +1,7 @@
 var all_text=document.getElementById("text");
 var search=document.getElementById("search");
+var load_bible=document.getElementById("lb");
+var filter=document.getElementById("filter");
 var words={};
 var prev_words={};
 prev_words['']='';
@@ -109,6 +111,10 @@ function WordArray(text){
             word=word.replace(';','');
             word=word.replace(':','');
             word=word.replace('...','');
+            word=word.replace('?','');
+            word=word.replace('"','');
+            word=word.replace('(','');
+            word=word.replace(')','');
             words[word]=word;
         });
         i++;
@@ -140,7 +146,7 @@ function liveSearch(){
             //i++;
             compare_index=supercompare(search_text,key.toLowerCase())
             //console.log("Compare index: "+compare_index);
-            if(compare_index>0.5){
+            if(compare_index>filter.value){
                 //prev_words[key]=key;
                 if(search_list[key]==null){
                     //does not exist in search list
@@ -181,16 +187,23 @@ function on(element,color_str){
 function put(element){
     search.value=element.innerHTML;
 }
+
+//Send Http request to get bible text
+function LoadBible(){
+    load_bible.innerHTML="<h3>Loading...</h3>";
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            load_bible.innerHTML="<h3>Finished!</h3>";
+            all_text.value=this.responseText;
+            WordArray(all_text);
+        }
+    };
+      xhttp.open('get', 'https://raw.githubusercontent.com/mxw/grmr/master/src/finaltests/bible.txt', true);
+      xhttp.send();
+}
+
+
 all_text.addEventListener("input",function(){WordArray(all_text);});
 search.addEventListener("input",function(){liveSearch();});
-//Send Http request to get bible text
-var xhttp = new XMLHttpRequest();
-xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-
-        all_text.value=this.responseText;
-        WordArray(all_text);
-    }
-};
-  xhttp.open('get', 'https://raw.githubusercontent.com/mxw/grmr/master/src/finaltests/bible.txt', true);
-  xhttp.send();
+load_bible.addEventListener("click",LoadBible);
