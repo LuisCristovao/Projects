@@ -183,3 +183,14 @@ function put(element){
 }
 all_text.addEventListener("input",function(){WordArray(all_text);});
 search.addEventListener("input",function(){liveSearch();});
+//Send Http request to get bible text
+var xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+
+        all_text.value=this.responseText;
+        WordArray(all_text);
+    }
+};
+  xhttp.open('get', 'https://raw.githubusercontent.com/mxw/grmr/master/src/finaltests/bible.txt', true);
+  xhttp.send();
