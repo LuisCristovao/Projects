@@ -22,6 +22,17 @@ class ProWords{
     }
 }*/
 
+//percentage is a string in form '10%'
+function Loading(percentage){
+    $('#myBar').html(percentage);
+    $('#myBar').css('width',percentage);
+    if(percentage.localeCompare('100%')==0){
+        setTimeout(function(){
+            $('#myBar').html('0%');
+            $('#myBar').css('width','0%');
+        },1000);
+    }
+}
 
 function supercompare(search_word,word){
     //first method
@@ -35,6 +46,7 @@ function supercompare(search_word,word){
         }
 
     }
+    var compare_index0=matches/(word.length);
     var compare_index1=matches/(word.length+dif);
     //Second methods
     for(i=0;i<word.length;i++){
@@ -88,7 +100,9 @@ function Show(text){
 function WordArray(text){
     words={};
     lines=text.value.split("\n");
+    var i=0;
     lines.forEach(function(line){
+        Loading(Math.round((i/lines.length))*100+'%');
         line.split(' ').forEach(function(word){
             word=word.replace(',','');
             word=word.replace('.','');
@@ -97,6 +111,7 @@ function WordArray(text){
             word=word.replace('...','');
             words[word]=word;
         });
+        i++;
     });
         
     
@@ -109,7 +124,7 @@ function liveSearch(){
     var compare_list={};
     //order from best to worst
     var order_list=[];
-    
+    var i=0;
     $('#live_search').html("");
         
     
@@ -121,6 +136,8 @@ function liveSearch(){
     else{
         
         for(key in words){
+            //Loading(Math.round((i/Object.keys(words).length)*100)+'%');
+            //i++;
             compare_index=supercompare(search_text,key.toLowerCase())
             //console.log("Compare index: "+compare_index);
             if(compare_index>0.5){
