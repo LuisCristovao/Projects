@@ -5,7 +5,7 @@ function Start(){
     align_burguer(toggle_nav);
     
     LoadProjects();
-
+    LoadProjects();
 }
 
 
