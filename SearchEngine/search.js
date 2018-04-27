@@ -2,6 +2,7 @@ var all_text=document.getElementById("text");
 var search=document.getElementById("search");
 var load_bible=document.getElementById("lb");
 var filter=document.getElementById("filter");
+var info_text=document.getElementById("info_text");
 var words={};
 var prev_words={};
 var wordArrayIndex=0;
@@ -31,9 +32,12 @@ class ProWords{
 //percentage is a string in form '10%'
 function Loading(percentage){
     real_percentage=parseInt(percentage.split('%')[0]);
+    if(real_percentage>1){
+        info_text.innerHTML='<h3><font color="lightgreen">You can start searching while the text is being processed!</font></h3>';
+    }
     if(real_percentage<=100){
         
-        $('#myBar').html(percentage);
+        $('#myBar').html(percentage+' getting words');
         $('#myBar').css('width',percentage);
 
         if(real_percentage>=100){
@@ -42,6 +46,10 @@ function Loading(percentage){
                 $('#myBar').css('width','0%');
             },1000);
         }
+    }
+    if(real_percentage>=100){
+        info_text.innerHTML='<h3><font color="blue">Finished to get all words from text, there are: '+Object.keys(words).length+' words!</font></h3>';
+        setTimeout(function(){},5000);
     }
 }
 
@@ -124,20 +132,23 @@ function WordArray(){
             if(next_step>wordArrayLines.length){
                 next_step=wordArrayLines.length;
             }
-            for(;wordArrayIndex<next_step;wordArrayIndex++)
-            line.split(' ').forEach(function(word){
-                word=word.replace(',','');
-                word=word.replace('.','');
-                word=word.replace(';','');
-                word=word.replace(':','');
-                word=word.replace('...','');
-                word=word.replace('?','');
-                word=word.replace('"','');
-                word=word.replace('(','');
-                word=word.replace(')','');
-                words[word]=word;
-                wordcount++;
-            });
+            for(;wordArrayIndex<next_step;wordArrayIndex++){
+                line=wordArrayLines[wordArrayIndex];
+                line.split(' ').forEach(function(word){
+                    word=word.replace(',','');
+                    word=word.replace('.','');
+                    word=word.replace(';','');
+                    word=word.replace(':','');
+                    word=word.replace('...','');
+                    word=word.replace('?','');
+                    word=word.replace('"','');
+                    word=word.replace('(','');
+                    word=word.replace(')','');
+                    word=word.replace("'",'');
+                    words[word]=word;
+                    wordcount++;
+                });
+            }
             //wordArrayIndex++;
 
             window.requestAnimationFrame(WordArray);
@@ -211,7 +222,8 @@ function on(element,color_str){
     element.style.backgroundColor=color_str;
 }
 function put(element){
-    search.value=element.innerHTML;
+    
+    search.value=element.innerHTML.split('-')[0];
 }
 
 //Send Http request to get bible text
