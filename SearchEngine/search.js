@@ -145,6 +145,7 @@ function WordArray(){
                     word=word.replace('(','');
                     word=word.replace(')','');
                     word=word.replace("'",'');
+                    word=word.replace("!",'');
                     words[word]=word;
                     wordcount++;
                 });
