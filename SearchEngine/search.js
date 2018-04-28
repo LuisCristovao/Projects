@@ -48,7 +48,7 @@ function Loading(percentage){
         }
     }
     if(real_percentage>=100){
-        info_text.innerHTML='<h3><font color="blue">Finished to get all words from text, there are: '+Object.keys(words).length+' words!</font></h3>';
+        info_text.innerHTML='<h3><font color="blue">Finished to get all words from text, there are: '+Object.keys(words).length+' unique words!</font></h3>';
         setTimeout(function(){},5000);
     }
 }
