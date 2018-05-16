@@ -9,6 +9,9 @@ var wordArrayIndex=0;
 var wordArrayLines=0;
 //var step_div=100;
 var wordcount=0;
+
+var ordered_array_len=0;
+
 prev_words['']='';
 /*class ProLetter{
     contructor(letter,percentage){
@@ -199,16 +202,27 @@ function liveSearch(){
         for(key in search_list){
             order_list.push([key,search_list[key]]);
         }
-        //order array
-        for(i=0;i<order_list.length;i++){
+        //order array with basic bubble sort
+        var i=0;any_change=false;needs_change=true;
+        while(needs_change){
             var value=order_list[i][1];
-            for(j=0;j<order_list.length;j++){
-                if(order_list[j][1]<value){
-                    auxj=order_list[j];
-                    auxi=order_list[i];
-                    order_list[i]=auxj;
-                    order_list[j]=auxi;
-                    
+            j=i+1;
+            if(order_list[j][1]>value){
+                auxj=order_list[j];
+                auxi=order_list[i];
+                order_list[i]=auxj;
+                order_list[j]=auxi;
+                any_change=true;
+            }
+            i++;
+            if(i==order_list.length-1){
+                i=0;
+                //There was no change so it's ordered
+                if(!any_change){
+                    needs_change=false;
+                }
+                else{
+                    any_change=false;
                 }
             }
         }
