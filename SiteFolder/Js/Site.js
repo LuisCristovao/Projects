@@ -1,9 +1,9 @@
 function Start(){
     document.getElementById('burguer').style.position="absolute";
-    allBD=readTextFile('SiteFolder/DB/DB.txt');
+    allBD=readTextFile('SiteFolder/DB/AllProjectsElements.txt');
     allBD=allBD.split('##########');
     align_burguer(toggle_nav);
-    
+    LoadRandom(allBD,3)
     //LoadProjects();
     //LoadProjects();
 }
@@ -99,7 +99,24 @@ function highLight(obj){
 function normal(obj){
     obj.style.backgroundColor="cornflowerblue";
 }
-function LoadProjects(){
+function LoadRandom(db_array,size){
+    var selected=1;
+    var index=Math.floor(Math.random()*db_array.length);
+    var prev_index={};
+    prev_index[index]=index;
+    $('#random_projects').html(db_array[index]);
+    while(selected<size){
+        index=Math.floor(Math.random()*db_array.length);
+        //it is a different index from previous
+        if(prev_index[index]==null){
+            $('#random_projects').append(db_array[index]);
+            selected++;
+            prev_index[index]=index;
+        }
+    }
+}
+
+/*function LoadProjects(){
     if(window.innerWidth>window.innerHeight){
 
         $('#footer').html('<div style="position: relative; left: 50%;" class="loader"></div>');
@@ -117,7 +134,7 @@ function LoadProjects(){
     }
     setTimeout(function(){window.scrollTo(0,$(document).height())},300);
     align_burguer(false);
-}
+}*/
 //only show footer when scroll to bottom
 /*$(window).scroll(function() {
     //console.log($(window).scrollTop() + $(window).height());
