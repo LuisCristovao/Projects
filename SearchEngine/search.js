@@ -204,7 +204,7 @@ function liveSearch(){
         }
         //order array with basic bubble sort
         var i=0;any_change=false;needs_change=true;
-        while(needs_change){
+        while(needs_change && order_list.length>1){
             var value=order_list[i][1];
             j=i+1;
             if(order_list[j][1]>value){
@@ -226,7 +226,7 @@ function liveSearch(){
                 }
             }
         }
-        for(i=0;i<order_list.length;i++){
+        for(i=0;i<order_list.length && order_list.length>0;i++){
                 $('#live_search').append('<p onmouseover="on(this,\'rgb(170,170,170)\')"  onmouseout="on(this,\'rgb(255,255,255)\')" onclick="put(this)">'+order_list[i][0]+' -> '+order_list[i][1]+'</p>');
         }
     }
