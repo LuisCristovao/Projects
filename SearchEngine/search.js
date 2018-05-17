@@ -187,7 +187,7 @@ function liveSearch(){
             //i++;
             compare_index=supercompare(search_text,key.toLowerCase())
             //console.log("Compare index: "+compare_index);
-            if(compare_index>filter.value){
+            if(compare_index>=filter.value){
                 //prev_words[key]=key;
                 if(search_list[key]==null){
                     //does not exist in search list
