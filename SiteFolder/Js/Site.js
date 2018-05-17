@@ -4,8 +4,8 @@ function Start(){
     allBD=allBD.split('##########');
     align_burguer(toggle_nav);
     
-    LoadProjects();
-    LoadProjects();
+    //LoadProjects();
+    //LoadProjects();
 }
 
 
@@ -119,7 +119,7 @@ function LoadProjects(){
     align_burguer(false);
 }
 //only show footer when scroll to bottom
-$(window).scroll(function() {
+/*$(window).scroll(function() {
     //console.log($(window).scrollTop() + $(window).height());
    if($(window).scrollTop() + $(window).height() >= ($(document).height()*(1-0.1))) {
        //alert("bottom!");
@@ -130,7 +130,7 @@ $(window).scroll(function() {
     else{
         document.getElementById('footer').style.visibility="collapse";
     }
-});
+});*/
 class Image{
     constructor(gif_src,img_src=null){
         this.gif_src=gif_src;
