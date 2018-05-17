@@ -1,0 +1,65 @@
+    <div class="col-sm-4">
+      <h3>Basic Machine Learning Server</h3>
+      <a href="https://basic-ml-server.herokuapp.com"><img  src="../Images/MLServer.gif" style="width:100%;"></a>
+    </div>
+##########
+    <div class="col-sm-4">
+      <h3>File Upload Server.</h3>
+      <a href="https://upload-server-bottle.herokuapp.com"><img src="../Images/UploadFilesServer.gif" style="width:100%"></a>
+    </div>
+##########
+    <div class="col-sm-4">
+      <h3>Local Pass Manager</h3>
+      <a href="https://github.com/LuisCristovao/Local_Password_Manager_Server"><img src="../Images/PassManager.gif" style="width:100%"></a>
+    </div>
+##########
+    <div class="col-sm-4">
+      <h3>Good vs Evil HTML Game!</h3>
+      <a href="https://luiscristovao.github.io/Projects/AnimationProject/Game.html"><img  src="../Images/GoodVsEvilLowRes.gif" style="width:100%;"></a>
+    </div>
+##########
+    <div class="col-sm-4">
+      <h3>HTML Canvas Simulation.</h3>
+      <a href="https://luiscristovao.github.io/Projects/DancingSquaresCanvas/DancingSquares.html"><img src="../Images/DancingSquaresLowRes2.gif" style="width:100%"></a>
+    </div>
+##########
+    <div class="col-sm-4">
+      <h3>Calculator Game!</h3>        
+      <a href="https://luiscristovao.github.io/Projects/AnimationProject/Calculator2.html"><img src="../Images/Calculator.gif" style="width:100%"></a>
+    </div>
+##########
+    <div class="col-sm-4">
+      <h3>URL to QRCode</h3>
+      <a href="https://luiscristovao.github.io/Projects/QRCode/URLToQRCode.html"><img src="../Images/QRCode.gif" style="width:100%"></a>
+    </div>
+##########
+    <div class="col-sm-4">
+      <h3>HTML Virtual Store</h3>
+      <a href="https://luiscristovao.github.io/Projects/LocalStorage/LocalStorage.html"><img src="../Images/LocalStore.gif" style="width:100%"></a>
+    </div>
+##########
+    <div class="col-sm-4">
+      <h3>Old GitHub Game</h3>        
+      <a href="https://secretid2.github.io/Projects/DashGame/DashGame.html"><img src="../Images/DashGame.gif" style="width:100%"></a>
+    </div>
+##########
+    <div class="col-sm-4">
+      <h3>Master Thesis Project</h3>
+      <a href="https://www.youtube.com/watch?v=tR6-5OFh-kg"><img src="../Images/Master_Thesis.gif" style="width:100%"></a>
+    </div>
+##########
+    <div class="col-sm-4">
+      <h3>Chat Rooms App</h3>
+      <a href="https://chat-rooms-nodejs.herokuapp.com/"><img src="../Images/ChatRooms.GIF" style="width:100%"></a>
+    </div>
+##########
+    <div class="col-sm-4">
+      <h3>Old GitHub Projects</h3>
+      <p>Go check out mainly my projects with Basic Video/Image Processing with JS.</p>
+      <a href="https://secretid2.github.io/Projects">Click Here To Go There!</a>
+    </div>
+##########
+    <div class="col-sm-4">
+      <h3>Search Engine Project</h3>
+      <a href="https://luiscristovao.github.io/Projects/SearchEngine/search.html"><img src="../Images/SearchEngine.gif" style="width:100%"></a>
+    </div>
