@@ -3,7 +3,8 @@ function Start(){
     allBD=readTextFile('SiteFolder/DB/AllProjectsElements.txt');
     allBD=allBD.split('##########');
     align_burguer(toggle_nav);
-    LoadRandom(allBD,3)
+    LoadRandom(allBD,3);
+    LoadRecent(allBD,3);
     //LoadProjects();
     //LoadProjects();
 }
@@ -115,7 +116,12 @@ function LoadRandom(db_array,size){
         }
     }
 }
-
+function LoadRecent(db_array,size){
+    for(i=0;i<size;i++){
+        $("#recent_projects").append(db_array[i]);
+    }
+    
+}
 /*function LoadProjects(){
     if(window.innerWidth>window.innerHeight){
 

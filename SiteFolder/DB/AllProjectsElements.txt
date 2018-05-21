@@ -1,4 +1,15 @@
+
     <div class="col-sm-4">
+      <h3>Search Engine Project</h3>
+      <a href="https://luiscristovao.github.io/Projects/SearchEngine/search.html"><img src="SiteFolder/Images/SearchEngine.gif" style="width:100%"></a>
+    </div>
+########## 
+    <div class="col-sm-4">
+      <h3>Chat Rooms App</h3>
+      <a href="https://chat-rooms-nodejs.herokuapp.com/"><img src="SiteFolder/Images/ChatRooms.GIF" style="width:100%"></a>
+    </div>
+##########
+<div class="col-sm-4">
       <h3>Basic Machine Learning Server</h3>
       <a href="https://basic-ml-server.herokuapp.com"><img  src="SiteFolder/Images/MLServer.gif" style="width:100%;"></a>
     </div>
@@ -29,6 +40,11 @@
     </div>
 ##########
     <div class="col-sm-4">
+      <h3>Master Thesis Project</h3>
+      <a href="https://www.youtube.com/watch?v=tR6-5OFh-kg"><img src="SiteFolder/Images/Master_Thesis.gif" style="width:100%"></a>
+    </div>
+##########
+    <div class="col-sm-4">
       <h3>URL to QRCode</h3>
       <a href="https://luiscristovao.github.io/Projects/QRCode/URLToQRCode.html"><img src="SiteFolder/Images/QRCode.gif" style="width:100%"></a>
     </div>
@@ -43,23 +59,9 @@
       <a href="https://secretid2.github.io/Projects/DashGame/DashGame.html"><img src="SiteFolder/Images/DashGame.gif" style="width:100%"></a>
     </div>
 ##########
-    <div class="col-sm-4">
-      <h3>Master Thesis Project</h3>
-      <a href="https://www.youtube.com/watch?v=tR6-5OFh-kg"><img src="SiteFolder/Images/Master_Thesis.gif" style="width:100%"></a>
-    </div>
-##########
-    <div class="col-sm-4">
-      <h3>Chat Rooms App</h3>
-      <a href="https://chat-rooms-nodejs.herokuapp.com/"><img src="SiteFolder/Images/ChatRooms.GIF" style="width:100%"></a>
-    </div>
-##########
+
     <div class="col-sm-4">
       <h3>Old GitHub Projects</h3>
       <p>Go check out mainly my projects with Basic Video/Image Processing with JS.</p>
       <a href="https://secretid2.github.io/Projects">Click Here To Go There!</a>
-    </div>
-##########
-    <div class="col-sm-4">
-      <h3>Search Engine Project</h3>
-      <a href="https://luiscristovao.github.io/Projects/SearchEngine/search.html"><img src="SiteFolder/Images/SearchEngine.gif" style="width:100%"></a>
     </div>
