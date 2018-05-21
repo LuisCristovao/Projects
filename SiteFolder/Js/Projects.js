@@ -1,11 +1,11 @@
 function Start(){
     document.getElementById('burguer').style.position="absolute";
-    allBD=readTextFile('../DB/AllProjects.txt');
+    allBD=readTextFile('../DB/AllProjectsv2.txt');
     allBD=allBD.split('##########');
     align_burguer(toggle_nav);
     
-    LoadProjects();
-    LoadProjects();
+    LoadProjects(3);
+    LoadProjects(3);
 }
 
 
@@ -99,7 +99,7 @@ function highLight(obj){
 function normal(obj){
     obj.style.backgroundColor="cornflowerblue";
 }
-function LoadProjects(){
+function LoadProjects(number_of_columns){
     if(window.innerWidth>window.innerHeight){
 
         $('#footer').html('<div style="position: relative; left: 50%;" class="loader"></div>');
@@ -110,11 +110,15 @@ function LoadProjects(){
     setTimeout(function(){
         $('#footer').html('<h3 style="text-align: center"><font color="white">Load More Projects</font></h3>');
     },1000);
-    $('#SiteBody').append(allBD[loaded_projects]);
-    if(loaded_projects<allBD.length){
-
-        loaded_projects++;
+    //$('#SiteBody').append(allBD[loaded_projects]);
+    $('#SiteBody').append("<div class=\"row\" id=\""+'row'+row_num+"\">");
+    for(i=0;i<number_of_columns;i++){
+        if(loaded_projects<allBD.length){
+            $("#row"+row_num).append(allBD[loaded_projects]);
+            loaded_projects++;
+        }
     }
+    row_num++;
     setTimeout(function(){window.scrollTo(0,$(document).height())},300);
     align_burguer(false);
 }
@@ -159,6 +163,7 @@ class FPS{
 //On site open do Start function
 var allBD;
 var loaded_projects=0;
+var row_num=0;
 //Load first projects
 
 window.onload=Start();
