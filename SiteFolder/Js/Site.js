@@ -1,6 +1,6 @@
 function Start(){
     document.getElementById('burguer').style.position="absolute";
-    allBD=readTextFile('SiteFolder/DB/AllProjectsElements.txt');
+    allBD=readTextFile('SiteFolder/DB/indexDB.txt');
     allBD=allBD.split('##########');
     align_burguer(toggle_nav);
     LoadRandom(allBD,3);
