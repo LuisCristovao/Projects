@@ -13,24 +13,6 @@ var wordcount=0;
 var ordered_array_len=0;
 
 prev_words['']='';
-/*class ProLetter{
-    contructor(letter,percentage){
-        this.letter=letter;
-        this.percentage=percentage;
-    }
-}
-
-class ProWords{
-    
-    constructor(){
-    
-    }
-    Study(word){
-        for(i=0;i<word.length;i++){
-            
-        }
-    }
-}*/
 
 //percentage is a string in form '10%'
 function Loading(percentage){
@@ -108,9 +90,18 @@ function supercompare(search_word,word){
             }
         }
     }
-    var compare_index2=matches/word.length;
-    var compare_index=(compare_index1+compare_index2)/2;
-    
+    var compare_index2=matches/(word.length+dif);
+    //third method
+    matches=0;
+    for(i=word.length-1;i>=0;i--){
+        if(search_word[i]==word[i]){
+            matches++;
+        }
+
+    }
+    var compare_index3=matches/(word.length+dif);
+    var compare_index=(compare_index1+compare_index2+compare_index3)/3;
+    //var compare_index=compare_index3;
     //
     return compare_index;
    
