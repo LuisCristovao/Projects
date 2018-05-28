@@ -42,17 +42,26 @@ function supercompare(search_word,word){
     //first method
     var dif=Math.abs(search_word.length-word.length);
     var matches=0;
+    var missMatches=0;
     var word_freq={};
     var search_freq={}
     for(i=0;i<word.length;i++){
         if(search_word[i]==word[i]){
             matches++;
+            if(i==0){
+                matches++;
+            }
+        }
+        else{
+            missMatches++;
         }
 
     }
     var compare_index0=matches/(word.length);
     var compare_index1=matches/(word.length+dif);
     //Second methods
+    matches=0;
+    missMatches=0;
     for(i=0;i<word.length;i++){
         //if not exists
         if(word_freq[word[i]]==null){
@@ -80,27 +89,37 @@ function supercompare(search_word,word){
     for(var key in search_freq){
         //both have same letter
         if(search_freq[key]!=null && word_freq[key]!=null){
-            //
-            if(search_freq[key]==word_freq[key]){
-                matches+=search_freq[key];
+            if(search_freq[key]!=null && word_freq[key]!=null){
+                
+                //
+                if(search_freq[key]==word_freq[key]){
+                    matches+=search_freq[key];
+                }
+                else{
+                    //give the lowest value of matches
+                    matches+=(search_freq[key]<word_freq[key])? search_freq[key] : word_freq[key];
+                }
             }
-            else{
-                //give the lowest value of matches
-                matches+=(search_freq[key]<word_freq[key])? search_freq[key] : word_freq[key];
-            }
+            
         }
     }
-    var compare_index2=matches/(word.length+dif);
+    var compare_index2=matches/(word.length);
     //third method
     matches=0;
-    for(i=word.length-1;i>=0;i--){
-        if(search_word[i]==word[i]){
+    missMatches=0;
+    for(i=word.length-1,j=search_word.length-1;i>=0 && j>=0;i--,j--){
+        if(search_word[j]==word[i]){
             matches++;
+            if(j==search_word.length-1 ||i==word.length-1){
+                matches++;
+            }
         }
-
+        else{
+            missMatches++;
+        }
     }
-    var compare_index3=matches/(word.length+dif);
-    var compare_index=(compare_index1+compare_index2+compare_index3)/3;
+    var compare_index3=matches/(word.length);
+    var compare_index=(compare_index0+compare_index2+compare_index3)/3;
     //var compare_index=compare_index3;
     //
     return compare_index;
