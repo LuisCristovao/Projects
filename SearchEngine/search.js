@@ -45,7 +45,17 @@ function supercompare(search_word,word){
     var missMatches=0;
     var word_freq={};
     var search_freq={}
-   
+    var compare_lenght=Math.floor(word.length*0.3);
+    //first method
+    for(i=0;i<compare_lenght;i++){
+        if(search_word[i]==word[i]){
+            matches++;
+        }
+    }
+    
+    var compare_index0=matches/(compare_lenght);
+    
+    
     //Second methods
     matches=0;
     missMatches=0;
@@ -104,7 +114,7 @@ function supercompare(search_word,word){
     var compare_index2=matches/(matches+missMatches);
    
     
-    var compare_index=compare_index2;
+    var compare_index=(compare_index2+compare_index0)/2;
     //
     return compare_index;
    
