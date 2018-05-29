@@ -48,9 +48,9 @@ function supercompare(search_word,word){
     for(i=0;i<word.length;i++){
         if(search_word[i]==word[i]){
             matches++;
-            if(i==0){
+            /*if(i==0){
                 matches++;
-            }
+            }*/
         }
         else{
             missMatches++;
@@ -110,9 +110,9 @@ function supercompare(search_word,word){
     for(i=word.length-1,j=search_word.length-1;i>=0 && j>=0;i--,j--){
         if(search_word[j]==word[i]){
             matches++;
-            if(j==search_word.length-1 ||i==word.length-1){
+            /*if(j==search_word.length-1 ||i==word.length-1){
                 matches++;
-            }
+            }*/
         }
         else{
             missMatches++;
