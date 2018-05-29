@@ -56,7 +56,38 @@ function Loading(percentage){
     }
 }
 
-function supercompare(search_word,word){
+function editDistance(search_word, word) {
+	var ed = []
+	var n = search_word.length;
+	var m = word.length
+	var nplusmplus = (n + 1) * (m + 1);
+	for(var k = 0; k < nplusmplus; k++) {
+		var i = k % (n + 1);
+		var j = Math.floor(k / (n + 1));
+		if (i == 0) ed[i + (n + 1) * j] = j;  // Min. operations = j
+ 
+        // If second string is empty, only option is to
+        // remove all characters of second string
+        else if (j == 0) ed[i + (n + 1) * j] = i; // Min. operations = i
+
+        // If last characters are same, ignore last char
+        // and recur for remaining string
+        else if (search_word[i - 1] === word[j - 1])
+            ed[i + (n + 1) * j] = ed[(i - 1) + (n + 1) * (j - 1)];
+
+        // If the last character is different, consider all
+        // possibilities and find the minimum
+        else
+            ed[i + (n + 1) * j] = 1 + Math.min(Math.min(ed[i + (n + 1) * (j-1)],  // Insert
+                                                        ed[(i - 1) + (n + 1) * j]),  // Remove
+                                                        ed[(i - 1) + (n + 1) * (j - 1)]); // Replace
+
+	} 
+
+	return 1 - ed[nplusmplus - 1] / (n + m > 0 ? Math.max(n, m) : 1);
+}
+
+function supercompare(search_word, word){
     //first method
     var dif=Math.abs(search_word.length-word.length);
     var matches=0;
@@ -173,6 +204,10 @@ function liveSearch(){
     var order_list=[];
     var i=0;
     $('#live_search').html("");
+
+    distances = []
+    distances["base"] = supercompare;
+    distances["edit"] = editDistance;
         
     
     search_text=search.value.toLowerCase();
@@ -185,7 +220,7 @@ function liveSearch(){
         for(key in words){
             //Loading(Math.round((i/Object.keys(words).length)*100)+'%');
             //i++;
-            compare_index=supercompare(search_text,key.toLowerCase())
+            compare_index=distances[$("#selectDistance").val()](search_text, key.toLowerCase())
             //console.log("Compare index: "+compare_index);
             if(compare_index>=filter.value){
                 //prev_words[key]=key;
