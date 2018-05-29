@@ -186,21 +186,29 @@ function liveSearch(){
     }
     else{
         
-        for(key in words){
-            //Loading(Math.round((i/Object.keys(words).length)*100)+'%');
-            //i++;
-            compare_index=supercompare(search_text,key.toLowerCase())
-            //console.log("Compare index: "+compare_index);
-            if(compare_index>=filter.value){
-                //prev_words[key]=key;
-                if(search_list[key]==null){
-                    //does not exist in search list
-                        search_list[key]=compare_index;
-                        
+        while(Object.keys(search_list).length==0 ){
+            
+            for(key in words){
+                //Loading(Math.round((i/Object.keys(words).length)*100)+'%');
+                //i++;
+                compare_index=supercompare(search_text,key.toLowerCase())
+                //console.log("Compare index: "+compare_index);
+                if(compare_index>=filter.value){
+                    //prev_words[key]=key;
+                    if(search_list[key]==null){
+                        //does not exist in search list
+                            search_list[key]=compare_index;
+
+                    }
                 }
             }
-                        
-        }        
+            if(Object.keys(search_list).length==0){
+                filter.value-=0.1;
+            }
+            if(Object.keys(search_list).length>10){
+                filter.value=0.8;
+            }
+        }
           
         //dictionary to array
         for(key in search_list){
