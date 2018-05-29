@@ -43,13 +43,15 @@ function supercompare(search_word,word){
     var dif=Math.abs(search_word.length-word.length);
     var matches=0;
     var missMatches=0;
+    var frontcompare=0;
+    var endcompare=0;
     var word_freq={};
     var search_freq={}
     for(i=0;i<word.length;i++){
         if(search_word[i]==word[i]){
             matches++;
             /*if(i==0){
-                matches++;
+                frontcompare=1;
             }*/
         }
         else{
@@ -119,8 +121,8 @@ function supercompare(search_word,word){
         }
     }
     var compare_index3=matches/(word.length);
-    var compare_index=(compare_index0+compare_index2+compare_index3)/3;
-    //var compare_index=compare_index3;
+    //var compare_index=(compare_index0+compare_index2+compare_index3)/3;
+    var compare_index=compare_index2;
     //
     return compare_index;
    
