@@ -45,7 +45,7 @@ function supercompare(search_word,word){
     var missMatches=0;
     var word_freq={};
     var search_freq={}
-    var compare_lenght=Math.floor(word.length*0.3);
+    var compare_lenght=Math.floor(word.length*0.5);
     //first method
     for(i=0;i<compare_lenght;i++){
         if(search_word[i]==word[i]){
@@ -87,19 +87,19 @@ function supercompare(search_word,word){
     for(var key in search_freq){
         //both have same letter
         if(search_freq[key]!=null && word_freq[key]!=null){
-            if(search_freq[key]!=null && word_freq[key]!=null){
+            
                 
-                //
-                if(search_freq[key]==word_freq[key]){
-                    matches+=search_freq[key];
-                }
-                else{
-                    //give the lowest value of matches
-                    matches+=(search_freq[key]<word_freq[key])? search_freq[key] : word_freq[key];
-                    difference=Math.abs(search_freq[key]-word_freq[key]);
-                    missMatches+=difference;
-                }
-            } 
+            //
+            if(search_freq[key]==word_freq[key]){
+                matches+=search_freq[key];
+            }
+            else{
+                //give the lowest value of matches
+                matches+=(search_freq[key]<word_freq[key])? search_freq[key] : word_freq[key];
+                difference=Math.abs(search_freq[key]-word_freq[key]);
+                missMatches+=difference;
+            }
+            
         }
         else{
             missMatches++;
