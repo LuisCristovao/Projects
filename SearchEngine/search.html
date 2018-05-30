@@ -2,7 +2,7 @@
 	<head>
 		<title>Search Engine</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
 	</head>
     <style>
         #myProgress {
@@ -21,7 +21,17 @@
         
 </style>
 	<body>
-		<i class="fa fa-search" aria-hidden="true"></i><input id="search" placeholder="Type word to search"><input id="filter" value="0.5" type="number" max="1" min="0.1" step="0.1">Similarity Filter<br><div id="live_search" style="border: 1px solid rgb(165, 172, 178);"></div><br><br>
+		<i class="fa fa-search" aria-hidden="true"></i><input id="search" placeholder="Type word to search"><input id="filter" value="0.5" type="number" max="1" min="0.1" step="0.1">Similarity Filter
+
+    <select id="selectDistance">
+      <option value="base">Base Distance</option>
+      <option value="edit">Edit Distance</option>
+    </select>
+
+    <br>
+    <div id="live_search" style="border: 1px solid rgb(165, 172, 178);"></div>
+
+    <br><br>
         <a id="lb" href="#"><h3>Click Here to load text from bible.</h3></a>
         <h2 id="info_text">Insert Text Here &darr; To Start Searching</h2>
 		<textarea id="text" style="width:500px;height:200px;"></textarea>
