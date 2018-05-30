@@ -243,7 +243,7 @@ function liveSearch(){
                 filter.value-=0.1;
             }
             if(Object.keys(search_list).length>10){
-                filter.value=0.8;
+                filter.value=0.6;
             }
         }
           
