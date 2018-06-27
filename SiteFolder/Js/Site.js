@@ -185,7 +185,7 @@ var loaded_projects=0;
 //Load first projects
 
 window.onload=Start();
-document.body.onresize=function(){align_burguer(toggle_nav)};
+//document.body.onresize=function(){align_burguer(toggle_nav)};
 //var fps=new FPS();
 
 /////////////////code to resize images after load////////////////////////////
