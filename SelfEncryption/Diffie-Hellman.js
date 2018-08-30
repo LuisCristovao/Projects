@@ -1,13 +1,4 @@
-
-#######################################
-#
-#generator^(private-number) mod large-prime-number
-#But I will do without prime numbers 
-
-
-##########################################
-
-import random
+/*import random
 
 
 def DH(generator,private_number,mod):
@@ -39,4 +30,12 @@ print("\n[Public]Alice: Take my DH number:",DH(gen,Alice_key,mod))
 print("[Public]Bob: Take my DH number:",DH(gen,Bob_key,mod))
 
 print("\n[Private]Alice: Our Common Key is:",DH(dhBob,Alice_key,mod))
-print("\n[Private]Bob: Our Common Key is:",DH(dhAlice,Bob_key,mod))
+print("\n[Private]Bob: Our Common Key is:",DH(dhAlice,Bob_key,mod))*/
+
+
+
+function DH(generator,private_number,mod){
+    return (generator**private_number)%mod;
+}
+
+console.log(DH(23000,34,345));
