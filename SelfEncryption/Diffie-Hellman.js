@@ -110,7 +110,7 @@ function genRandomNumber(length){
        fnum+=numbers[r];
     }
        
-    return parseInt(fnum); 
+    return fnum; 
     
 }
 
