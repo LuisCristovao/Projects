@@ -120,7 +120,7 @@ var alicekey=getRandomArbitrary(2,5)
 var bobkey=getRandomArbitrary(2,5)
 
 gen=getRandomArbitrary(2,10);
-mod=genRandomNumber(8);
+mod=genRandomNumber(24);
 
 console.log("[Public]Alice: the generator is "+gen+" and the mod is "+mod+"\n");
 console.log("[Private]Alice: my private number is, "+alicekey);
