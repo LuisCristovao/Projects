@@ -110,17 +110,17 @@ function genRandomNumber(length){
        fnum+=numbers[r];
     }
        
-    return fnum; 
+    return parseFloat(fnum); 
     
 }
 
 
 
-var alicekey=getRandomArbitrary(2,30)
-var bobkey=getRandomArbitrary(2,30)
+var alicekey=getRandomArbitrary(2,5)
+var bobkey=getRandomArbitrary(2,5)
 
-gen=getRandomArbitrary(2,100);
-mod=genRandomNumber(10);
+gen=getRandomArbitrary(2,10);
+mod=genRandomNumber(8);
 
 console.log("[Public]Alice: the generator is "+gen+" and the mod is "+mod+"\n");
 console.log("[Private]Alice: my private number is, "+alicekey);
