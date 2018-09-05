@@ -106,7 +106,7 @@ function genRandomNumber(length){
     var fnum=""
     for( i=0; i<length;i++){
         
-       var r=getRandomArbitrary(0,numbers.length);
+       var r=getRandomArbitrary(0,numbers.length-1);
        fnum+=numbers[r];
     }
        
@@ -116,11 +116,11 @@ function genRandomNumber(length){
 
 
 
-var alicekey=getRandomArbitrary(2,100)
-var bobkey=getRandomArbitrary(2,100)
+var alicekey=getRandomArbitrary(2,30)
+var bobkey=getRandomArbitrary(2,30)
 
 gen=getRandomArbitrary(2,100);
-mod=genRandomNumber(30);
+mod=genRandomNumber(10);
 
 console.log("[Public]Alice: the generator is "+gen+" and the mod is "+mod+"\n");
 console.log("[Private]Alice: my private number is, "+alicekey);
