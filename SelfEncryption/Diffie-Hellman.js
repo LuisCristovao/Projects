@@ -33,10 +33,44 @@ print("\n[Private]Alice: Our Common Key is:",DH(dhBob,Alice_key,mod))
 print("\n[Private]Bob: Our Common Key is:",DH(dhAlice,Bob_key,mod))*/
 
 
+
+
+function scientificToDecimal(num) {
+        const sign = Math.sign(num);
+        //if the number is in scientific notation remove it
+        if(/\d+\.?\d*e[\+\-]*\d+/i.test(num)) {
+            const zero = '0';
+            const parts = String(num).toLowerCase().split('e'); //split into coeff and exponent
+            const e = parts.pop(); //store the exponential part
+            let l = Math.abs(e); //get the number of zeros
+            const direction = e/l; // use to determine the zeroes on the left or right
+            const coeff_array = parts[0].split('.');
+            
+            if (direction === -1) {
+                coeff_array[0] = Math.abs(coeff_array[0]);
+                num = zero + '.' + new Array(l).join(zero) + coeff_array.join('');
+            }
+            else {
+                const dec = coeff_array[1];
+                if (dec) l = l - dec.length;
+                num = coeff_array.join('') + new Array(l+1).join(zero);
+            }
+        }
+        
+        if (sign < 0) {
+            num = -num;
+        }
+
+        return num;
+    }
+
+
+
+
 //works for numbers lower than 2**50
 //need to do 3 times
 function DH(generator,private_number,mod){
-    return (generator**private_number)%mod;
+    return modulo(scientificToDecimal(generator**private_number).toString(),mod);
 }
 /*
 Makes mod for big numbers 
@@ -56,9 +90,6 @@ function modulo( aNumStr, aDiv)
 	return tmp / 1;
 }
 
-
-
-
 /**
  * Returns a random integer between min (inclusive) and max (inclusive)
  * Using Math.round() will give you a non-uniform distribution!
@@ -67,14 +98,29 @@ function getRandomArbitrary(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-var alicekey=getRandomArbitrary(2,12)
-var bobkey=getRandomArbitrary(2,12)
-
-gen=getRandomArbitrary(2,9);
-do{
+/*
+Generate random string with numbers
+*/
+function genRandomNumber(length){
+    var numbers="0123456789"
+    var fnum=""
+    for( i=0; i<length;i++){
+        
+       var r=getRandomArbitrary(0,numbers.length);
+       fnum+=numbers[r];
+    }
+       
+    return parseInt(fnum); 
     
-    mod=getRandomArbitrary(2,9)*getRandomArbitrary(10,50)
-}while(mod>2**50)
+}
+
+
+
+var alicekey=getRandomArbitrary(2,100)
+var bobkey=getRandomArbitrary(2,100)
+
+gen=getRandomArbitrary(2,100);
+mod=genRandomNumber(30);
 
 console.log("[Public]Alice: the generator is "+gen+" and the mod is "+mod+"\n");
 console.log("[Private]Alice: my private number is, "+alicekey);
