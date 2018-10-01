@@ -23,8 +23,8 @@ def generateRandom(length=30):
        
     return int(fnum)   
 
-Alice_key=random.randrange(2,100)
-Bob_key=random.randrange(2,100)
+Alice_key=random.randrange(2,1000)
+Bob_key=random.randrange(2,1000)
 
 gen=random.randrange(2,100)
 mod=generateRandom()
