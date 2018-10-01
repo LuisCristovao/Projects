@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Luis Cristóvão Webpage</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+    <link rel="stylesheet" type="text/css" href="../Css/BasicSite.css">
+    <link rel="stylesheet" type="text/css" href="../Css/ContactPage.css">
+
+</head>
+    
+<body >
+    <div  style="visibility: collapse">
+        <div id="myNav" class="topnav">    
+          <!--<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>-->
+          <div class="content">
+            <a href="../../index.html">Home</a><br>
+            <a href="../Pages/Projects.html">Projects</a><br>
+            <a href="https://github.com/LuisCristovao/">GitHub</a><br>
+            <a href="#">Youtube Channels</a><br>
+            <a href="https://luiscristovao.github.io/Projects/CV/LuisCristóvãoCV_Website.pdf">CV</a><br>
+            <a href="#">Contact</a><br>
+          </div>
+        </div>
+
+    </div>
+<div class="jumbotron text-center" style="background-color:cornflowerblue">
+    <h1><font color="white">Luís Cristóvão GitHub Site</font></h1>
+    <p id="debug"><font color="white">See Some of my Projects!</font></p>
+    <div align="center" id="burguer"  onclick="openNav(this)" style="cursor: pointer">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+    </div>
+    <br>
+</div>
+  
+<div id="SiteBody" class="container">
+    <h2 align="center">Email: luis.cristovao92@gmail.com</h2>
+    <div align="center">
+        <button type="button" class="btn btn-default" onclick="copyToClipboard('luis.cristovao92@gmail.com')">Copy email to clip board</button>
+        <div class="mytooltip">
+            
+            <span id="copy-msg" class="mytooltiptext">Copied Email!</span>
+        </div>
+        
+        
+        
+    </div>
+    
+</div>
+
+<script>
+const copyToClipboard = str => {
+  const el = document.createElement('textarea');
+  el.value = str;
+  el.setAttribute('readonly', '');
+  el.style.position = 'absolute';
+  el.style.left = '-9999px';
+  document.body.appendChild(el);
+  el.select();
+  document.execCommand('copy');
+  document.body.removeChild(el);
+  $("#copy-msg").css("visibility","visible");    
+  $("#copy-msg").css("opacity",1);   
+  setTimeout(function (){
+        $("#copy-msg").css("opacity",0);   
+        //$("#copy-msg").css("visibility","hidden"); 
+  },1000);    
+    
+};
+
+function align_burguer(panel){
+    var burguer=document.getElementById('burguer');
+    if(panel){
+        if(window.innerWidth<window.innerHeight){
+            burguer.style.left='46%';
+        }
+        else{
+            burguer.style.left='49%';
+        }
+    }
+    else{
+
+        if(window.innerWidth<window.innerHeight){
+            burguer.style.left='45%';
+        }
+        else{
+            burguer.style.left='50%';
+        }
+    }
+    
+}
+    
+var toggle_nav=false;
+function openNav(x) {
+    toggle_nav=!toggle_nav;
+    if(toggle_nav){
+        x.classList.toggle("change");
+        x.style.position="absolute";
+        x.style.top="15%";
+        //x.style.left="49%";
+        align_burguer(toggle_nav);
+        //x.style.hover="color:white";
+        document.getElementById("myNav").style.visibility = "visible";
+        document.getElementById("myNav").style.height = "100%";
+        $('#SiteBody').slideUp('fast');
+        //$('#footer').slideUp('fast');
+    }
+    else{
+        x.classList.toggle("change");
+        x.style.position="absolute";
+        x.style.top="auto";
+        
+        document.getElementById("myNav").style.visibility = "collapse";
+        document.getElementById("myNav").style.height = "0%";
+        $('#SiteBody').slideDown('fast');   
+        //$('#footer').slideDown('fast');
+        align_burguer(toggle_nav);
+    }
+}
+    
+    
+    
+    
+</script>
+
+</body>
+</html>
