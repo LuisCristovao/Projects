@@ -60,14 +60,14 @@ def shuffleArray(array):
 def Subs(key,character,size=255):
     
     num=chaToNumber(character)
-    num=((num+key)%255)-1
+    num=((num+key)%size)-1
     return numToCharacter(num)
 
 #Working if key ==1 then does not change
-def invertSubs(key,character):
+def invertSubs(key,character,size=255):
     
     num=chaToNumber(character)
-    num=((num-key)%255)+1
+    num=((num-key)%size)+1
     return numToCharacter(num)
 
     
@@ -84,6 +84,52 @@ def invertSubsString(key,string):
         out+=invertSubs(key,l)
     
     return out
+
+
+#def Subs(key,character,size=255,sub_by=3):
+#    numbers=[]
+#    
+#    num=chaToNumber(character)
+#    numbers.append(((num+key)%size)-1)
+#    for i in range(1,sub_by):
+#        numbers.append(((numbers[i-1]+key)%size)-1)
+#    
+#    out=""
+#    for i in range(sub_by):
+#        out+=numToCharacter(numbers[i])
+#    return out
+#
+##Working if key ==1 then does not change
+#def invertSubs(key,characters,size=255,sub_by=3):
+#
+#    for i in range(0,len(characters),sub_by):
+#        
+#    
+#    
+#    num=chaToNumber(character)
+#    num=((num+key)%255)+1
+#    num1=((num+key)%255)+1
+#    num2=((num1+key)%255)+1
+#    out=numToCharacter(num)+numToCharacter(num1)+numToCharacter(num2)
+#    
+#    return out
+#
+#    
+#def SubsString(key,string):
+#    out=""
+#    for l in string:
+#        out+=Subs(key,l)
+#    
+#    return out
+#
+#def invertSubsString(key,string):
+#    out=""
+#    for l in string:
+#        out+=invertSubs(key,l)
+#    
+#    return out
+
+
 #-------------------------------------
 def ShiftArray(key, array):
     out_array=array.copy()
@@ -131,4 +177,24 @@ def decript_procedure(key,string):
     return out
     
 
+#----------------------------------------------
+    
+def Encrypt(string_key,string):
+    out=string
+    for key in string_key:
+        key=chaToNumber(key)
+        out=encript_procedure(key,out)
+        #print(key)
+        #print(out)
+        
+    return out    
 
+def Decrypt(string_key,string):
+    out=string
+    for key in string_key:
+        key=chaToNumber(key)
+        out=decript_procedure(key,out)
+#        print(key)
+#        print(out)
+        
+    return out
