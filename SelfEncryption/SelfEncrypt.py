@@ -89,7 +89,7 @@ def Encrypt(text,key):
         for i in range(len(bintext)):
             binarray[i]=xorArrays(bintext[i],kel)
             
-            
+        bintext=binarray    
     return binArrayToText(binarray)        
 
 
@@ -102,10 +102,11 @@ def Decrypt(etext,key):
         binarray.append([])
     
     for kel in binkey:
+        
         for i in range(len(bintext)):
             binarray[i]=(xorArrays(bintext[i],kel))
-            
-            
+        
+        bintext=binarray
     return binArrayToText(binarray)
 
 #
@@ -130,8 +131,8 @@ def Decrypt(etext,key):
 #    
 #    return outtext
     
-text="Ave Maria"
-key="Jesus"    
+text="A pass é 123321"
+key="231"    
 
 print(textToBin(text))
 print()
@@ -144,12 +145,12 @@ print(binArrayToText(textToBin(text)))
 
 
 enmessage=Encrypt(text,key)
-#
+
 print()
 print(enmessage)
 #
 print()
-print(Decrypt(enmessage,key))
+print(Decrypt(enmessage,'213'))
 
 
 
