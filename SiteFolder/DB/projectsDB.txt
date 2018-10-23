@@ -1,5 +1,5 @@
 <div class="col-sm-4">
-      <h3>Search Engine Project</h3>
+      <h3>Volley Game</h3>
       <a href="https://luiscristovao.github.io/Projects/Volley/index.html"><img src="../Images/volley.gif" style="width:100%"></a>
 </div>
 ##########
