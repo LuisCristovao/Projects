@@ -1,0 +1,75 @@
+<html>
+    <head>
+        <title>Every Day Calendar</title>
+        
+    </head>
+    <style>
+        .hexagon {
+          top:25px;        
+          width: 100px;
+          height: 50px;
+          background: red;
+          position: relative;
+          align: center;    
+        }
+        .hexagon .text{
+            position: relative;
+            color: white;
+            text-align: center;
+            top:30%;
+        }
+        .hexagon:before {
+          content: "";
+          position: absolute;
+          top: -25px;
+          left: 0;
+          width: 0;
+          height: 0;
+          border-left: 50px solid transparent;
+          border-right: 50px solid transparent;
+          border-bottom: 25px solid red;
+        }
+        .hexagon:after {
+          content: "";
+          position: absolute;
+          bottom: -25px;
+          left: 0;
+          width: 0;
+          height: 0;
+          border-left: 50px solid transparent;
+          border-right: 50px solid transparent;
+          border-top: 25px solid red;
+        }
+        
+        .div-table {
+          display: table;         
+          width: auto;         
+          background-color: #eee;         
+          border: 1px solid #666666;         
+          border-spacing: 5px; /* cellspacing:poor IE support for  this */
+        }
+        .div-table-row {
+          display: table-row;
+          width: auto;
+          clear: both;
+        }
+        .div-table-col {
+          float: left; /* fix for  buggy browsers */
+          display: table-column;         
+          width: 200px;         
+          background-color: #ccc;  
+        }
+        
+    </style>
+    <script src="EveryDayCalendar.js"></script>
+    <body id="body">
+        
+        <!--<div class="hexagon" >
+            <div class="text" >dscfhiu wefe</div>
+        </div>-->    
+    
+        
+    </body>
+
+
+</html>
