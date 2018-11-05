@@ -58,7 +58,8 @@ function CreateColumns(lines, columns){
     
     
     var table=CreateDiv(0,global_height*0.20,global_width,global_height,"rgb(255,255,255)","absolute")
-    var width_factor=global_width/columns
+    
+    var width_factor=global_width*((global_width<=global_height)?0.5:0.2)
     var height_factor=global_height*0.35
     
     
@@ -87,10 +88,10 @@ window.onload=function(){
         
     if(global_width<=global_height){
 
-        CreateColumns(8,2)
+        CreateColumns(30,12)
     }
     else{
-        CreateColumns(5,3)
+        CreateColumns(30,12)
     }
     CreateHeader()
     //setStyle(body,{"width":global_width,"height":global_height,"top":"0px","left":"0px","position":"absolute"})
@@ -110,10 +111,10 @@ function Main(){
         prev_height=global_height
         prev_width=global_width
         if(global_width<=global_height){
-            CreateColumns(8,2)
+            CreateColumns(30,12)
         }
         else{
-            CreateColumns(5,3)
+            CreateColumns(30,12)
         }
         
         CreateHeader()
