@@ -35,7 +35,7 @@ function CreateDiv(left,top,width,height,color,position){
                    "left":left,
                    "width":width,
                    "height":height,
-                   "background":color,
+                   //"background":color,
                    "position":position
                   }
     setStyle(div,atributes)
@@ -44,15 +44,31 @@ function CreateDiv(left,top,width,height,color,position){
     //body.appendChild(hex)
 }
 
+function CreateButton(){
+    var btn=document.createElement("div");
+    setStyle(btn,{"position":"relative","background":"rgba("+Math.random()*255+","+Math.random()*255+","+Math.random()*255+","+Math.random()+")","border-radius":"50%","width":"80%","height":"80%"})
+    var text=document.createElement("p")
+    text.appendChild(document.createTextNode("ola"))
+    
+    
+    btn.appendChild(text)
+    if(global_width<=global_height){
+        setStyle(text,{"text-align":"center","top":"35%","position":"inherit","font-size":"12vw"})
+    }
+    else{
+        setStyle(text,{"text-align":"center","top":"35%","position":"inherit","font-size":"7vh"})
+    }
+    return btn
+}
 
 function CreateHeader(){
-    
+    var header=CreateDiv(0,0,global_width,headerHeight(),"rgb(255,255,255)","absolute")
     for(var j=0;j<columns;j++){
         
-        var header=CreateDiv(j*columnWidth(),0,columnWidth(),headerHeight(),"rgb(255,255,255)","absolute")
+        var headerblock=CreateDiv(j*columnWidth(),0,columnWidth(),headerHeight(),"rgb(255,255,255)","absolute")
         var h1=document.createElement("h1")
         h1.appendChild(document.createTextNode(months[j]))
-        header.appendChild(h1)
+        headerblock.appendChild(h1)
         if(global_width<=global_height){
                 h1.setAttribute("style","font-size:15vw")
         }
@@ -60,15 +76,17 @@ function CreateHeader(){
                 h1.setAttribute("style","font-size:10vh")
         }
 
-        header.setAttribute("align","center")
-        var body=document.getElementById("html");
-        body.appendChild(header)
+        headerblock.setAttribute("align","center")
+        header.appendChild(headerblock)
+        
     }
+    var body=document.getElementById("body");
+    body.appendChild(header)
 }
 
 
 function CreateColumns(lines, columns){
-    var body=document.getElementById("html");
+    var body=document.getElementById("body");
     
     body.innerHTML="";
     
@@ -84,6 +102,11 @@ function CreateColumns(lines, columns){
         
         for(var j=0;j<columns;j++){
             var column=CreateDiv(j*width_factor,i*height_factor,width_factor,height_factor,"rgba("+Math.random()*255+","+Math.random()*255+","+Math.random()*255+","+Math.random()+")","absolute")
+            
+            
+            
+            var btn=CreateButton()
+            column.appendChild(btn)
             
             //line.appendChild(column)
             table.appendChild(column)
@@ -110,7 +133,7 @@ window.onload=function(){
 
 //Main-------------------
 function Main(){
-    var html=document.getElementById("html");
+    var html=document.getElementById("body");
     global_width=html.offsetWidth;
     global_height=html.offsetHeight;
     //console.log("with: "+global_width)
