@@ -14,7 +14,7 @@ function columnWidth(){
     return global_width*((global_width<=global_height)?0.5:0.2)
 }
 function headerHeight(){
-    return global_height*0.30
+    return global_height*0.20
 }
 function columnHeight(){
     return global_height*0.35
@@ -62,6 +62,8 @@ function CreateButton(){
 }
 
 function CreateHeader(){
+    var body=document.getElementById("body");
+    body.innerHTML="";
     var header=CreateDiv(0,0,global_width,headerHeight(),"rgb(255,255,255)","absolute")
     for(var j=0;j<columns;j++){
         
@@ -80,7 +82,7 @@ function CreateHeader(){
         header.appendChild(headerblock)
         
     }
-    var body=document.getElementById("body");
+    
     body.appendChild(header)
 }
 
@@ -88,7 +90,7 @@ function CreateHeader(){
 function CreateColumns(lines, columns){
     var body=document.getElementById("body");
     
-    body.innerHTML="";
+    
     
     
     var table=CreateDiv(0,headerHeight(),global_width,global_height,"rgb(255,255,255)","absolute")
@@ -103,7 +105,7 @@ function CreateColumns(lines, columns){
         for(var j=0;j<columns;j++){
             var column=CreateDiv(j*width_factor,i*height_factor,width_factor,height_factor,"rgba("+Math.random()*255+","+Math.random()*255+","+Math.random()*255+","+Math.random()+")","absolute")
             
-            
+            column.setAttribute("align","center")
             
             var btn=CreateButton()
             column.appendChild(btn)
@@ -123,9 +125,10 @@ window.onload=function(){
     global_height=html.offsetHeight;
     prev_width=global_width;
     prev_height=global_height;
-        
+    
+    CreateHeader()    
     CreateColumns(lines,columns)
-    CreateHeader()
+    
     //setStyle(body,{"width":global_width,"height":global_height,"top":"0px","left":"0px","position":"absolute"})
     
     
@@ -143,8 +146,9 @@ function Main(){
         prev_height=global_height
         prev_width=global_width
         
-        CreateColumns(lines,columns)
         CreateHeader()
+        CreateColumns(lines,columns)
+        
         //var body=document.getElementById("html");
         //setStyle(body,{"width":global_width,"height":global_height,"top":"0px","left":"0px","position":"absolute"})
     }
