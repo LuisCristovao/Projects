@@ -6,6 +6,7 @@ var prev_height=global_height;
 var body=document.getElementById("body");
 
 var months=["Jan","Fev","Mar","Apr","May","Jun","Jul","Ago","Set","Out","Nov","Dez"]
+var days={1:31,2:28,3:31,4:30,5:31,6:30,7:31,8:30,9:31,10:31,11:30,12:31}
 var lines=31
 var columns=12
 
@@ -16,6 +17,7 @@ function columnWidth(){
 function headerHeight(){
     return global_height*0.15
 }
+
 function columnHeight(){
     return global_height*((global_height>global_width)?0.25:0.35)
 }
@@ -44,11 +46,11 @@ function CreateDiv(left,top,width,height,color,position){
     //body.appendChild(hex)
 }
 
-function CreateButton(){
+function CreateButton(_text){
     var btn=document.createElement("div");
     setStyle(btn,{"position":"relative","background":"rgba("+Math.random()*255+","+Math.random()*255+","+Math.random()*255+","+Math.random()+")","border-radius":"50%","width":"80%","height":"80%"})
     var text=document.createElement("p")
-    text.appendChild(document.createTextNode("ola"))
+    text.appendChild(document.createTextNode(_text))
     
     
     btn.appendChild(text)
@@ -104,8 +106,10 @@ function CreateColumns(lines, columns){
             
             column.setAttribute("align","center")
             
-            var btn=CreateButton()
-            column.appendChild(btn)
+            if(i<days[j+1]){
+                var btn=CreateButton(i+1)
+                column.appendChild(btn)
+            }
             
             //line.appendChild(column)
             table.appendChild(column)
