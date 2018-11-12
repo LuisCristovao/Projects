@@ -11,13 +11,13 @@ var columns=12
 
 
 function columnWidth(){
-    return global_width*((global_width<=global_height)?0.5:0.2)
+    return global_width*((global_height>global_width)?0.5:0.2)
 }
 function headerHeight(){
-    return global_height*0.20
+    return global_height*0.15
 }
 function columnHeight(){
-    return global_height*0.35
+    return global_height*((global_height>global_width)?0.25:0.35)
 }
 
 function setStyle(element,atributes){
@@ -90,13 +90,10 @@ function CreateHeader(){
 function CreateColumns(lines, columns){
     var body=document.getElementById("body");
     
-    
-    
-    
     var table=CreateDiv(0,headerHeight(),global_width,global_height,"rgb(255,255,255)","absolute")
     
     var width_factor=columnWidth()
-    var height_factor=columnHeight()
+    var height_factor=columnWidth()
     
     
     var lines_elements=[];
