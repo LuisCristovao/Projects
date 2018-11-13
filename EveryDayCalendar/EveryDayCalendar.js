@@ -49,8 +49,9 @@ function CreateDiv(left,top,width,height,color,position){
 function CreateButton(_text,_color){
     var btn=document.createElement("div");
     //setStyle(btn,{"position":"relative","background":"rgba("+Math.random()*255+","+Math.random()*255+","+Math.random()*255+","+Math.random()+")","border-radius":"50%","width":"80%","height":"80%"})
-    setStyle(btn,{"position":"relative","background":"hsla("+_color+",100%,50%,1)","border-radius":"50%","width":"80%","height":"80%"})
+    setStyle(btn,{"position":"relative","background":"hsla("+_color+",100%,60%,1)","border-radius":"50%","width":"80%","height":"80%"})
     var text=document.createElement("p")
+    
     text.appendChild(document.createTextNode(_text))
     
     
