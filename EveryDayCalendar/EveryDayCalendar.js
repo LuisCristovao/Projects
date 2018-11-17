@@ -12,10 +12,10 @@ var columns=12
 
 
 function columnWidth(){
-    return global_width*((global_height>global_width)?0.5:0.2)
+    return global_width*((global_height>global_width)?0.5:0.1)
 }
 function headerHeight(){
-    return global_height*0.15
+    return global_height*0.1
 }
 
 function columnHeight(){
@@ -65,11 +65,11 @@ function CreateButton(_text,_color){
     
     
     btn.appendChild(text)
-    if(global_width<=global_height){
+    if(global_height>global_width){
         setStyle(text,{"text-align":"center","position":"relative","font-size":"12vw","top":"0%"})
     }
     else{
-        setStyle(text,{"text-align":"center","position":"relative","font-size":"7vh","top":"0%"})
+        setStyle(text,{"text-align":"center","position":"relative","font-size":"5vh","top":"0%"})
     }
     
     
@@ -88,11 +88,11 @@ function CreateHeader(){
         var h1=document.createElement("h1")
         h1.appendChild(document.createTextNode(months[j]))
         headerblock.appendChild(h1)
-        if(global_width<=global_height){
+        if(global_height>global_width){
                 h1.setAttribute("style","font-size:15vw;margin-top:0px;")
         }
         else{
-                h1.setAttribute("style","font-size:10vh;margin-top:0px;")
+                h1.setAttribute("style","font-size:7vh;margin-top:0px;")
         }
 
         headerblock.setAttribute("align","center")
