@@ -58,7 +58,7 @@ function CreateButton(_text,_color){
     //btn.setAttribute("valign","center")
     var width_height=80;
     var middle=(100-width_height)/2;
-    setStyle(btn,{"position":"inherit","background":"hsla("+_color+",100%,60%,1)","border-radius":"50%","width":width_height+"%","height":width_height+"%","top":middle+"%","left":middle+"%"})
+    setStyle(btn,{"position":"inherit","background":"hsla("+_color+",100%,60%,1)","border-radius":"50%","width":width_height+"%","height":width_height+"%","top":middle+"%","left":middle+"%","border":"5px solid hsla("+_color+",100%,60%,1)"})
     var text=document.createElement("p")
     
     text.appendChild(document.createTextNode(_text))
