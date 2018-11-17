@@ -46,10 +46,19 @@ function CreateDiv(left,top,width,height,color,position){
     //body.appendChild(hex)
 }
 
+
+function btnClick(day,month,btn){
+    
+}
+
+
+
 function CreateButton(_text,_color){
     var btn=document.createElement("div");
-    //setStyle(btn,{"position":"relative","background":"rgba("+Math.random()*255+","+Math.random()*255+","+Math.random()*255+","+Math.random()+")","border-radius":"50%","width":"80%","height":"80%"})
-    setStyle(btn,{"position":"relative","background":"hsla("+_color+",100%,60%,1)","border-radius":"50%","width":"80%","height":"80%"})
+    //btn.setAttribute("valign","center")
+    var width_height=80;
+    var middle=(100-width_height)/2;
+    setStyle(btn,{"position":"inherit","background":"hsla("+_color+",100%,60%,1)","border-radius":"50%","width":width_height+"%","height":width_height+"%","top":middle+"%","left":middle+"%"})
     var text=document.createElement("p")
     
     text.appendChild(document.createTextNode(_text))
@@ -57,11 +66,15 @@ function CreateButton(_text,_color){
     
     btn.appendChild(text)
     if(global_width<=global_height){
-        setStyle(text,{"text-align":"center","top":"35%","position":"inherit","font-size":"12vw"})
+        setStyle(text,{"text-align":"center","position":"relative","font-size":"12vw","top":"0%"})
     }
     else{
-        setStyle(text,{"text-align":"center","top":"35%","position":"inherit","font-size":"7vh"})
+        setStyle(text,{"text-align":"center","position":"relative","font-size":"7vh","top":"0%"})
     }
+    
+    
+    btn.setAttribute("isActive",false)
+    
     return btn
 }
 
@@ -76,10 +89,10 @@ function CreateHeader(){
         h1.appendChild(document.createTextNode(months[j]))
         headerblock.appendChild(h1)
         if(global_width<=global_height){
-                h1.setAttribute("style","font-size:15vw")
+                h1.setAttribute("style","font-size:15vw;margin-top:0px;")
         }
         else{
-                h1.setAttribute("style","font-size:10vh")
+                h1.setAttribute("style","font-size:10vh;margin-top:0px;")
         }
 
         headerblock.setAttribute("align","center")
