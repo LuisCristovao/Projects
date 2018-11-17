@@ -69,7 +69,7 @@ function CreateButton(_text,_color){
         setStyle(text,{"text-align":"center","position":"relative","font-size":"12vw","top":"0%"})
     }
     else{
-        setStyle(text,{"text-align":"center","position":"relative","font-size":"5vh","top":"0%"})
+        setStyle(text,{"text-align":"center","position":"relative","font-size":"2.5vw","top":"0%"})
     }
     
     
@@ -92,7 +92,7 @@ function CreateHeader(){
                 h1.setAttribute("style","font-size:15vw;margin-top:0px;")
         }
         else{
-                h1.setAttribute("style","font-size:7vh;margin-top:0px;")
+                h1.setAttribute("style","font-size:4vw;margin-top:0px;")
         }
 
         headerblock.setAttribute("align","center")
