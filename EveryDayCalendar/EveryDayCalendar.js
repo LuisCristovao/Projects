@@ -47,8 +47,15 @@ function CreateDiv(left,top,width,height,color,position){
 }
 
 
-function btnClick(day,month,btn){
-    
+function btnClick(btn){
+    if(btn.getAttribute("isActive")=="false"){
+        btn.style.background="hsl(0,100%,100%)"
+        btn.setAttribute("isActive",true)
+    }else{
+        var color=btn.style.border.split(" ")[2]+btn.style.border.split(" ")[3]+btn.style.border.split(" ")[4]
+        btn.style.background=color
+        btn.setAttribute("isActive",false)
+    }
 }
 
 
@@ -77,6 +84,8 @@ function CreateButton(_text,_color,_month){
     
     btn.setAttribute("isActive",false)
     btn.setAttribute("id",_text+"/"+(_month+1));
+    btn.setAttribute("onclick","btnClick(this)")
+    //btn.addEventListener("click",btnClick(btn))
     
     return btn
 }
