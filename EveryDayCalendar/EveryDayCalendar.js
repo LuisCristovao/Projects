@@ -53,12 +53,14 @@ function btnClick(day,month,btn){
 
 
 
-function CreateButton(_text,_color){
+function CreateButton(_text,_color,_month){
     var btn=document.createElement("div");
     //btn.setAttribute("valign","center")
     var width_height=80;
     var middle=(100-width_height)/2;
+    
     setStyle(btn,{"position":"inherit","background":"hsla("+_color+",100%,60%,1)","border-radius":"50%","width":width_height+"%","height":width_height+"%","top":middle+"%","left":middle+"%","border":"5px solid hsla("+_color+",100%,60%,1)"})
+    
     var text=document.createElement("p")
     
     text.appendChild(document.createTextNode(_text))
@@ -74,6 +76,7 @@ function CreateButton(_text,_color){
     
     
     btn.setAttribute("isActive",false)
+    btn.setAttribute("id",_text+"/"+(_month+1));
     
     return btn
 }
@@ -122,7 +125,7 @@ function CreateColumns(lines, columns){
             column.setAttribute("align","center")
             
             if(i<days[j+1]){
-                var btn=CreateButton(i+1,j*20)
+                var btn=CreateButton(i+1,j*20,j)
                 column.appendChild(btn)
             }
             
