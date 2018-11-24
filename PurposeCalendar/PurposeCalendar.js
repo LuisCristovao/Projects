@@ -243,6 +243,32 @@ function CreateColumns(lines, columns){
     body.appendChild(table)
 }
 
+function highLightDay(index){
+    var date=new Date()
+    var d=date.getDate()
+    var m=date.getMonth()+1
+    
+    var id=d+"/"+m
+    var btn=document.getElementById(id)
+    
+    if(btn.getAttribute("isActive")=="false"){
+        animation(btn,index)
+    }
+    
+    
+    
+}
+
+function animation(btn,index){
+    btn.style.background="hsla("+index%360+",100%,60%,1)"
+    var color=btn.style.border.split(" ")[2]+btn.style.border.split(" ")[3]+btn.style.border.split(" ")[4]
+    btn.style.border=(index%10).toString()+"px "+"solid "+"hsl("+color+",100%,60%)" 
+}
+
+
+
+
+
 
 window.onload=function(){
     //alert("hello");
@@ -267,7 +293,7 @@ window.onload=function(){
 
 
 var lsm;
-
+var index=0;
 
 function Main(){
     var html=document.getElementById("body");
@@ -286,6 +312,12 @@ function Main(){
         //var body=document.getElementById("html");
         //setStyle(body,{"width":global_width,"height":global_height,"top":"0px","left":"0px","position":"absolute"})
     }
+    
+    //Highlight actual day
+    
+    highLightDay(index)
+    index=(index+10)%1000;
+    
     setTimeout(Main,100);
 }
 
