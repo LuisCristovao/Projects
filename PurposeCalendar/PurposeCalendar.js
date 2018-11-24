@@ -268,10 +268,10 @@ function animation(btn,index){
 }
 
 
-/*window.onload=function(){
+window.onload=function(){
     //alert("hello");
     
-    lsm=new LocalStorageManager()
+    
     
     
     global_width=html.offsetWidth;
@@ -285,7 +285,7 @@ function animation(btn,index){
     //setStyle(body,{"width":global_width,"height":global_height,"top":"0px","left":"0px","position":"absolute"})
     
     
-}*/
+}
 
 //Main-------------------
 
