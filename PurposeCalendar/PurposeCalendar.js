@@ -266,10 +266,6 @@ function animation(btn,index){
 }
 
 
-
-
-
-
 window.onload=function(){
     //alert("hello");
     
