@@ -12,6 +12,73 @@ var days={1:31,2:28,3:31,4:30,5:31,6:30,7:31,8:30,9:31,10:31,11:30,12:31}
 var lines=31
 var columns=12
 
+class LocalStorageManager{
+    
+    constructor(){
+        this.calendar_purpose=this.getTitle()
+        this.JsonData=this.getData()
+        localStorage[this.calendar_purpose]=JSON.stringify(this.JsonData)
+    }
+    
+    getTitle(){
+        if(window.location.search!=""){
+            document.title=window.location.search
+            return window.location.search    
+        }
+        else{
+            return document.title;
+        }
+        
+    }
+    
+    createDays(month){
+        var d={}
+        for(var i=1;i<=days[month];i++){
+            d[i]=false
+        }
+        
+        return d
+    }
+    
+    createData(){
+        var out=[]
+        
+        for(var i=0;i<months.length;i++)
+        {
+            var month={
+                "month_number":i+1,
+                "month_name":months[i],
+                "days":this.createDays(i+1)
+            }
+            out.push(month)
+        }
+        
+        
+        return out
+    }
+    
+    getData(){
+        //if data already exists
+        if(localStorage[this.calendar_purpose]!=null){
+            return localStorage[this.calendar_purpose]
+        }
+        else{
+            //localStorage[this.calendar_purpose]=this.createData()
+            return this.createData()
+        }
+    }
+    
+    
+    
+    
+}
+
+
+
+
+
+
+
 
 function columnWidth(){
     return global_width*((global_height>global_width)?0.5:0.1)
@@ -152,6 +219,10 @@ function CreateColumns(lines, columns){
 
 window.onload=function(){
     //alert("hello");
+    
+    var lsm=new LocalStorageManager()
+    
+    
     global_width=html.offsetWidth;
     global_height=html.offsetHeight;
     prev_width=global_width;
