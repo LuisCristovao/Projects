@@ -22,8 +22,10 @@ class LocalStorageManager{
     
     getTitle(){
         if(window.location.search!=""){
-            document.title=window.location.search
-            return window.location.search    
+            var p=window.location.search;
+            p=p.substr(1,p.length)
+            document.title=p
+            return p
         }
         else{
             return document.title;
@@ -60,7 +62,7 @@ class LocalStorageManager{
     getData(){
         //if data already exists
         if(localStorage[this.calendar_purpose]!=null){
-            return localStorage[this.calendar_purpose]
+            return JSON.parse(localStorage[this.calendar_purpose])
         }
         else{
             //localStorage[this.calendar_purpose]=this.createData()
@@ -68,8 +70,14 @@ class LocalStorageManager{
         }
     }
     
+    setDay(month,day,val){
+        this.JsonData[month-1].days[day]=val
+        localStorage[this.calendar_purpose]=JSON.stringify(this.JsonData)
+    }
     
-    
+    getDay(month,day){
+        return this.JsonData[month-1].days[day]
+    }
     
 }
 
@@ -115,15 +123,32 @@ function CreateDiv(left,top,width,height,color,position){
     //body.appendChild(hex)
 }
 
+function btnChangeColor(btn){
+    if(btn.getAttribute("isActive")=="true"){
+        btn.style.background="hsl(0,100%,100%)"
+    }
+    else{
+        var color=btn.style.border.split(" ")[2]+btn.style.border.split(" ")[3]+btn.style.border.split(" ")[4]
+        btn.style.background=color
+    }
+}
 
 function btnClick(btn){
+    
+    var d,m;
+    d=btn.getAttribute("id").split("/")[0]
+    m=btn.getAttribute("id").split("/")[1]
+    
     if(btn.getAttribute("isActive")=="false"){
         btn.style.background="hsl(0,100%,100%)"
         btn.setAttribute("isActive","true")
+        lsm.setDay(m,d,true)
+        
     }else{
         var color=btn.style.border.split(" ")[2]+btn.style.border.split(" ")[3]+btn.style.border.split(" ")[4]
         btn.style.background=color
         btn.setAttribute("isActive","false")
+        lsm.setDay(m,d,false)
     }
 }
 
@@ -136,7 +161,7 @@ function CreateButton(_text,_color,_month){
     var width_height=80;
     var middle=(100-width_height)/2;
     
-    setStyle(btn,{"position":"inherit","background":"hsla("+_color+",100%,60%,1)","border-radius":"50%","width":width_height+"%","height":width_height+"%","top":middle+"%","left":middle+"%","border":"5px solid hsla("+_color+",100%,60%,1)"})
+    setStyle(btn,{"position":"inherit","background":"hsla("+_color+",100%,60%,1)","border-radius":"50%","width":width_height+"%","height":width_height+"%","top":middle+"%","left":middle+"%","border":"5px solid hsla("+_color+",100%,60%,1)","cursor":"pointer"})
     
     var text=document.createElement("p")
     
@@ -152,9 +177,11 @@ function CreateButton(_text,_color,_month){
     }
     
     
-    btn.setAttribute("isActive","false")
+    
     btn.setAttribute("id",_text+"/"+(_month+1));
+    btn.setAttribute("isActive",lsm.getDay(_month+1,_text))
     btn.setAttribute("onclick","btnClick(this)")
+    btnChangeColor(btn)
     //btn.addEventListener("click",btnClick(btn))
     
     return btn
@@ -220,7 +247,7 @@ function CreateColumns(lines, columns){
 window.onload=function(){
     //alert("hello");
     
-    var lsm=new LocalStorageManager()
+    lsm=new LocalStorageManager()
     
     
     global_width=html.offsetWidth;
@@ -237,6 +264,11 @@ window.onload=function(){
 }
 
 //Main-------------------
+
+
+var lsm;
+
+
 function Main(){
     var html=document.getElementById("body");
     global_width=html.offsetWidth;
