@@ -4,6 +4,8 @@ var global_height=html.offsetHeight;
 var prev_width=global_width;
 var prev_height=global_height;
 var body=document.getElementById("body");
+//var purpose=document.title;
+//purpose="Ola"
 
 var months=["Jan","Fev","Mar","Apr","May","Jun","Jul","Ago","Set","Out","Nov","Dez"]
 var days={1:31,2:28,3:31,4:30,5:31,6:30,7:31,8:30,9:31,10:31,11:30,12:31}
@@ -61,6 +63,7 @@ function btnClick(btn){
 
 
 function CreateButton(_text,_color,_month){
+    
     var btn=document.createElement("div");
     //btn.setAttribute("valign","center")
     var width_height=80;
