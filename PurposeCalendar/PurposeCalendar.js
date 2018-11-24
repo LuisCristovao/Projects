@@ -268,7 +268,7 @@ function animation(btn,index){
 }
 
 
-window.onload=function(){
+/*window.onload=function(){
     //alert("hello");
     
     lsm=new LocalStorageManager()
@@ -285,12 +285,12 @@ window.onload=function(){
     //setStyle(body,{"width":global_width,"height":global_height,"top":"0px","left":"0px","position":"absolute"})
     
     
-}
+}*/
 
 //Main-------------------
 
 
-var lsm;
+var lsm=new LocalStorageManager();
 var index=0;
 
 function Main(){
