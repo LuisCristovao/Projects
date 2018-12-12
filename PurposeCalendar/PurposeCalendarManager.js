@@ -67,11 +67,11 @@ function addSubMenu(el){
 function clickAction(el){
     if(el.getAttribute("was_clicked")=="true"){
         el.setAttribute("was_clicked","false")
-        removeSubMenu(el)
+        removeSubMenu(el.parentElement)
     }
     else{
         el.setAttribute("was_clicked","true")
-        addSubMenu(el)
+        addSubMenu(el.parentElement)
     }
 }
 
@@ -90,8 +90,8 @@ function CreateTableRow(string){
     li.appendChild(text)
     li.setAttribute("onmouseover","Highlight(this)")
     li.setAttribute("onmouseout","NotHighLight(this)")
-    ul.setAttribute("was_clicked","false")
-    ul.setAttribute("onclick","clickAction(this)")
+    li.setAttribute("was_clicked","false")
+    li.setAttribute("onclick","clickAction(this)")
     return row
     
     
