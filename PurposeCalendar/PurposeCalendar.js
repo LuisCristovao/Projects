@@ -254,8 +254,7 @@ function highLightDay(index){
     if(btn.getAttribute("isActive")=="false"){
         animation(btn,index)
     }
-    
-    
+   
     
 }
 
@@ -283,7 +282,13 @@ window.onload=function(){
     CreateColumns(lines,columns)
     
     //setStyle(body,{"width":global_width,"height":global_height,"top":"0px","left":"0px","position":"absolute"})
+    var date=new Date()
+    var d=date.getDate()
+    var m=date.getMonth()+1
     
+    var id=d+"/"+m
+     //go to actual button in page
+    window.location.href="#"+id
     
 }
 
