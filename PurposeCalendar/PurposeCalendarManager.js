@@ -5,7 +5,10 @@ var global_height=html.offsetHeight;
 var prev_width=global_width;
 var prev_height=global_height;
 
-var test_array=["new year res ababa ababsb ashjahgajs ","alchool free", "rosary"]
+
+
+
+var test_array=["new year res ","alchool free", "rosary"]
 
 function range(initial=0,end){
     var array=[]
@@ -15,12 +18,61 @@ function range(initial=0,end){
     return array
 }
 
+function Highlight(el){
+    el.style["text-decoration"]="underline"
+}
+function NotHighLight(el){
+    el.style["text-decoration"]=""
+}
 
 function titleSize(){
     return (global_height>global_width)?"10vh":"7vw"
 }
 function tableFontSize(){
     return (global_height>global_width)?"7vh":"8vh"
+}
+
+
+function removeSubMenu(el){
+    //el.get
+    CreatePage()
+}
+function addSubMenu(el){
+    prev_html=el.innerHTML;
+    array=["Enter Calendar","export calendar","reset calendar","remove calendar"]
+    new_html=prev_html
+    
+    for(var i in range(0,array.length)){
+        new_html+="<ul><a href=#><li>"+array[i]+"</li></a></ul>"
+    }
+    el.innerHTML=new_html
+    
+    //update prev_width and height to not use createPage()
+    html=document.getElementsByTagName("html")[0];
+    global_width=html.offsetWidth;
+    global_height=html.offsetHeight;
+    prev_width=global_width;
+    prev_height=global_height;
+    
+    
+    /*var ul=document.createElement("ul")
+    var li=document.createElement("li")
+    
+    ul.appendChild(li)
+    el.appendChild(ul)
+    
+    li*/
+}
+
+function clickAction(el){
+    if(el.getAttribute("was_clicked")=="true"){
+        el.setAttribute("was_clicked","false")
+        removeSubMenu(el)
+    }
+    else{
+        el.setAttribute("was_clicked","true")
+        addSubMenu(el)
+    }
 }
 
 function CreateTableRow(string){
@@ -36,6 +88,10 @@ function CreateTableRow(string){
     
     var text=document.createTextNode(string+"(0/365)")
     li.appendChild(text)
+    li.setAttribute("onmouseover","Highlight(this)")
+    li.setAttribute("onmouseout","NotHighLight(this)")
+    ul.setAttribute("was_clicked","false")
+    ul.setAttribute("onclick","clickAction(this)")
     return row
     
     
