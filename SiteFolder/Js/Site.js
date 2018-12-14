@@ -2,7 +2,7 @@ function Start(){
     document.getElementById('burguer').style.position="absolute";
     allBD=readTextFile('SiteFolder/DB/indexDB.txt');
     allBD=allBD.split('##########');
-    align_burguer(toggle_nav);
+    align_burguer();
     LoadRandom(allBD,3);
     LoadRecent(allBD,3);
     resizeImages();
@@ -24,7 +24,7 @@ function resizeImages(){
             console.log( 'All images loaded!' );
             //document.getElementById('debug').innerHTML="All "+counter+" gifs loaded!";
             //setTimeout(function(){document.getElementById('debug').innerHTML="<font color='white'>See Some of my Projects!</font>"},5000);
-            align_burguer(false);
+            align_burguer();
         }
     }
     //////////////////////////////////////////////////////////////////////////
@@ -52,9 +52,9 @@ function readTextFile(file)
 }
 
 
-function align_burguer(panel){
+function align_burguer(){
     var burguer=document.getElementById('burguer');
-    if(panel){
+    if(toggle_nav){
         if(window.innerWidth<window.innerHeight){
             burguer.style.left='46%';
         }
@@ -68,7 +68,7 @@ function align_burguer(panel){
             burguer.style.left='45%';
         }
         else{
-            burguer.style.left='50%';
+            burguer.style.left='49%';
         }
     }
     //change images size
@@ -91,7 +91,7 @@ function openNav(x) {
         x.style.position="absolute";
         x.style.top="15%";
         //x.style.left="49%";
-        align_burguer(toggle_nav);
+        align_burguer();
         //x.style.hover="color:white";
         document.getElementById("myNav").style.visibility = "visible";
         document.getElementById("myNav").style.height = "100%";
@@ -107,7 +107,7 @@ function openNav(x) {
         document.getElementById("myNav").style.height = "0%";
         $('#SiteBody').slideDown('fast');   
         $('#footer').slideDown('fast');
-        align_burguer(toggle_nav);
+        align_burguer();
     }
 }
 
@@ -177,6 +177,7 @@ var global_width=html.offsetWidth;
 var global_height=html.offsetHeight;
 var prev_width=global_width;
 var prev_height=global_height;
+//var prev_toggle_nav_state=toggle_nav;
 
 //Load first projects
 
@@ -189,12 +190,13 @@ function ChangeOrientation(){
     global_width=html.offsetWidth;
     global_height=html.offsetHeight;
     
-    if((prev_width!=global_width || prev_height!=global_height) && !toggle_nav){
+    if(prev_width!=global_width || prev_height!=global_height){
         console.log("change")
         prev_height=global_height
         prev_width=global_width
+        prev_toggle_nav_state=toggle_nav
         
-        align_burguer(false);
+        align_burguer();
     }
     requestAnimationFrame(ChangeOrientation)
 }
