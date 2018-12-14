@@ -6,7 +6,10 @@ function Start(){
     
     LoadProjects(3);
     LoadProjects(3);
+    
+    resizeImages();
 }
+
 
 
 function readTextFile(file)
@@ -99,6 +102,7 @@ function highLight(obj){
 function normal(obj){
     obj.style.backgroundColor="cornflowerblue";
 }
+
 function LoadProjects(number_of_columns){
     
     //loading animation
@@ -170,12 +174,41 @@ function GoToInitialPage(){
     window.location.href="../../index.html"
 }
 
+function resizeImages(){
+    /////////////////code to resize images after load////////////////////////////
+    var objs = document.getElementsByTagName('img'),
+        len = objs.length,
+        counter = 0;
+
+    [].forEach.call( objs, function( obj ) {
+        obj.addEventListener( 'load', incrementCounter, false );
+    } );
+
+    function incrementCounter() {
+        counter++;
+        if ( counter === len ) {
+            console.log( 'All images loaded!' );
+            //document.getElementById('debug').innerHTML="All "+counter+" gifs loaded!";
+            //setTimeout(function(){document.getElementById('debug').innerHTML="<font color='white'>See Some of my Projects!</font>"},5000);
+            align_burguer(false);
+        }
+    }
+    //////////////////////////////////////////////////////////////////////////
+}
+
+
 
 //Main--------------------------------
 //On site open do Start function
 var allBD;
 var loaded_projects=0;
 var row_num=0;
+
+var html=document.getElementsByTagName("html")[0];
+var global_width=html.offsetWidth;
+var global_height=html.offsetHeight;
+var prev_width=global_width;
+var prev_height=global_height;
 //Load first projects
 
 window.onload=Start();
@@ -183,23 +216,20 @@ window.onload=Start();
 //document.body.onresize=function(){align_burguer(toggle_nav)};
 //var fps=new FPS();
 
-/////////////////code to resize images after load////////////////////////////
-var objs = document.getElementsByTagName('img'),
-    len = objs.length,
-    counter = 0;
 
-[].forEach.call( objs, function( obj ) {
-    obj.addEventListener( 'load', incrementCounter, false );
-} );
-
-function incrementCounter() {
-    counter++;
-    if ( counter === len ) {
-        console.log( 'All images loaded!' );
-        //document.getElementById('debug').innerHTML="All "+counter+" gifs loaded!";
-        //setTimeout(function(){document.getElementById('debug').innerHTML="<font color='white'>See Some of my Projects!</font>"},5000);
+//Align everything when change phone orientation
+function ChangeOrientation(){
+    html=document.getElementsByTagName("html")[0];
+    global_width=html.offsetWidth;
+    global_height=html.offsetHeight;
+    
+    if((prev_width!=global_width || prev_height!=global_height) && !toggle_nav){
+        console.log("change")
+        prev_height=global_height
+        prev_width=global_width
+        
         align_burguer(false);
     }
+    requestAnimationFrame(ChangeOrientation)
 }
-//////////////////////////////////////////////////////////////////////////
-//Align everything when change phone orientation
+requestAnimationFrame(ChangeOrientation)

@@ -5,10 +5,30 @@ function Start(){
     align_burguer(toggle_nav);
     LoadRandom(allBD,3);
     LoadRecent(allBD,3);
-    //LoadProjects();
-    //LoadProjects();
+    resizeImages();
 }
 
+function resizeImages(){
+    /////////////////code to resize images after load////////////////////////////
+    var objs = document.getElementsByTagName('img'),
+        len = objs.length,
+        counter = 0;
+
+    [].forEach.call( objs, function( obj ) {
+        obj.addEventListener( 'load', incrementCounter, false );
+    } );
+
+    function incrementCounter() {
+        counter++;
+        if ( counter === len ) {
+            console.log( 'All images loaded!' );
+            //document.getElementById('debug').innerHTML="All "+counter+" gifs loaded!";
+            //setTimeout(function(){document.getElementById('debug').innerHTML="<font color='white'>See Some of my Projects!</font>"},5000);
+            align_burguer(false);
+        }
+    }
+    //////////////////////////////////////////////////////////////////////////
+}
 
 function readTextFile(file)
 {
@@ -122,38 +142,7 @@ function LoadRecent(db_array,size){
     }
     
 }
-/*function LoadProjects(){
-    if(window.innerWidth>window.innerHeight){
 
-        $('#footer').html('<div style="position: relative; left: 50%;" class="loader"></div>');
-    }
-    else{
-        $('#footer').html('<div style="position: relative; left: 45%;" class="loader"></div>');
-    }
-    setTimeout(function(){
-        $('#footer').html('<h3 style="text-align: center"><font color="white">Load More Projects</font></h3>');
-    },1000);
-    $('#SiteBody').append(allBD[loaded_projects]);
-    if(loaded_projects<allBD.length){
-
-        loaded_projects++;
-    }
-    setTimeout(function(){window.scrollTo(0,$(document).height())},300);
-    align_burguer(false);
-}*/
-//only show footer when scroll to bottom
-/*$(window).scroll(function() {
-    //console.log($(window).scrollTop() + $(window).height());
-   if($(window).scrollTop() + $(window).height() >= ($(document).height()*(1-0.1))) {
-       //alert("bottom!");
-       //console.log($(window).scrollTop() + $(window).height());
-       //$('footer').slideUp('fast');
-       document.getElementById('footer').style.visibility="visible";
-   }
-    else{
-        document.getElementById('footer').style.visibility="collapse";
-    }
-});*/
 class Image{
     constructor(gif_src,img_src=null){
         this.gif_src=gif_src;
@@ -182,29 +171,31 @@ class FPS{
 //On site open do Start function
 var allBD;
 var loaded_projects=0;
+
+var html=document.getElementsByTagName("html")[0];
+var global_width=html.offsetWidth;
+var global_height=html.offsetHeight;
+var prev_width=global_width;
+var prev_height=global_height;
+
 //Load first projects
 
 window.onload=Start();
-//document.body.onresize=function(){align_burguer(toggle_nav)};
-//var fps=new FPS();
 
-/////////////////code to resize images after load////////////////////////////
-var objs = document.getElementsByTagName('img'),
-    len = objs.length,
-    counter = 0;
 
-[].forEach.call( objs, function( obj ) {
-    obj.addEventListener( 'load', incrementCounter, false );
-} );
-
-function incrementCounter() {
-    counter++;
-    if ( counter === len ) {
-        console.log( 'All images loaded!' );
-        /*document.getElementById('debug').innerHTML="All "+counter+" gifs loaded!";
-        setTimeout(function(){document.getElementById('debug').innerHTML="<font color='white'>See Some of my Projects!</font>"},5000);*/
+//Align everything when change phone orientation
+function ChangeOrientation(){
+    html=document.getElementsByTagName("html")[0];
+    global_width=html.offsetWidth;
+    global_height=html.offsetHeight;
+    
+    if((prev_width!=global_width || prev_height!=global_height) && !toggle_nav){
+        console.log("change")
+        prev_height=global_height
+        prev_width=global_width
+        
         align_burguer(false);
     }
+    requestAnimationFrame(ChangeOrientation)
 }
-//////////////////////////////////////////////////////////////////////////
-
+requestAnimationFrame(ChangeOrientation)
