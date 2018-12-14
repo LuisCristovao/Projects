@@ -1,5 +1,5 @@
 function Start(){
-    document.getElementById('burguer').style.position="absolute";
+    //document.getElementById('burguer').style.position="absolute";
     allBD=readTextFile('../DB/projectsDB.txt');
     allBD=allBD.split('##########');
     align_burguer(toggle_nav);
@@ -100,15 +100,12 @@ function normal(obj){
     obj.style.backgroundColor="cornflowerblue";
 }
 function LoadProjects(number_of_columns){
-    if(window.innerWidth>window.innerHeight){
-
-        $('#footer').html('<div style="position: relative; left: 50%;" class="loader"></div>');
-    }
-    else{
-        $('#footer').html('<div style="position: relative; left: 45%;" class="loader"></div>');
-    }
+    
+    //loading animation
+    $('#footer').html('<div style="position: relative; " class="loader"></div>');
+    //return to normal
     setTimeout(function(){
-        $('#footer').html('<h3 style="text-align: center"><font color="white">Load More Projects</font></h3>');
+        $('#footer').html('<h3 style="text-align: center;color:white">Load More Projects</h3>');
     },1000);
     //$('#SiteBody').append(allBD[loaded_projects]);
     $('#SiteBody').append("<div class=\"row\" id=\""+'row'+row_num+"\">");
@@ -159,6 +156,21 @@ class FPS{
         window.requestAnimationFrame(this.Run());
     }
 }
+
+function UnderLineText(el,on){
+    if(on){
+        el.style["text-decoration"]="underline"
+    }
+    else{
+        el.style["text-decoration"]=""
+    }
+}
+
+function GoToInitialPage(){
+    window.location.href="../../index.html"
+}
+
+
 //Main--------------------------------
 //On site open do Start function
 var allBD;
@@ -167,6 +179,7 @@ var row_num=0;
 //Load first projects
 
 window.onload=Start();
+
 //document.body.onresize=function(){align_burguer(toggle_nav)};
 //var fps=new FPS();
 
@@ -183,10 +196,10 @@ function incrementCounter() {
     counter++;
     if ( counter === len ) {
         console.log( 'All images loaded!' );
-        /*document.getElementById('debug').innerHTML="All "+counter+" gifs loaded!";
-        setTimeout(function(){document.getElementById('debug').innerHTML="<font color='white'>See Some of my Projects!</font>"},5000);*/
+        //document.getElementById('debug').innerHTML="All "+counter+" gifs loaded!";
+        //setTimeout(function(){document.getElementById('debug').innerHTML="<font color='white'>See Some of my Projects!</font>"},5000);
         align_burguer(false);
     }
 }
 //////////////////////////////////////////////////////////////////////////
-
+//Align everything when change phone orientation

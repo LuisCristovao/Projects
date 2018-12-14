@@ -20,43 +20,47 @@
             <a href="#">Projects</a><br>
             <a href="https://github.com/LuisCristovao/">GitHub</a><br>
             <a href="#">Youtube Channels</a><br>
+            <a href="#">Youtube Channels</a><br>
+              <a href="#">Youtube Channels</a><br>
+              <a href="#">Youtube Channels</a><br>
             <a href="../CV/LuisCristóvãoCV_Website.pdf">CV</a><br>
             <a href="../Pages/Contact.html">Contact</a><br>
           </div>
         </div>
 
     </div>
-<div class="jumbotron text-center" style="background-color:cornflowerblue">
-    <h1><font color="white">Luís Cristóvão GitHub Site</font></h1>
-    <p id="debug"><font color="white">See Some of my Projects!</font></p>
-    <div align="center" id="burguer"  onclick="openNav(this)" style="cursor: pointer">
-        <div class="bar1"></div>
-        <div class="bar2"></div>
-        <div class="bar3"></div>
+    <div class="jumbotron text-center" style="background-color:cornflowerblue">
+        <h1 style="color:white" onmouseover="UnderLineText(this,true)" onmouseout="UnderLineText(this,false)" onclick="GoToInitialPage()">Luís Cristóvão GitHub Site</h1>
+        <p id="debug" style="color: white" onmouseover="UnderLineText(this,true)" onmouseout="UnderLineText(this,false)" onclick="GoToInitialPage()">See Some of my Projects!</p>
+        <div align="center" id="burguer"  onclick="openNav(this)" style="cursor: pointer;position: absolute">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
+        </div>
+        <br>
     </div>
-    <br>
-</div>
-  
-<div id="SiteBody" class="container">
-  
-</div>
-<div id="footer" class="navbar navbar-fixed-bottom " style=" background-color: cornflowerblue;cursor: pointer;" onmouseover="highLight(this)" onmouseout="normal(this)" onclick="LoadProjects(3)">
-    <h3 style="text-align: center"><font color="white">Load More Projects</font></h3>
-</div>    
-<script src="../Js/Projects.js"></script>
-<!--<script>
-    var time=0;
-    var dt=0;
-    var startTime=new Date().getTime();
-    function Fps(){
-        dt = Math.round(1E-3 * (new Date().getTime() - startTime));
-        startTime = new Date().getTime();
-        //time += dt%10000;
-        //console.log(dt);
-        $('#debug').html('slowness:'+dt);
-        window.requestAnimationFrame(Fps);
-    }
-    window.requestAnimationFrame(Fps);
-</script>-->
+
+    <div id="SiteBody" class="container">
+
+    </div>
+    <div id="footer" class="navbar navbar-fixed-bottom " style=" background-color: cornflowerblue;cursor: pointer;" onmouseover="highLight(this)" onmouseout="normal(this)" onclick="LoadProjects(3)" align="center">
+        <h3 style="text-align: center;color:white">Load More Projects</h3>
+    </div>    
+    <script src="../Js/Projects.js"></script>
+    <script>
+
+        /*var time=0;
+        var dt=0;
+        var startTime=new Date().getTime();
+        function Fps(){
+            dt = Math.round(1E-3 * (new Date().getTime() - startTime));
+            startTime = new Date().getTime();
+            //time += dt%10000;
+            //console.log(dt);
+            $('#debug').html('slowness:'+dt);
+            window.requestAnimationFrame(Fps);
+        }
+        window.requestAnimationFrame(Fps);*/
+    </script>
 </body>
 </html>
