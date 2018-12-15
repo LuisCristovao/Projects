@@ -289,7 +289,7 @@ window.onload=function(){
     var id=d+"/"+m
      //go to actual button in page
     window.location.href="#"+id
-    
+    requestAnimationFrame(Main);
 }
 
 //Main-------------------
@@ -324,4 +324,3 @@ function Main(){
     //setTimeout(Main,100);
     requestAnimationFrame(Main)
 }
-requestAnimationFrame(Main);
