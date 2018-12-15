@@ -9,7 +9,15 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     
     <link rel="stylesheet" type="text/css" href="../Css/BasicSite.css">
-    <link rel="stylesheet" type="text/css" href="../Css/ContactPage.css">
+    <style>
+        h3{
+            font-size: 3em;   
+        }
+        p{
+            font-size: 1.5em;   
+        }
+    
+    </style>
 
 </head>
     
@@ -39,17 +47,25 @@
     <br>
 </div>
   
-<div id="SiteBody" class="container">
-    <h3 align="center">Email: luis.cristovao92@gmail.com</h3>
-    <div align="center">
-        <button type="button" class="btn btn-default btn-lg" onclick="copyToClipboard('luis.cristovao92@gmail.com')">Copy email to clip board</button>
-        <div class="mytooltip">
-            <span id="copy-msg" class="mytooltiptext">Copied Email!</span>
-        </div>
-        
-        
-        
+<div id="SiteBody" class="container" align="center">
+    <div align="center" style="width:80%">
+        <h3 class="text_size">Description:</h3>
+        <br>
+        <p class="text_size">Dash Game is a survival game, where the player tries to avoid evil squares</p>
+        <p class="text_size">for the most time possible. The game is also playable on mobile (better in Chrome!).</p>
+        <p class="text_size">Below there is a live demo, source code and a small video of the game.</p>
     </div>
+    <br><br>
+    <a href="https://secretid2.github.io/Projects/DashGame/DashGame.html">
+        <button type="button" class="btn btn-default btn-lg" style="font-size: 2em;">Live Demo of DasGame</button>
+    </a>    
+    <br><br><br>
+    <a href="#">
+        <button type="button" class="btn btn-default btn-lg" style="font-size: 2em;">Source Code</button>
+    </a>
+    <br><br><br>
+    <iframe width="70%" height="250px" src="https://www.youtube.com/embed/0mpLcbj-eVY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>   
+
     
 </div>
 
@@ -134,6 +150,9 @@ function UnderLineText(el,on){
 
 function GoToInitialPage(){
     window.location.href="../../index.html"
+} 
+function GoToSomePage(page){
+    window.location.href=page
 }    
 // Main------------
 var prev_height = window.innerHeight
