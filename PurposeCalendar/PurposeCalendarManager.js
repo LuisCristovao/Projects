@@ -50,10 +50,15 @@ function tablePadding(){
     return (global_height>global_width)?"5%":"0%"
 }
 
+function hyperlinkStyle(){
+    return "text-decoration:underline;color:#0183D9"
+}
+
+
 function removeSubMenu(el){
     //el.get
     //CreatePage()
-    array=el.children
+    var array=el.children
     
     for(var i=1;i<array.length;i++){
         array[i].innerHTML=""
@@ -61,12 +66,13 @@ function removeSubMenu(el){
     
 }
 function addSubMenu(el){
-    prev_html=el.innerHTML;
-    array=["Enter Calendar","import calendar","export calendar","reset calendar","remove calendar"]
-    new_html=prev_html
+    var prev_html=el.innerHTML;
+    //change array to map of option_name:function_to_execute()
+    var array=["Enter Calendar","import calendar","export calendar","reset calendar","remove calendar"]
+    var new_html=prev_html
     
     for(var i=0;i<array.length;i++){
-        new_html+="<ul><a href=#><li>"+array[i]+"</li></a></ul>"
+        new_html+="<ul><li style="+hyperlinkStyle()+">"+array[i]+"</li></ul>"
     }
     el.innerHTML=new_html
     
@@ -135,7 +141,7 @@ function createPCBtn(el){
     CreatePage()
 }
 function undoCreatePC(el){
-    el.parentElement.parentElement.parentElement.innerHTML='<ul onclick="openInput(this)"><a href="#"><li>+ create purpose calendar</li></a></ul>'
+    el.parentElement.parentElement.parentElement.innerHTML='<ul onclick="openInput(this)"><li style="'+hyperlinkStyle()+'">+ create purpose calendar</li></ul>'
 }
 function okBtn(el){
     return '<button onclick="createPCBtn(this)" style="border-radius:50%;background:green;color:white;font-size:'+inputFontSize()+';margin-left:2%;">&#160;&#10004&#160;</button>';
@@ -161,7 +167,7 @@ function addNewPurposeCalendarRow(){
     var column=document.createElement("td")
     row.appendChild(column)
     
-    column.innerHTML='<ul onclick="openInput(this)"><a href="#"><li>+ create purpose calendar</li></a></ul>'
+    column.innerHTML='<ul onclick="openInput(this)"><li style="'+hyperlinkStyle()+'">+ create purpose calendar</li></ul>'
     
     return row
     
