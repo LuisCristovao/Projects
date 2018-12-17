@@ -94,8 +94,21 @@ function enterCalendar(el){
     var calendar=el.parentElement.innerText.split("\n")[0];
     window.location.href="PurposeCalendar.html?"+calendar
 }
-
-
+function resetCalendar(el){
+    var calendar=el.parentElement.innerText.split("\n")[0];
+    delete localStorage[calendar]
+    CreatePage()
+}
+function removeCalendar(el){
+    var calendar=el.parentElement.innerText.split("\n")[0];
+    delete localStorage[calendar]
+    var aux=JSON.parse(localStorage["PCM"])
+    delete aux[calendar]
+    localStorage["PCM"]=JSON.stringify(aux)
+    all_calendars=aux
+    CreatePage()
+    
+}
 
 
 
