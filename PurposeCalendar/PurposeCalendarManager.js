@@ -16,8 +16,8 @@ function getCalendars(){
         return JSON.parse(localStorage["PCM"])
     }
     else{
-        localStorage["PCM"]=JSON.stringify([])
-        return []
+        localStorage["PCM"]=JSON.stringify({})
+        return {}
     }
 }    
     
@@ -149,7 +149,7 @@ function createPC(event,input){
     if (event.keyCode == 13 ) {
         // Do something
         //alert(document.getElementsByTagName("input")[0].value);
-        all_calendars.push(input.value)
+        all_calendars[input.value]="(0/365)"
         localStorage["PCM"]=JSON.stringify(all_calendars)
         CreatePage()
     }
@@ -157,7 +157,7 @@ function createPC(event,input){
 }
 function createPCBtn(el){
     var input=el.parentElement.children[0]
-    all_calendars.push(input.value)
+    all_calendars[input.value]="(0/365)"
     localStorage["PCM"]=JSON.stringify(all_calendars)
     CreatePage()
 }
@@ -204,8 +204,8 @@ function CreatePage(){
     
     var tbody=document.getElementsByTagName("tbody")[0]
     tbody.innerHTML="";
-    for(var i in range(0,all_calendars.length)){
-        tbody.appendChild(CreateTableRow(all_calendars[i]))    
+    for(var key in all_calendars){
+        tbody.appendChild(CreateTableRow(key))    
     }
     //Add create new purpose calendar row
     tbody.appendChild(addNewPurposeCalendarRow())
