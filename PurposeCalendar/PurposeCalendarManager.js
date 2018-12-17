@@ -58,23 +58,27 @@ function hyperlinkStyle(){
 function removeSubMenu(el){
     //el.get
     //CreatePage()
-    var array=el.children
-    
-    for(var i=1;i<array.length;i++){
-        array[i].innerHTML=""
-    }
+    var new_html='<td><ul><li onmouseover="Highlight(this)" onmouseout="NotHighLight(this)" was_clicked="false" onclick="clickAction(this)">'+el.innerText.split("\n")[0]+"</li></ul></td>"
+    new_html+="<td><ul>(0/365)</ul></td>"
+    //changing row
+    el.parentElement.parentElement.innerHTML=new_html
     
 }
 function addSubMenu(el){
-    var prev_html=el.innerHTML;
-    //change array to map of option_name:function_to_execute()
-    var array=["Enter Calendar","import calendar","export calendar","reset calendar","remove calendar"]
-    var new_html=prev_html
     
-    for(var i=0;i<array.length;i++){
-        new_html+="<ul><li style="+hyperlinkStyle()+">"+array[i]+"</li></ul>"
+    //el.parentElement.parentElement.innerHTML="<td colspan='2'><ul><li>ola</li></ul></td>"
+    
+    //change array to map of option_name:function_to_execute()
+    var map={"Enter Calendar":"enterCalendar(this)","Import Calendar":"importCalendar(this)","Export Calendar":"exportCalendar(this)","reset calendar":"resetCalendar(this)","remove calendar":"removeCalendar(this)"}
+    
+    var new_html="<td colspan='2'><ul>"+el.innerHTML.split("</ul")[0]
+
+    for(var key in map){
+        new_html+='<ul onclick="'+map[key]+'"><li style="'+hyperlinkStyle()+'">'+key+'</li></ul>'
     }
-    el.innerHTML=new_html
+    new_html+="</ul></td>"
+    //changing row
+    el.parentElement.parentElement.innerHTML=new_html
     
     /*var ul=document.createElement("ul")
     var li=document.createElement("li")
@@ -84,6 +88,16 @@ function addSubMenu(el){
     
     li*/
 }
+
+
+function enterCalendar(el){
+    var calendar=el.parentElement.innerText.split("\n")[0];
+    window.location.href="PurposeCalendar.html?"+calendar
+}
+
+
+
+
 
 function clickAction(el){
     if(el.getAttribute("was_clicked")=="true"){
@@ -105,20 +119,27 @@ function clickAction(el){
 function CreateTableRow(string){
     var row=document.createElement("tr")
     var column=document.createElement("td")
+    var column2=document.createElement("td")
     
     row.appendChild(column)
+    row.appendChild(column2)
     
     var ul=document.createElement("ul")
     var li=document.createElement("li")
     ul.appendChild(li)
     column.appendChild(ul)
     
-    var text=document.createTextNode(string+"(0/365)")
+    var text=document.createTextNode(string)
     li.appendChild(text)
     li.setAttribute("onmouseover","Highlight(this)")
     li.setAttribute("onmouseout","NotHighLight(this)")
     li.setAttribute("was_clicked","false")
     li.setAttribute("onclick","clickAction(this)")
+    
+    column2.innerHTML="<ul>(0/365)</ul>"
+    
+    
+    
     return row
     
     
@@ -166,7 +187,7 @@ function addNewPurposeCalendarRow(){
     var row=document.createElement("tr")
     var column=document.createElement("td")
     row.appendChild(column)
-    
+    column.setAttribute("colspan","2")
     column.innerHTML='<ul onclick="openInput(this)"><li style="'+hyperlinkStyle()+'">+ create purpose calendar</li></ul>'
     
     return row
