@@ -8,10 +8,20 @@ var prev_height=global_height;
 
 
 
-//var test_array=["new year res ","alchool free", "rosary"]
-var test_array=[]
+var all_calendars=getCalendars()
 
 
+function getCalendars(){
+    if(localStorage["PCM"]!=null){
+        return JSON.parse(localStorage["PCM"])
+    }
+    else{
+        localStorage["PCM"]=JSON.stringify([])
+        return []
+    }
+}    
+    
+    
 function range(initial,end){
     var array=[]
     for(var i=initial;i<end;i++){
@@ -108,15 +118,21 @@ function CreateTableRow(string){
     
 }
 
-function createPC(event,el){
+function createPC(event,input){
     if (event.keyCode == 13 ) {
         // Do something
-        alert(document.getElementsByTagName("input")[0].value);
+        //alert(document.getElementsByTagName("input")[0].value);
+        all_calendars.push(input.value)
+        localStorage["PCM"]=JSON.stringify(all_calendars)
+        CreatePage()
     }
     
 }
 function createPCBtn(el){
-    alert(document.getElementsByTagName("input")[0].value);
+    var input=el.parentElement.children[0]
+    all_calendars.push(input.value)
+    localStorage["PCM"]=JSON.stringify(all_calendars)
+    CreatePage()
 }
 function undoCreatePC(el){
     el.parentElement.parentElement.parentElement.innerHTML='<ul onclick="openInput(this)"><a href="#"><li>+ create purpose calendar</li></a></ul>'
@@ -130,7 +146,7 @@ function crossBtn(el){
 function openInput(el){
     var prev_html=el.innerHTML
     el.setAttribute("onclick","")
-    el.innerHTML='<li><input onkeypress="createPC(event)" type="text" placeholder="Insert PC Name" style="width:70%;height:auto;font-size:'+inputFontSize()+';">'+okBtn(el)+crossBtn(el)+'</li>'
+    el.innerHTML='<li><input onkeypress="createPC(event,this)" type="text" placeholder="Insert PC Name" style="width:70%;height:auto;font-size:'+inputFontSize()+';">'+okBtn(el)+crossBtn(el)+'</li>'
     
     //update prev_width and height to not use createPage()
     html=document.getElementsByTagName("html")[0];
@@ -161,8 +177,8 @@ function CreatePage(){
     
     var tbody=document.getElementsByTagName("tbody")[0]
     tbody.innerHTML="";
-    for(var i in range(0,test_array.length)){
-        tbody.appendChild(CreateTableRow(test_array[i]))    
+    for(var i in range(0,all_calendars.length)){
+        tbody.appendChild(CreateTableRow(all_calendars[i]))    
     }
     //Add create new purpose calendar row
     tbody.appendChild(addNewPurposeCalendarRow())
