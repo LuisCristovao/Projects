@@ -8,7 +8,9 @@ var prev_height=global_height;
 
 
 
-var test_array=["new year res ","alchool free", "rosary"]
+//var test_array=["new year res ","alchool free", "rosary"]
+var test_array=[]
+
 
 function range(initial,end){
     var array=[]
@@ -31,6 +33,9 @@ function titleSize(){
 function tableFontSize(){
     return (global_height>global_width)?"7vh":"8vh"
 }
+function inputFontSize(){
+    return (global_height>global_width)?"6vw":"6vh"
+}
 function tablePadding(){
     return (global_height>global_width)?"5%":"0%"
 }
@@ -47,7 +52,7 @@ function removeSubMenu(el){
 }
 function addSubMenu(el){
     prev_html=el.innerHTML;
-    array=["Enter Calendar","export calendar","reset calendar","remove calendar"]
+    array=["Enter Calendar","import calendar","export calendar","reset calendar","remove calendar"]
     new_html=prev_html
     
     for(var i=0;i<array.length;i++){
@@ -103,6 +108,48 @@ function CreateTableRow(string){
     
 }
 
+function createPC(event,el){
+    if (event.keyCode == 13 ) {
+        // Do something
+        alert(document.getElementsByTagName("input")[0].value);
+    }
+    
+}
+function createPCBtn(el){
+    alert(document.getElementsByTagName("input")[0].value);
+}
+function undoCreatePC(el){
+    el.parentElement.parentElement.parentElement.innerHTML='<ul onclick="openInput(this)"><a href="#"><li>+ create purpose calendar</li></a></ul>'
+}
+function okBtn(el){
+    return '<button onclick="createPCBtn(this)" style="border-radius:50%;background:green;color:white;font-size:'+inputFontSize()+';margin-left:2%;">&#160;&#10004&#160;</button>';
+}
+function crossBtn(el){
+    return '<button onclick="undoCreatePC(this)" style="border-radius:50%;background:red;color:white;margin-left:2%;font-size:'+inputFontSize()+'">&#160;&#10006&#160;</button>'
+}
+function openInput(el){
+    var prev_html=el.innerHTML
+    el.setAttribute("onclick","")
+    el.innerHTML='<li><input onkeypress="createPC(event)" type="text" placeholder="Insert PC Name" style="width:70%;height:auto;font-size:'+inputFontSize()+';">'+okBtn(el)+crossBtn(el)+'</li>'
+    
+    //update prev_width and height to not use createPage()
+    html=document.getElementsByTagName("html")[0];
+    global_width=html.offsetWidth;
+    global_height=html.offsetHeight;
+    prev_width=global_width;
+    prev_height=global_height;
+}
+
+function addNewPurposeCalendarRow(){
+    var row=document.createElement("tr")
+    var column=document.createElement("td")
+    row.appendChild(column)
+    
+    column.innerHTML='<ul onclick="openInput(this)"><a href="#"><li>+ create purpose calendar</li></a></ul>'
+    
+    return row
+    
+}
 function CreatePage(){
     var title=document.getElementById("title")
     title.style["font-size"]=titleSize()
@@ -117,6 +164,9 @@ function CreatePage(){
     for(var i in range(0,test_array.length)){
         tbody.appendChild(CreateTableRow(test_array[i]))    
     }
+    //Add create new purpose calendar row
+    tbody.appendChild(addNewPurposeCalendarRow())
+    
 }
 
 
