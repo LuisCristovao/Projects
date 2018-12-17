@@ -10,7 +10,7 @@ var prev_height=global_height;
 
 var test_array=["new year res ","alchool free", "rosary"]
 
-function range(initial=0,end){
+function range(initial,end){
     var array=[]
     for(var i=initial;i<end;i++){
         array.push(i)
@@ -31,29 +31,29 @@ function titleSize(){
 function tableFontSize(){
     return (global_height>global_width)?"7vh":"8vh"
 }
-
+function tablePadding(){
+    return (global_height>global_width)?"5%":"0%"
+}
 
 function removeSubMenu(el){
     //el.get
-    CreatePage()
+    //CreatePage()
+    array=el.children
+    
+    for(var i=1;i<array.length;i++){
+        array[i].innerHTML=""
+    }
+    
 }
 function addSubMenu(el){
     prev_html=el.innerHTML;
     array=["Enter Calendar","export calendar","reset calendar","remove calendar"]
     new_html=prev_html
     
-    for(var i in range(0,array.length)){
+    for(var i=0;i<array.length;i++){
         new_html+="<ul><a href=#><li>"+array[i]+"</li></a></ul>"
     }
     el.innerHTML=new_html
-    
-    //update prev_width and height to not use createPage()
-    html=document.getElementsByTagName("html")[0];
-    global_width=html.offsetWidth;
-    global_height=html.offsetHeight;
-    prev_width=global_width;
-    prev_height=global_height;
-    
     
     /*var ul=document.createElement("ul")
     var li=document.createElement("li")
@@ -73,6 +73,12 @@ function clickAction(el){
         el.setAttribute("was_clicked","true")
         addSubMenu(el.parentElement)
     }
+    //update prev_width and height to not use createPage()
+    html=document.getElementsByTagName("html")[0];
+    global_width=html.offsetWidth;
+    global_height=html.offsetHeight;
+    prev_width=global_width;
+    prev_height=global_height;
 }
 
 function CreateTableRow(string){
@@ -103,6 +109,8 @@ function CreatePage(){
     
     var table=document.getElementsByTagName("table")[0]
     table.style["font-size"]=tableFontSize()
+    
+    table.style["padding-left"]=tablePadding()
     
     var tbody=document.getElementsByTagName("tbody")[0]
     tbody.innerHTML="";
