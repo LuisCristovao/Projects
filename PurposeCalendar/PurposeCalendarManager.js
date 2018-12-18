@@ -54,6 +54,14 @@ function hyperlinkStyle(){
     return "text-decoration:underline;color:#0183D9"
 }
 
+function updatePrevWidthHeight(){
+     //update prev_width and height to not use createPage()
+    html=document.getElementsByTagName("html")[0];
+    global_width=html.offsetWidth;
+    global_height=html.offsetHeight;
+    prev_width=global_width;
+    prev_height=global_height;
+}
 
 function removeSubMenu(el){
     //el.get
@@ -71,12 +79,12 @@ function addSubMenu(el){
     //change array to map of option_name:function_to_execute()
     var map={"Enter Calendar":"enterCalendar(this)","Import Calendar":"importCalendar(this)","Export Calendar":"exportCalendar(this)","reset calendar":"resetCalendar(this)","remove calendar":"removeCalendar(this)"}
     
-    var new_html="<td colspan='2'><ul>"+el.innerHTML.split("</ul")[0]
+    var new_html="<td colspan='2'><ul>"+el.innerHTML.split("</ul")[0]+"<div>"
 
     for(var key in map){
         new_html+='<ul onclick="'+map[key]+'"><li style="'+hyperlinkStyle()+'">'+key+'</li></ul>'
     }
-    new_html+="</ul></td>"
+    new_html+="</ul></div></td>"
     //changing row
     el.parentElement.parentElement.innerHTML=new_html
     
@@ -109,7 +117,30 @@ function removeCalendar(el){
     CreatePage()
     
 }
+function importCalendar(el){
+    /*var calendar=el.parentElement.innerText.split("\n")[0];
+    var calendar_json=JSON.parse(localStorage[calendar])
+    if(global_height>global_width){
+        
+        el.parentElement.innerHTML='<textarea style="">sdwsdsw</textarea>'
+    }else{
+        
+    }
+    //update prev_width and height so that main does not createPage() again
+    updatePrevWidthHeight()*/
+    //console.log(el.parentElement)
+    
+    //Cannot be this it must be a input box as i did previously!!!
+    el.parentElement.innerHTML='<textarea style="width:100%;height:100%">Paste JSON over this text!</textarea>'
+    updatePrevWidthHeight()
+}
 
+function exportCalendar(){
+    //need to put the json text in clipboard can see an example in site copy contact
+    //put setimeout to warning the user of the json in clipboard and change back to normal view.
+    /*var calendar=el.parentElement.innerText.split("\n")[0];
+    var calendar_json=JSON.parse(localStorage[calendar])*/
+}
 
 
 function clickAction(el){
@@ -121,12 +152,8 @@ function clickAction(el){
         el.setAttribute("was_clicked","true")
         addSubMenu(el.parentElement)
     }
-    //update prev_width and height to not use createPage()
-    html=document.getElementsByTagName("html")[0];
-    global_width=html.offsetWidth;
-    global_height=html.offsetHeight;
-    prev_width=global_width;
-    prev_height=global_height;
+    //update prev_width and height so that main does not createPage() again
+    updatePrevWidthHeight()
 }
 
 function CreateTableRow(string){
@@ -188,12 +215,8 @@ function openInput(el){
     el.setAttribute("onclick","")
     el.innerHTML='<li><input onkeypress="createPC(event,this)" type="text" placeholder="Insert PC Name" style="width:70%;height:auto;font-size:'+inputFontSize()+';">'+okBtn(el)+crossBtn(el)+'</li>'
     
-    //update prev_width and height to not use createPage()
-    html=document.getElementsByTagName("html")[0];
-    global_width=html.offsetWidth;
-    global_height=html.offsetHeight;
-    prev_width=global_width;
-    prev_height=global_height;
+    //update prev_width and height so that main does not createPage() again
+    updatePrevWidthHeight()
 }
 
 function addNewPurposeCalendarRow(){
