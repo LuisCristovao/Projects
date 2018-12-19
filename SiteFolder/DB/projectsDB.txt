@@ -21,7 +21,7 @@
 ##########
 <div class="col-sm-4">
       <h3>Basic Machine Learning Server</h3>
-      <a href="https://basic-ml-server.herokuapp.com"><img  src="../Images/MLServer.gif" style="width:100%;"></a>
+      <a href="../Pages/MLServerPage.html"><img  src="../Images/MLServer.gif" style="width:100%;"></a>
     </div>
 ##########
     <div class="col-sm-4">
