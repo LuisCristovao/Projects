@@ -10,12 +10,14 @@
     
     <link rel="stylesheet" type="text/css" href="../Css/BasicSite.css">
     <style>
-        h3{
-            font-size: 3em;   
+        .h3_page{
+            font-size: 3em; 
+            
         }
-        p{
+        .p_page{
             font-size: 1.5em;
-            /*text-indent: 2%;*/
+            text-align: justify;
+            text-indent: 5%;
         }
     
     </style>
@@ -50,13 +52,13 @@
   
 <div id="SiteBody" class="container" align="center">
     <div align="center" style="width:80%">
-        <h3 >Basic ML Server Description:</h3>
+        <h3 class="h3_page">Basic ML Server Description:</h3>
         <br>
-        <p >This project, as the title says is a basic machine learning server that allows the user to export the model in the end.
+        <p class="p_page">  This project, as the title says is a basic machine learning server that allows the user to export the model in the end.
         The server will accept <b>csv like files</b>, for instance a <b>.txt</b> with the features separeted by a <b>" , "</b> or any othe character. The target class must be in the <b>last right column</b> in order to work!! Also I made this server using <b>Bottle: Python Web Framework</b>
-        </p>
-        <p><b>[DISCLAIMER]: This project is really limited! It uses basic machine learning algorithms, and has lots of other limitations, such as, does not do interpolations... just the basic features target stuff. There are more limitations but it is not necessary to display them here.</b></p>
-        <p >Below there is a <b>live demo, source code</b> and a small video tutorial how to use the application server.</p>
+        </p >
+        <p class="p_page"><b>[DISCLAIMER]: This project is really limited! It uses basic machine learning algorithms, and has lots of other limitations, such as, does not do interpolations... just the basic features target stuff. There are more limitations but it is not necessary to display them here.</b></p>
+        <p class="p_page">Below there is a <b>live demo, The Source Code actually running in Heroku app</b> and a small video tutorial how to use the application server.</p>
     </div>
     <br><br>
     <a href="https://basic-ml-server.herokuapp.com" target="_blank">
@@ -64,7 +66,7 @@
     </a>    
     <br><br><br>
     <a href="https://github.com/LuisCristovao/MLServer" target="_blank">
-        <button type="button" class="btn btn-default btn-lg" style="font-size: 2em;">Source Code actually published in heroku app!</button>
+        <button type="button" class="btn btn-default btn-lg" style="font-size: 2em;">Source Code</button>
     </a>
     <br><br><br>
     <iframe width="70%" height="250px" src="https://www.youtube.com/embed/ClqpghwCOfg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>   
