@@ -6,7 +6,7 @@
 ##########
 <div class="col-sm-4">
       <h3>Volley Game</h3>
-      <a href="https://luiscristovao.github.io/Projects/Volley/index.html"><img src="../Images/volley.gif" style="width:100%"></a>
+      <a href="../Pages/VolleyGamePage.html"><img src="../Images/volley.gif" style="width:100%"></a>
 </div>
 ##########
     <div class="col-sm-4">
