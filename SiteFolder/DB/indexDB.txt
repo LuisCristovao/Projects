@@ -16,7 +16,7 @@
 ########## 
     <div class="col-sm-4">
       <h3>Chat Rooms App</h3>
-      <a href="https://chat-rooms-nodejs.herokuapp.com/"><img src="SiteFolder/Images/ChatRooms.GIF" style="width:100%"></a>
+      <a href="SiteFolder/Pages/ChatRoomsPage.html"><img src="SiteFolder/Images/ChatRooms.GIF" style="width:100%"></a>
     </div>
 ##########
 <div class="col-sm-4">
