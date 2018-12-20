@@ -99,16 +99,16 @@ function addSubMenu(el){
 
 
 function enterCalendar(el){
-    var calendar=el.parentElement.innerText.split("\n")[0];
+    var calendar=el.parentElement.parentElement.innerText.split("\n")[0];
     window.location.href="PurposeCalendar.html?"+calendar
 }
 function resetCalendar(el){
-    var calendar=el.parentElement.innerText.split("\n")[0];
+    var calendar=el.parentElement.parentElement.innerText.split("\n")[0];
     delete localStorage[calendar]
     CreatePage()
 }
 function removeCalendar(el){
-    var calendar=el.parentElement.innerText.split("\n")[0];
+    var calendar=el.parentElement.parentElement.innerText.split("\n")[0];
     delete localStorage[calendar]
     var aux=JSON.parse(localStorage["PCM"])
     delete aux[calendar]
