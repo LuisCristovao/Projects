@@ -77,7 +77,7 @@ function addSubMenu(el){
     //el.parentElement.parentElement.innerHTML="<td colspan='2'><ul><li>ola</li></ul></td>"
     
     //change array to map of option_name:function_to_execute()
-    var map={"Enter Calendar":"enterCalendar(this)","Import Calendar":"importCalendar(this)","Export Calendar":"exportCalendar(this)","reset calendar":"resetCalendar(this)","remove calendar":"removeCalendar(this)"}
+    var map={"Enter Calendar":"enterCalendar(this)","Import Calendar":"importCalendar(this)","Export Calendar":"exportCalendar(this)","Reset calendar":"resetCalendar(this)","Remove calendar":"removeCalendar(this)"}
     
     var new_html="<td colspan='2'><ul>"+el.innerHTML.split("</ul")[0]+"<div>"
 
@@ -204,16 +204,16 @@ function createPCBtn(el){
 function undoCreatePC(el){
     el.parentElement.parentElement.parentElement.innerHTML='<ul onclick="openInput(this)"><li style="'+hyperlinkStyle()+'">+ create purpose calendar</li></ul>'
 }
-function okBtn(el){
-    return '<button onclick="createPCBtn(this)" style="border-radius:50%;background:green;color:white;font-size:'+inputFontSize()+';margin-left:2%;">&#160;&#10004&#160;</button>';
+function okBtn(el,onclick_function){
+    return '<button onclick="'+onclick_function+'" style="border-radius:50%;background:green;color:white;font-size:'+inputFontSize()+';margin-left:2%;">&#160;&#10004&#160;</button>';
 }
-function crossBtn(el){
-    return '<button onclick="undoCreatePC(this)" style="border-radius:50%;background:red;color:white;margin-left:2%;font-size:'+inputFontSize()+'">&#160;&#10006&#160;</button>'
+function crossBtn(el,onclick_function){
+    return '<button onclick="'+onclick_function+'" style="border-radius:50%;background:red;color:white;margin-left:2%;font-size:'+inputFontSize()+'">&#160;&#10006&#160;</button>'
 }
-function openInput(el){
+function openInput(el,placeholder,on_key_press_function){
     var prev_html=el.innerHTML
     el.setAttribute("onclick","")
-    el.innerHTML='<li><input onkeypress="createPC(event,this)" type="text" placeholder="Insert PC Name" style="width:70%;height:auto;font-size:'+inputFontSize()+';">'+okBtn(el)+crossBtn(el)+'</li>'
+    el.innerHTML='<li><input onkeypress="'+on_key_press_function+'" type="text" placeholder="'+placeholder+'" style="width:70%;height:auto;font-size:'+inputFontSize()+';">'+okBtn(el,"createPCBtn(this)")+crossBtn(el,"undoCreatePC(this)")+'</li>'
     
     //update prev_width and height so that main does not createPage() again
     updatePrevWidthHeight()
@@ -224,7 +224,7 @@ function addNewPurposeCalendarRow(){
     var column=document.createElement("td")
     row.appendChild(column)
     column.setAttribute("colspan","2")
-    column.innerHTML='<ul onclick="openInput(this)"><li style="'+hyperlinkStyle()+'">+ create purpose calendar</li></ul>'
+    column.innerHTML='<ul onclick="openInput(this,\'Insert PC Name\',\'createPC(event,this)\')"><li style="'+hyperlinkStyle()+'">+ create purpose calendar</li></ul>'
     
     return row
     
