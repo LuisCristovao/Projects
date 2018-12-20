@@ -50,8 +50,8 @@ function tablePadding(){
     return (global_height>global_width)?"5%":"0%"
 }
 
-function hyperlinkStyle(){
-    return "text-decoration:underline;color:#0183D9"
+function hyperlinkStyle(color){
+    return "text-decoration:underline;color:"+color+";"
 }
 
 function updatePrevWidthHeight(){
@@ -66,7 +66,7 @@ function updatePrevWidthHeight(){
 function removeSubMenu(el){
     //el.get
     //CreatePage()
-    var new_html='<td><ul><li onmouseover="Highlight(this)" onmouseout="NotHighLight(this)" was_clicked="false" onclick="clickAction(this)">'+el.innerText.split("\n")[0]+"</li></ul></td>"
+    var new_html='<td><ul><li onmouseover="Highlight(this)" onmouseout="NotHighLight(this)" was_clicked="false" onclick="clickAction(this)" style="cursor:pointer">'+el.innerText.split("\n")[0]+"</li></ul></td>"
     new_html+="<td><ul>(0/365)</ul></td>"
     //changing row
     el.parentElement.parentElement.innerHTML=new_html
@@ -82,7 +82,7 @@ function addSubMenu(el){
     var new_html="<td colspan='2'><ul>"+el.innerHTML.split("</ul")[0]+"<div>"
 
     for(var key in map){
-        new_html+='<ul onclick="'+map[key]+'"><li style="'+hyperlinkStyle()+'">'+key+'</li></ul>'
+        new_html+='<ul onclick="'+map[key]+'"><li style="'+hyperlinkStyle('#0183D9')+';cursor:pointer">'+key+'</li></ul>'
     }
     new_html+="</ul></div></td>"
     //changing row
@@ -133,15 +133,34 @@ function importCalendar(el){
     
     //Cannot be this it must be a input box as i did previously!!!
     //el.parentElement.innerHTML='<textarea style="width:100%;height:100%">Paste JSON over this text!</textarea>'
-    openInput(el,"Insert JSON","")
+    openInput(el,'Insert JSON','createPC(event,this)',okBtn('createPCBtn(this)'),crossBtn('undoCreatePC(this)'))
     updatePrevWidthHeight()
 }
-
+const copyToClipboard = str => {
+  const el = document.createElement('textarea');
+  el.value = str;
+  el.setAttribute('readonly', '');
+  el.style.position = 'absolute';
+  el.style.left = '-9999px';
+  document.body.appendChild(el);
+  el.select();
+  document.execCommand('copy');
+  document.body.removeChild(el);
+  
+    
+};
 function exportCalendar(el){
     //need to put the json text in clipboard can see an example in site copy contact
     //put setimeout to warning the user of the json in clipboard and change back to normal view.
-    /*var calendar=el.parentElement.innerText.split("\n")[0];
-    var calendar_json=JSON.parse(localStorage[calendar])*/
+    /*var calendar=el.parentElement.parentElement.innerText.split("\n")[0];
+    var calendar_json=JSON.parse(localStorage[calendar])
+    copyToClipboard(calendar_json)
+    el.innerHTML='<li style="'+hyperlinkStyle('#2AB30E')+';cursor:pointer">Copy JSON to clip board!</li>'
+    var f=function(ele){
+        ele.innerHTML='<li style="'+hyperlinkStyle('#0183D9')+';cursor:pointer">Export Calendar</li>'
+    }
+    
+    setTimeout(f.bind(el),2500)*/
 }
 
 
@@ -177,6 +196,7 @@ function CreateTableRow(string){
     li.setAttribute("onmouseout","NotHighLight(this)")
     li.setAttribute("was_clicked","false")
     li.setAttribute("onclick","clickAction(this)")
+    li.setAttribute("style","cursor:pointer")
     
     column2.innerHTML="<ul>(0/365)</ul>"
     
@@ -204,7 +224,7 @@ function createPCBtn(el){
     CreatePage()
 }
 function undoCreatePC(el){
-    el.parentElement.parentElement.parentElement.innerHTML='<ul onclick="openInput(this,\'Insert PC Name\',\'createPC(event,this)\',okBtn(\'createPCBtn(this)\'),crossBtn(\'undoCreatePC(this)\'))"><li style="'+hyperlinkStyle()+'">+ create purpose calendar</li></ul>'
+    el.parentElement.parentElement.parentElement.innerHTML='<ul onclick="openInput(this,\'Insert PC Name\',\'createPC(event,this)\',okBtn(\'createPCBtn(this)\'),crossBtn(\'undoCreatePC(this)\'))"><li style="'+hyperlinkStyle('#0183D9')+'">+ create purpose calendar</li></ul>'
 }
 function okBtn(onclick_function){
     return '<button onclick="'+onclick_function+'" style="border-radius:50%;background:green;color:white;font-size:'+inputFontSize()+';margin-left:2%;">&#160;&#10004&#160;</button>';
@@ -226,7 +246,7 @@ function addNewPurposeCalendarRow(){
     var column=document.createElement("td")
     row.appendChild(column)
     column.setAttribute("colspan","2")
-    column.innerHTML='<ul onclick="openInput(this,\'Insert PC Name\',\'createPC(event,this)\',okBtn(\'createPCBtn(this)\'),crossBtn(\'undoCreatePC(this)\'))"><li style="'+hyperlinkStyle()+'">+ create purpose calendar</li></ul>'
+    column.innerHTML='<ul onclick="openInput(this,\'Insert PC Name\',\'createPC(event,this)\',okBtn(\'createPCBtn(this)\'),crossBtn(\'undoCreatePC(this)\'))"><li style="'+hyperlinkStyle('#0183D9')+';cursor:pointer">+ create purpose calendar</li></ul>'
     
     return row
     
