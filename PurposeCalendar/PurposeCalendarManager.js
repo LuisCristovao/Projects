@@ -117,6 +117,7 @@ function removeCalendar(el){
     CreatePage()
     
 }
+
 function importCalendar(el){
     /*var calendar=el.parentElement.innerText.split("\n")[0];
     var calendar_json=JSON.parse(localStorage[calendar])
@@ -131,11 +132,12 @@ function importCalendar(el){
     //console.log(el.parentElement)
     
     //Cannot be this it must be a input box as i did previously!!!
-    el.parentElement.innerHTML='<textarea style="width:100%;height:100%">Paste JSON over this text!</textarea>'
+    //el.parentElement.innerHTML='<textarea style="width:100%;height:100%">Paste JSON over this text!</textarea>'
+    openInput(el,"Insert JSON","")
     updatePrevWidthHeight()
 }
 
-function exportCalendar(){
+function exportCalendar(el){
     //need to put the json text in clipboard can see an example in site copy contact
     //put setimeout to warning the user of the json in clipboard and change back to normal view.
     /*var calendar=el.parentElement.innerText.split("\n")[0];
@@ -202,18 +204,18 @@ function createPCBtn(el){
     CreatePage()
 }
 function undoCreatePC(el){
-    el.parentElement.parentElement.parentElement.innerHTML='<ul onclick="openInput(this)"><li style="'+hyperlinkStyle()+'">+ create purpose calendar</li></ul>'
+    el.parentElement.parentElement.parentElement.innerHTML='<ul onclick="openInput(this,\'Insert PC Name\',\'createPC(event,this)\',okBtn(\'createPCBtn(this)\'),crossBtn(\'undoCreatePC(this)\'))"><li style="'+hyperlinkStyle()+'">+ create purpose calendar</li></ul>'
 }
-function okBtn(el,onclick_function){
+function okBtn(onclick_function){
     return '<button onclick="'+onclick_function+'" style="border-radius:50%;background:green;color:white;font-size:'+inputFontSize()+';margin-left:2%;">&#160;&#10004&#160;</button>';
 }
-function crossBtn(el,onclick_function){
+function crossBtn(onclick_function){
     return '<button onclick="'+onclick_function+'" style="border-radius:50%;background:red;color:white;margin-left:2%;font-size:'+inputFontSize()+'">&#160;&#10006&#160;</button>'
 }
-function openInput(el,placeholder,on_key_press_function){
+function openInput(el,placeholder,on_key_press_function,okBtn_function,crossBtn_function){
     var prev_html=el.innerHTML
     el.setAttribute("onclick","")
-    el.innerHTML='<li><input onkeypress="'+on_key_press_function+'" type="text" placeholder="'+placeholder+'" style="width:70%;height:auto;font-size:'+inputFontSize()+';">'+okBtn(el,"createPCBtn(this)")+crossBtn(el,"undoCreatePC(this)")+'</li>'
+    el.innerHTML='<li><input onkeypress="'+on_key_press_function+'" type="text" placeholder="'+placeholder+'" style="width:70%;height:auto;font-size:'+inputFontSize()+';">'+okBtn_function+crossBtn_function+'</li>'
     
     //update prev_width and height so that main does not createPage() again
     updatePrevWidthHeight()
@@ -224,7 +226,7 @@ function addNewPurposeCalendarRow(){
     var column=document.createElement("td")
     row.appendChild(column)
     column.setAttribute("colspan","2")
-    column.innerHTML='<ul onclick="openInput(this,\'Insert PC Name\',\'createPC(event,this)\')"><li style="'+hyperlinkStyle()+'">+ create purpose calendar</li></ul>'
+    column.innerHTML='<ul onclick="openInput(this,\'Insert PC Name\',\'createPC(event,this)\',okBtn(\'createPCBtn(this)\'),crossBtn(\'undoCreatePC(this)\'))"><li style="'+hyperlinkStyle()+'">+ create purpose calendar</li></ul>'
     
     return row
     
