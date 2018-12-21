@@ -291,13 +291,20 @@ function CreateTableRow(string){
     
     
 }
-
+String.prototype.replaceAll = function(search, replacement) {
+            var target = this;
+            return target.replace(new RegExp(search, 'g'), replacement);
+        };
+        function checkRoomName(){
+            var input=document.getElementById("roomName")
+            input.value=input.value.replaceAll(" ","-")
+        }
 function createPC(event,input){
     if (event.keyCode == 13 ) {
         // Do something
         //alert(document.getElementsByTagName("input")[0].value);
         if(input.value!=""){
-            
+            input.value=input.value.replaceAll(" ","-")
             all_calendars[input.value]="(0/365)"
             localStorage["PCM"]=JSON.stringify(all_calendars)
             CreatePage()
@@ -312,7 +319,7 @@ function createPCBtn(el){
     var input=el.parentElement.children[0]
     
     if(input.value!=""){
-            
+        input.value=input.value.replaceAll(" ","-")    
         all_calendars[input.value]="(0/365)"
         localStorage["PCM"]=JSON.stringify(all_calendars)
         CreatePage()
