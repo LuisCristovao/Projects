@@ -25,14 +25,17 @@ function CalculateDaysSelected(){
     var pcm=JSON.parse(localStorage["PCM"])
     for(var calendar in pcm){
         var days_selected=0;
-        var cal_json=JSON.parse(localStorage[calendar])
-        for(var month_index=0;month_index<cal_json.length;month_index++){
-            var days=cal_json[month_index].days
-            for(var day in days){
-                if(days[day]==true){
-                    days_selected++
-                }
-            } 
+        if(localStorage[calendar]!=null){
+            
+            var cal_json=JSON.parse(localStorage[calendar])
+            for(var month_index=0;month_index<cal_json.length;month_index++){
+                var days=cal_json[month_index].days
+                for(var day in days){
+                    if(days[day]==true){
+                        days_selected++
+                    }
+                } 
+            }
         }
         pcm[calendar]="("+days_selected+"/365)"
     }
