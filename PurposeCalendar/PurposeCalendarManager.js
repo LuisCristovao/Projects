@@ -90,7 +90,7 @@ function removeSubMenu(el){
     //el.get
     //CreatePage()
     
-    var new_html='<td><ul><li onmouseover="Highlight(this)" onmouseout="NotHighLight(this)" was_clicked="false" onclick="clickAction(this)" style="cursor:pointer">'+el.innerText.split("\n")[0]+"</li></ul></td>"
+    var new_html='<td><ul><li onmouseover="Highlight(this)" onmouseout="NotHighLight(this)" was_clicked="false" onclick="clickAction(this)" style="cursor:pointer;">'+el.innerText.split("\n")[0]+"</li></ul></td>"
     new_html+="<td><ul>"+all_calendars[el.innerText.split("\n")[0]]+"</ul></td>"
     //changing row
     el.parentElement.parentElement.innerHTML=new_html
@@ -130,14 +130,14 @@ function resetCalendar(el){
     var calendar=el.parentElement.parentElement.innerText.split("\n")[0];
     if(localStorage[calendar]!=null){
         delete localStorage[calendar]
-        el.innerHTML='<li style="'+hyperlinkStyle('#2AB30E')+'">Reseted calendar with success!</li>'
+        el.innerHTML='<li style="'+hyperlinkStyle('#2AB30E')+';font-size:'+SubMenuFontSize()+'">Reseted calendar with success!</li>'
     }
     else{
-        el.innerHTML='<li style="'+hyperlinkStyle('#497964')+'">Already at initial state!</li>'
+        el.innerHTML='<li style="'+hyperlinkStyle('#497964')+';font-size:'+SubMenuFontSize()+'">Already at initial state!</li>'
     }
     
     var f=function(element){
-        element.innerHTML='<li style="'+hyperlinkStyle('#0183D9')+';cursor:pointer">Reset Calendar</li>'
+        element.innerHTML='<li style="'+hyperlinkStyle('#0183D9')+';cursor:pointer;font-size:'+SubMenuFontSize()+'">Reset Calendar</li>'
         updatePrevWidthHeight()
     }
     setTimeout(function(){f(el)},2000)
@@ -156,7 +156,7 @@ function removeCalendar(el){
 }
 function importCalendarUndo(input){
 
-    input.parentElement.parentElement.outerHTML='<ul onclick="importCalendar(this)"><li style="'+hyperlinkStyle('#0183D9')+'">Import Calendar</li></ul>'
+    input.parentElement.parentElement.outerHTML='<ul onclick="importCalendar(this)"><li style="'+hyperlinkStyle('#0183D9')+';font-size:'+SubMenuFontSize()+'">Import Calendar</li></ul>'
     updatePrevWidthHeight()
  
 }
@@ -173,7 +173,7 @@ function importCalendarActionBtn(input){
         var ul=input.parentElement.parentElement
         input.parentElement.parentElement.innerHTML='<li style="'+hyperlinkStyle('#2AB30E')+'">Imported calendar with success!</li>'
         var f=function(ele){
-            ele.outerHTML='<ul onclick="importCalendar(this)"><li style="'+hyperlinkStyle('#0183D9')+'">Import Calendar</li></ul>'
+            ele.outerHTML='<ul onclick="importCalendar(this)"><li style="'+hyperlinkStyle('#0183D9')+';font-size:'+SubMenuFontSize()+'">Import Calendar</li></ul>'
             updatePrevWidthHeight()
         }
 
@@ -236,14 +236,14 @@ function exportCalendar(el){
     if(localStorage[calendar]!=null){
         var calendar_json=localStorage[calendar]
         copyToClipboard(calendar_json)
-        el.innerHTML='<li style="'+hyperlinkStyle('#2AB30E')+'">Copy JSON to clip board!</li>'
+        el.innerHTML='<li style="'+hyperlinkStyle('#2AB30E')+';font-size:'+SubMenuFontSize()+'">Copy JSON to clip board!</li>'
     }
     else{
-        el.innerHTML='<li style="'+hyperlinkStyle('#497964')+'">Never entered in calendar!</li>'
+        el.innerHTML='<li style="'+hyperlinkStyle('#497964')+';font-size:'+SubMenuFontSize()+'">Never entered in calendar!</li>'
     }
     
     var f=function(ele){
-        ele.innerHTML='<li style="'+hyperlinkStyle('#0183D9')+';cursor:pointer">Export Calendar</li>'
+        ele.innerHTML='<li style="'+hyperlinkStyle('#0183D9')+';cursor:pointer;font-size:'+SubMenuFontSize()+'">Export Calendar</li>'
         updatePrevWidthHeight()
     }
     
