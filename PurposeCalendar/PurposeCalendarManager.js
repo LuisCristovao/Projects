@@ -61,13 +61,16 @@ function titleSize(){
     return (global_height>global_width)?"10vh":"7vw"
 }
 function tableFontSize(){
-    return (global_height>global_width)?"7vh":"8vh"
+    return (global_height>global_width)?"6vh":"8vh"
 }
 function inputFontSize(){
     return (global_height>global_width)?"6vw":"6vh"
 }
 function tablePadding(){
     return (global_height>global_width)?"5%":"0%"
+}
+function SubMenuFontSize(){
+    return (global_height>global_width)?"5vh":"8vh"
 }
 
 function hyperlinkStyle(color){
@@ -103,7 +106,7 @@ function addSubMenu(el){
     var new_html="<td colspan='2'><ul>"+el.innerHTML.split("</ul")[0]+"<div>"
 
     for(var key in map){
-        new_html+='<ul onclick="'+map[key]+'"><li style="'+hyperlinkStyle('#0183D9')+';cursor:pointer">'+key+'</li></ul>'
+        new_html+='<ul onclick="'+map[key]+'"><li style="'+hyperlinkStyle('#0183D9')+';cursor:pointer;font-size:'+SubMenuFontSize()+'">'+key+'</li></ul>'
     }
     new_html+="</ul></div></td>"
     //changing row
@@ -307,7 +310,7 @@ function createPC(event,input){
             input.value=input.value.replaceAll(" ","-")
             all_calendars[input.value]="(0/365)"
             localStorage["PCM"]=JSON.stringify(all_calendars)
-            CreatePage()
+            setTimeout(CreatePage,500)
         }
         else{
             input.placeholder="Must not be empty!"
@@ -322,7 +325,7 @@ function createPCBtn(el){
         input.value=input.value.replaceAll(" ","-")    
         all_calendars[input.value]="(0/365)"
         localStorage["PCM"]=JSON.stringify(all_calendars)
-        CreatePage()
+        setTimeout(CreatePage,500)
     }
     else{
         input.placeholder="Must not be empty!"
