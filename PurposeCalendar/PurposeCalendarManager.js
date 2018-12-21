@@ -77,7 +77,7 @@ function addSubMenu(el){
     //el.parentElement.parentElement.innerHTML="<td colspan='2'><ul><li>ola</li></ul></td>"
     
     //change array to map of option_name:function_to_execute()
-    var map={"Enter Calendar":"enterCalendar(this)","Import Calendar":"importCalendar(this)","Export Calendar":"exportCalendar(this)","Reset calendar":"resetCalendar(this)","Remove calendar":"removeCalendar(this)"}
+    var map={"Enter Calendar":"enterCalendar(this)","Import Calendar":"importCalendar(this)","Export Calendar":"exportCalendar(this)","Reset Calendar":"resetCalendar(this)","Remove Calendar":"removeCalendar(this)"}
     
     var new_html="<td colspan='2'><ul>"+el.innerHTML.split("</ul")[0]+"<div>"
 
@@ -275,17 +275,30 @@ function createPC(event,input){
     if (event.keyCode == 13 ) {
         // Do something
         //alert(document.getElementsByTagName("input")[0].value);
-        all_calendars[input.value]="(0/365)"
-        localStorage["PCM"]=JSON.stringify(all_calendars)
-        CreatePage()
+        if(input.value!=""){
+            
+            all_calendars[input.value]="(0/365)"
+            localStorage["PCM"]=JSON.stringify(all_calendars)
+            CreatePage()
+        }
+        else{
+            input.placeholder="Must not be empty!"
+        }
     }
     
 }
 function createPCBtn(el){
     var input=el.parentElement.children[0]
-    all_calendars[input.value]="(0/365)"
-    localStorage["PCM"]=JSON.stringify(all_calendars)
-    CreatePage()
+    
+    if(input.value!=""){
+            
+        all_calendars[input.value]="(0/365)"
+        localStorage["PCM"]=JSON.stringify(all_calendars)
+        CreatePage()
+    }
+    else{
+        input.placeholder="Must not be empty!"
+    }
 }
 function undoCreatePC(el){
     el.parentElement.parentElement.parentElement.innerHTML='<ul onclick="openInput(this,\'Insert PC Name\',\'createPC(event,this)\',okBtn(\'createPCBtn(this)\'),crossBtn(\'undoCreatePC(this)\'))"><li style="'+hyperlinkStyle('#0183D9')+'">+ create purpose calendar</li></ul>'
