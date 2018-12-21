@@ -130,23 +130,66 @@ function removeCalendar(el){
     CreatePage()
     
 }
+function importCalendarUndo(input){
 
-function importCalendar(el){
-    /*var calendar=el.parentElement.innerText.split("\n")[0];
-    var calendar_json=JSON.parse(localStorage[calendar])
-    if(global_height>global_width){
-        
-        el.parentElement.innerHTML='<textarea style="">sdwsdsw</textarea>'
-    }else{
-        
-    }
-    //update prev_width and height so that main does not createPage() again
-    updatePrevWidthHeight()*/
-    //console.log(el.parentElement)
+    input.parentElement.parentElement.outerHTML='<ul onclick="importCalendar(this)"><li style="'+hyperlinkStyle('#0183D9')+'">Import Calendar</li></ul>'
+    updatePrevWidthHeight()
+ 
+}
+function importCalendarActionBtn(input){
     
-    //Cannot be this it must be a input box as i did previously!!!
-    //el.parentElement.innerHTML='<textarea style="width:100%;height:100%">Paste JSON over this text!</textarea>'
-    openInput(el,'Insert JSON','createPC(event,this)',okBtn('createPCBtn(this)'),crossBtn('undoCreatePC(this)'))
+    
+    // Do something
+    //alert(document.getElementsByTagName("input")[0].value);
+    input=input.parentElement.children[0]
+    if(input.value!=""){
+        var _calendar=input.parentElement.parentElement.parentElement.parentElement.innerText.split("\n")[0];
+
+        localStorage[_calendar]=input.value
+        var ul=input.parentElement.parentElement
+        input.parentElement.parentElement.innerHTML='<li style="'+hyperlinkStyle('#2AB30E')+'">Imported calendar with success!</li>'
+        var f=function(ele){
+            ele.outerHTML='<ul onclick="importCalendar(this)"><li style="'+hyperlinkStyle('#0183D9')+'">Import Calendar</li></ul>'
+            updatePrevWidthHeight()
+        }
+
+        setTimeout(function(){f(ul)},2000)
+        updatePrevWidthHeight()
+    }
+    else{
+        input.placeholder="Must not be empty!"
+    }
+    
+}
+function importCalendarAction(event,input){
+    //press enter
+    if (event.keyCode == 13 ) {
+        // Do something
+        //alert(document.getElementsByTagName("input")[0].value);
+        if(input.value!=""){
+            var _calendar=input.parentElement.parentElement.parentElement.parentElement.innerText.split("\n")[0];
+            
+            localStorage[_calendar]=input.value
+            var ul=input.parentElement.parentElement
+            input.parentElement.parentElement.innerHTML='<li style="'+hyperlinkStyle('#2AB30E')+'">Imported calendar with success!</li>'
+            var f=function(ele){
+                ele.outerHTML='<ul onclick="importCalendar(this)"><li style="'+hyperlinkStyle('#0183D9')+'">Import Calendar</li></ul>'
+                updatePrevWidthHeight()
+            }
+
+            setTimeout(function(){f(ul)},2000)
+            updatePrevWidthHeight()
+        }
+        else{
+            input.placeholder="Must not be empty!"
+        }
+    }
+}
+function importCalendar(el){
+    
+    var calendar=el.parentElement.parentElement.innerText.split("\n")[0];
+
+    openInput(el,'Insert JSON','importCalendarAction(event,this)',okBtn('importCalendarActionBtn(this)'),crossBtn('importCalendarUndo(this)'))
     updatePrevWidthHeight()
 }
 const copyToClipboard = str => {
