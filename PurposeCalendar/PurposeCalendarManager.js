@@ -152,15 +152,17 @@ const copyToClipboard = str => {
 function exportCalendar(el){
     //need to put the json text in clipboard can see an example in site copy contact
     //put setimeout to warning the user of the json in clipboard and change back to normal view.
-    /*var calendar=el.parentElement.parentElement.innerText.split("\n")[0];
-    var calendar_json=JSON.parse(localStorage[calendar])
+    var calendar=el.parentElement.parentElement.innerText.split("\n")[0];
+    var calendar_json=localStorage[calendar]
     copyToClipboard(calendar_json)
     el.innerHTML='<li style="'+hyperlinkStyle('#2AB30E')+';cursor:pointer">Copy JSON to clip board!</li>'
     var f=function(ele){
         ele.innerHTML='<li style="'+hyperlinkStyle('#0183D9')+';cursor:pointer">Export Calendar</li>'
+        updatePrevWidthHeight()
     }
     
-    setTimeout(f.bind(el),2500)*/
+    setTimeout(function(){f(el)},2000)
+    updatePrevWidthHeight()
 }
 
 
