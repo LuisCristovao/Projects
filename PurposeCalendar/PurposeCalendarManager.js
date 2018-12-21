@@ -13,6 +13,7 @@ var all_calendars=getCalendars()
 
 function getCalendars(){
     if(localStorage["PCM"]!=null){
+        CalculateDaysSelected()
         return JSON.parse(localStorage["PCM"])
     }
     else{
@@ -20,7 +21,23 @@ function getCalendars(){
         return {}
     }
 }    
-    
+function CalculateDaysSelected(){
+    var pcm=JSON.parse(localStorage["PCM"])
+    for(var calendar in pcm){
+        var days_selected=0;
+        var cal_json=JSON.parse(localStorage[calendar])
+        for(var month_index=0;month_index<cal_json.length;month_index++){
+            var days=cal_json[month_index].days
+            for(var day in days){
+                if(days[day]==true){
+                    days_selected++
+                }
+            } 
+        }
+        pcm[calendar]="("+days_selected+"/365)"
+    }
+    localStorage["PCM"]=JSON.stringify(pcm)
+}  
     
 function range(initial,end){
     var array=[]
@@ -66,8 +83,9 @@ function updatePrevWidthHeight(){
 function removeSubMenu(el){
     //el.get
     //CreatePage()
+    
     var new_html='<td><ul><li onmouseover="Highlight(this)" onmouseout="NotHighLight(this)" was_clicked="false" onclick="clickAction(this)" style="cursor:pointer">'+el.innerText.split("\n")[0]+"</li></ul></td>"
-    new_html+="<td><ul>(0/365)</ul></td>"
+    new_html+="<td><ul>"+all_calendars[el.innerText.split("\n")[0]]+"</ul></td>"
     //changing row
     el.parentElement.parentElement.innerHTML=new_html
     
@@ -262,7 +280,7 @@ function CreateTableRow(string){
     li.setAttribute("onclick","clickAction(this)")
     li.setAttribute("style","cursor:pointer")
     
-    column2.innerHTML="<ul>(0/365)</ul>"
+    column2.innerHTML="<ul>"+all_calendars[string]+"</ul>"
     
     
     
@@ -353,6 +371,7 @@ function CreatePage(){
 
 window.onload=function(){
     CreatePage()
+    
     html=document.getElementsByTagName("html")[0];
     global_width=html.offsetWidth;
     global_height=html.offsetHeight;
