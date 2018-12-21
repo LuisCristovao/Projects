@@ -145,13 +145,16 @@ function resetCalendar(el){
     //CreatePage()
 }
 function removeCalendar(el){
-    var calendar=el.parentElement.parentElement.innerText.split("\n")[0];
-    delete localStorage[calendar]
-    var aux=JSON.parse(localStorage["PCM"])
-    delete aux[calendar]
-    localStorage["PCM"]=JSON.stringify(aux)
-    all_calendars=aux
-    CreatePage()
+    if(confirm("Are you sure?")){
+        
+        var calendar=el.parentElement.parentElement.innerText.split("\n")[0];
+        delete localStorage[calendar]
+        var aux=JSON.parse(localStorage["PCM"])
+        delete aux[calendar]
+        localStorage["PCM"]=JSON.stringify(aux)
+        all_calendars=aux
+        CreatePage()
+    }
     
 }
 function importCalendarUndo(input){
