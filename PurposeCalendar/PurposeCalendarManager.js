@@ -411,7 +411,7 @@ function Main(){
     global_height=html.offsetHeight;
     //console.log("with: "+global_width)
     //console.log("height: "+global_height)
-    if((prev_width!=global_width || prev_height!=global_height)&& !DetectinputBox){
+    if((prev_width!=global_width || prev_height!=global_height)&& !DetectinputBox()){
         console.log("change")
         CreatePage()
         prev_height=global_height
