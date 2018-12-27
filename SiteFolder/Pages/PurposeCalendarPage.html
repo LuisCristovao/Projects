@@ -55,7 +55,7 @@
         <h3 class="h3_page">Purpose Calendar Manager Description:</h3>
         <br>
         <p class="p_page">To start explaining this project first it is required to define what is a purpose calendar. Purpose Calendar was inspired by this project:</p>
-        <a href="https://www.kickstarter.com/projects/simonegiertz/the-every-day-calendar" style="font-size:3vw">https://www.kickstarter.com/projects/simonegiertz/the-every-day-calendar</a> <br><br>
+        <p id="link" class="p_page" style="text-align: center"><a href="https://www.kickstarter.com/projects/simonegiertz/the-every-day-calendar" >https://www.kickstarter.com/projects/simonegiertz/the-every-day-calendar</a></p>
         <p class="p_page">Basically is the same thing but in digital format. If a person has a goal that wants to accomplish this year, and wants to keep track of how he/she is doing, then a purpose calendar helps you with that. A purpose calendar manager is basically a manager for many purpose calendars. Below there is a link with the browser application, the source code and a video tutorial.</p> 
     </div>
     <br><br>
@@ -134,16 +134,21 @@ function UnderLineText(el,on){
     }
 }
 
-function GoToInitialPage(){
-    window.location.href="../../index.html"
-} 
-function GoToSomePage(page){
-    window.location.href=page
-}    
+
 // Main------------
 var prev_height = window.innerHeight
 var prev_width= window.innerWidth   
-    
+ 
+function linksize(){
+    if(window.innerWidth<window.innerHeight){
+        
+    document.getElementById("link").style["font-size"]="0.8em"
+    }
+    else{
+        document.getElementById("link").style["font-size"]=""
+    }
+}
+
     
 function ChangeOrientation(){
     
@@ -154,11 +159,12 @@ function ChangeOrientation(){
         prev_width=window.innerWidth
 
         align_burguer();
+        linksize()
     }
     requestAnimationFrame(ChangeOrientation)
 }
 requestAnimationFrame(ChangeOrientation)
-    
+linksize()    
 </script>
 
 </body>
