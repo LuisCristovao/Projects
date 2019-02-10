@@ -12,13 +12,19 @@ var all_calendars=getCalendars()
 
 
 function getCalendars(){
-    if(localStorage["PCM"]!=null){
-        CalculateDaysSelected()
-        return JSON.parse(localStorage["PCM"])
-    }
-    else{
-        localStorage["PCM"]=JSON.stringify({})
-        return {}
+    try{
+        
+        if(localStorage["PCM"]!=null){
+            CalculateDaysSelected()
+            return JSON.parse(localStorage["PCM"])
+        }
+        else{
+            localStorage["PCM"]=JSON.stringify({})
+            return {}
+        }
+    }catch{
+            localStorage["PCM"]=JSON.stringify({})
+            return {}
     }
 }    
 function CalculateDaysSelected(){
@@ -61,7 +67,7 @@ function titleSize(){
     return (global_height>global_width)?"10vh":"7vw"
 }
 function tableFontSize(){
-    return (global_height>global_width)?"6vh":"8vh"
+    return (global_height>global_width)?"5vh":"8vh"
 }
 function inputFontSize(){
     return (global_height>global_width)?"6vw":"6vh"
@@ -70,9 +76,11 @@ function tablePadding(){
     return (global_height>global_width)?"5%":"0%"
 }
 function SubMenuFontSize(){
+    return (global_height>global_width)?"4vh":"7vh"
+}
+function footerFontSize(){
     return (global_height>global_width)?"5vh":"8vh"
 }
-
 function hyperlinkStyle(color){
     return "text-decoration:underline;color:"+color+";"
 }
@@ -390,6 +398,163 @@ function CreatePage(){
     //Add create new purpose calendar row
     tbody.appendChild(addNewPurposeCalendarRow())
     
+    //create footer
+    CreateFooter()
+}
+
+function CreateFooter(){
+    var footer=document.getElementById("footer")
+    
+    
+    
+    
+    //change footer div
+    //footer.style.width=(global_height>global_width)?"100%":"50%"
+    
+    
+    //change block
+    //footer.children[0].style.height=(global_height>global_width)?"10px":"5px"
+    
+    //create Menu Btn
+    CreateFooterMenuBtn(footer)
+    
+    //change table
+    //footer.children[1].style['font-size']=tableFontSize()
+    
+    /*var innerhtml='<ul style="font-size:'+footerFontSize()+'"><li style="'+hyperlinkStyle('#0183D9')+'">Export PCM</li></ul>'
+    innerhtml+='<ul style="font-size:'+footerFontSize()+'"><li style="'+hyperlinkStyle('#0183D9')+'text-align:center;">Import PCM</li></ul>'
+    footer.innerHTML=innerhtml*/
+}
+
+function CreateFooterMenuBtn(footer){
+    footer.innerHTML=""
+    var btn=document.createElement('div')
+    footer.appendChild(btn)
+    btn.setAttribute("style","border: 3pt solid black;border-radius:25px;font-size:"+footerFontSize()+";cursor:pointer;")
+    btn.setAttribute("onclick","footerMenuBtnAction(this)")
+    btn.innerText="Menu"
+}
+
+function footerMenuBtnAction(btn){
+    
+    
+    var xfont_size=function(){
+        return (global_height>global_width)?"0.5em":"0.7em"
+    }
+    var outer_width=function(){
+        return (global_height>global_width)?"100%":"60%"
+    }
+    
+    var out='<table style="font-size:'+footerFontSize()+';width:60%;">'
+    out+='<tbody>'
+    out+='<tr>'
+    out+='<td><ul id="export_pcm" style="list-style-position:inside;padding-left: 0%;" onclick="exportPCM(this)"><li style="text-decoration:underline;color:#0183D9;cursor:pointer;">Export PCM</li></ul></td>'
+    out+='</tr>'
+    out+='<tr>'
+    out+='<td><ul id="import_pcm" style="list-style-position:inside;padding-left: 0%;" onclick="openInput(this,\'Insert JSON\',\'importPCMKeyPress(event,this)\',okBtn(\'importPCMBtn(this)\'),crossBtn(\'undoImport(this)\'))"><li style="text-decoration:underline;color:#0183D9;cursor:pointer;">Import PCM</li></ul></td>'
+    out+='</tr>'
+    out+='</tbody>'
+    out+='</table>'
+    out+='<div style="position:relative;border:2pt solid black;border-radius:25px;background:lightsteelblue;text-align:center;color:white;width:100%;font-size:'+xfont_size()+';cursor:pointer;" onclick="CreateFooter()">&#10006</div>'
+    btn.innerHTML=out
+    
+    //change div width
+    btn.style.width=outer_width();
+    
+    //delete onclick of div in order to not click in 2 buttons at same time
+    btn.setAttribute("onclick","")
+    //stop cursor pointer
+    btn.style.cursor="";
+    updatePrevWidthHeight()
+}
+
+
+function exportPCM(ul){
+    var parent=ul.parentElement
+    var prev_html=ul.outerHTML
+    var out_export={}
+    out_export={"PCM":JSON.parse(localStorage['PCM'])}
+    
+    //get storage
+    var storage=JSON.parse(localStorage['PCM'])
+    var data={}
+    for(key in storage){
+        console.log(key)
+        var dictionary;
+        dictionary=localStorage[key]
+        data[key]=dictionary
+    }
+    out_export["Data"]=data
+    
+    var f=function(el,html){el.innerHTML=html;updatePrevWidthHeight()}
+    
+    
+    copyToClipboard(JSON.stringify(out_export))
+    ul.outerHTML='<ul id="export_pcm" style="list-style-position:inside;padding-left: 0%;"><li style="'+hyperlinkStyle('#2AB30E')+'">Copied Data To ClipBoard</li></ul>'
+    setTimeout(function(){f(parent,prev_html)},1800)
+    updatePrevWidthHeight()
+}
+function undoImport(btn){
+    var parent=btn.parentElement.parentElement.parentElement
+    parent.innerHTML='<ul id="import_pcm" style="list-style-position:inside;padding-left: 0%;" onclick="openInput(this,\'Insert JSON\',\'importPCMKeyPress(event,this)\',okBtn(\'importPCMBtn(this)\'),crossBtn(\'undoImport(this)\'))"><li style="text-decoration:underline;color:#0183D9;cursor:pointer;">Import PCM</li></ul>'
+    updatePrevWidthHeight()
+}
+
+function importPCMKeyPress(event,input){
+    //enter key
+    if(event.keyCode==13){
+        if(input.value!=""){
+            try{
+                var isJson=JSON.parse(input.value)
+                importPCM(input.value);    
+            }
+            catch{
+                input.value=""
+                input.placeholder="Wrong format!"
+            }
+        }
+        else{
+            input.placeholder="Must not be empty!"
+        }
+    }
+}
+function importPCMBtn(btn){
+    var parent=btn.parentElement
+    var input=parent.children[0]    
+    console.log(input.value)
+    
+    
+    if(input.value==""){
+        input.placeholder="Must not be empty!"
+    }else{
+        try{
+            var isJson=JSON.parse(input.value)
+            importPCM(input.value);    
+        }
+        catch{
+            input.value=""
+            input.placeholder="Wrong format!"
+        }
+        
+    }
+    
+    updatePrevWidthHeight()
+}
+function deleteDB(){
+    for(key in JSON.parse(localStorage["PCM"])){
+        delete localStorage[key]
+    }
+}
+function importPCM(json_data){
+    //delete previous storage
+    deleteDB()
+    json_data=JSON.parse(json_data)  
+    localStorage["PCM"]=JSON.stringify(json_data["PCM"])
+    for(key in json_data["Data"]){
+        //as it seems locaStorage can store actual js dictionary
+        localStorage[key]=json_data["Data"][key]
+    }
+    window.location.reload();
 }
 
 function DetectinputBox(){
