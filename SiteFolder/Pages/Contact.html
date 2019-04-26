@@ -1,159 +1,77 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Luis Cristóvão Webpage</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!--<link rel="stylesheet" type="text/css" href="SiteFolder/Css/ContactPage.css">-->
+<style>
+.mytooltip {
+    position: relative;
     
-    <link rel="stylesheet" type="text/css" href="../Css/BasicSite.css">
-    <link rel="stylesheet" type="text/css" href="../Css/ContactPage.css">
+}
 
-</head>
+.mytooltip .mytooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    top: 150%;
+    left: 50%;
+    margin-left: -60px;
     
-<body >
-    <div  style="visibility: collapse">
-        <div id="myNav" class="topnav">    
-          <!--<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>-->
-          <div class="content">
-            <a href="../../index.html">Home</a><br>
-            <a href="../Pages/Projects.html">Projects</a><br>
-            <a href="https://github.com/LuisCristovao/">GitHub</a><br>
-            <a href="https://www.youtube.com/channel/UCtv1X7rlXYCD4zNxDJ8EJnQ">Youtube Channel</a><br>
-			<a href="../Pages/Contact.html">Contact</a><br>
-          </div>
-        </div>
+    /* Fade in tooltip - takes 1 second to go from 0% to 100% opac: */
+    opacity: 0;
+    transition: opacity 1s;
+    
+   
+}
+.mytooltip .mytooltiptext::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent black transparent;
+}
 
-    </div>
-<div class="jumbotron text-center" style="background-color:cornflowerblue">
-    <h1 style="color:white;cursor:pointer;" onmouseover="UnderLineText(this,true)" onmouseout="UnderLineText(this,false)" onclick="GoToInitialPage()">Luís Cristóvão GitHub Site</h1>
-    <p id="debug" style="color: white;cursor:pointer;" onmouseover="UnderLineText(this,true)" onmouseout="UnderLineText(this,false)" onclick="GoToInitialPage()">See Some of my Projects!</p>
-    <div align="center" id="burguer"  onclick="openNav(this)" style="cursor: pointer">
-        <div class="bar1"></div>
-        <div class="bar2"></div>
-        <div class="bar3"></div>
-    </div>
+.main{
+    position: relative;
+    top:30%;
+}
+</style>
+<div class="main">
+    <h1 align="center" style="font-size: 6vmin">Email: luis.cristovao92@gmail.com</h1>
     <br>
-</div>
-  
-<div id="SiteBody" class="container">
-    <h3 align="center">Email: luis.cristovao92@gmail.com</h3>
     <div align="center">
-        <button type="button" class="btn btn-default btn-lg" onclick="copyToClipboard('luis.cristovao92@gmail.com')">Copy email to clip board</button>
+        <button type="button" class="btn btn-outline-dark btn-lg" style="font-size: 4vmin" onclick="copyToClipboard('luis.cristovao92@gmail.com')">Copy email to clip board</button>
         <div class="mytooltip">
-            <span id="copy-msg" class="mytooltiptext">Copied Email!</span>
+            <span id="copy-msg" style="font-size: 3vmin" class="mytooltiptext">Copied Email!</span>
         </div>
-        
-        
-        
     </div>
-    
 </div>
+
 
 <script>
-const copyToClipboard = str => {
-  const el = document.createElement('textarea');
-  el.value = str;
-  el.setAttribute('readonly', '');
-  el.style.position = 'absolute';
-  el.style.left = '-9999px';
-  document.body.appendChild(el);
-  el.select();
-  document.execCommand('copy');
-  document.body.removeChild(el);
-  $("#copy-msg").css("visibility","visible");    
-  $("#copy-msg").css("opacity",1);   
-  setTimeout(function (){
-        $("#copy-msg").css("opacity",0);   
-        //$("#copy-msg").css("visibility","hidden"); 
-  },1000);    
-    
-};
+    const copyToClipboard = str => {
+        const el = document.createElement('textarea');
+        el.value = str;
+        el.setAttribute('readonly', '');
+        el.style.position = 'absolute';
+        el.style.left = '-9999px';
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand('copy');
+        document.body.removeChild(el);
+        $("#copy-msg").css("visibility", "visible");
+        $("#copy-msg").css("opacity", 1);
+        setTimeout(function() {
+            $("#copy-msg").css("opacity", 0);
+            //$("#copy-msg").css("visibility","hidden"); 
+        }, 1000);
 
-function align_burguer(){
-    var burguer=document.getElementById('burguer');
-    if(toggle_nav){
-        if(window.innerWidth<window.innerHeight){
-            burguer.style.left='46%';
-        }
-        else{
-            burguer.style.left='49%';
-        }
-    }
-    else{
-
-        if(window.innerWidth<window.innerHeight){
-            burguer.style.left='45%';
-        }
-        else{
-            burguer.style.left='49%';
-        }
-    }
-    
-}
-    
-var toggle_nav=false;
-function openNav(x) {
-    toggle_nav=!toggle_nav;
-    if(toggle_nav){
-        x.classList.toggle("change");
-        x.style.position="absolute";
-        x.style.top="15%";
-        //x.style.left="49%";
-        align_burguer();
-        //x.style.hover="color:white";
-        document.getElementById("myNav").style.visibility = "visible";
-        document.getElementById("myNav").style.height = "100%";
-        $('#SiteBody').slideUp('fast');
-        //$('#footer').slideUp('fast');
-    }
-    else{
-        x.classList.toggle("change");
-        x.style.position="absolute";
-        x.style.top="auto";
-        
-        document.getElementById("myNav").style.visibility = "collapse";
-        document.getElementById("myNav").style.height = "0%";
-        $('#SiteBody').slideDown('fast');   
-        //$('#footer').slideDown('fast');
-        align_burguer();
-    }
-}
-    
-function UnderLineText(el,on){
-    if(on){
-        el.style["text-decoration"]="underline"
-    }
-    else{
-        el.style["text-decoration"]=""
-    }
-}
-
-function GoToInitialPage(){
-    window.location.href="../../index.html"
-}    
-// Main------------
-var prev_height = window.innerHeight
-var prev_width= window.innerWidth   
-    
-    
-function ChangeOrientation(){
+    };
     
 
-    if(prev_width!=window.innerWidth || prev_height!=window.innerHeight){
-        console.log("change")
-        prev_height=window.innerHeight
-        prev_width=window.innerWidth
-
-        align_burguer();
-    }
-    requestAnimationFrame(ChangeOrientation)
-}
-requestAnimationFrame(ChangeOrientation)
-    
 </script>
-
-</body>
-</html>
