@@ -1,0 +1,119 @@
+<html>
+
+<head>
+    <title>edit</title>
+</head>
+
+<body>
+
+    <form id="form" action="/edit_db" method="post">
+        id:<br><select name="id" id="select_id">
+
+        </select><br>
+    </form>
+</body>
+<script>
+    //global vars--------------
+    var menu = JSON.parse('{{menu|tojson|safe}}')
+
+    //global functions-----------------------
+    function fillForm(menu) {
+
+        var ifs = {
+            "direct": {
+                "number": "number",
+                "text": "text",
+                "date": "date"
+            },
+            "not direct": {
+                "option": (key) => {
+                    out = key + ':<br><select id="' + key + '" name="' + key + '" style="visibility:'+menu[key]["visibility"]+';"><option value="project">project</option>'
+                    out += '<option value="blog post">blog post</option>blog post</select><br>'
+                    return out
+                },
+                "search": (key) => {
+                    out = key + ":<br><input id='" + key + "' name='" + key + "' type='text' placeholder='separate tags with comma' style='visibility:"+menu[key]["visibility"]+";'><br>"
+                    return out
+                },
+                "textarea": (key) => {
+                    out = key + ':<br><textarea id="' + key + '" name ="' + key + '" style="visibility:'+menu[key]["visibility"]+';"></textarea><br>'
+                    return out
+                }
+            }
+        }
+
+
+        var form = document.getElementById("form")
+        var html = form.innerHTML
+        for (key in menu) {
+            if (menu[key]["type"] == ifs["direct"][menu[key]["type"]]) {
+                html += key + ":<br><input id='" + key + "' name='" + key + "' type='" + menu[key]["type"] + "' placeholder='"+menu[key]["placeholder"]+"' style='visibility:"+menu[key]["visibility"]+";' ><br>"
+            } else {
+                html += ifs["not direct"][menu[key]["type"]](key)
+            }
+        }
+        html += "<br><input type='submit' value='Submit'>"
+        form.innerHTML = html
+    }
+    async function getIds() {
+        //let response = await fetch('/getDbIds',{method:"POST",body:data});
+        let response = await fetch('getDbIds');
+        let val = await response.json();
+        return val
+    }
+
+    async function selectRow(id) {
+
+        let response = await fetch('select_row', {
+            method: "POST",
+            "Content-Type": "application/x-www-form-urlencoded",
+            body: "id=" + id
+        });
+        //let val = await response.json();
+        let val = await response.json();
+        return val
+    }
+
+    async function fillSelectBox() {
+        var ids = await getIds()
+        var select = document.getElementById("select_id")
+        if (ids.length > 0) {
+            var options = ""
+            for (value in ids) {
+                options += '<option value="' + value + '">' + value + '</option>'
+            }
+            select.innerHTML = options
+            fillForm(menu)
+        }
+    }
+
+    async function fillFormValues() {
+        var select = document.getElementById("select_id")
+        
+        var row = await selectRow(select.value)
+        //alert(row)
+        for (key in menu) {
+            var el = document.getElementById(key)
+            el.value = row[key]
+        }
+    }
+
+    //Main-------------------    
+    //fillForm(menu)
+    window.onload = () => {
+        fillSelectBox()
+
+        setTimeout(() => {
+            document.getElementById("select_id").addEventListener('change', () => {
+                fillFormValues()
+            })
+        }, 500)//wait until page is loaded
+
+        setTimeout(() => {
+            fillFormValues()
+        }, 500)//wait until page is loaded
+    }
+
+</script>
+
+</html>

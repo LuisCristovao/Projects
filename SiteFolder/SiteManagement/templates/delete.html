@@ -1,0 +1,155 @@
+<html>
+
+<head>
+    <title>delete</title>
+</head>
+
+<body>
+
+    <div id="form">
+        id:<br><select name="id" id="select_id">
+
+        </select><br>
+    </div>
+    <h1 id="answer"></h1>
+</body>
+<script>
+    //global vars--------------
+    var menu = JSON.parse('{{menu|tojson|safe}}')
+
+    //global functions-----------------------
+    function fillForm(menu) {
+
+        var ifs = {
+            "direct": {
+                "number": "number",
+                "text": "text",
+                "date": "date"
+            },
+            "not direct": {
+                "option": (key) => {
+                    out = key + ':<br><select id="' + key + '" name="' + key + '" disabled><option value="project">project</option>'
+                    out += '<option value="blog post">blog post</option>blog post</select><br>'
+                    return out
+                },
+                "search": (key) => {
+                    out = key + ":<br><input id='" + key + "' name='" + key + "' type='text' placeholder='separate tags with comma' disabled><br>"
+                    return out
+                },
+                "textarea": (key) => {
+                    out = key + ':<br><textarea id="' + key + '" name ="' + key + '" disabled></textarea><br>'
+                    return out
+                }
+            }
+        }
+
+
+        var form = document.getElementById("form")
+        var html = form.innerHTML
+        for (key in menu) {
+            if (menu[key]["type"] == ifs["direct"][menu[key]["type"]]) {
+                html += key + ":<br><input id='" + key + "' name='" + key + "' type='" + menu[key]["type"] + "' disabled><br>"
+            } else {
+                html += ifs["not direct"][menu[key]["type"]](key)
+            }
+        }
+        html += "<br><input type='submit' value='Delete' onclick='ask()'>"
+        form.innerHTML = html
+    }
+
+    async function deletePost(id) {
+
+        let response = await fetch('delete_db', {
+            method: "POST",
+            "Content-Type": "application/x-www-form-urlencoded",
+            body: "id=" + id
+        });
+        //let val = await response.json();
+        let val = await response.text();
+        return val
+    }
+
+
+    async function ask() {
+        var select = document.getElementById("select_id")
+        if (confirm("Are you sure you want to delete row with id " + select.value + "?")) {
+
+            var ans = document.getElementById("answer")
+            ans.innerHTML = await deletePost(select.value)
+            if (ans.innerHTML == "Deleted with Success!") {
+                ans.style.color = "green"
+                setTimeout(()=>{ans.innerHTML=""},1000)
+                fillSelectBox(false)
+                fillFormValues()
+            } else {
+                ans.style.color = "red"
+                setTimeout(()=>{ans.innerHTML=""},1000)
+            }
+        }
+    }
+
+    async function getIds() {
+        //let response = await fetch('/getDbIds',{method:"POST",body:data});
+        let response = await fetch('getDbIds');
+        let val = await response.json();
+        return val
+    }
+
+    async function selectRow(id) {
+
+        let response = await fetch('select_row', {
+            method: "POST",
+            "Content-Type": "application/x-www-form-urlencoded",
+            body: "id=" + id
+        });
+        //let val = await response.json();
+        let val = await response.json();
+        return val
+    }
+
+    async function fillSelectBox(fill_form) {
+        var ids = await getIds()
+        var select = document.getElementById("select_id")
+        if (ids.length > 0) {
+            var options = ""
+            for (value in ids) {
+                options += '<option value="' + value + '">' + value + '</option>'
+            }
+            select.innerHTML = options
+            if (fill_form) {
+
+                fillForm(menu)
+            }
+        }
+    }
+
+    async function fillFormValues() {
+        var select = document.getElementById("select_id")
+
+        var row = await selectRow(select.value)
+        //alert(row)
+        for (key in menu) {
+            var el = document.getElementById(key)
+            el.value = row[key]
+        }
+    }
+
+    //Main-------------------    
+    //fillForm(menu)
+    window.onload = () => {
+        fillSelectBox(true)
+
+        setTimeout(() => {
+            document.getElementById("select_id").addEventListener('change', () => {
+                fillFormValues()
+            })
+        }, 500) //wait until page is loaded
+
+        setTimeout(() => {
+            fillFormValues()
+        }, 500) //wait until page is loaded
+    }
+
+</script>
+
+</html>

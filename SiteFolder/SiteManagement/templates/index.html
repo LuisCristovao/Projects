@@ -1,0 +1,23 @@
+<html>
+
+<body>
+</body>
+<script>
+    //global vars--------------
+    var menu=JSON.parse('{{menu|tojson|safe}}')
+    
+    //global functions-----------------------
+    function createPage(menu){
+        var html=""
+        for(key in menu){
+            html+="<a href='"+menu[key]+"'><h1>"+key+"</h1></a>\n"
+        }
+        document.body.innerHTML=html
+    }
+        
+    //Main-------------------    
+    createPage(menu)
+
+</script>
+
+</html>

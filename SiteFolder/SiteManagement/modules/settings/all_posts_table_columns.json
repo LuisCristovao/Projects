@@ -1,0 +1,12 @@
+{
+    "title": {"type":"text","placeholder":"title name","visibility":"visible"},
+    "type": {"type":"option","options":["project","blog post"],"visibility":"visible"},
+    "short description": {"type":"textarea","visibility":"visible"},
+    "creation date": {"type":"date","visibility":"visible"},
+    "last update date": {"type":"date","visibility":"visible"},
+    "link": {"type":"text","placeholder":"link to find page","visibility":"visible"},
+    "image url": {"type":"text","placeholder":"image file name (x.png)","visibility":"visible"},
+    "search tags": {"type":"search","visibility":"visible"},
+    "secondary search tags":{"type":"search","visibility":"visible"},
+    "page location":{"type":"text","placeholder":"html filename (x.html)","visibility":"visible"}
+}

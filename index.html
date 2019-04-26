@@ -1,68 +1,67 @@
-<!DOCTYPE html>
-<html lang="en"> 
+<html>
+
 <head>
-    <title>Luis Cristóvão Webpage</title>
+    <title>
+        template
+    </title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    
-    <link rel="stylesheet" type="text/css" href="SiteFolder/Css/BasicSite.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+
+
 </head>
-    
-<body >
-    <div  style="visibility: collapse">
-        <div id="myNav" class="topnav">    
-          <!--<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>-->
-          <div class="content">
-            <a href="SiteFolder/Pages/Projects.html">Projects</a><br>
-            <a href="https://github.com/LuisCristovao/">GitHub</a><br>
-            <a href="https://www.youtube.com/channel/UCtv1X7rlXYCD4zNxDJ8EJnQ">Youtube Channel</a><br>
-            <a href="SiteFolder/Pages/Contact.html">Contact</a><br>
-          </div>
+
+<body>
+    <nav id="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="index.html">Luís Cristóvão Site</a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="navbar-collapse collapse" id="navbarColor01" style="">
+            <ul class="navbar-nav mr-auto">
+                <!-- The comment is to highlight text -->
+                <!--<li class="nav-item active">-->
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="?Projects">Projects</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="?Blog">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="?tags_page">Categories/Tags</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="?">Youtube Channel</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="?">Contact</a>
+                </li>
+            </ul>
+            <div class="form-inline my-2 my-md-0">
+                <input id="search_input" class="form-control mr-sm-2" type="search" onkeydown="SearchKeyPress(event,this)" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-info my-2 my-sm-0" onclick="Search(this)">Search</button>
+                
+            </div>
         </div>
+    </nav>
+    
+    <div class="container" id="pageContent">
 
     </div>
-    
-    <div class="jumbotron text-center" style="background-color:cornflowerblue">
-        <h1 style="color:white">Luís Cristóvão GitHub Site</h1>
-        <p id="debug" style="color: white">See Some of my Projects!</p>
-        <div align="center" id="burguer"  onclick="openNav(this)" style="cursor: pointer">
-            <div class="bar1"></div>
-            <div class="bar2"></div>
-            <div class="bar3"></div>
-        </div>
-        <br>
-    </div>
-  
-<div id="SiteBody" class="container">
-    <h2 style="text-decoration: underline;text-align: center">Recent Projects</h2>
-    <div id="recent_projects" class="row">
-        
-    </div>
-    <br>
-    <div style="background-color: darkgray;width: auto;height: 5px;"></div>
-    <h2 style="text-decoration: underline;text-align: center">Random Projects</h2>
-    <div id="random_projects" class="row">
-        
-    </div>
-</div>
-  
-<script src="SiteFolder/Js/Site.js"></script>
-<!--<script>
-    var time=0;
-    var dt=0;
-    var startTime=new Date().getTime();
-    function Fps(){
-        dt = Math.round(1E-3 * (new Date().getTime() - startTime));
-        startTime = new Date().getTime();
-        //time += dt%10000;
-        //console.log(dt);
-        $('#debug').html('slowness:'+dt);
-        window.requestAnimationFrame(Fps);
-    }
-    window.requestAnimationFrame(Fps);
-</script>-->
 </body>
+<!-- Insert code at the end to page load faster according to: Bootstrap-->
+<!--Code needed to run bootstrap-->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<!--My general script-->
+<script src="SiteFolder/JS/index.js"></script>
+<!--SearchEngine class script-->
+<script src="SiteFolder/JS/SearchEngine.js"></script>    
 </html>

@@ -1,0 +1,13 @@
+{
+    "": "SiteFolder/Pages/home.html",
+    "?Projects": "SiteFolder/Pages/ShowOffTemplate.html",
+    "?Blog": "SiteFolder/Pages/ShowOffTemplate.html",
+    "?search": "SiteFolder/Pages/ShowOffTemplate.html",
+    "?tags_page": "SiteFolder/Pages/tags.html",
+    "?Purpose-Calendar-Manager": "SiteFolder/Pages/PurposeCalendarPage.html",
+    "?Volley-Game": "SiteFolder/Pages/VolleyGamePage.html",
+    "?Chat-Rooms-App": "SiteFolder/Pages/ChatRoomsPage.html",
+    "?Basic-Machine-Learning-Server": "SiteFolder/Pages/MLServerPage.html",
+    "?File-Upload-Server.": "SiteFolder/Pages/FileUploadPage.html",
+    "?Old-GitHub-Game": "SiteFolder/Pages/DashGamePage.html"
+}
