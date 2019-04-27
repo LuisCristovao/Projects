@@ -26,9 +26,9 @@ async function searchBlogPosts() {
     loaded_projects = 0
     if(db.length>0){
         
-        $("#showOffFooter").html("<h2>&#8595;  Load More Posts &#8595;</h2>")
+        $("#showOffFooter").html('<h2 style="cursor:pointer" onclick="document.body.scrollTo(0,document.body.scrollHeight)">&#8595;  Load More Posts &#8595;</h2>')
     }else{
-        $("#showOffFooter").html("<h2>No Posts To Show!</h2>")
+        $("#showOffFooter").html('<h2>No Posts To Show!</h2>')
     }
     requestAnimationFrame(detectScrollBottom)
 }
@@ -49,7 +49,7 @@ async function searchProjects() {
     loaded_projects = 0
     if(db.length>0){
         
-        $("#showOffFooter").html("<h2>&#8595;  Load More Posts &#8595;</h2>")
+        $("#showOffFooter").html('<h2 style="cursor:pointer" onclick="document.body.scrollTo(0,document.body.scrollHeight)">&#8595;  Load More Posts &#8595;</h2>')
     }else{
         $("#showOffFooter").html("<h2>No Posts To Show!</h2>")
     }
