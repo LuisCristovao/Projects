@@ -1,17 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Luis Cristóvão Webpage</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     
-    <link rel="stylesheet" type="text/css" href="../Css/BasicSite.css">
     <style>
         .h3_page{
-            font-size: 3em; 
+            font-size: 2.5em; 
             
         }
         .p_page{
@@ -19,35 +12,14 @@
             text-align: justify;
             /*text-indent: 5%;*/
         }
-    
+        #SiteBody{
+            padding-top: 5%;
+        } 
     </style>
 
 </head>
     
 <body >
-    <div  style="visibility: collapse">
-        <div id="myNav" class="topnav">    
-          <!--<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>-->
-          <div class="content">
-            <a href="../../index.html">Home</a><br>
-            <a href="../Pages/Projects.html">Projects</a><br>
-            <a href="https://github.com/LuisCristovao/">GitHub</a><br>
-            <a href="https://www.youtube.com/channel/UCtv1X7rlXYCD4zNxDJ8EJnQ">Youtube Channel</a><br>
-			<a href="../Pages/Contact.html">Contact</a><br>
-          </div>
-        </div>
-
-    </div>
-<div class="jumbotron text-center" style="background-color:cornflowerblue">
-    <h1 style="color:white;cursor:pointer;" onmouseover="UnderLineText(this,true)" onmouseout="UnderLineText(this,false)" onclick="GoToInitialPage()">Luís Cristóvão GitHub Site</h1>
-    <p id="debug" style="color: white;cursor:pointer;" onmouseover="UnderLineText(this,true)" onmouseout="UnderLineText(this,false)" onclick="GoToInitialPage()">See Some of my Projects!</p>
-    <div align="center" id="burguer"  onclick="openNav(this)" style="cursor: pointer">
-        <div class="bar1"></div>
-        <div class="bar2"></div>
-        <div class="bar3"></div>
-    </div>
-    <br>
-</div>
   
 <div id="SiteBody" class="container" align="center">
     <div align="center" style="width:80%">
@@ -59,7 +31,7 @@
     </div>
     <br><br>
     <a href="https://secretid2.github.io/Projects/DashGame/DashGame.html">
-        <button type="button" class="btn btn-default btn-lg" style="font-size: 2em;">Live Demo of Dash Game</button>
+        <button type="button" class="btn btn-default btn-lg" style="font-size: 2em;">Live Demo</button>
     </a>    
     <br><br><br>
     <a href="https://github.com/LuisCristovao/DashGame">
@@ -70,98 +42,19 @@
 
     
 </div>
-
+<!-- begin wwww.htmlcommentbox.com -->
+ <div id="HCB_comment_box" style="padding-top: 5%;">
+ <a href="http://www.htmlcommentbox.com">Comment Box</a> is loading comments...</div>
+ <link rel="stylesheet" type="text/css" href="https://www.htmlcommentbox.com/static/skins/bootstrap/twitter-bootstrap.css?v=0" />
+ <script type="text/javascript" id="hcb"> /*<!--*/ if(!window.hcb_user){hcb_user={};} (function(){var s=document.createElement("script"), l=hcb_user.PAGE || (""+window.location).replace(/'/g,"%27"), h="https://www.htmlcommentbox.com";s.setAttribute("type","text/javascript");s.setAttribute("src", h+"/jread?page="+encodeURIComponent(l).replace("+","%2B")+"&mod=%241%24wq1rdBcg%2447ipUA8n%2FvfvjRMuzpc77%2F"+"&opts=16862&num=10&ts=1556213103497");if (typeof s!="undefined") document.getElementsByTagName("head")[0].appendChild(s);})(); /*-->*/ </script>
+<!-- end www.htmlcommentbox.com -->
 <script>
-const copyToClipboard = str => {
-  const el = document.createElement('textarea');
-  el.value = str;
-  el.setAttribute('readonly', '');
-  el.style.position = 'absolute';
-  el.style.left = '-9999px';
-  document.body.appendChild(el);
-  el.select();
-  document.execCommand('copy');
-  document.body.removeChild(el);
-  $("#copy-msg").css("visibility","visible");    
-  $("#copy-msg").css("opacity",1);   
-  setTimeout(function (){
-        $("#copy-msg").css("opacity",0);   
-        //$("#copy-msg").css("visibility","hidden"); 
-  },1000);    
-    
-};
-
-function align_burguer(){
-    var burguer=document.getElementById('burguer');
-    if(toggle_nav){
-        if(window.innerWidth<window.innerHeight){
-            burguer.style.left='46%';
-        }
-        else{
-            burguer.style.left='49%';
-        }
-    }
-    else{
-
-        if(window.innerWidth<window.innerHeight){
-            burguer.style.left='45%';
-        }
-        else{
-            burguer.style.left='49%';
-        }
-    }
-    
-}
-    
-var toggle_nav=false;
-function openNav(x) {
-    toggle_nav=!toggle_nav;
-    if(toggle_nav){
-        x.classList.toggle("change");
-        x.style.position="absolute";
-        x.style.top="15%";
-        //x.style.left="49%";
-        align_burguer();
-        //x.style.hover="color:white";
-        document.getElementById("myNav").style.visibility = "visible";
-        document.getElementById("myNav").style.height = "100%";
-        $('#SiteBody').slideUp('fast');
-        //$('#footer').slideUp('fast');
-    }
-    else{
-        x.classList.toggle("change");
-        x.style.position="absolute";
-        x.style.top="auto";
-        
-        document.getElementById("myNav").style.visibility = "collapse";
-        document.getElementById("myNav").style.height = "0%";
-        $('#SiteBody').slideDown('fast');   
-        //$('#footer').slideDown('fast');
-        align_burguer();
-    }
-}
-    
-function UnderLineText(el,on){
-    if(on){
-        el.style["text-decoration"]="underline"
-    }
-    else{
-        el.style["text-decoration"]=""
-    }
-}
-
-function GoToInitialPage(){
-    window.location.href="../../index.html"
-} 
-function GoToSomePage(page){
-    window.location.href=page
-}    
 // Main------------
 var prev_height = window.innerHeight
 var prev_width= window.innerWidth   
     
     
-function ChangeOrientation(){
+/*function ChangeOrientation(){
     
 
     if(prev_width!=window.innerWidth || prev_height!=window.innerHeight){
@@ -173,7 +66,7 @@ function ChangeOrientation(){
     }
     requestAnimationFrame(ChangeOrientation)
 }
-requestAnimationFrame(ChangeOrientation)
+requestAnimationFrame(ChangeOrientation)*/
     
 </script>
 
