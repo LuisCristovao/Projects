@@ -126,9 +126,7 @@ class SearchEngine {
         suggestion_div.style = ""
     }
     clickSuggestion(suggestion_div) {
-        var suggestion = suggestion_div.innerText
-        var search_input = document.getElementById("search_input")
-        search_input.value = suggestion
+        this.selectSuggestionAction(suggestion_div)
     }
     fillSuggestions(suggestions) {
         var html = ""
