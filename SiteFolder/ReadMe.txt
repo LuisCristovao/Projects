@@ -412,3 +412,4 @@ Every time I insert a post on DB, it should always update search_tags.json (add,
  
 
 
+#Comments
