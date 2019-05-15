@@ -61,8 +61,10 @@ function htmlDecode(value) {
 //scroll class  controls navbar when scroll down and a button to scroll up
 class Scroll {
     constructor() {
-        this.navbar_visibility_point = window.innerHeight * 0.5
+        this.navbar_visibility_point = 65//window.innerHeight * 0.2 //80
+        this.created_btn=false
         this.nav = document.getElementById("navbar")
+        this.nav_clone=null
         this.detectScrollTopUnderNavBar = this.detectScrollTopUnderNavBar.bind(this);
     }
 
@@ -111,23 +113,40 @@ class Scroll {
             btn.style["font-size"] = btn_dimensions["font-size"]
         }
     }
+    createNavBarClone(){
+        if(this.nav_clone==null){
+            this.nav_clone=this.nav.cloneNode(true)
+            this.nav_clone.id=this.nav_clone.id+"_clone" //navbar_clone; just so browser does not freak out with two elem with same id
+            document.body.appendChild(this.nav_clone)
+        }
+        //if already created does not do anything
+    }
     detectScrollTopUnderNavBar() {
 
         if (window.scrollY > this.navbar_visibility_point) {
-
-            this.nav.style.position = "absolute"
-            this.nav.style["z-index"] = 1
-            this.nav.style.top = document.body.scrollTop + "px"
-            this.nav.style.width = "100%"
+            this.createNavBarClone()
+            this.nav_clone.style.position = "absolute"
+            this.nav_clone.style["z-index"] = 1
+            this.nav_clone.style.top = document.body.scrollTop + "px"
+            this.nav_clone.style.width = "100%"
 
             this.createScrollTopBtn()
+            this.created_btn=true
 
         } else {
-            this.nav.style = ""
-            var btn = document.getElementById("scrollToTopBtn")
-            if (btn != null) {
+            if(this.created_btn ){
+                this.created_btn=false
+                //this.nav.style.position = ""
+                //this.nav.style["z-index"] = 0
+                //this.nav.style.top = ""
+                //this.nav.style.width = ""
+                var btn = document.getElementById("scrollToTopBtn")
+                this.nav_clone.parentNode.removeChild(this.nav_clone)
+                this.nav_clone=null
+                if (btn != null) {
 
-                btn.parentNode.removeChild(btn);
+                    btn.parentNode.removeChild(btn);
+                }
             }
         }
         requestAnimationFrame(this.detectScrollTopUnderNavBar)

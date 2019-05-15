@@ -154,6 +154,11 @@ class SearchEngine {
                 div.innerHTML = ""
                 html += this.fillSuggestions(suggestions)
                 div.innerHTML = html
+                //update input box position
+                var top = input.offsetTop
+                var left = input.offsetLeft
+                div.style.top = top + height + 10 + 'px'
+                div.style.left = left + 'px'
             }
         } else {
 
