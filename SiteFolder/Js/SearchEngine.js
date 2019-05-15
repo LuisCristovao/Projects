@@ -155,8 +155,9 @@ class SearchEngine {
                 html += this.fillSuggestions(suggestions)
                 div.innerHTML = html
                 //update input box position
-                var top = input.offsetTop
-                var left = input.offsetLeft
+                var top = input.style.top
+                var left = input.style.left
+                div.style.position="absolute"
                 div.style.top = top + height + 10 + 'px'
                 div.style.left = left + 'px'
             }

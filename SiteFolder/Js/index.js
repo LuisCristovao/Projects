@@ -118,6 +118,11 @@ class Scroll {
             this.nav_clone=this.nav.cloneNode(true)
             this.nav_clone.id=this.nav_clone.id+"_clone" //navbar_clone; just so browser does not freak out with two elem with same id
             document.body.appendChild(this.nav_clone)
+            this.nav_clone.style.position="absolute"
+            this.nav_clone.style.top="0px"
+            this.nav_clone.style.width="100%"
+            //change search input id so that search ngine object/class doesn not mix up
+            this.nav_clone.children[2].children[1].children[0].id="search_input_clone"
         }
         //if already created does not do anything
     }
@@ -125,10 +130,10 @@ class Scroll {
 
         if (window.scrollY > this.navbar_visibility_point) {
             this.createNavBarClone()
-            this.nav_clone.style.position = "absolute"
-            this.nav_clone.style["z-index"] = 1
-            this.nav_clone.style.top = document.body.scrollTop + "px"
-            this.nav_clone.style.width = "100%"
+            this.nav.style.position = "absolute"
+            this.nav.style["z-index"] = 1
+            this.nav.style.top = document.body.scrollTop + "px"
+            this.nav.style.width = "100%"
 
             this.createScrollTopBtn()
             this.created_btn=true
@@ -136,10 +141,10 @@ class Scroll {
         } else {
             if(this.created_btn ){
                 this.created_btn=false
-                //this.nav.style.position = ""
-                //this.nav.style["z-index"] = 0
-                //this.nav.style.top = ""
-                //this.nav.style.width = ""
+                this.nav.style.position = ""
+                this.nav.style["z-index"] = 0
+                this.nav.style.top = ""
+                this.nav.style.width = ""
                 var btn = document.getElementById("scrollToTopBtn")
                 this.nav_clone.parentNode.removeChild(this.nav_clone)
                 this.nav_clone=null
