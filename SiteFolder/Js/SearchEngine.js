@@ -155,11 +155,11 @@ class SearchEngine {
                 html += this.fillSuggestions(suggestions)
                 div.innerHTML = html
                 //update input box position----
-                
-                var top = input.parentElement.parentElement.parentElement.offsetTop+input.offsetTop//navbar element top
+
+                var top = input.parentElement.parentElement.parentElement.offsetTop + input.offsetTop //navbar element top
                 var left = input.offsetLeft
                 var height = input.offsetHeight
-                div.style.position="absolute"
+                div.style.position = "absolute"
                 div.style.top = top + height + 10 + 'px'
                 div.style.left = left + 'px'
             }
@@ -169,7 +169,7 @@ class SearchEngine {
             if (suggestions.length > 0) {
                 var body = document.body
                 var width = input.offsetWidth
-                var top = input.parentElement.parentElement.parentElement.offsetTop+input.offsetTop//navbar element top + input offsetTop
+                var top = input.parentElement.parentElement.parentElement.offsetTop + input.offsetTop //navbar element top + input offsetTop
                 var left = input.offsetLeft
                 var height = input.offsetHeight
                 div = document.createElement("div")
@@ -194,28 +194,28 @@ class SearchEngine {
         }
         return index % length;
     }
-    selectSuggestionAction(suggestion){
-        let search_input=document.getElementById("search_input")
-        let val=search_input.value
-        let actual_tags=val.split(" ")
-        
+    selectSuggestionAction(suggestion) {
+        let search_input = document.getElementById("search_input")
+        let val = search_input.value
+        let actual_tags = val.split(" ")
+
         this.highLight(suggestion)
-        
-        if(val.split(" ").length>1){
-            actual_tags[actual_tags.length-1]=suggestion.innerText
-            let input_val=""
-            actual_tags=actual_tags.filter(el=>el!=" " && el!="")
-            for(let i=0;i<actual_tags.length;i++){
-                let el=actual_tags[i]
-                if(i==0){
-                    input_val+=el
-                }else{
-                    input_val+=" "+el
+
+        if (val.split(" ").length > 1) {
+            actual_tags[actual_tags.length - 1] = suggestion.innerText
+            let input_val = ""
+            actual_tags = actual_tags.filter(el => el != " " && el != "")
+            for (let i = 0; i < actual_tags.length; i++) {
+                let el = actual_tags[i]
+                if (i == 0) {
+                    input_val += el
+                } else {
+                    input_val += " " + el
                 }
             }
-            search_input.value=input_val
-        }else{
-            search_input.value=suggestion.innerText
+            search_input.value = input_val
+        } else {
+            search_input.value = suggestion.innerText
         }
     }
     selectSuggestion(suggestions, up) {
@@ -228,10 +228,10 @@ class SearchEngine {
                 suggestion.style = ""
                 //down
                 if (!up) {
-                    this.selectSuggestionAction(suggestions.children[0].children[this.circularIndexCalc(i+1,Length)])
+                    this.selectSuggestionAction(suggestions.children[0].children[this.circularIndexCalc(i + 1, Length)])
                 } else {
                     //up
-                    this.selectSuggestionAction(suggestions.children[0].children[this.circularIndexCalc(i-1,Length)])
+                    this.selectSuggestionAction(suggestions.children[0].children[this.circularIndexCalc(i - 1, Length)])
                 }
                 break
             }
@@ -288,15 +288,18 @@ class SearchEngine {
 
             //for(var i =0 ;i<search_query_tags.length;i++,compare_index=0.5){
             //var search_query=search_query_tags[i]
-            var first_letter = search_query[0].toUpperCase()
+            //var first_letter = search_query[0].toUpperCase()
             while (suggestions.length == 0 && compare_index >= 0) {
+                for (var letter in this.tagsdb) {
 
-                for (var key in this.tagsdb[first_letter]) {
-                    if (this.supercompare(search_query.toUpperCase(), key.toUpperCase()) > compare_index) {
-                        suggestions.push(key)
+                    for (var key in this.tagsdb[letter]) {
+                        if (this.supercompare(search_query.toUpperCase(), key.toUpperCase()) > compare_index) {
+                            suggestions.push(key)
+                        }
+                        //just test version
+                        //suggestions.push(key)
                     }
-                    //just test version
-                    //suggestions.push(key)
+
                 }
                 if (suggestions.length <= 3) {
                     compare_index -= 0.1
