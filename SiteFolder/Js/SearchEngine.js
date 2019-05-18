@@ -127,6 +127,7 @@ class SearchEngine {
     }
     clickSuggestion(suggestion_div) {
         this.selectSuggestionAction(suggestion_div)
+        
     }
     fillSuggestions(suggestions) {
         var html = ""
@@ -217,6 +218,8 @@ class SearchEngine {
         } else {
             search_input.value = suggestion.innerText
         }
+        $("#search_input").focus()//select input box
+        //document.getElementById("search_input").focus()
     }
     selectSuggestion(suggestions, up) {
         var not_selected = true
