@@ -154,9 +154,11 @@ class SearchEngine {
                 div.innerHTML = ""
                 html += this.fillSuggestions(suggestions)
                 div.innerHTML = html
-                //update input box position
-                var top = input.style.top
-                var left = input.style.left
+                //update input box position----
+                
+                var top = input.parentElement.parentElement.parentElement.offsetTop+input.offsetTop//navbar element top
+                var left = input.offsetLeft
+                var height = input.offsetHeight
                 div.style.position="absolute"
                 div.style.top = top + height + 10 + 'px'
                 div.style.left = left + 'px'
@@ -167,7 +169,7 @@ class SearchEngine {
             if (suggestions.length > 0) {
                 var body = document.body
                 var width = input.offsetWidth
-                var top = input.offsetTop
+                var top = input.parentElement.parentElement.parentElement.offsetTop+input.offsetTop//navbar element top + input offsetTop
                 var left = input.offsetLeft
                 var height = input.offsetHeight
                 div = document.createElement("div")
