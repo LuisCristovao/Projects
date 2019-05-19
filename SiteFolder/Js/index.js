@@ -42,7 +42,8 @@ function Search(btn) {
     var parent = btn.parentElement
     var input = parent.children[0]
     //In future detect top suggestion of suggestion box and send it to get
-    window.location.search = "search=" + encodeSearchQuery(getFirstSuggestion(input.value))
+    var query=getFirstSuggestion(input.value)
+    window.location.search = "search=" + encodeSearchQuery(query.trim())
 
 }
 
@@ -53,8 +54,9 @@ function SearchKeyPress(event, input) {
     }, 100)
     //press enter
     if (event.keyCode == 13) {
-        var value = input.value
-        window.location.search = "search=" + encodeSearchQuery(getFirstSuggestion(input.value))
+        //In future detect top suggestion of suggestion box and send it to get
+        var query=getFirstSuggestion(input.value)
+        window.location.search = "search=" + encodeSearchQuery(query.trim())
 
     }
     //if press space
