@@ -4,22 +4,62 @@ var server;
 var scroll;
 var search_engine;
 //global functions-------------------------------------
+function doesSearchTagExists(search_tag) {
+    var tagsdb = search_engine.tagsdb
+    for (var key in tagsdb) {
+        for (var subkey in tagsdb[key]) {
+            if (subkey == search_tag) {
+                return true
+            }
+        }
+    }
+    return false
+}
+
+function getFirstSuggestion(input_value) {
+    var suggestions = document.getElementById("suggestions")
+    if (suggestions != null) {
+        var first_suggestion = suggestions.children[0].children[0].innerText
+        var query_words = input_value.split(" ")
+        //if last query tag does not exists choose the first suggestion
+        if (!doesSearchTagExists(query_words[query_words.length - 1])) {
+            query_words[query_words.length - 1] = first_suggestion
+        }
+        if (query_words.length - 1 != 0) {
+
+            return query_words.reduce((e1, e2) => {
+                return `${e1} ${e2}`
+            }, "")
+        } else {
+            return query_words[0]
+        }
+    } else {
+        return input_value
+    }
+}
+
 function Search(btn) {
     var parent = btn.parentElement
     var input = parent.children[0]
     //In future detect top suggestion of suggestion box and send it to get
-    window.location.search = "search=" + encodeSearchQuery(input.value)
+    window.location.search = "search=" + encodeSearchQuery(getFirstSuggestion(input.value))
 
 }
 
 function SearchKeyPress(event, input) {
     //set time out because the input takes time to change its value
-    setTimeout(()=>{search_engine.onKeyPressSuggestion(input,event)},100)
+    setTimeout(() => {
+        search_engine.onKeyPressSuggestion(input, event)
+    }, 100)
     //press enter
     if (event.keyCode == 13) {
         var value = input.value
-        window.location.search = "search=" + encodeSearchQuery(input.value)
+        window.location.search = "search=" + encodeSearchQuery(getFirstSuggestion(input.value))
 
+    }
+    //if press space
+    if (event.keyCode==32){
+        input.value=getFirstSuggestion(input.value)
     }
 
 }
@@ -61,10 +101,10 @@ function htmlDecode(value) {
 //scroll class  controls navbar when scroll down and a button to scroll up
 class Scroll {
     constructor() {
-        this.navbar_visibility_point = 65//window.innerHeight * 0.2 //80
-        this.created_btn=false
+        this.navbar_visibility_point = 65 //window.innerHeight * 0.2 //80
+        this.created_btn = false
         this.nav = document.getElementById("navbar")
-        this.nav_clone=null
+        this.nav_clone = null
         this.detectScrollTopUnderNavBar = this.detectScrollTopUnderNavBar.bind(this);
     }
 
@@ -113,16 +153,16 @@ class Scroll {
             btn.style["font-size"] = btn_dimensions["font-size"]
         }
     }
-    createNavBarClone(){
-        if(this.nav_clone==null){
-            this.nav_clone=this.nav.cloneNode(true)
-            this.nav_clone.id=this.nav_clone.id+"_clone" //navbar_clone; just so browser does not freak out with two elem with same id
+    createNavBarClone() {
+        if (this.nav_clone == null) {
+            this.nav_clone = this.nav.cloneNode(true)
+            this.nav_clone.id = this.nav_clone.id + "_clone" //navbar_clone; just so browser does not freak out with two elem with same id
             document.body.appendChild(this.nav_clone)
-            this.nav_clone.style.position="absolute"
-            this.nav_clone.style.top="0px"
-            this.nav_clone.style.width="100%"
+            this.nav_clone.style.position = "absolute"
+            this.nav_clone.style.top = "0px"
+            this.nav_clone.style.width = "100%"
             //change search input id so that search ngine object/class doesn not mix up
-            this.nav_clone.children[2].children[1].children[0].id="search_input_clone"
+            this.nav_clone.children[2].children[1].children[0].id = "search_input_clone"
         }
         //if already created does not do anything
     }
@@ -136,18 +176,18 @@ class Scroll {
             this.nav.style.width = "100%"
 
             this.createScrollTopBtn()
-            this.created_btn=true
+            this.created_btn = true
 
         } else {
-            if(this.created_btn ){
-                this.created_btn=false
+            if (this.created_btn) {
+                this.created_btn = false
                 this.nav.style.position = ""
                 this.nav.style["z-index"] = 0
                 this.nav.style.top = ""
                 this.nav.style.width = ""
                 var btn = document.getElementById("scrollToTopBtn")
                 this.nav_clone.parentNode.removeChild(this.nav_clone)
-                this.nav_clone=null
+                this.nav_clone = null
                 if (btn != null) {
 
                     btn.parentNode.removeChild(btn);
