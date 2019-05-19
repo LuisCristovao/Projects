@@ -32,7 +32,34 @@ class SearchEngine {
     getQuery() {
         return window.location.search.split("=")[1].split("+")
     }
-
+    orderTuples(tuple_array){
+        /*
+        receives tuples_array like ("word",number) and order by number bigger to lower
+        */
+        var i=0,j=0,any_change=false,needs_change=true,order_list=tuple_array;
+        while(needs_change && order_list.length>1){
+            var value=order_list[i][1];
+            j=i+1;
+            if(order_list[j][1]>value){
+                var auxj=order_list[j];
+                var auxi=order_list[i];
+                order_list[i]=auxj;
+                order_list[j]=auxi;
+                any_change=true;
+            }
+            i++;
+            if(i==order_list.length-1){
+                i=0;
+                //There was no change so it's ordered
+                if(!any_change){
+                    needs_change=false;
+                }
+                else{
+                    any_change=false;
+                }
+            }
+        }
+    }
     orderBestIndex(selected_posts_map) {
         var ordered_posts_id = []
         var ordered_posts_tuple = []
@@ -92,8 +119,8 @@ class SearchEngine {
         var query_tags = this.arrayUpperCase(this.getQuery()) //array with tags
         for (var i in all_posts) {
             var post = all_posts[i]
-            var post_tags = this.arrayUpperCase(post['search tags'].split(","))
-            post_tags = post_tags.concat(this.arrayUpperCase(post['secondary search tags'].split(",")))
+            var post_tags = this.arrayUpperCase(post['search tags'].split(",").map(el=>el.trim()))
+            post_tags = post_tags.concat(this.arrayUpperCase(post['secondary search tags'].split(",").map(el=>el.trim())))
             for (var j in post_tags) {
                 for (var e in query_tags) {
                     if (query_tags[e] == post_tags[j]) {
@@ -296,8 +323,9 @@ class SearchEngine {
                 for (var letter in this.tagsdb) {
 
                     for (var key in this.tagsdb[letter]) {
-                        if (this.supercompare(search_query.toUpperCase(), key.toUpperCase()) > compare_index) {
-                            suggestions.push(key)
+                        var compare_value=this.supercompare(search_query.toUpperCase(), key.toUpperCase())
+                        if (compare_value > compare_index) {
+                            suggestions.push([key,compare_value])
                         }
                         //just test version
                         //suggestions.push(key)
@@ -310,10 +338,14 @@ class SearchEngine {
                     compare_index += 0.1
                 }
             }
+            
             final_suggestions = final_suggestions.concat(suggestions)
             suggestions = []
         }
         //}
+        //oreder array of tuples from best to worst compare index
+        this.orderTuples(final_suggestions)
+        final_suggestions=final_suggestions.map(el=>el[0])
         return final_suggestions
     }
     compare(search_word, word) {
