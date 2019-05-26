@@ -47,6 +47,21 @@
     </p>
     <h2>SHA</h2>
     <p>dssdfdfsd f sdf sdf ew fwef wef wef wef wefwefwef wefwef wef wef we f ewfwgrth yjtrh th ergerg erg er geg er ger ger ge rg er</p>
+    <h1>AAA</h1>
+    <h2>dsdk</h2>
+    <p>dkfjoisedjf</p>
+    <p>doifjoweijfe</p>
+    <h1>OOOO</h1>
+    <p>dsoijf+posidfj efih wpeofuihwpe fhwp eufh wpeufh wpefh pweuifh wpie hfpwe hfpw eufhpw ef</p>
+    <h1>YYids</h1>
+    <p>dsoijf+posidfj efih wpeofuihwpe fhwp eufh wpeufh wpefh pweuifh wpie hfpwe hfpw eufhpw ef</p>
+    <h1>OOOO</h1>
+    <p>dsoijf+posidfj efih wpeofuihwpe fhwp eufh wpeufh wpefh pweuifh wpie hfpwe hfpw eufhpw ef</p>
+    <h1>JJklmjdls</h1>
+    <p>dofsdif</p>
+    <h2>dsfsd</h2>
+    <h1>NNN</h1>
+    <p>dsoijf+posidfj efih wpeofuihwpe fhwp eufh wpeufh wpefh pweuifh wpie hfpwe hfpw eufhpw ef</p>
     <div>
         <!-- begin wwww.htmlcommentbox.com -->
         <div id="HCB_comment_box" style="padding-top: 10%;padding-bottom: 5%;">
@@ -76,8 +91,8 @@
     $("#hide_show_index_btn").click(() => {
         $("#blog_index").toggle("fast")
     })
-    
-    function createIndex(index) {
+
+    function createIndex(header) {
         html = ""
         html
         index.innerHTML = html
@@ -93,12 +108,47 @@
         "H5": "H5",
         "H6": "H6"
     }
-    elements.filter(el=>hs[el.nodeName]!=null).forEach(el => {
+    let titels_subtitles_order = [{
+        "type": "h1",
+        "value": "sssas",
+        "sub": [{
+            "type": "h2",
+            "value": "asjsa",
+            "sub": [{
+                "type": "h3",
+                "value": "sssas",
+                "sub": []
+            }]
+        }]
+    }, {
+        "type": "h1",
+        "value": "sssas",
+        "sub": [{
+            "type": "h2",
+            "value": "asjsa",
+            "sub": [{
+                "type": "h3",
+                "value": "sssas",
+                "sub": []
+            }]
+        }]
+    }]
+    let headers = elements.filter(el => hs[el.nodeName] != null)
+    headers.forEach(el => {
 
         console.log(el.nodeName)
-        el.setAttribute("id", el.innerText.replaceAll(" ","-"))
+        el.setAttribute("id", el.innerText.replaceAll(" ", "-"))
+
 
 
     })
+
+
+    var html = "<ul>"
+    headers.filter(el => el.nodeName == "H1").forEach(el => {
+        html += `<li><a href="#${el.innerText.replaceAll(" ","-")}">${el.innerText}</a></li>`
+    })
+    html += "</ul>"
+    index.innerHTML = html
 
 </script>
