@@ -103,7 +103,7 @@ function htmlDecode(value) {
 //scroll class  controls navbar when scroll down and a button to scroll up
 class Scroll {
     constructor() {
-        this.navbar_visibility_point = 65 //window.innerHeight * 0.2 //80
+        this.navbar_visibility_point = ((Math.abs(document.body.scrollHeight-window.innerHeight)/document.body.scrollHeight)*100)>10?window.innerHeight * 0.2:65// detect  if windows height is close to document height. Basically if document is large there is not afraid of bug else...
         this.created_btn = false
         this.nav = document.getElementById("navbar")
         this.nav_clone = null
@@ -169,9 +169,9 @@ class Scroll {
         //if already created does not do anything
     }
     detectScrollTopUnderNavBar() {
-
+        this.navbar_visibility_point = ((Math.abs(document.body.scrollHeight-window.innerHeight)/document.body.scrollHeight)*100)>10?65:window.innerHeight * 0.2// detect  if windows height is close to document height. Basically if document is large there is not afraid of bug else...
         if (window.scrollY > this.navbar_visibility_point) {
-            this.createNavBarClone()
+            //this.createNavBarClone()
             this.nav.style.position = "absolute"
             this.nav.style["z-index"] = 1
             this.nav.style.top = document.body.scrollTop + "px"
@@ -181,15 +181,16 @@ class Scroll {
             this.created_btn = true
 
         } else {
-            if (this.created_btn) {
+            
+            if (this.created_btn ) {
                 this.created_btn = false
                 this.nav.style.position = ""
                 this.nav.style["z-index"] = 0
                 this.nav.style.top = ""
                 this.nav.style.width = ""
                 var btn = document.getElementById("scrollToTopBtn")
-                this.nav_clone.parentNode.removeChild(this.nav_clone)
-                this.nav_clone = null
+                //this.nav_clone.parentNode.removeChild(this.nav_clone)
+                //this.nav_clone = null
                 if (btn != null) {
 
                     btn.parentNode.removeChild(btn);

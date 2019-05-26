@@ -9,9 +9,18 @@ async function getDBPosts() {
     let val = await response.json();
     return val
 }
+
+function detectIfMorePostsToLoadAction(db) {
+    if (db.length > 0) {
+
+        $("#showOffFooter").html('<h2 style="cursor:pointer" onclick="document.body.scrollTo(0,document.body.scrollHeight)">&#8595;  Load More Posts &#8595;</h2>')
+    } else {
+        $("#showOffFooter").html('<h2>No Posts To Show!</h2>')
+    }
+}
 async function searchBlogPosts() {
     $("#showOffTitle").html("Blog Posts")
-    
+
     db = await getDBPosts()
     //filter only blog posts type
     var blog_posts = []
@@ -24,12 +33,7 @@ async function searchBlogPosts() {
     //invert array so to show more recent at front
     //db=search_engine.invertArrayOrder(db)
     loaded_projects = 0
-    if(db.length>0){
-        
-        $("#showOffFooter").html('<h2 style="cursor:pointer" onclick="document.body.scrollTo(0,document.body.scrollHeight)">&#8595;  Load More Posts &#8595;</h2>')
-    }else{
-        $("#showOffFooter").html('<h2>No Posts To Show!</h2>')
-    }
+    detectIfMorePostsToLoadAction(db)
     requestAnimationFrame(detectScrollBottom)
 }
 async function searchProjects() {
@@ -47,12 +51,7 @@ async function searchProjects() {
     //invert array so to show more recent at front
     //db=search_engine.invertArrayOrder(db)
     loaded_projects = 0
-    if(db.length>0){
-        
-        $("#showOffFooter").html('<h2 style="cursor:pointer" onclick="document.body.scrollTo(0,document.body.scrollHeight)">&#8595;  Load More Posts &#8595;</h2>')
-    }else{
-        $("#showOffFooter").html("<h2>No Posts To Show!</h2>")
-    }
+    detectIfMorePostsToLoadAction(db)
     requestAnimationFrame(detectScrollBottom)
 }
 async function searchPostsByTags() {
@@ -61,6 +60,7 @@ async function searchPostsByTags() {
     db = await search_engine.findPosts()
 
     loaded_projects = 0
+    detectIfMorePostsToLoadAction(db)
     requestAnimationFrame(detectScrollBottom)
 }
 
@@ -112,13 +112,12 @@ function loadMoreProjects() {
 
             html += jsonToHml(db[loaded_projects])
             loaded_projects++
-        }
-        else{
+        } else {
             //Loaded everything
-            if(loaded_projects!=0){
-                
+            if (loaded_projects != 0) {
+
                 $("#showOffFooter").html("<h2>Loaded EveryThing!</h2>")
-            }else{
+            } else {
                 $("#showOffFooter").html("<h2>No Posts To Show!</h2>")
             }
             break;
