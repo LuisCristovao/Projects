@@ -70,7 +70,7 @@ function AddMoreInfoToCards(data) {
     html += '<ul class="list-group list-group-flush">'
     html += '<li class="list-group-item"><strong>Last Update:</strong><br>' + vals["last update date"] + '</li>'
     html += '<li class="list-group-item"><strong>Creation Date:</strong><br>' + vals["creation date"] + '</li>'
-    var search_tags = vals["search tags"].split(",")
+    var search_tags = vals["search tags"].split(",").map(el=>el.trim())
     html += '<li class="list-group-item">'
     html += '<strong>Search Tags:</strong><br>'
     for (var i in search_tags) {

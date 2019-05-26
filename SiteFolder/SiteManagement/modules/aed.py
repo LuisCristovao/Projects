@@ -58,7 +58,10 @@ def get_all_posts():
     dirpath=json_files.get_dirpath_less(1)# to work as a module of server
     return json_files.get_json_file(dirpath + "DB/all_posts.json")
     
-    
+def update_position_index(db_array):
+    for i in range(len(db_array)):
+        db_array[i]["array_position"]=i
+        
 def insertByDate(db,new_data):
     '''
     goal:
@@ -102,7 +105,7 @@ def insertByDate(db,new_data):
             new_db.append(new_data)
                 
     
-        
+    update_position_index(new_db)    
     return new_db
         
 
@@ -140,6 +143,7 @@ def add_posts_row(data):
                 data["link"]=url
                 pages.writeRowDB(url,page)
             new_db=insertByDate(db,data)
+            
             
             #add tags to tags db
             tags.writeTags(data["search tags"])
