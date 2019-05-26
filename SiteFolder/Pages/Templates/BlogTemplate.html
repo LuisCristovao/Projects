@@ -76,26 +76,29 @@
     $("#hide_show_index_btn").click(() => {
         $("#blog_index").toggle("fast")
     })
-    function createIndex()
+    
+    function createIndex(index) {
+        html = ""
+        html
+        index.innerHTML = html
+    }
     let page_body = document.getElementById("page_body")
     let elements = Array.from(page_body.children)
-    let index=document.getElementById("blog_index")
-    elements.forEach(el => {
-        var hs = {
-            "H1": "H1",
-            "H2": "H2",
-            "H3": "H3",
-            "H4": "H4",
-            "H5": "H5",
-            "H6": "H6"
-        }
-        if (hs[el.nodeName] != null) {
-            //console.log(el.nodeName)
-            el.setAttribute("id", el.innerText)
-        }
-    })
-    elements.forEach(el=>{
-        
+    let index = document.getElementById("blog_index")
+    var hs = {
+        "H1": "H1",
+        "H2": "H2",
+        "H3": "H3",
+        "H4": "H4",
+        "H5": "H5",
+        "H6": "H6"
+    }
+    elements.filter(el=>hs[el.nodeName]!=null).forEach(el => {
+
+        console.log(el.nodeName)
+        el.setAttribute("id", el.innerText.replaceAll(" ","-"))
+
+
     })
 
 </script>
