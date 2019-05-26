@@ -11,5 +11,6 @@
     "?Basic-Machine-Learning-Server": "SiteFolder/Pages/MLServerPage.html",
     "?File-Upload-Server.": "SiteFolder/Pages/FileUploadPage.html",
     "?Dash-Game": "SiteFolder/Pages/DashGamePage.html",
-    "?Pages-Template": "SiteFolder/Pages/Templates/PagesTemplate.html"
+    "?Pages-Template": "SiteFolder/Pages/Templates/BlogTemplate.html",
+    "?Project-Template": "SiteFolder/Pages/Templates/ProjectTemplate.html"
 }

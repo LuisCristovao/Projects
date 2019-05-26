@@ -19,8 +19,13 @@
     }
 </style>
 <div class="page_body">
-
-
+    <button type="button" id="hide_show_index_btn" class="btn btn-outline-secondary" style="font-size: 2em;">Hide/Show Index</button>
+    <div id="blog_index" style="display: none">
+        <ul>
+            <li>aaa</li>
+            <li>dddd</li>
+        </ul>
+    </div>
     <h1>Page Templates</h1>
     <h2>Bla</h2>
     <p>
@@ -53,6 +58,10 @@
 </div>
 
 <script>
-
+    //Create Index for page
+    //var hide_show_index_btn=document.getElementById("hide_show_index_btn")
+    $("#hide_show_index_btn").click(()=>{
+        $("#blog_index").toggle("fast")
+    })
 
 </script>
