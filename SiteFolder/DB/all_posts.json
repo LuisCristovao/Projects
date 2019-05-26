@@ -8,7 +8,8 @@
     "secondary search tags": "",
     "short description": "test",
     "title": "Pages Template",
-    "type": "blog post"
+    "type": "blog post",
+    "array_position": 0
 }, {
     "creation date": "",
     "image url": "",
@@ -19,7 +20,8 @@
     "secondary search tags": "",
     "short description": "Go check out mainly my projects with Basic Video/Image Processing with JS.",
     "title": "Old GitHub Projects",
-    "type": "project"
+    "type": "project",
+    "array_position": 1
 }, {
     "creation date": "",
     "image url": "SiteFolder/Images/DashGame.gif",
@@ -30,7 +32,8 @@
     "secondary search tags": "github,old",
     "short description": "",
     "title": "Dash Game",
-    "type": "project"
+    "type": "project",
+    "array_position": 2
 }, {
     "creation date": "",
     "image url": "SiteFolder/Images/LocalStore.gif",
@@ -41,7 +44,8 @@
     "secondary search tags": "js,javascript",
     "short description": "",
     "title": "HTML Virtual Store",
-    "type": "project"
+    "type": "project",
+    "array_position": 3
 }, {
     "creation date": "",
     "image url": "SiteFolder/Images/QRCode.gif",
@@ -52,7 +56,8 @@
     "secondary search tags": "",
     "short description": "",
     "title": "URL to QRCode",
-    "type": "project"
+    "type": "project",
+    "array_position": 4
 }, {
     "creation date": "",
     "image url": "SiteFolder/Images/Master_Thesis.gif",
@@ -63,7 +68,8 @@
     "secondary search tags": "",
     "short description": "",
     "title": "Master Thesis Project",
-    "type": "project"
+    "type": "project",
+    "array_position": 5
 }, {
     "creation date": "",
     "image url": "SiteFolder/Images/Calculator.gif",
@@ -74,7 +80,8 @@
     "secondary search tags": "",
     "short description": "",
     "title": "Calculator Game!",
-    "type": "project"
+    "type": "project",
+    "array_position": 6
 }, {
     "creation date": "",
     "image url": "SiteFolder/Images/DancingSquaresLowRes2.gif",
@@ -85,7 +92,8 @@
     "secondary search tags": "",
     "short description": "",
     "title": "HTML Canvas Simulation.",
-    "type": "project"
+    "type": "project",
+    "array_position": 7
 }, {
     "creation date": "",
     "image url": "SiteFolder/Images/GoodVsEvilLowRes.gif",
@@ -96,7 +104,8 @@
     "secondary search tags": "html,js,javascript",
     "short description": "",
     "title": "Good vs Evil HTML Game!",
-    "type": "project"
+    "type": "project",
+    "array_position": 8
 }, {
     "creation date": "2018-05-08",
     "image url": "SiteFolder/Images/SearchEngine.gif",
@@ -107,7 +116,8 @@
     "secondary search tags": "2018,09,Jun",
     "short description": "",
     "title": "Search Engine Project",
-    "type": "project"
+    "type": "project",
+    "array_position": 9
 }, {
     "creation date": "",
     "image url": "SiteFolder/Images/PassManager.gif",
@@ -118,7 +128,8 @@
     "secondary search tags": "2017,April",
     "short description": "",
     "title": "Local Pass Manager",
-    "type": "project"
+    "type": "project",
+    "array_position": 10
 }, {
     "creation date": "",
     "image url": "SiteFolder/Images/UploadFilesServer.gif",
@@ -129,7 +140,8 @@
     "secondary search tags": "",
     "short description": "",
     "title": "File Upload Server.",
-    "type": "project"
+    "type": "project",
+    "array_position": 11
 }, {
     "creation date": "",
     "image url": "SiteFolder/Images/MLServer.gif",
@@ -140,7 +152,8 @@
     "secondary search tags": "2017,March",
     "short description": "",
     "title": "Basic Machine Learning Server",
-    "type": "project"
+    "type": "project",
+    "array_position": 12
 }, {
     "creation date": "",
     "image url": "SiteFolder/Images/ChatRooms.GIF",
@@ -151,7 +164,8 @@
     "secondary search tags": "2017",
     "short description": "",
     "title": "Chat Rooms App",
-    "type": "project"
+    "type": "project",
+    "array_position": 13
 }, {
     "creation date": "",
     "image url": "SiteFolder/Images/volley.gif",
@@ -162,7 +176,8 @@
     "secondary search tags": "2018",
     "short description": "",
     "title": "Volley Game",
-    "type": "project"
+    "type": "project",
+    "array_position": 14
 }, {
     "creation date": "",
     "image url": "",
@@ -173,7 +188,8 @@
     "secondary search tags": "2017",
     "short description": "Angular JS learning app, that send http requests using ajax.",
     "title": "Dynamic Http Request",
-    "type": "project"
+    "type": "project",
+    "array_position": 15
 }, {
     "creation date": "",
     "image url": "SiteFolder/Images/PCM.gif",
@@ -184,5 +200,6 @@
     "secondary search tags": "2018, 12, 18,Dezember,app, application",
     "short description": "",
     "title": "Purpose Calendar Manager",
-    "type": "project"
+    "type": "project",
+    "array_position": 16
 }]
