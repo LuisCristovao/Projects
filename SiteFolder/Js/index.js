@@ -103,7 +103,7 @@ function htmlDecode(value) {
 //scroll class  controls navbar when scroll down and a button to scroll up
 class Scroll {
     constructor() {
-        this.navbar_visibility_point = ((Math.abs(document.body.scrollHeight-window.innerHeight)/document.body.scrollHeight)*100)>10?window.innerHeight * 0.2:65// detect  if windows height is close to document height. Basically if document is large there is not afraid of bug else...
+        this.navbar_visibility_point =((Math.abs(document.body.scrollHeight-window.innerHeight)/document.body.scrollHeight)*100)>12?65:window.innerHeight *0.2// detect  if windows height is close to document height. Basically if document is large there is not afraid of bug else...
         this.created_btn = false
         this.nav = document.getElementById("navbar")
         this.nav_clone = null
@@ -169,7 +169,7 @@ class Scroll {
         //if already created does not do anything
     }
     detectScrollTopUnderNavBar() {
-        this.navbar_visibility_point = ((Math.abs(document.body.scrollHeight-window.innerHeight)/document.body.scrollHeight)*100)>11?65:window.innerHeight * 0.2// detect  if windows height is close to document height. Basically if document is large there is not afraid of bug else...
+        this.navbar_visibility_point =((Math.abs(document.body.scrollHeight-window.innerHeight)/document.body.scrollHeight)*100)>12?65:window.innerHeight * 0.2 // detect  if windows height is close to document height. Basically if document is large there is not afraid of bug else...
         if (window.scrollY > this.navbar_visibility_point) {
             //this.createNavBarClone()
             this.nav.style.position = "absolute"
@@ -291,7 +291,7 @@ class ServePages {
                 this.updatePreviousPage()
 
                 var page_url = window.location.search.split("=")[0] // the .split is to detect when is search 
-                var page = this.pages[page_url]
+                var page = this.pages[page_url]["page template"]
                 this.getHtml(page)
 
             }

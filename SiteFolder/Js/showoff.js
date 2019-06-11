@@ -25,7 +25,7 @@ async function searchBlogPosts() {
     //filter only blog posts type
     var blog_posts = []
     for (var i in db) {
-        if (db[i]["type"] == "blog post") {
+        if (db[i]["type"] == "blog") {
             blog_posts.push(db[i])
         }
     }

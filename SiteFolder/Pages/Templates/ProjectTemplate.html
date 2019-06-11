@@ -16,7 +16,7 @@
 
         .page_body {
             padding-top: 5%;
-            
+
         }
     </style>
 
@@ -24,9 +24,9 @@
 
 <body>
 
-    <div class="page_body" align="center">
+    <div id="project_body" class="page_body" align="center">
 
-        <h1>Dash Game Description:</h1>
+        <!--<h1>Dash Game Description:</h1>
         <br>
         <p>Dash Game is a survival game, where the player tries to avoid evil squares for the most time possible.</p>
         <p> The game is also playable on mobile (better in Chrome!).</p>
@@ -41,7 +41,7 @@
             <button type="button" class="btn btn-default btn-lg" style="font-size: 2em;">Source Code</button>
         </a>
         <br><br><br>
-        <iframe width="70%" height="250px" src="https://www.youtube.com/embed/0mpLcbj-eVY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe width="70%" height="250px" src="https://www.youtube.com/embed/0mpLcbj-eVY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>-->
 
 
     </div>
@@ -64,9 +64,12 @@
     </script>
     <!-- end www.htmlcommentbox.com -->
     <script>
+        var script_el = document.createElement("script")
+        script_el.src = 'SiteFolder/JS/ProjectTemplate.js'
+        document.body.appendChild(script_el)
         // Main------------
-        var prev_height = window.innerHeight
-        var prev_width = window.innerWidth
+        //var prev_height = window.innerHeight
+        //var prev_width = window.innerWidth
 
 
         /*function ChangeOrientation(){

@@ -1,5 +1,6 @@
 <!--<link rel="stylesheet" type="text/css" href="SiteFolder/Css/ContactPage.css">-->
 <style>
+    
     h1,
     h2,
     h3,
@@ -20,13 +21,22 @@
         font-size: 1.5em;
         text-align: justify;
     }
-
+    .blog_li{
+        font-size: 1.5em;
+        padding-top: 1%;
+        color: cornflowerblue;
+        cursor: pointer;
+        
+    }
+    .blog_li:hover{
+        text-decoration: underline
+    }
     #page_body {
         padding-top: 5%;
     }
 
 </style>
-<div id="page_body">
+<div style="padding-top: 5%">
     <button type="button" id="hide_show_index_btn" class="btn btn-outline-secondary" style="font-size: 2em;">Hide/Show Index</button>
     <div id="blog_index" style="display: none">
         <!--<ul>
@@ -39,7 +49,9 @@
             <li>dddd</li>
         </ul>-->
     </div>
-    <h1>Page Templates</h1>
+</div>
+<div id="blog_body">
+    <!--<h1>Page Templates</h1>
     <h2>Bla</h2>
     <p>
         csdjcs dcj sdoicj sdoc isodcksdlc sdsdcsc
@@ -61,94 +73,34 @@
     <p>dofsdif</p>
     <h2>dsfsd</h2>
     <h1>NNN</h1>
-    <p>dsoijf+posidfj efih wpeofuihwpe fhwp eufh wpeufh wpefh pweuifh wpie hfpwe hfpw eufhpw ef</p>
-    <div>
-        <!-- begin wwww.htmlcommentbox.com -->
-        <div id="HCB_comment_box" style="padding-top: 10%;padding-bottom: 5%;">
-            <a href="http://www.htmlcommentbox.com">Comment Box</a> is loading comments...</div>
-        <link rel="stylesheet" type="text/css" href="https://www.htmlcommentbox.com/static/skins/bootstrap/twitter-bootstrap.css?v=0" />
-        <script type="text/javascript" id="hcb">
-            /*<!--*/
-            if (!window.hcb_user) {
-                hcb_user = {};
-            }(function() {
-                var s = document.createElement("script"),
-                    l = hcb_user.PAGE || ("" + window.location).replace(/'/g, "%27"),
-                    h = "https://www.htmlcommentbox.com";
-                s.setAttribute("type", "text/javascript");
-                s.setAttribute("src", h + "/jread?page=" + encodeURIComponent(l).replace("+", "%2B") + "&mod=%241%24wq1rdBcg%2447ipUA8n%2FvfvjRMuzpc77%2F" + "&opts=16862&num=10&ts=1556213103497");
-                if (typeof s != "undefined") document.getElementsByTagName("head")[0].appendChild(s);
-            })(); /*-->*/
+    <p>dsoijf+posidfj efih wpeofuihwpe fhwp eufh wpeufh wpefh pweuifh wpie hfpwe hfpw eufhpw ef</p>-->
 
-        </script>
-        <!-- end www.htmlcommentbox.com -->
-    </div>
+</div>
+<div>
+    <!-- begin wwww.htmlcommentbox.com -->
+    <div id="HCB_comment_box" style="padding-top: 5%;padding-bottom: 5%;">
+        <a href="http://www.htmlcommentbox.com">Comment Box</a> is loading comments...</div>
+    <link rel="stylesheet" type="text/css" href="https://www.htmlcommentbox.com/static/skins/bootstrap/twitter-bootstrap.css?v=0" />
+    <script type="text/javascript" id="hcb">
+        /*<!--*/
+        if (!window.hcb_user) {
+            hcb_user = {};
+        }(function() {
+            var s = document.createElement("script"),
+                l = hcb_user.PAGE || ("" + window.location).replace(/'/g, "%27"),
+                h = "https://www.htmlcommentbox.com";
+            s.setAttribute("type", "text/javascript");
+            s.setAttribute("src", h + "/jread?page=" + encodeURIComponent(l).replace("+", "%2B") + "&mod=%241%24wq1rdBcg%2447ipUA8n%2FvfvjRMuzpc77%2F" + "&opts=16862&num=10&ts=1556213103497");
+            if (typeof s != "undefined") document.getElementsByTagName("head")[0].appendChild(s);
+        })(); /*-->*/
+
+    </script>
+    <!-- end www.htmlcommentbox.com -->
 </div>
 
 <script>
-    //Create Index for page
-    //var hide_show_index_btn=document.getElementById("hide_show_index_btn")
-    $("#hide_show_index_btn").click(() => {
-        $("#blog_index").toggle("fast")
-    })
-
-    function createIndex(header) {
-        html = ""
-        html
-        index.innerHTML = html
-    }
-    let page_body = document.getElementById("page_body")
-    let elements = Array.from(page_body.children)
-    let index = document.getElementById("blog_index")
-    var hs = {
-        "H1": "H1",
-        "H2": "H2",
-        "H3": "H3",
-        "H4": "H4",
-        "H5": "H5",
-        "H6": "H6"
-    }
-    let titels_subtitles_order = [{
-        "type": "h1",
-        "value": "sssas",
-        "sub": [{
-            "type": "h2",
-            "value": "asjsa",
-            "sub": [{
-                "type": "h3",
-                "value": "sssas",
-                "sub": []
-            }]
-        }]
-    }, {
-        "type": "h1",
-        "value": "sssas",
-        "sub": [{
-            "type": "h2",
-            "value": "asjsa",
-            "sub": [{
-                "type": "h3",
-                "value": "sssas",
-                "sub": []
-            }]
-        }]
-    }]
-    let headers = elements.filter(el => hs[el.nodeName] != null)
-    headers.forEach(el => {
-
-        console.log(el.nodeName)
-        el.setAttribute("id", el.innerText.replaceAll(" ", "-"))
-
-
-
-    })
-
-
-    var html = "<ul>"
-    headers.filter(el => el.nodeName == "H1").forEach(el => {
-        html += `<li><a href="#${el.innerText.replaceAll(" ","-")}">${el.innerText}</a></li>`
-    })
-    html += "</ul>"
-    index.innerHTML = html
+    var script_el = document.createElement("script")
+    script_el.src = 'SiteFolder/JS/BlogTemplate.js'
+    document.body.appendChild(script_el)
 
 </script>

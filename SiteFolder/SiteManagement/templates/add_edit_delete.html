@@ -1,0 +1,293 @@
+<html>
+
+<head>
+    <title>{{add_edit_delete}}</title>
+</head>
+
+<body>
+    <div id="form">
+        <select id="select_id" style="visibility: collapse" onchange="fillFormValues()"></select>
+    </div><br><br>
+    <div>
+        <button id="submit" style="position: relative;left: 20%;font-size:2em;" onclick="submit()">Submit</button>
+    </div><br><br>
+    <div id="ans">
+    </div>
+</body>
+<script>
+    //config variables-------------------------
+    let page_info = {
+
+        "form json": "path/all_posts_table_columns.json",
+        "add": {
+            "server url": "add_db",
+            "init": () => {
+                document.getElementById("submit").innerHTML = "Add"
+            },
+            "create question": {
+                "text": (obj) => {
+                    var html = ""
+                    html += `<h2>${obj["name"]} ${(!obj["optional"])?`<font color="red">*</font>`:""}</h2>`
+                    html += `<input id="${obj["name"]}" type="text" value="${obj["value"]}" placeholder="${obj["placeholder"]}">`
+                    return html
+                },
+                "option": (obj) => {
+                    var html = ""
+                    html += `<h2>${obj["name"]} ${(!obj["optional"])?`<font color="red">*</font>`:""}</h2>`
+                    html += `<select id="${obj["name"]}" value="${obj["value"]}">`
+                    let suggestions = Array.from(obj["suggestions"])
+                    suggestions.forEach(el => {
+                        html += `<option>${el}</option>`
+                    })
+                    html += `</select>`
+                    return html
+                },
+                "textarea": (obj) => {
+                    var html = ""
+                    html += `<h2>${obj["name"]} ${(!obj["optional"])?`<font color="red">*</font>`:""}</h2>`
+                    html += `<textarea style="width:430px;height:100px;" id="${obj["name"]}" >${obj["value"]}</textarea>`
+                    return html
+                },
+                "date": (obj) => {
+                    var html = ""
+                    html += `<h2>${obj["name"]} ${(!obj["optional"])?`<font color="red">*</font>`:""}</h2>`
+                    html += `<input id="${obj["name"]}" type="date">`
+                    return html
+                }
+
+            }
+        },
+        "edit": {
+            "server url": "edit_db",
+            "init": () => {
+                document.getElementById("submit").innerHTML = "Edit"
+                document.getElementById("select_id").style.visibility = "visible"
+                fillSelectBox()
+                setTimeout(fillFormValues, 500)
+            },
+            "create question": {
+                "text": (obj) => {
+                    var html = ""
+                    html += `<h2>${obj["name"]} ${(!obj["optional"])?`<font color="red">*</font>`:""}</h2>`
+                    html += `<input id="${obj["name"]}" type="text" value="${obj["value"]}" placeholder="${obj["placeholder"]}">`
+                    return html
+                },
+                "option": (obj) => {
+                    var html = ""
+                    html += `<h2>${obj["name"]} ${(!obj["optional"])?`<font color="red">*</font>`:""}</h2>`
+                    html += `<select id="${obj["name"]}" value="${obj["value"]}">`
+                    let suggestions = Array.from(obj["suggestions"])
+                    suggestions.forEach(el => {
+                        html += `<option>${el}</option>`
+                    })
+                    html += `</select>`
+                    return html
+                },
+                "textarea": (obj) => {
+                    var html = ""
+                    html += `<h2>${obj["name"]} ${(!obj["optional"])?`<font color="red">*</font>`:""}</h2>`
+                    html += `<textarea style="width:430px;height:100px;" id="${obj["name"]}" >${obj["value"]}</textarea>`
+                    return html
+                },
+                "date": (obj) => {
+                    var html = ""
+                    html += `<h2>${obj["name"]} ${(!obj["optional"])?`<font color="red">*</font>`:""}</h2>`
+                    html += `<input id="${obj["name"]}" type="date">`
+                    return html
+                }
+
+            }
+        },
+        "delete": {
+            "server url": "delete_db",
+            "init": () => {
+                var btn = document.getElementById("submit")
+                btn.innerHTML = "Delete"
+                document.getElementById("select_id").style.visibility = "visible"
+                fillSelectBox()
+                setTimeout(fillFormValues, 500)
+            },
+            "create question": {
+                "text": (obj) => {
+                    var html = ""
+                    html += `<h2>${obj["name"]} ${(!obj["optional"])?`<font color="red">*</font>`:""}</h2>`
+                    html += `<input id="${obj["name"]}" type="text" value="${obj["value"]}" placeholder="${obj["placeholder"]}" disabled>`
+                    return html
+                },
+                "option": (obj) => {
+                    var html = ""
+                    html += `<h2>${obj["name"]} ${(!obj["optional"])?`<font color="red">*</font>`:""}</h2>`
+                    html += `<select id="${obj["name"]}" value="${obj["value"]}" disabled>`
+                    let suggestions = Array.from(obj["suggestions"])
+                    suggestions.forEach(el => {
+                        html += `<option>${el}</option>`
+                    })
+                    html += `</select>`
+                    return html
+                },
+                "textarea": (obj) => {
+                    var html = ""
+                    html += `<h2>${obj["name"]} ${(!obj["optional"])?`<font color="red">*</font>`:""}</h2>`
+                    html += `<textarea style="width:430px;height:100px;" id="${obj["name"]}" disabled>${obj["value"]}</textarea>`
+                    return html
+                },
+                "date": (obj) => {
+                    var html = ""
+                    html += `<h2>${obj["name"]} ${(!obj["optional"])?`<font color="red">*</font>`:""}</h2>`
+                    html += `<input id="${obj["name"]}" type="date" disabled>`
+                    return html
+                }
+            }
+        }
+
+
+    }
+    let add_edit_delete = document.title
+    //functions -------------------------------------------------------
+    function createQuestion(obj) {
+
+        var html = ""
+        html += page_info[add_edit_delete]["create question"][obj["type"]](obj)
+        return html
+    }
+
+    async function createPage() {
+
+        //Initial construct function for each page add, edit,delete 
+        page_info[add_edit_delete]["init"]()
+
+        let form = document.getElementById("form")
+        let columns_text = await sendToServer(page_info["form json"])
+        let columns_json = await JSON.parse(columns_text)
+        let columns = await Array.from(columns_json)
+
+        var html = form.innerHTML
+
+        columns.forEach(col => {
+            html += createQuestion(col)
+        })
+        form.innerHTML = html
+
+    }
+    //alert(add_edit_delete)
+    async function sendToServer(url, data = "", get_post = "GET", type = "application/json") {
+        //"application/x-www-form-urlencoded"
+        var response;
+        if (get_post == "post" || get_post == "POST") {
+
+            response = await fetch(url, {
+                method: get_post,
+                "Content-Type": type,
+                body: data
+            });
+        } else {
+            response = await fetch(url)
+        }
+        //let val = await response.json();
+        let val = await response.text();
+        return val
+    }
+
+    function toUrlEncoded(columns_info) {
+        var url = ""
+        columns_info.forEach((col, index) => {
+            var val = document.getElementById(col["name"]).value
+            if (index < columns_info.length - 1) {
+
+                url += `${col["name"]}=${val}&`
+            } else {
+                url += `${col["name"]}=${val}`
+            }
+        })
+        return url
+    }
+
+    function jsonData(columns) {
+        var data = {}
+        columns.forEach((col) => {
+            var val = document.getElementById(col["name"]).value
+            data[col["name"]] = val
+        })
+        return data
+    }
+    async function getData() {
+        let columns_text = await sendToServer(page_info["form json"])
+        let columns_json = await JSON.parse(columns_text)
+        let columns = await Array.from(columns_json)
+        return jsonData(columns)
+
+    }
+    async function submit() {
+        if (add_edit_delete != "delete") {
+
+            let div = document.getElementById("ans")
+            let data = await getData()
+            if (add_edit_delete == "edit") {
+                var select_id = document.getElementById("select_id").value
+                data["id"] = select_id
+            }
+            let ans = await sendToServer(page_info[add_edit_delete]["server url"], JSON.stringify(data), "post")
+            div.innerHTML = ans
+        } else {
+            //confirm dialog...
+            var select = document.getElementById("select_id")
+            if (confirm("Are you sure you want to delete row with id " + select.value + "?")) {
+                let div = document.getElementById("ans")
+                let data = {
+                    "id": select.value
+                }
+                let ans = await sendToServer(page_info[add_edit_delete]["server url"], JSON.stringify(data), "post")
+                div.innerHTML = ans
+                setTimeout(fillFormValues, 500)
+            }
+        }
+    }
+    async function getIds() {
+        //let response = await fetch('/getDbIds',{method:"POST",body:data});
+        let response = await fetch('getDbIds');
+        let val = await response.json();
+        return val
+    }
+
+    async function fillSelectBox() {
+        var ids = await getIds()
+        var select = document.getElementById("select_id")
+        if (ids.length > 0) {
+            var options = ""
+            for (value in ids) {
+                options += '<option value="' + value + '">' + value + '</option>'
+            }
+            select.innerHTML = options
+        }
+    }
+    async function fillFormValues() {
+
+        let columns_text = await sendToServer(page_info["form json"])
+        let columns_json = await JSON.parse(columns_text)
+        let columns = await Array.from(columns_json)
+
+        var select = document.getElementById("select_id")
+        var row = await sendToServer("select_row", JSON.stringify({
+            "id": select.value
+        }), "post")
+        //alert(row)
+        row = JSON.parse(row)
+        columns.forEach(col => {
+            var input = document.getElementById(col["name"])
+            if(col["name"]!="page location"){
+                input.value = row[col["name"]]
+            }else{
+                input.value = JSON.stringify(row[col["name"]])
+            }
+        })
+    }
+    //sendToServer(page_info["form json"])
+    function init() {
+        createPage()
+    }
+    //Main-------------------------------------------------------
+    window.onload = init()
+
+</script>
+
+</html>

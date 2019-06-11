@@ -18,6 +18,21 @@ pages=SourceFileLoader("urls.py", "modules/urls.py").load_module()
 #to import module in tags.py when using server
 tags=SourceFileLoader("tags.py", "modules/tags.py").load_module() 
 
+
+#config constants
+config_constants={
+                   "title":"title",
+                   "type":"type",
+                   "short description":"short description",
+                   "creation date":"creation date",
+                   "last update date":"last update date",
+                   "link":"link",
+                   "image url":"image url",
+                   "search tags":"search tags",
+                   "secondary search tags":"secondary search tags",
+                   "page location":"page location"
+                  }
+
 def strToDate(date_str):
     '''
     goal: 
@@ -46,7 +61,16 @@ def detect_if_unique(db,new_title):
             return False
         
     return unique
-               
+
+def get_data_columns():
+    '''
+    goal:
+        return json object with columns of main db table
+    '''
+    #dirpath=get_dirpath_less(2) #to work locally
+    dirpath=json_files.get_dirpath_less(1)# to work as a module of server
+    return json_files.get_json_file(dirpath + "SiteManagement/modules/settings/all_posts_table_columns.json")
+                   
 
 def get_all_posts():
     '''
@@ -59,7 +83,7 @@ def get_all_posts():
     return json_files.get_json_file(dirpath + "DB/all_posts.json")
     
 def update_position_index(db_array):
-    for i in range(len(db_array)):
+    for i in range(0,len(db_array)):
         db_array[i]["array_position"]=i
         
 def insertByDate(db,new_data):
@@ -134,9 +158,11 @@ def add_posts_row(data):
     '''
     
     try:
+        
         db=get_all_posts()
         url="?"+data["title"].replace(" ","-")
-        page=data["page location"]
+        page=json_files.parse(data["page location"])
+        data["page location"]=json_files.parse(data["page location"])
         #data["id"]=len(db)
         if detect_if_unique(db,data["title"]):
             if data["page location"]!="":
@@ -174,7 +200,8 @@ def edit_posts_row(data):
         id_=int(data["id"])
         url="?"+data["title"].replace(" ","-")
         old_url=db[id_]["link"]
-        page=data["page location"]
+        page=json_files.parse(data["page location"])
+        data["page location"]=json_files.parse(data["page location"])
         del data["id"]
         
         if detect_if_unique(db,data["title"]) or data["title"]==db[id_]["title"]:
@@ -215,14 +242,14 @@ def delete_posts_row(id_):
     
     try:
         db=get_all_posts()
-        print("delete id:",id_)
+        #print("delete id:",id_)
         
         #get url from db row
         url=db[id_]["link"]
         
         #get search tags from row
         all_tags=db[id_]["search tags"]
-        all_tags+=db[id_]["secondary search tags"]
+        all_tags+=','+db[id_]["secondary search tags"]
         
         
         
@@ -233,7 +260,8 @@ def delete_posts_row(id_):
         tags.deleteTags(all_tags)
         #Delete row in posts db
         del db[id_]
-        
+        #Update array_position column on every row
+        update_position_index(db)
         #dump json object in db all_post.json
         dirpath=json_files.get_dirpath_less(1)# to work as a module of server
         json_files.dump_json_in_file(dirpath + "DB/all_posts.json",db)

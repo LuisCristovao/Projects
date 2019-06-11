@@ -9,6 +9,9 @@ Goal:script to deal with get and write json to files
 import json
 import os
 
+def parse(json_string):
+    return json.loads(json_string)
+
 
 def get_dirpath_less(less=0):
     '''
