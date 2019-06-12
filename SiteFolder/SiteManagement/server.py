@@ -66,7 +66,6 @@ def edit_db():
     global aed
     received_values={}
     received_values=json.loads(fl.request.data.decode("ascii"))
-    print("DAmmmmmm",received_values)
     #for key in fl.request.form:
     #    received_values[key]=fl.request.form[key]
     if aed.edit_posts_row(received_values):
