@@ -5,8 +5,9 @@ let project_configs = {
         "font-size": "2em",
         "name": "A",
         "action": (el) => {
+            el.target="_blank"
             let text=el.innerText
-            el.innerHTML=`<button class="btn btn-default btn-lg" style="font-size:2em;padding-top:2%;">${text}</button><br><br>`
+            el.innerHTML=`<button class="btn btn-default btn-lg" style="font-size:2em">${text}</button><br><br>`
             //el.setAttribute("class", "btn btn-default btn-lg")
             //el.style["font-size"] = "2em"
         }
@@ -19,6 +20,16 @@ let project_configs = {
             el.style.width = "70%"
             el.style.height = "250px"
             el.style["padding-top"]="2%"
+        }
+    },
+    "P":{
+        "action":(el)=>{
+            el.style["padding-top"]="1%"
+        }
+    },
+    "H1":{
+        "action":(el)=>{
+            el.style["padding-bottom"]="2%"
         }
     }
 }
