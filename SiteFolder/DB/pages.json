@@ -1,27 +1,27 @@
 {
     "": {
-        "page template":"SiteFolder/Pages/home.html",
-        "page content":"SiteFolder/Pages/home.html"
+        "page template": "SiteFolder/Pages/home.html",
+        "page content": "SiteFolder/Pages/home.html"
     },
     "?Projects": {
-        "page template":"SiteFolder/Pages/ShowOffTemplate.html",
-        "page content":"SiteFolder/Pages/ShowOffTemplate.html"
+        "page template": "SiteFolder/Pages/ShowOffTemplate.html",
+        "page content": "SiteFolder/Pages/ShowOffTemplate.html"
     },
     "?Blog": {
-        "page template":"SiteFolder/Pages/ShowOffTemplate.html",
-        "page content":"SiteFolder/Pages/ShowOffTemplate.html"
+        "page template": "SiteFolder/Pages/ShowOffTemplate.html",
+        "page content": "SiteFolder/Pages/ShowOffTemplate.html"
     },
-    "?search":{
-        "page template":"SiteFolder/Pages/ShowOffTemplate.html",
-        "page content":"SiteFolder/Pages/ShowOffTemplate.html"
+    "?search": {
+        "page template": "SiteFolder/Pages/ShowOffTemplate.html",
+        "page content": "SiteFolder/Pages/ShowOffTemplate.html"
     },
-    "?tags_page":{
-        "page template":"SiteFolder/Pages/tags.html",
-        "page content":"SiteFolder/Pages/tags.html"
+    "?tags_page": {
+        "page template": "SiteFolder/Pages/tags.html",
+        "page content": "SiteFolder/Pages/tags.html"
     },
-    "?contact":{
-        "page template":"SiteFolder/Pages/contact.html",
-        "page content":"SiteFolder/Pages/contact.html"
+    "?contact": {
+        "page template": "SiteFolder/Pages/contact.html",
+        "page content": "SiteFolder/Pages/contact.html"
     },
     "?Purpose-Calendar-Manager": "SiteFolder/Pages/PurposeCalendarPage.html",
     "?Volley-Game": "SiteFolder/Pages/VolleyGamePage.html",
@@ -30,12 +30,12 @@
     "?File-Upload-Server.": "SiteFolder/Pages/FileUploadPage.html",
     "?Dash-Game": "SiteFolder/Pages/DashGamePage.html",
     "?Pages-Template": "SiteFolder/Pages/Templates/BlogTemplate.html",
-    "?Project-Template": {
-        "page template":"SiteFolder/Pages/Templates/ProjectTemplate.html",
-        "page content":"SiteFolder/Pages/y.html"
-    },
     "?TESTT": {
         "page template": "SiteFolder/Pages/Templates/BlogTemplate.html",
         "page content": "SiteFolder/Pages/x.html"
+    },
+    "?Project-Template": {
+        "page template": "SiteFolder/Pages/Templates/ProjectTemplate.html",
+        "page content": "SiteFolder/Pages/y.html"
     }
 }

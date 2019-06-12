@@ -6,8 +6,8 @@
         "players": "players",
         "Pass": "Pass",
         "Project": "Project",
-        "project": "project",
-        "projects": "projects"
+        "projects": "projects",
+        "project": "project"
     },
     "C": {
         "Calendar": "Calendar",
@@ -114,5 +114,4 @@
     "O": {
         "old": "old"
     }
-    
 }

@@ -14,16 +14,19 @@
     },
     "array_position": 0
 }, {
-    "creation date": "",
-    "image url": "",
-    "last update date": "2019-05-26",
-    "link": "?Project-Template",
-    "page location": "SiteFolder/Pages/Templates/ProjectTemplate.html",
-    "search tags": "test",
-    "secondary search tags": "project",
-    "short description": "",
     "title": "Project Template",
     "type": "project",
+    "short description": "",
+    "creation date": "",
+    "last update date": "2019-05-26",
+    "link": "?Project-Template",
+    "image url": "",
+    "search tags": "test",
+    "secondary search tags": "project",
+    "page location": {
+        "page template": "SiteFolder/Pages/Templates/ProjectTemplate.html",
+        "page content": "SiteFolder/Pages/y.html"
+    },
     "array_position": 1
 }, {
     "creation date": "2019-05-09",
