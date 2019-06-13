@@ -88,11 +88,11 @@ function jsonToHml(data) {
     html += '<div class="card" >'
     if (val["image url"] != "") {
 
-        html += '<a href="' + val["link"] + '"><img class="card-img-top" src="' + val["image url"] + '" alt=""></a>'
+        html += '<a target="_blank" href="' + val["link"] + '"><img class="card-img-top" src="' + val["image url"] + '" alt=""></a>'
     }
     html += '<div class="card-body">'
     html += '<h4 class="card-title">'
-    html += '<a href="' + val["link"] + '">' + val["title"] + '</a>'
+    html += '<a target="_blank" href="' + val["link"] + '">' + val["title"] + '</a>'
     html += '</h4>'
     html += '<p class="card-text">' + val["short description"] + '</p>'
     html += '</h4>'

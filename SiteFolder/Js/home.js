@@ -51,15 +51,28 @@ function selectRandom(min, max) {
     var random = Math.floor(Math.random() * (+max - +min)) + +min;
     return random
 }
-
+function selectRandomDiffFromPrev(min,max,previous_map){
+    var condition=false
+    while(!condition){
+        var r_index=selectRandom(min,max)
+        //if already was chosen this index
+        if(previous_map[r_index]!=null){
+            continue
+        }else{
+            return r_index
+        }
+    }
+}
 function createPage() {
     var recent_grid = document.getElementById("recent")
     var random_grid = document.getElementById("random")
+    var random_indexes={}
     var recent = ""
     var random = ""
     for (index in [0, 1, 2]) { //load 3 posts each time this is triggered
         recent += jsonToHml(db[index])
-        var r_index=selectRandom(0,db.length)
+        var r_index=selectRandomDiffFromPrev(3,db.length,random_indexes)
+        random_indexes[r_index]=r_index
         random+=jsonToHml(db[r_index])
     }
     recent_grid.innerHTML = recent
