@@ -71,7 +71,7 @@ function createIndex() {
                 else{
                     
                     //close all
-                    //html += `</li>`
+                    html += `<li class="blog_li" onclick="myScrollTo('${el.innerText.replaceAll(" ","-")}')">${el.innerText}</li>`
                     first_h1 = false
                     first_h2 = true
                 }
