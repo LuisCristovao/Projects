@@ -23,14 +23,21 @@
         "page template": "SiteFolder/Pages/Contact.html",
         "page content": "SiteFolder/Pages/Contact.html"
     },
-    "?Pages-Template": "SiteFolder/Pages/Templates/BlogTemplate.html",
-    "?TESTT": {
-        "page template": "SiteFolder/Pages/Templates/BlogTemplate.html",
-        "page content": "SiteFolder/Pages/x.html"
-    },
     "?Project-Template": {
         "page template": "SiteFolder/Pages/Templates/ProjectTemplate.html",
         "page content": "SiteFolder/Pages/y.html"
+    },
+    "?Purpose-Calendar-Manager": {
+        "page template": "SiteFolder/Pages/Templates/ProjectTemplate.html",
+        "page content": "SiteFolder/Pages/PurposeCalendarPage.html"
+    },
+    "?Chat-Rooms-App": {
+        "page template": "SiteFolder/Pages/Templates/ProjectTemplate.html",
+        "page content": "SiteFolder/Pages/ChatRoomsPage.html"
+    },
+    "?Dash-Game": {
+        "page template": "SiteFolder/Pages/Templates/ProjectTemplate.html",
+        "page content": "SiteFolder/Pages/DashGamePage.html"
     },
     "?Volley-Game": {
         "page template": "SiteFolder/Pages/Templates/ProjectTemplate.html",
@@ -44,16 +51,8 @@
         "page template": "SiteFolder/Pages/Templates/ProjectTemplate.html",
         "page content": "SiteFolder/Pages/FileUploadPage.html"
     },
-    "?Chat-Rooms-App": {
-        "page template": "SiteFolder/Pages/Templates/ProjectTemplate.html",
-        "page content": "SiteFolder/Pages/ChatRoomsPage.html"
-    },
-    "?Dash-Game": {
-        "page template": "SiteFolder/Pages/Templates/ProjectTemplate.html",
-        "page content": "SiteFolder/Pages/DashGamePage.html"
-    },
-    "?Purpose-Calendar-Manager": {
-        "page template": "SiteFolder/Pages/Templates/ProjectTemplate.html",
-        "page content": "SiteFolder/Pages/PurposeCalendarPage.html"
+    "?TESTT": {
+        "page template": "SiteFolder/Pages/Templates/BlogTemplate.html",
+        "page content": "SiteFolder/Pages/x.html"
     }
 }
