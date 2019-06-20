@@ -133,7 +133,7 @@ function detectScrollBottom() {
     }
     if (Math.round(prev_scrollTop) != Math.round(document.body.scrollTop)) {
         prev_scrollTop = document.body.scrollTop
-        if (Math.round(document.body.scrollTop + window.innerHeight) == document.body.scrollHeight*0.95) {
+        if (Math.round(document.body.scrollTop + window.innerHeight) >= document.body.scrollHeight*0.95) {
             loadMoreProjects()
         }
     }
