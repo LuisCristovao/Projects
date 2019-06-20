@@ -300,7 +300,7 @@ class ServePages {
     }
 
 
-}
+};
 //Main-------------------------------
 //to do function after complet load need to do this!!!
 window.onload = () => {
