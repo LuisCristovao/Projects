@@ -39,7 +39,7 @@ async function buildTagsPage() {
             html += '<div align="center">'
             html += '<ul style="list-style: none; padding-left:0px;">'
             for (var value in db[key]) {
-                html += '<li><a style="color:rgba(200, 36, 255, 1);" href="?search='+value+'">' + value + '</a></li>'
+                html += '<li><a style="color:rgba(200, 36, 255, 1);" href="?search='+encodeURIComponent(value)+'">' + value + '</a></li>'
             }
             html += '</ul>'
             html += '</div>'

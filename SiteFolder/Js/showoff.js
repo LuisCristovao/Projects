@@ -74,7 +74,7 @@ function AddMoreInfoToCards(data) {
     html += '<li class="list-group-item">'
     html += '<strong>Search Tags:</strong><br>'
     for (var i in search_tags) {
-        html += '<a href="?search=' + decodeURI(search_tags[i]) + '">' + search_tags[i] + '</a>&nbsp;'
+        html += '<a href="?search=' + encodeURIComponent(search_tags[i]) + '">' + search_tags[i] + '</a>&nbsp;'
     }
     html += '</li>'
     html += '</ul>'
