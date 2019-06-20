@@ -282,6 +282,8 @@ class ServePages {
     //        rawFile.send(null);
     //        return allText;
     //    }
+    
+    //Instead of using binding on the constructor I could simply did run=()=>{...} but fire fox does not like it so...
     run(){
         this.setActualPage(window.location.search)
 
