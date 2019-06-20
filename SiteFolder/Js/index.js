@@ -282,7 +282,7 @@ class ServePages {
     //        rawFile.send(null);
     //        return allText;
     //    }
-    run = () => {
+    run(){
         this.setActualPage(window.location.search)
 
         if (this.detectChange()) {
