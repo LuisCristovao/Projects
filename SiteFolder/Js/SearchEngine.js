@@ -28,7 +28,6 @@ class SearchEngine {
         let val = await response.json();
         this.tagsdb = val
     }
-
     getQuery() {
         return window.location.search.split("=")[1].split("+")
     }
@@ -111,12 +110,13 @@ class SearchEngine {
         return new_array
     }
 
-
+    
 
     async findPosts() {
         var select_posts = {}
         var all_posts = await this.getDBPosts()
         var query_tags = this.arrayUpperCase(this.getQuery()) //array with tags
+        query_tags=query_tags.map(el => decodeURIComponent(el))
         for (var i in all_posts) {
             var post = all_posts[i]
             var post_tags = this.arrayUpperCase(post['search tags'].split(",").map(el=>el.trim()))
