@@ -172,10 +172,10 @@ class Scroll {
         this.navbar_visibility_point =((Math.abs(document.body.scrollHeight-window.innerHeight)/document.body.scrollHeight)*100)>12?65:window.innerHeight * 0.2 // detect  if windows height is close to document height. Basically if document is large there is not afraid of bug else...
         if (window.scrollY > this.navbar_visibility_point) {
             //this.createNavBarClone()
-            this.nav.style.position = "absolute"
-            this.nav.style["z-index"] = 1
-            this.nav.style.top = document.body.scrollTop + "px"
-            this.nav.style.width = "100%"
+//            this.nav.style.position = "absolute"
+//            this.nav.style["z-index"] = 1
+//            this.nav.style.top = document.body.scrollTop + "px"
+//            this.nav.style.width = "100%"
 
             this.createScrollTopBtn()
             this.created_btn = true
@@ -184,10 +184,10 @@ class Scroll {
             
             if (this.created_btn ) {
                 this.created_btn = false
-                this.nav.style.position = ""
-                this.nav.style["z-index"] = 0
-                this.nav.style.top = ""
-                this.nav.style.width = ""
+//                this.nav.style.position = ""
+//                this.nav.style["z-index"] = 0
+//                this.nav.style.top = ""
+//                this.nav.style.width = ""
                 var btn = document.getElementById("scrollToTopBtn")
                 //this.nav_clone.parentNode.removeChild(this.nav_clone)
                 //this.nav_clone = null
@@ -209,6 +209,7 @@ class ServePages {
         this.pages;
         this.getPages()
         //setTimeout(()=>{},1000)
+        this.run=this.run.bind(this);
     }
 
     detectChange() {
@@ -300,7 +301,7 @@ class ServePages {
     }
 
 
-};
+}
 //Main-------------------------------
 //to do function after complet load need to do this!!!
 window.onload = () => {
