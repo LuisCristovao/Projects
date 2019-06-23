@@ -1,19 +1,21 @@
-# Unix Quick Start
+# Unix Quick Start (WIP...)
 ## Intro
 **To test shell scripting there is these options (that I know of):**
-1. Have a pc with linux operating system (OP)
-2. Use **vagrant** ([https://www.vagrantup.com/intro/getting-started/index.html](https://www.vagrantup.com/intro/getting-started/index.html)) or **virtual machine** with a linux OP
+1. Have a pc with Linux operating system (OP)
+2. Use **vagrant** ([link for tutorial here](https://www.vagrantup.com/intro/getting-started/index.html)) or **virtual machine** with a Linux OP
 3. Use **git Bash**
 4. Search on google keywords: **shell or bash script online**
 
-If you have **Windows (OP)** and want rapidly to test shell scripting  you can start with options **4(simple stuff only)** and **3(more powerfull)**. But if you want to go more deep in the knowledge of unix better solutions are **1** and **2** 
+If you have **Windows (OP)** and want rapidly to test shell scripting you can start with options **4(simple stuff only)** and **3(more powerful)**. But if you want to go more deep in the knowledge of Unix better solutions are **1** and **2** 
 ## Basics 
-In this example you can use a **linux OP PC** or a **Virtual Machine** or **git Bash** program.
+In this example, you can use a **Linux OP PC** or a **Virtual Machine** or **git Bash** program.
 - Open a command line terminal
 - For with **git Bash** right click and select **Git Bash Here** option
+- ![](http://luiscristovao.github.io/Projects/SiteFolder/Images/Unix-Knowledge-Base/1.PNG)
+- euiowyew
+- dehyufweiou
 
-
-# Shell Script  Knowdge Base
+# Shell Script  Knowledge Base
 ## String Manipulation
 
 ### String Replace
