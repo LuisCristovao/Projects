@@ -33,11 +33,29 @@ let titels_subtitles_order = [
                     }]
             }]
     }]
+let blog_configs = {
+    "LI": {
+        "class": "blog_li",
+        "font-size": "2em",
+        "name": "A",
+        "action": (el) => {
+            el.class="blog_li"
+        }
+    }
+}
 //functions-----------------------------------------------------
 async function getPages() {
     let response = await fetch('SiteFolder/DB/pages.json');
     let val = await response.json();
     return val
+}
+function adaptBlogContent() {
+    
+    let body_elements = Array.from(page_body.children)
+    body_elements.filter(el => blog_configs[el.nodeName]).forEach(el => {
+        blog_configs[el.nodeName]["action"](el)
+    })
+
 }
 function myScrollTo(element_id){
     let el=document.getElementById(element_id)
@@ -109,9 +127,11 @@ function init() {
     })
 
     loadPageContent()
+    
 
 }
 //main---------------------
 
 init()
 setTimeout(createIndex, 500)
+setTimeout(adaptBlogContent, 500)
