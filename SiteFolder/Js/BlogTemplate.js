@@ -34,14 +34,28 @@ let titels_subtitles_order = [
             }]
     }]
 let blog_configs = {
-    "LI": {
+    "OL": {
         "class": "blog_li",
-        "font-size": "2em",
-        "name": "A",
+        "font-size": "1.5em",
+        "name": "ol",
         "action": (el) => {
-            el.class="blog_li"
+            let children=Array.from(el.children)
+            children.filter(child=>child.nodeName=="LI").forEach(child=>{
+                child.setAttribute("class","blog_li")
+            })
         }
-    }
+    },
+    "UL": {
+        "class": "blog_li",
+        "font-size": "1.5em",
+        "name": "ul",
+        "action": (el) => {
+            let children=Array.from(el.children)
+            children.filter(child=>child.nodeName=="LI").forEach(child=>{
+                child.setAttribute("class","blog_li")
+            })
+        }
+    },
 }
 //functions-----------------------------------------------------
 async function getPages() {
@@ -73,23 +87,24 @@ function createIndex() {
     var html = "<ul>"
     var first_h1 = true
     var first_h2 = true
+    let class_val="blog_li_index"
     headers.forEach((el,i) => {
         if (el.nodeName == "H1") {
             if (first_h1) {
 
-                html += `<li class="blog_li" onclick="myScrollTo('${el.innerText.replaceAll(" ","-")}')">${el.innerText}</li>`
+                html += `<li class="${class_val}" onclick="myScrollTo('${el.innerText.replaceAll(" ","-")}')">${el.innerText}</li>`
                 first_h1 = false
             } else {
                 if(headers[i-1].nodeName!="H1"){
                     //close all
-                    html += `</ul><li class="blog_li" onclick="myScrollTo('${el.innerText.replaceAll(" ","-")}')">${el.innerText}</li>`
+                    html += `</ul><li class="${class_val}" onclick="myScrollTo('${el.innerText.replaceAll(" ","-")}')">${el.innerText}</li>`
                     first_h1 = false
                     first_h2 = true
                 }
                 else{
                     
                     //close all
-                    html += `<li class="blog_li" onclick="myScrollTo('${el.innerText.replaceAll(" ","-")}')">${el.innerText}</li>`
+                    html += `<li class="${class_val}" onclick="myScrollTo('${el.innerText.replaceAll(" ","-")}')">${el.innerText}</li>`
                     first_h1 = false
                     first_h2 = true
                 }
@@ -97,10 +112,10 @@ function createIndex() {
         } else {
             if (el.nodeName == "H2" && !first_h1) {
                 if (first_h2) {
-                    html += `<ul><li class="blog_li" onclick="myScrollTo('${el.innerText.replaceAll(" ","-")}')">${el.innerText}</li>`
+                    html += `<ul><li class="${class_val}" onclick="myScrollTo('${el.innerText.replaceAll(" ","-")}')">${el.innerText}</li>`
                     first_h2 = !first_h2
                 } else {
-                    html += `<li class="blog_li" onclick="myScrollTo('${el.innerText.replaceAll(" ","-")}')">${el.innerText}</li>`
+                    html += `<li class="${class_val}" onclick="myScrollTo('${el.innerText.replaceAll(" ","-")}')">${el.innerText}</li>`
                 }
             } 
         }
@@ -127,11 +142,11 @@ function init() {
     })
 
     loadPageContent()
-    
+    setTimeout(createIndex, 500)
+    setTimeout(adaptBlogContent, 500)
 
 }
 //main---------------------
 
 init()
-setTimeout(createIndex, 500)
-setTimeout(adaptBlogContent, 500)
+
