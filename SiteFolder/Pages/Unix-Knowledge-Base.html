@@ -28,7 +28,7 @@
     <li><img src="SiteFolder/Images/Unix-Knowledge-Base/6.PNG" style="width: 100%"></li>
     <li>To edit file use unix file editor <strong>vi</strong> or <strong>vim</strong></li>
     <li>This editor is difficult to use, so here I will just be covering a simple example. For more, better search online.</li>
-    <li>Write  <strong>vi</strong> or <strong>vim</strong> and then the file you want to edit:</li>
+    <li>Write <strong>vi</strong> or <strong>vim</strong> and then the file you want to edit:</li>
     <li><img src="SiteFolder/Images/Unix-Knowledge-Base/7.PNG" style="width: 100%"></li>
     <li>A weird interce will appear</li>
     <li><img src="SiteFolder/Images/Unix-Knowledge-Base/8.PNG" style="width: 100%"></li>
@@ -43,28 +43,57 @@
     <li>Now if you use the command <b>cat</b> on the file</li>
     <li><img src="SiteFolder/Images/Unix-Knowledge-Base/12.PNG" style="width: 100%;"></li>
     <li>This command <b>prints</b> the file <b>content</b></li>
-    
+
 </ul>
 <p>So these are just some basic commands to move around. To see more advance knowledge see the next chapter (Shell Script KnowledgeBase).</p>
 <h1>Shell Script KnowledgeBase (WIP...)</h1>
 <h2>Usefull Commands Cheat Sheet</h2>
 <h3>Change Directory (cd)</h3>
 <p>
-The command is <strong>cd &lt;dir or path&gt;</strong>.<br>
-If you press just the command <b>cd</b> with nothing more it will go to <b>user home directory</b>.
-<br>
-<br>
-<b>Example:</b><br><br>
-<img src="SiteFolder/Images/Unix-Knowledge-Base/13.PNG" style="width: 100%;">    
-    
+    The command is <strong>cd &lt;dir or path&gt;</strong>.<br>
+    If you press just the command <b>cd</b> with nothing more it will go to <b>user home directory</b>.
+    <br>
+    <br>
+    <b>Example:</b><br><br>
+    <img src="SiteFolder/Images/Unix-Knowledge-Base/13.PNG" style="width: 100%;">
 </p>
 <h3>Show files and folders list</h3>
+<p>The commands are:</p>
+<ul>
+    <li><strong>ll &lt;dir or path&gt;</strong></li>
+    <li><strong>ls &lt;dir or path&gt;</strong></li>
+</ul>
+<p>Examples:</p>
+<ul>
+    <li><strong>ll /x/y/z...</strong></li>
+    <li><strong>ls ~/x/y/z...</strong></li>
+</ul>
+
 <h3>Check Space</h3>
+<p>Generic commands:</p>
+
+<ul>
+    <li><strong>df -h &lt;dir or path&gt;</strong> -> shows space usage/left in folder/path</li>
+    <li><strong>du -h &lt;dir or path&gt;</strong> -> list folders/files and their space occupied in folder/path</li>
+    <li><strong>du -hs ./*|sort -h</strong> -> list files from smaller to bigger from current directory (./* or *)</li>
+</ul>
 <h3>Show File Content</h3>
 <h3>Edit file</h3>
 <h2>Variables</h2>
 <h2>String Manipulation</h2>
 <h3>String Replace</h3>
+<p>
+    foo="2019-04-24"
+    <br>
+    <br># replace first "-" only with "."
+    <br>bar=${foo/-/.}
+    <br>echo $bar
+    <br>
+    <br># replace all "-"
+    <br>bar=${foo//-/.}
+    <br>echo $bar
+
+</p>
 <h2>Functions</h2>
 <h2>Cycles and Arrays</h2>
 <h2>If and else</h2>
