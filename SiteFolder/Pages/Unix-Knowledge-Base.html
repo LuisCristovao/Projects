@@ -79,21 +79,21 @@
 </ul>
 <h3>Show File Content</h3>
 <p>
-    cat &lt;filename&gt; 
+    cat &lt;filename&gt;
 </p>
 <p><strong>Example:</strong></p>
 <ul>
     <li>Create text file with <b>Hello World</b></li>
     <li><img src="SiteFolder/Images/Unix-Knowledge-Base/14.png" style="width: 100%;"></li>
     <li>cat output:</li>
-    <li><img src="SiteFolder/Images/Unix-Knowledge-Base/15.png" style="width: 100%;" ></li>
+    <li><img src="SiteFolder/Images/Unix-Knowledge-Base/15.png" style="width: 100%;"></li>
 </ul>
 <h3>Edit file</h3>
 <h3>Find Big Small files</h3>
 <p>
-find . -type f -size +1M # find files bigger than 1 MegaByte in current directory
-<br>find . -type f -size -1M # find files smaller than 1 MegaByte in current directory
-<br># k -> kilo; M -> Mega; G ->Giga bytes</p>
+    find . -type f -size +1M # find files bigger than 1 MegaByte in current directory
+    <br>find . -type f -size -1M # find files smaller than 1 MegaByte in current directory
+    <br># k -> kilo; M -> Mega; G ->Giga bytes</p>
 <h2>Variables</h2>
 <h2>String Manipulation</h2>
 <h3>String Replace</h3>
@@ -112,13 +112,28 @@ find . -type f -size +1M # find files bigger than 1 MegaByte in current director
 <p><strong>Other Way:</strong></p>
 <p>
     echo " yaay ss "|sed 's/ /z/g' # output: zyaayzssz
-<br>echo " yaay ss "|sed 's/ /z/' # output: zyaay ss 
+    <br>echo " yaay ss "|sed 's/ /z/' # output: zyaay ss
 </p>
 <p><strong>On a file</strong></p>
 <p>sed -i "s/a/_/g" &lt;filename&gt; # replace all 'a' by '_' in file...
 </p>
 <p>See <a href="http://tldp.org/LDP/abs/html/string-manipulation.html">this site</a> for more details.</p>
 <h2>Functions</h2>
+<h3>Print menu function</h3>
+<xmp>
+menu(){
+  local foo=""
+  foo="$foo 1. list kafka topics\n"
+  foo="$foo 2. read kafka topic\n"
+  foo="$foo 3. search kafka topic\n"
+  foo="$foo 4. show zookeeper hosts\n"
+  foo="$foo 5. show kafka brokers\n"
+  foo="$foo Choose Option:\n"
+  echo "$foo"
+}
+printf "$(menu)"
+</xmp>
+
 <h2>Cycles and Arrays</h2>
 <h2>If and else</h2>
 <h2>...</h2>
