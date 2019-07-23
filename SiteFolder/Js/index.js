@@ -42,7 +42,7 @@ function Search(btn) {
     var parent = btn.parentElement
     var input = parent.children[0]
     //In future detect top suggestion of suggestion box and send it to get
-    var query=getFirstSuggestion(input.value)
+    var query = getFirstSuggestion(input.value)
     window.location.search = "search=" + encodeSearchQuery(query.trim())
 
 }
@@ -55,13 +55,13 @@ function SearchKeyPress(event, input) {
     //press enter
     if (event.keyCode == 13) {
         //In future detect top suggestion of suggestion box and send it to get
-        var query=getFirstSuggestion(input.value)
+        var query = getFirstSuggestion(input.value)
         window.location.search = "search=" + encodeSearchQuery(query.trim())
 
     }
     //if press space
-    if (event.keyCode==32){
-        input.value=getFirstSuggestion(input.value)
+    if (event.keyCode == 32) {
+        input.value = getFirstSuggestion(input.value)
     }
 
 }
@@ -76,8 +76,9 @@ function Init() {
     server = new ServePages()
     scroll = new Scroll()
     search_engine = new SearchEngine()
-
-    requestAnimationFrame(server.run)
+    server.run()
+    //requestAnimationFrame(server.run)
+    //setTimeout(server.run,500)
     requestAnimationFrame(scroll.detectScrollTopUnderNavBar)
 }
 String.prototype.replaceAll = function (search, replacement) {
@@ -103,7 +104,7 @@ function htmlDecode(value) {
 //scroll class  controls navbar when scroll down and a button to scroll up
 class Scroll {
     constructor() {
-        this.navbar_visibility_point =((Math.abs(document.body.scrollHeight-window.innerHeight)/document.body.scrollHeight)*100)>12?65:window.innerHeight *0.2// detect  if windows height is close to document height. Basically if document is large there is not afraid of bug else...
+        this.navbar_visibility_point = ((Math.abs(document.body.scrollHeight - window.innerHeight) / document.body.scrollHeight) * 100) > 12 ? 65 : window.innerHeight * 0.2 // detect  if windows height is close to document height. Basically if document is large there is not afraid of bug else...
         this.created_btn = false
         this.nav = document.getElementById("navbar")
         this.nav_clone = null
@@ -169,25 +170,25 @@ class Scroll {
         //if already created does not do anything
     }
     detectScrollTopUnderNavBar() {
-        this.navbar_visibility_point =((Math.abs(document.body.scrollHeight-window.innerHeight)/document.body.scrollHeight)*100)>12?65:window.innerHeight * 0.2 // detect  if windows height is close to document height. Basically if document is large there is not afraid of bug else...
+        this.navbar_visibility_point = ((Math.abs(document.body.scrollHeight - window.innerHeight) / document.body.scrollHeight) * 100) > 12 ? 65 : window.innerHeight * 0.2 // detect  if windows height is close to document height. Basically if document is large there is not afraid of bug else...
         if (window.scrollY > this.navbar_visibility_point) {
             //this.createNavBarClone()
-//            this.nav.style.position = "absolute"
-//            this.nav.style["z-index"] = 1
-//            this.nav.style.top = document.body.scrollTop + "px"
-//            this.nav.style.width = "100%"
+            //            this.nav.style.position = "absolute"
+            //            this.nav.style["z-index"] = 1
+            //            this.nav.style.top = document.body.scrollTop + "px"
+            //            this.nav.style.width = "100%"
 
             this.createScrollTopBtn()
             this.created_btn = true
 
         } else {
-            
-            if (this.created_btn ) {
+
+            if (this.created_btn) {
                 this.created_btn = false
-//                this.nav.style.position = ""
-//                this.nav.style["z-index"] = 0
-//                this.nav.style.top = ""
-//                this.nav.style.width = ""
+                //                this.nav.style.position = ""
+                //                this.nav.style["z-index"] = 0
+                //                this.nav.style.top = ""
+                //                this.nav.style.width = ""
                 var btn = document.getElementById("scrollToTopBtn")
                 //this.nav_clone.parentNode.removeChild(this.nav_clone)
                 //this.nav_clone = null
@@ -209,7 +210,7 @@ class ServePages {
         this.pages;
         this.getPages()
         //setTimeout(()=>{},1000)
-        this.run=this.run.bind(this);
+        this.run = this.run.bind(this);
     }
 
     detectChange() {
@@ -282,24 +283,25 @@ class ServePages {
     //        rawFile.send(null);
     //        return allText;
     //    }
-    
+
     //Instead of using binding on the constructor I could simply did run=()=>{...} but fire fox does not like it so...
-    run(){
-        this.setActualPage(window.location.search)
+    run() {
+        //this.setActualPage(window.location.search)
+        //console.log(window.location.search)
+        //if (this.detectChange()) {
 
-        if (this.detectChange()) {
+        if (this.pages == undefined) {
+            setTimeout(this.run, 100)
+        } else {
+            this.updatePreviousPage()
 
-            if (this.pages != undefined) {
+            var page_url = window.location.search.split("=")[0] // the .split is to detect when is search 
+            var page = this.pages[page_url]["page template"]
+            this.getHtml(page)
 
-                this.updatePreviousPage()
-
-                var page_url = window.location.search.split("=")[0] // the .split is to detect when is search 
-                var page = this.pages[page_url]["page template"]
-                this.getHtml(page)
-
-            }
         }
-        requestAnimationFrame(this.run)
+        //}
+        //requestAnimationFrame(this.run)
     }
 
 
