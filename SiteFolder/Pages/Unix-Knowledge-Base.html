@@ -133,7 +133,56 @@ menu(){
 }
 printf "$(menu)"
 </xmp>
-
+<h3>Function with input parameters</h3>
+<xmp>
+Hi(){
+    echo "Hello $1"
+}
+str="Tiago!"
+echo $(Hi $str)
+echo $(Hi "Pedro!")
+    
+</xmp>
+<p><b>Concat function</b></p>
+<xmp>
+#Concat
+concat_with_underscore(){
+    
+    echo "$1_$2"
+}
+echo $(concat_with_underscore "Hello" "World")
+</xmp>
+<h3>Function which returns array</h3>
+<xmp>
+#split function
+split(){
+    string="$1"
+    split_regex="$2"
+    # if inputs not empty
+	if [ ! -z "$1" ] && [ ! -z "$2" ];then
+		IFS="$split_regex" read -r -a array <<< "$string"
+		echo "${array[@]}"
+	else
+		echo "at least one input is empty"
+	fi
+}
+# echo the output of function
+echo $(split "aa,bb,ccc,ddd" "," )
+echo "----------------------"
+# print each word in loop
+for word in $(split "aa,bb,ccc,ddd" "," );do
+	echo $word
+done   
+</xmp>
+<p><b>Output</b></p>    
+<xmp>
+aa bb ccc ddd
+----------------------
+aa
+bb
+ccc
+ddd
+</xmp>   
 <h2>Cycles and Arrays</h2>
 <h2>If and else</h2>
 <h2>...</h2>
