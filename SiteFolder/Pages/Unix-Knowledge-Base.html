@@ -118,6 +118,129 @@
 <p>sed -i "s/a/_/g" &lt;filename&gt; # replace all 'a' by '_' in file...
 </p>
 <p>See <a href="http://tldp.org/LDP/abs/html/string-manipulation.html">this site</a> for more details.</p>
+<h2>If and else</h2>
+<h3>Basic If</h3>
+<xmp>
+# basic if
+var="AAA"
+if [ $var = "AAA" ];then
+    echo "var is AAA!"
+fi
+    
+</xmp>
+<h3>Else</h3>
+<xmp>
+var="AAA"
+if [ $var = "AAA" ];then
+    echo "var is AAA!"
+else
+    echo "var is not AAA"
+fi
+</xmp>
+<h3>Check if empty</h3>
+<xmp>
+#
+if [ -z $var ];then
+    echo "var is empty!"
+else
+    echo "var is $var"
+fi
+</xmp>
+<h3>Negation</h3>
+<xmp>
+#
+var="AAA"
+if [ ! -z $var ];then
+    echo "var is $var"
+else
+    echo "var is empty"
+fi
+</xmp>
+<h3>elif</h3>
+<xmp>
+#
+var="zzz"
+if [ -z $var ];then
+    echo "var is empty"
+else
+    echo "var is $var"
+    if [ $var = "AAA" ];then
+        echo "AAA -> 111"
+    elif [ $var = "BBB" ];then
+        echo "BBB -> 222"
+    elif [ $var = "zzz" ];then
+        echo "zzz -> 333"
+    fi
+fi
+</xmp>
+<h2>Cycles and Arrays</h2>
+<h3>Basic For</h3>
+<xmp>
+#Run through array and print each element    
+array=( "AAA" "BBB" "CCC" "DDD" )
+for element in ${array[@]};do
+    echo $element
+done
+</xmp>
+<h3>For with index</h3>
+<xmp>
+a=( aaa sss ddd fff )
+
+# -> create a sequence from 0 to array length
+for i in $(seq 0 ${#a[@]});do 
+    echo "$i: ${a[$i]}"
+done
+echo "------------------------"
+# -> create a sequence from 0 to array length-1
+for i in $(seq 0 $(echo ${#a[@]} - 1|bc));do 
+    echo "$i: ${a[$i]}"
+done
+echo "------------------------"
+# -> Best way to create a sequence from 0 to array length-1
+for i in ${!a[@]};do 
+    echo "$i: ${a[$i]}"
+done 
+
+echo "------------------------"
+echo "#a[@] = ${#a[@]}"
+echo "a[@] = ${a[@]}"
+echo "!a[@] = ${!a[@]}"
+echo "a[0] | a[1] = ${a[0]}| ${a[1]}"
+echo "a[*] = ${a[*]}"
+echo "* = @"  
+</xmp>
+<h3>Append array</h3>
+<xmp>
+a=()
+a+=(aaa)
+a+=(bbb)
+a+=(ccc)
+
+for el in ${a[@]};do
+    echo $el
+done
+
+</xmp>
+<h3>While</h3>
+<xmp>
+index=0
+array=("fj1" "sdjk2" "b3" "b4")
+# while index lower than array length
+while [ $index -lt ${#array[*]} ]
+do
+   echo "$index : ${array[$index]}"
+   index=`expr $index + 1`
+done
+echo "---------------"
+#invert order
+index=${#array[*]}
+# while index greater or equal to zero
+while [ $index -ge 0 ]
+do
+   echo "$index : ${array[$index]}"
+   index=`expr $index - 1`
+done
+</xmp>
 <h2>Functions</h2>
 <h3>Print menu function</h3>
 <xmp>
@@ -183,6 +306,4 @@ bb
 ccc
 ddd
 </xmp>   
-<h2>Cycles and Arrays</h2>
-<h2>If and else</h2>
 <h2>...</h2>
