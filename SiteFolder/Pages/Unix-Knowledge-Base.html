@@ -231,6 +231,8 @@ do
    echo "$index : ${array[$index]}"
    index=`expr $index + 1`
 done
+
+
 echo "---------------"
 #invert order
 index=${#array[*]}
@@ -240,7 +242,19 @@ do
    echo "$index : ${array[$index]}"
    index=`expr $index - 1`
 done
-</xmp>
+
+
+#Output
+#0 : fj1
+#1 : sdjk2
+#2 : b3
+#3 : b4
+#---------------
+#4 : 
+#3 : b4
+#2 : b3
+#1 : sdjk2
+#0 : fj1</xmp>
 <h2>Functions</h2>
 <h3>Print menu function</h3>
 <xmp>
@@ -275,7 +289,7 @@ concat_with_underscore(){
 }
 echo $(concat_with_underscore "Hello" "World")
 </xmp>
-<h3>Function which returns array</h3>
+<h3>Function which returns array (Split function)</h3>
 <xmp>
 #split function
 split(){
