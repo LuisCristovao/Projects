@@ -95,29 +95,6 @@
     <br>find . -type f -size -1M # find files smaller than 1 MegaByte in current directory
     <br># k -> kilo; M -> Mega; G ->Giga bytes</p>
 <h2>Variables</h2>
-<h2>String Manipulation</h2>
-<h3>String Replace</h3>
-<p>
-    foo="2019-04-24"
-    <br>
-    <br># replace first "-" only with "."
-    <br>bar=${foo/-/.}
-    <br>echo $bar
-    <br>
-    <br># replace all "-"
-    <br>bar=${foo//-/.}
-    <br>echo $bar
-
-</p>
-<p><strong>Other Way:</strong></p>
-<p>
-    echo " yaay ss "|sed 's/ /z/g' # output: zyaayzssz
-    <br>echo " yaay ss "|sed 's/ /z/' # output: zyaay ss
-</p>
-<p><strong>On a file</strong></p>
-<p>sed -i "s/a/_/g" &lt;filename&gt; # replace all 'a' by '_' in file...
-</p>
-<p>See <a href="http://tldp.org/LDP/abs/html/string-manipulation.html">this site</a> for more details.</p>
 <h2>If and else</h2>
 <h3>Basic If</h3>
 <xmp>
@@ -319,5 +296,79 @@ aa
 bb
 ccc
 ddd
-</xmp>   
-<h2>...</h2>
+</xmp>
+<h2>String Manipulation</h2>
+<h3>String Replace</h3>
+<p>
+    foo="2019-04-24"
+    <br>
+    <br># replace first "-" only with "."
+    <br>bar=${foo/-/.}
+    <br>echo $bar
+    <br>
+    <br># replace all "-"
+    <br>bar=${foo//-/.}
+    <br>echo $bar
+
+</p>
+<p><strong>Other Way:</strong></p>
+<p>
+    echo " yaay ss "|sed 's/ /z/g' # output: zyaayzssz
+    <br>echo " yaay ss "|sed 's/ /z/' # output: zyaay ss
+</p>
+<p><strong>On a file</strong></p>
+<p>sed -i "s/a/_/g" &lt;filename&gt; # replace all 'a' by '_' in file...
+</p>
+<p>See <a href="http://tldp.org/LDP/abs/html/string-manipulation.html">this site</a> for more details.</p> 
+<h3>Split Function</h3>
+<xmp>
+#split function
+split(){
+    string="$1"
+    split_regex="$2"
+    # if inputs not empty
+	if [ ! -z "$1" ] && [ ! -z "$2" ];then
+		IFS="$split_regex" read -r -a array <<< "$string"
+		echo "${array[@]}"
+	else
+		echo "at least one input is empty"
+	fi
+}
+# echo the output of function
+echo $(split "aa,bb,ccc,ddd" "," )
+echo "----------------------"
+# print each word in loop
+for word in $(split "aa,bb,ccc,ddd" "," );do
+	echo $word
+done   
+</xmp>
+<p><b>Output</b></p>    
+<xmp>
+aa bb ccc ddd
+----------------------
+aa
+bb
+ccc
+ddd
+</xmp>
+<h3>Trim</h3>
+<xmp>
+echo '"aaa"'|tr -d \" #output: aaa
+echo '!aaa!'|tr -d \! #output: aaa
+echo 'yaaay'|tr -d y #output: aaa
+echo ' aaa ss '|tr -d ' ' #output: aaass
+echo ' aaa ss '|sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//' #output: aaa ss        
+</xmp>    
+<h2>Dates manipulation</h2>
+<h3>Get date</h3>
+<xmp>
+    DATE1=$(date +%Y-%m-%d)
+    DATE2=$(date +%Y%m%d)
+    echo "$DATE1"
+    echo "$DATE2"
+    echo $(date +%Y-%m-%d-%H:%M:%S)
+</xmp>    
+<h3>Change Date Format</h3>
+<xmp>
+    
+</xmp>    
