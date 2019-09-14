@@ -56,6 +56,16 @@ let blog_configs = {
             })
         }
     },
+    "XMP":{
+        "action":(el)=>{
+            var html=""
+            html+=`<div style="overflow:auto;">`
+            html+=el.outerHTML
+            html+=`</div>`
+            el.outerHTML=html
+        }
+        
+    }
 }
 //functions-----------------------------------------------------
 async function getPages() {
