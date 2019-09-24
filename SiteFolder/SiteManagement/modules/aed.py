@@ -5,7 +5,7 @@ Created on Mon Feb 25 18:14:14 2019
 @author: Luis Cristovao
 """
 
-
+import os 
 from datetime import datetime
 #import json_files #to import json_files module locally
 #import urls as pages # to import urls.py locally
@@ -251,7 +251,13 @@ def delete_posts_row(id_):
         all_tags=db[id_]["search tags"]
         all_tags+=','+db[id_]["secondary search tags"]
         
-        
+        page_path=db[id_]["page location"]
+        print(page_path)
+        # if there is a page to delete
+        if page_path["page content"]!="" and  page_path!="":
+            res=deleteSitePage(page_path["page content"])
+            if res is not True:
+                return False
         
         #Delete row in pages DB if exists
         pages.deleteRowDB(url)
@@ -268,6 +274,24 @@ def delete_posts_row(id_):
         return True
     except:
         return False       
+    
+def deleteSitePage(page_relative_path):
+    '''
+    input: relative path to the html page like -> SiteFolder/Pages/x.html
+    destroy page in of site in SiteFolder.../Pages
+    '''
+    dirpath=json_files.get_dirpath_less(2) # get C://...Projects
+    page_path=os.path.join(dirpath, page_relative_path)
+    print(page_path)
+    try:
+        if os.path.isfile (page_path):
+            os.remove(page_path)
+            return True
+    
+    except Exception as e:
+        print(e)
+        return False
+    
     
 
 def select_post(id_):
