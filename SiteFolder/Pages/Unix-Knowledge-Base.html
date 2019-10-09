@@ -370,5 +370,15 @@ echo ' aaa ss '|sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//' #output: aaa s
 </xmp>    
 <h3>Change Date Format</h3>
 <xmp>
-    
-</xmp>    
+received_date=$(date +%Y%m%d)    
+valid_date=$(date "+%Y-%m-%d" -d "$1" 2>/dev/null) #if is valid $report_date gets date with the valid format else empty string.
+
+if [ -z $valid_date ]; then
+	echo "not valid date"
+else
+	echo OK
+fi
+echo "valid_date: $valid_date || received_date: $received_date"    
+</xmp>
+<h3></h3>    
+<h2>...</h2>    
