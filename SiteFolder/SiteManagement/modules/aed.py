@@ -158,7 +158,6 @@ def add_posts_row(data):
     '''
     
     try:
-        
         db=get_all_posts()
         url="?"+data["title"].replace(" ","-")
         page=json_files.parse(data["page location"])
@@ -169,6 +168,7 @@ def add_posts_row(data):
                 data["link"]=url
                 pages.writeRowDB(url,page)
             new_db=insertByDate(db,data)
+            addSitePage(data["page location"]["page content"])
             
             
             #add tags to tags db
@@ -283,16 +283,29 @@ def deleteSitePage(page_relative_path):
     dirpath=json_files.get_dirpath_less(2) # get C://...Projects
     page_path=os.path.join(dirpath, page_relative_path)
     print(page_path)
-    try:
-        if os.path.isfile (page_path):
-            os.remove(page_path)
-            return True
+   
+    if os.path.isfile (page_path):
+        os.remove(page_path)
     
-    except Exception as e:
-        print(e)
-        return False
+    return True
     
+   
     
+def addSitePage(page_relative_path):
+    '''
+    input: relative path to the html page like -> SiteFolder/Pages/x.html
+    create page if not exists
+    '''
+    dirpath=json_files.get_dirpath_less(2) # get C://...Projects
+    page_path=os.path.join(dirpath, page_relative_path)
+    
+
+    if not os.path.isfile(page_path):
+        file = open(page_path, 'w+')
+    
+    return True
+    
+   
 
 def select_post(id_):
     '''

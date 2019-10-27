@@ -28,7 +28,7 @@
     <li><img src="SiteFolder/Images/Unix-Knowledge-Base/6.PNG" style="width: 100%"></li>
     <li>To edit file use unix file editor <strong>vi</strong> or <strong>vim</strong></li>
     <li>This editor is difficult to use, so here I will just be covering a simple example. For more, better search online.</li>
-    <li>Write <strong>vi</strong> or <strong>vim</strong> and then the file you want to edit:</li>
+    <li id="vi vim">Write <strong>vi</strong> or <strong>vim</strong> and then the file you want to edit:</li>
     <li><img src="SiteFolder/Images/Unix-Knowledge-Base/7.PNG" style="width: 100%"></li>
     <li>A weird interce will appear</li>
     <li><img src="SiteFolder/Images/Unix-Knowledge-Base/8.PNG" style="width: 100%"></li>
@@ -89,12 +89,93 @@
     <li><img src="SiteFolder/Images/Unix-Knowledge-Base/15.png" style="width: 100%;"></li>
 </ul>
 <h3>Edit file</h3>
+<p>Go check previous chapter <a href="#vi vim">Here</a></p>
+<p>To delete all file content in <b>vim</b> write <b>gg</b> to go to the begining of the file and then write <b>dG</b> to clear all file content </p>
+<p>To paste into <b>vim</b> click <b>shift+insert</b> and to copy content from <b>vim</b> select content using mouse (just that it copies directly to clipboard)</p>
 <h3>Find Big Small files</h3>
 <p>
     find . -type f -size +1M # find files bigger than 1 MegaByte in current directory
     <br>find . -type f -size -1M # find files smaller than 1 MegaByte in current directory
     <br># k -> kilo; M -> Mega; G ->Giga bytes</p>
+<h3>Get actual directory of script</h3>
+<xmp>DIR="$( cd "$( dirname "${BASH:SOURCE[0]}" )")" >/dev/null 2>&1 && pwd )"
+echo $DIR
+</xmp>
+<h3>Get file name</h3>
+<xmp>
+filename=$(basename $0)
+echo $filename
+</xmp>
+<h3>Align csv file</h3>
+
+<p>having origin.csv file like:</p>
+<xmp>
+AAAAAAAAAAAAAA,BBBB,CCCCCCC
+123,rsdfvsdf,0.334445456
+1235,sovhjowihjw,0.12434
+11,rsdsd,0.65783749384
+12,sdihfosdifhsp,0.0893534785
+</xmp>
+<p>You can turn to target.csv file like:</p>
+
+<xmp>    
+AAAAAAAAAAAAAA ,BBBB          ,CCCCCCC
+123            ,rsdfvsdf      ,0.334445456
+1235           ,sovhjowihjw   ,0.12434
+11             ,rsdsd         ,0.65783749384
+12             ,sdihfosdifhsp ,0.0893534785
+</xmp>
+<p>Using command:</p>
+    
+<p><strong>sed 's/,/:,/g' origin.csv | column -t -s: | sed 's/ ,/,/g' > target.csv # search online align csv bash </strong></p>
+<p>Check explanation <a href="https://stackoverflow.com/questions/51471554/align-columns-in-comma-separated-file"> Here</a></p>
+<p>It is possible to do the same with other delimiters, just replace <b>','</b> with <b>'|'</b> beware is if the csv has <b>':'</b> if you are using this command. In that case use other character than <b>':'</b> you can use even an invented code word</p>
+
 <h2>Variables</h2>
+<h3>Declaration</h3>
+<xmp>
+# simple variable
+x=12
+echo $x
+
+#String
+str="Hi how are you"
+echo $str
+
+</xmp>
+<h3>Calculations (Sum subtractand more)</h3>
+<xmp>
+# sum
+echo $(expr 1 + 2 )
+echo $(( 2 + 2 ))
+# subtract
+echo $(expr 1 - 2 )
+# multiplication
+echo $(expr 3 * 3 )
+# integer division
+echo $(expr  9 / 2 )
+# decimal division
+echo $(echo "scale=2; 9 / 2"| bc)
+
+# with variables 
+x=1
+y=2
+echo $(expr $x + $y )
+echo $(( x + y ))
+</xmp>
+<h3>Operation to variable</h3>
+<xmp>
+res=$(( 3 + 3 ))
+echo $res
+</xmp>
+<p>Other example</p>
+<xmp>
+#list files for folder
+list=$(ls) #list of files in current folder
+for file in ${list[@]};do
+    echo $file
+done   
+</xmp>
 <h2>If and else</h2>
 <h3>Basic If</h3>
 <xmp>
@@ -103,7 +184,7 @@ var="AAA"
 if [ $var = "AAA" ];then
     echo "var is AAA!"
 fi
-    
+
 </xmp>
 <h3>Else</h3>
 <xmp>
@@ -111,7 +192,7 @@ var="AAA"
 if [ $var = "AAA" ];then
     echo "var is AAA!"
 else
-    echo "var is not AAA"
+echo "var is not AAA"
 fi
 </xmp>
 <h3>Check if empty</h3>
@@ -153,10 +234,10 @@ fi
 <h2>Cycles and Arrays</h2>
 <h3>Basic For</h3>
 <xmp>
-#Run through array and print each element    
+#Run through array and print each element
 array=( "AAA" "BBB" "CCC" "DDD" )
 for element in ${array[@]};do
-    echo $element
+echo $element
 done
 </xmp>
 <h3>For with index</h3>
@@ -231,7 +312,18 @@ done
 #3 : b4
 #2 : b3
 #1 : sdjk2
-#0 : fj1</xmp>
+#0 : fj1
+</xmp>
+<h2>Hash Maps or Dictionary</h2>
+<p>See link:<a href="https://stackoverflow.com/questions/1494178/how-to-define-hash-tables-in-bash" >Here!</a> (stackoverflow)</p>
+<xmp>
+declare -A animals
+animals=( ["moo"]="cow" ["woof"]="dog")
+echo "${animals[moo]}"
+for sound in "${!animals[@]}"; do # ${!animals[@]} list keys of map; ${animals[@]} -> list values of map
+	echo "$sound - ${animals[$sound]}"
+done
+</xmp>
 <h2>Functions</h2>
 <h3>Print menu function</h3>
 <xmp>
@@ -265,6 +357,23 @@ concat_with_underscore(){
     echo "$1_$2"
 }
 echo $(concat_with_underscore "Hello" "World")
+</xmp>
+<h3>Function which receives array as input</h3>
+<p>Source: <a href="https://stackoverflow.com/questions/1063347/passing-arrays-as-parameters-in-bash"> Here!</a> (stackoverflow)</p>
+<xmp>
+copyFiles(){
+    argAry1=("${!1}")
+    #argAry2=("${!2}") for a second array
+   for el in "${argAry1[@]}";do
+        echo "$el"
+   done
+   
+
+}
+
+array=("one" "two" "three")
+
+copyFiles array[@]
 </xmp>
 <h3>Function which returns array (Split function)</h3>
 <xmp>
@@ -380,5 +489,22 @@ else
 fi
 echo "valid_date: $valid_date || received_date: $received_date"    
 </xmp>
-<h3></h3>    
+<h3>Get first and last day of the month</h3> 
+<xmp>
+month=0 # 0=current , -1=previous month, 1=next month ,2...
+START_LAST_MONTH=$(date "+%Y-%m-01" -d "$month Month");
+END_LAST_MONTH=$(date "+%Y-%m-%d" -d "$START_LAST_MONTH +1 month -1 day");
+
+#Test Code
+echo START_LAST_MONTH=$START_LAST_MONTH
+echo END_LAST_MONTH=$END_LAST_MONTH
+</xmp>
+<h3>Dates calculations</h3>
+<xmp>
+d=$(date  +%Y-%m-%d) # actual date
+d_diff=30
+
+echo $(date --date="${d} -${d_diff} day" +%Y-%m-%d)    
+    
+</xmp>
 <h2>...</h2>    
