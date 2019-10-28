@@ -127,7 +127,7 @@ AAAAAAAAAAAAAA ,BBBB          ,CCCCCCC
 </xmp>
 <p>Using command:</p>
     
-<p><strong>sed 's/,/:,/g' origin.csv | column -t -s: | sed 's/ ,/,/g' > target.csv # search online align csv bash </strong></p>
+<xmp>sed 's/,/:,/g' origin.csv | column -t -s: | sed 's/ ,/,/g' > target.csv # search online align csv bash </xmp>
 <p>Check explanation <a href="https://stackoverflow.com/questions/51471554/align-columns-in-comma-separated-file"> Here</a></p>
 <p>It is possible to do the same with other delimiters, just replace <b>','</b> with <b>'|'</b> beware is if the csv has <b>':'</b> if you are using this command. In that case use other character than <b>':'</b> you can use even an invented code word</p>
 
@@ -231,6 +231,19 @@ else
     fi
 fi
 </xmp>
+<h3>And and Or operations</h3>
+<xmp>
+z=""
+a=""
+    
+if [ -z $z ] && [ -z $a ];then #if z and a empty
+    echo "both empty"
+elif [ -z $z ] || [ -z $a ];then #if z or a empty
+    echo "one of them  is empty"
+fi
+
+</xmp>
+
 <h2>Cycles and Arrays</h2>
 <h3>Basic For</h3>
 <xmp>
