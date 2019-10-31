@@ -10,12 +10,34 @@ async function getDBPosts() {
     return val
 }
 
+function searchInGoogle() {
+    let site_link = "https://luiscristovao.github.io/Projects"
+    let search_words_array=search_engine.getQuery()
+    let query_to_google = search_words_array.reduce((acc, next) => `${acc}+${next}`)
+    //jump to google search
+    let search_url = `https://www.google.com/search?q=${query_to_google} site:${site_link}`
+    return {
+        url: search_url,
+        words:search_words_array.reduce((acc,next)=>`<b>${acc}, ${next}</b>`)
+    }
+}
+
+function whatToDoWhenNoSearch() {
+    let search_fields = searchInGoogle()
+    var content_div = document.getElementById("showOffFooter")
+    var html = `<h2>No Posts To Show!</h2><br><h2>Search in google keys: ${search_fields.words} <a href="${search_fields.url}">Here</a></h2><br>`
+    html += ``
+    content_div.innerHTML = html
+
+}
+
 function detectIfMorePostsToLoadAction(db) {
     if (db.length > 0) {
 
         $("#showOffFooter").html('<h2 style="cursor:pointer" onclick="document.body.scrollTo(0,document.body.scrollHeight)">&#8595;  Load More Posts &#8595;</h2>')
     } else {
-        $("#showOffFooter").html('<h2>No Posts To Show!</h2>')
+        //$("#showOffFooter").html('<h2>No Posts To Show!</h2>')
+        whatToDoWhenNoSearch()
     }
 }
 async function searchBlogPosts() {
@@ -54,6 +76,7 @@ async function searchProjects() {
     detectIfMorePostsToLoadAction(db)
     requestAnimationFrame(detectScrollBottom)
 }
+
 async function searchPostsByTags() {
     $("#showOffTitle").html("Search Results")
 
@@ -70,7 +93,7 @@ function AddMoreInfoToCards(data) {
     html += '<ul class="list-group list-group-flush">'
     html += '<li class="list-group-item"><strong>Last Update:</strong><br>' + vals["last update date"] + '</li>'
     html += '<li class="list-group-item"><strong>Creation Date:</strong><br>' + vals["creation date"] + '</li>'
-    var search_tags = vals["search tags"].split(",").map(el=>el.trim())
+    var search_tags = vals["search tags"].split(",").map(el => el.trim())
     html += '<li class="list-group-item">'
     html += '<strong>Search Tags:</strong><br>'
     for (var i in search_tags) {
@@ -119,6 +142,7 @@ function loadMoreProjects() {
                 $("#showOffFooter").html("<h2>Loaded EveryThing!</h2>")
             } else {
                 $("#showOffFooter").html("<h2>No Posts To Show!</h2>")
+
             }
             break;
         }
@@ -133,7 +157,7 @@ function detectScrollBottom() {
     }
     if (Math.round(prev_scrollTop) != Math.round(document.body.scrollTop)) {
         prev_scrollTop = document.body.scrollTop
-        if (Math.round(document.body.scrollTop + window.innerHeight) >= document.body.scrollHeight*0.95) {
+        if (Math.round(document.body.scrollTop + window.innerHeight) >= document.body.scrollHeight * 0.95) {
             loadMoreProjects()
         }
     }

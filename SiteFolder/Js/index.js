@@ -55,14 +55,15 @@ function SearchKeyPress(event, input) {
     //press enter
     if (event.keyCode == 13) {
         //In future detect top suggestion of suggestion box and send it to get
-        var query = getFirstSuggestion(input.value)
+        //var query = getFirstSuggestion(input.value)
+        var query = input.value
         window.location.search = "search=" + encodeSearchQuery(query.trim())
 
     }
     //if press space
-    if (event.keyCode == 32) {
+    /*if (event.keyCode == 32) {
         input.value = getFirstSuggestion(input.value)
-    }
+    }*/
 
 }
 
