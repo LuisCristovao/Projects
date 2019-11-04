@@ -12,21 +12,21 @@ async function getDBPosts() {
 
 function searchInGoogle() {
     let site_link = "https://luiscristovao.github.io/Projects"
-    let search_words_array=search_engine.getQuery()
+    let search_words_array = search_engine.getQuery()
     let query_to_google = search_words_array.reduce((acc, next) => `${acc}+${next}`)
     //jump to google search
     let search_url = `https://www.google.com/search?q=${query_to_google} site:${site_link}`
     return {
         url: search_url,
-        words:search_words_array.reduce((acc,next)=>`<b>${acc}, ${next}</b>`)
+        words: search_words_array
     }
 }
 
 function whatToDoWhenNoSearch() {
     let search_fields = searchInGoogle()
     var content_div = document.getElementById("showOffFooter")
-    var html = `<h2>No Posts To Show!</h2><br><h2>Search in google keys: ${search_fields.words} <a href="${search_fields.url}">Here</a></h2><br>`
-    html += ``
+    var html = `<h1>No Posts To Show!</h1><br><h2>Search in google, the following text : ${search_fields.words.reduce((acc,next)=>`<b>"${acc} ${next}"</b>`)} <a href="${search_fields.url}">Here</a></h2><br>`
+    html += `<br><h2>Other Possible Categories:</h2><br><ul style="list-style:none;font-size:2em">${search_fields.words.flatMap(el=>search_engine.calculateSuggestions(el)).reduce((acc,next)=>`${acc}<li><a href="?search=${next}">${next}</a></li>`,"")}</ul>`
     content_div.innerHTML = html
 
 }
@@ -141,7 +141,8 @@ function loadMoreProjects() {
 
                 $("#showOffFooter").html("<h2>Loaded EveryThing!</h2>")
             } else {
-                $("#showOffFooter").html("<h2>No Posts To Show!</h2>")
+                //$("#showOffFooter").html("<h2>No Posts To Show!</h2>")
+                whatToDoWhenNoSearch()
 
             }
             break;
