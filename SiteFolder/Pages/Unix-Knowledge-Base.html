@@ -130,7 +130,16 @@ AAAAAAAAAAAAAA ,BBBB          ,CCCCCCC
 <xmp>sed 's/,/:,/g' origin.csv | column -t -s: | sed 's/ ,/,/g' > target.csv # search online align csv bash </xmp>
 <p>Check explanation <a href="https://stackoverflow.com/questions/51471554/align-columns-in-comma-separated-file"> Here</a></p>
 <p>It is possible to do the same with other delimiters, just replace <b>','</b> with <b>'|'</b> beware is if the csv has <b>':'</b> if you are using this command. In that case use other character than <b>':'</b> you can use even an invented code word</p>
-
+<h3>List only files command</h3>
+<xmp>
+ls -p | grep -v / # ls only on files
+</xmp>
+<h3>List only folders or directories</h3>
+<xmp>
+ls -d */ 
+</xmp>
+<h3>List files with excluding some</h3>
+<xmp>ls -I "*.txt" # exclude txt files </xmp>
 <h2>Variables</h2>
 <h3>Declaration</h3>
 <xmp>
