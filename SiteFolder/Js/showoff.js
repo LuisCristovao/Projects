@@ -13,31 +13,47 @@ async function getDBPosts() {
 function searchInGoogle() {
     let site_link = "https://luiscristovao.github.io/Projects"
     let search_words_array = search_engine.getQuery()
-    let query_to_google = search_words_array.reduce((acc, next) => `${acc}+${next}`)
-    //jump to google search
-    let search_url = `https://www.google.com/search?q=${query_to_google} site:${site_link}`
-    return {
-        url: search_url,
-        words: search_words_array
+
+    if (search_words_array == null) {
+        return null
+    } else {
+
+        let query_to_google = search_words_array.reduce((acc, next) => `${acc}+${next}`)
+        //jump to google search
+        let search_url = `https://www.google.com/search?q=${query_to_google} site:${site_link}`
+        return {
+            url: search_url,
+            words: search_words_array
+        }
     }
 }
 
-function whatToDoWhenNoSearch() {
+
+
+function showOptionalGoogleSearch(htmlOfFooter) {
     let search_fields = searchInGoogle()
     var content_div = document.getElementById("showOffFooter")
-    var html = `<h1>No Posts To Show!</h1><br><h2>Search in google, the following text : ${search_fields.words.reduce((acc,next)=>`<b>"${acc} ${next}"</b>`)} <a href="${search_fields.url}">Here</a></h2><br>`
-    html += `<br><h2>Other Possible Categories:</h2><br><ul style="list-style:none;font-size:2em">${search_fields.words.flatMap(el=>search_engine.calculateSuggestions(el)).reduce((acc,next)=>`${acc}<li><a href="?search=${next}">${next}</a></li>`,"")}</ul>`
+    var html = ""
+    if (search_fields == null) {
+        html+= htmlOfFooter
+        //html += `<h2 style="cursor:pointer" onclick="document.body.scrollTo(0,document.body.scrollHeight)">&#8595;  Load More Posts &#8595;</h2>`
+    } else {
+        html+=htmlOfFooter
+        //html += `<h2 style="cursor:pointer" onclick="document.body.scrollTo(0,document.body.scrollHeight)">&#8595;  Load More Posts &#8595;</h2>`
+        html += `<br><h3>Search in google, the following text : "<b>${search_fields.words.reduce((acc,next)=>`${decodeURI(acc)} ${decodeURI(next)}`)}</b>" <a href="${search_fields.url}">Here</a></h3><br>`
+        html += `<br><h3>Other Possible Categories:</h3><br><ul style="list-style:none;font-size:2em ;padding-left:0px">${search_fields.words.flatMap(el=>search_engine.calculateSuggestions(el)).reduce((acc,next)=>`${decodeURI(acc)}<li><a href="?search=${decodeURI(next)}">${decodeURI(next)}</a></li>`,"")}</ul>`
+    }
     content_div.innerHTML = html
-
 }
 
 function detectIfMorePostsToLoadAction(db) {
     if (db.length > 0) {
-
-        $("#showOffFooter").html('<h2 style="cursor:pointer" onclick="document.body.scrollTo(0,document.body.scrollHeight)">&#8595;  Load More Posts &#8595;</h2>')
+        //$("#showOffFooter").html('<h2 style="cursor:pointer" onclick="document.body.scrollTo(0,document.body.scrollHeight)">&#8595;  Load More Posts &#8595;</h2>')
+        showOptionalGoogleSearch('<h1 style="cursor:pointer" onclick="document.body.scrollTo(0,document.body.scrollHeight)">&#8595;  Load More Posts &#8595;</h1>')
     } else {
         //$("#showOffFooter").html('<h2>No Posts To Show!</h2>')
-        whatToDoWhenNoSearch()
+        //whatToDoWhenNoSearch()
+        showOptionalGoogleSearch('<h1>No Posts To Show!</h1>')
     }
 }
 async function searchBlogPosts() {
@@ -138,11 +154,12 @@ function loadMoreProjects() {
         } else {
             //Loaded everything
             if (loaded_projects != 0) {
-
-                $("#showOffFooter").html("<h2>Loaded EveryThing!</h2>")
+                showOptionalGoogleSearch("<h1>Loaded EveryThing!</h1>")
+                //$("#showOffFooter").html("<h2>Loaded EveryThing!</h2>")
             } else {
                 //$("#showOffFooter").html("<h2>No Posts To Show!</h2>")
-                whatToDoWhenNoSearch()
+                //whatToDoWhenNoSearch()
+                showOptionalGoogleSearch("<h1>No Posts To Show!</h1>")
 
             }
             break;
