@@ -93,10 +93,11 @@
 <p>To delete all file content in <b>vim</b> write <b>gg</b> to go to the begining of the file and then write <b>dG</b> to clear all file content </p>
 <p>To paste into <b>vim</b> click <b>shift+insert</b> and to copy content from <b>vim</b> select content using mouse (just that it copies directly to clipboard)</p>
 <h3>Find Big Small files</h3>
-<p>
-    find . -type f -size +1M # find files bigger than 1 MegaByte in current directory
-    <br>find . -type f -size -1M # find files smaller than 1 MegaByte in current directory
-    <br># k -> kilo; M -> Mega; G ->Giga bytes</p>
+<xmp>
+find . -type f -size +1M # find files bigger than 1 MegaByte in current directory
+find . -type f -size -1M # find files smaller than 1 MegaByte in current directory
+# k -> kilo; M -> Mega; G ->Giga bytes
+</xmp>
 <h3>Get actual directory of script</h3>
 <xmp>DIR="$( cd "$( dirname "${BASH:SOURCE[0]}" )")" >/dev/null 2>&1 && pwd )"
 echo $DIR
@@ -430,26 +431,26 @@ ddd
 </xmp>
 <h2>String Manipulation</h2>
 <h3>String Replace</h3>
-<p>
-    foo="2019-04-24"
-    <br>
-    <br># replace first "-" only with "."
-    <br>bar=${foo/-/.}
-    <br>echo $bar
-    <br>
-    <br># replace all "-"
-    <br>bar=${foo//-/.}
-    <br>echo $bar
+<xmp>
+foo="2019-04-24"
+    
+# replace first "-" only with "."
+bar=${foo/-/.}
+echo $bar
+    
+# replace all "-"
+bar=${foo//-/.}
+echo $bar
 
-</p>
+</xmp>
 <p><strong>Other Way:</strong></p>
-<p>
-    echo " yaay ss "|sed 's/ /z/g' # output: zyaayzssz
-    <br>echo " yaay ss "|sed 's/ /z/' # output: zyaay ss
-</p>
+<xmp>
+echo " yaay ss "|sed 's/ /z/g' # output: zyaayzssz
+echo " yaay ss "|sed 's/ /z/' # output: zyaay ss
+</xmp>
 <p><strong>On a file</strong></p>
-<p>sed -i "s/a/_/g" &lt;filename&gt; # replace all 'a' by '_' in file...
-</p>
+<xmp>sed -i "s/a/_/g" &lt;filename&gt; # replace all 'a' by '_' in file...
+</xmp>
 <p>See <a href="http://tldp.org/LDP/abs/html/string-manipulation.html">this site</a> for more details.</p> 
 <h3>Split Function</h3>
 <xmp>

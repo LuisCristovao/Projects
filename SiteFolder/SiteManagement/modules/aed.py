@@ -301,7 +301,7 @@ def addSitePage(page_relative_path):
     
 
     if not os.path.isfile(page_path):
-        file = open(page_path, 'w+')
+        open(page_path, 'w+')
     
     return True
     

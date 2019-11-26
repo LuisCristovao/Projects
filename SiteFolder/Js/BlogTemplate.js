@@ -59,7 +59,7 @@ let blog_configs = {
     "XMP":{
         "action":(el)=>{
             var html=""
-            html+=`<div style="overflow:auto;">`
+            html+=`<div style="overflow:auto;background-color:hsl(1, 0%, 90%);border-radius:15px">`
             html+=el.outerHTML
             html+=`</div>`
             el.outerHTML=html
