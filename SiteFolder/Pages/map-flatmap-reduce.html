@@ -47,7 +47,16 @@ function map(some_array,some_function_action){
 <p>Now lets us see an example:</p>
 <xmp>
 var arr=[1,2,3,4,5]
-var new_array=map(arr,(element)=>{element*2})
+var new_array=map(arr,(element)=>{return element*2})
+new_array.forEach(el=>console.log(el))
+</xmp>
+<p>To test this example copy both codes <b>(this and the previous one by order!!)</b> to the browser console.</p>
+<img src="SiteFolder/Images/map-flatmap-reduce/2.png"> 
+<h3>Map Usage</h3>
+<p><strong>Example 1</strong></p>
+<xmp>
+var arr=[1,2,3,4,5]
+var new_array=arr.map(element=>{return element*2})
 new_array.forEach(el=>console.log(el))
 </xmp>    
 <h1>Scala</h1>
