@@ -22,6 +22,32 @@ foreach(arr,(element)=>{console.log(`Number: ${element}`)})
 //Number: 2
 //Number: 3
 // ...
-//Try the code in the console just by copy and paste there and press enter button
 </xmp>
+<p>To test this example copy both codes <b>(this and the previous one by order!!)</b> to the browser console.</p>
+<img src="SiteFolder/Images/map-flatmap-reduce/1.png">
+<h3>forEach Usage</h3>
+<p><strong>Example 1</strong></p>
+<xmp>
+var arr=[1,2,3,4,5]
+arr.forEach(element=>{console.log(`Number: ${element}`)})
+</xmp>
+<h2>Map</h2>
+<p>The map function is the same ideia than foreach but it returns an array in the end. Check this example.</p>
+<xmp>
+function map(some_array,some_function_action){
+    var out_array=[]
+    for (i=0;i<some_array.length;i++){
+          var element=some_array[i]
+          out_array.push(some_function_action(element))
+    }
+    return out_array
+}
+</xmp>
+<p>The only difference here is that in this case we are returning an array with the changes made by some_function_action to each element of input array(some_array) </p>
+<p>Now lets us see an example:</p>
+<xmp>
+var arr=[1,2,3,4,5]
+var new_array=map(arr,(element)=>{element*2})
+new_array.forEach(el=>console.log(el))
+</xmp>    
 <h1>Scala</h1>
