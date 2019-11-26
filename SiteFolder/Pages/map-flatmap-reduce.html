@@ -1,0 +1,27 @@
+<h1>JavaScript</h1>
+<h2>Intro</h2>
+<p>To test the following examples simply press  the <b>F12</b> button on chrome or firefox browser to open the console. There it is possible to write and execute javascript code.</p>
+<h2>ForEach</h2>
+<p>If you don't know anything about it, here it is a little explanation. Imagine you have the following function: </p>
+<xmp>
+function foreach(some_array,some_function_action){
+    for (i=0;i<some_array.length;i++){
+          var element=some_array[i]
+          some_function_action(element)    
+    }
+}
+</xmp>
+<p>This function receives an array and a function as input. The input function will receive each element of the array and do something with it.
+This function is essentially what foreach function does.</p>
+<p>Let us see in action:</p>
+<xmp>
+var arr=[1,2,3,4,5]
+foreach(arr,(element)=>{console.log(`Number: ${element}`)})
+//This will print all numbers of array like this:
+//Number: 1
+//Number: 2
+//Number: 3
+// ...
+//Try the code in the console just by copy and paste there and press enter button
+</xmp>
+<h1>Scala</h1>
