@@ -2,6 +2,7 @@
 <h2>Intro</h2>
 <p>To test the following examples simply press  the <b>F12</b> button on chrome or firefox browser to open the console. There it is possible to write and execute javascript code.</p>
 <h2>ForEach</h2>
+<h3>Explanation</h3>
 <p>If you don't know anything about it, here it is a little explanation. Imagine you have the following function: </p>
 <xmp>
 function foreach(some_array,some_function_action){
@@ -32,6 +33,7 @@ var arr=[1,2,3,4,5]
 arr.forEach(element=>{console.log(`Number: ${element}`)})
 </xmp>
 <h2>Map</h2>
+<h3>Map Explanation</h3>    
 <p>The map function is the same ideia than foreach but it returns an array in the end. Check this example.</p>
 <xmp>
 function map(some_array,some_function_action){
@@ -58,5 +60,65 @@ new_array.forEach(el=>console.log(el))
 var arr=[1,2,3,4,5]
 var new_array=arr.map(element=>{return element*2})
 new_array.forEach(el=>console.log(el))
+</xmp> 
+<h2>Reduce</h2>
+<h3>Reduce Explanation</h3>
+    <p>Reduce function is a little bit different, but its purpose is to aggregate arrays data into one value.</p>
+    <p>Check this example where we implement the reduce function:</p>
+<xmp>
+//functions----------    
+function reduce(some_array,some_function_action,initial_value){
+    var accumulator=initial_value
+    for (i=0;i<some_array.length;i++){
+          var next_val=some_array[i]
+          accumulator=some_function_action(accumulator,next_val)
+          console.log(accumulator)
+    }
+    return accumulator
+}
+function sum(a,b){
+   return a+b
+}
+//Main --------
+var array=[1,2,3,4,5,6]
+reduce(array,sum,0)
+</xmp>
+<p>See this code in action</p>
+<img src="SiteFolder/Images/map-flatmap-reduce/3.png">
+<p>As you can see what the reduce function is doing in this example is sum all values from the array. The sum, in this case, is the aggregating function. Check other examples down below</p>
+<h3>Reduce Usage</h3>
+    <h4>Sum Example</h4>
+<xmp>
+//Sum example
+var array=[1,2,3,4,5,6]
+array.reduce((acc,next)=>{return acc+next},0)//initial value of acc=0
+//without initial value it will consider 0 as default
+</xmp>
+<img src="SiteFolder/Images/map-flatmap-reduce/4.png">
+<h4>Concate strings with comma ','</h4>
+<xmp>
+var array=[" X "," Y ", "Z"]
+
+var reduce_without_initial_value=array.reduce((acc,next)=>{return `${acc.trim()},${next.trim()}`})
+console.log(reduce_without_initial_value)
+
+var reduce_with_initial_value=array.reduce((acc,next)=>{return `${acc.trim()},${next.trim()}`},"")
+console.log(reduce_with_initial_value)
+
+var other_example=array.reduce((acc,next)=>{return `${acc.trim()},${next.trim()}`}," A ".trim())
+console.log(other_example)    
 </xmp>    
+<img src="SiteFolder/Images/map-flatmap-reduce/5.png">
+<h4>Create csv from array with data</h4>
+<xmp>
+//data to csv file string
+var data=[["id","name","cash"],["1","peter","100"],["2","james","200"]]
+
+var data1=data.map(el=>el.reduce((acc,next)=>{return `${acc},${next}`}))
+console.log(data1)
+
+var data2=data1.reduce((acc,next)=>{return `${acc}\n${next}`})
+console.log(data2)
+</xmp>
+<img src="SiteFolder/Images/map-flatmap-reduce/6.png">
 <h1>Scala</h1>
