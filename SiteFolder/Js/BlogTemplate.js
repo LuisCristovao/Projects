@@ -59,8 +59,9 @@ let blog_configs = {
     "XMP":{
         "action":(el)=>{
             var html=""
-            html+=`<div style="overflow:auto;background-color:hsl(1, 0%, 90%);border-radius:15px">`
+            html+=`<div style="overflow:auto;background-color:hsl(1, 0%, 90%);border-radius:5px">`
             html+=el.outerHTML
+            html+=`<button onclick="copyCode(this)" class="ripple">Copy</button>`
             html+=`</div>`
             el.outerHTML=html
         }
@@ -68,6 +69,13 @@ let blog_configs = {
     }
 }
 //functions-----------------------------------------------------
+function copyCode(btn){
+    var div=btn.parentElement
+    var codeText=div.children[0]
+    copyToClipboard(codeText.innerText)
+}
+
+
 async function getPages() {
     let response = await fetch('SiteFolder/DB/pages.json');
     let val = await response.json();

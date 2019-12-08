@@ -51,27 +51,3 @@
         </div>
     </div>
 </div>
-
-
-<script>
-    const copyToClipboard = str => {
-        const el = document.createElement('textarea');
-        el.value = str;
-        el.setAttribute('readonly', '');
-        el.style.position = 'absolute';
-        el.style.left = '-9999px';
-        document.body.appendChild(el);
-        el.select();
-        document.execCommand('copy');
-        document.body.removeChild(el);
-        $("#copy-msg").css("visibility", "visible");
-        $("#copy-msg").css("opacity", 1);
-        setTimeout(function() {
-            $("#copy-msg").css("opacity", 0);
-            //$("#copy-msg").css("visibility","hidden"); 
-        }, 1000);
-
-    };
-    
-
-</script>

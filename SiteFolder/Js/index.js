@@ -100,7 +100,24 @@ function htmlEncode(value) {
 function htmlDecode(value) {
     return $('<div/>').html(value).text();
 }
+const copyToClipboard = str => {
+        const el = document.createElement('textarea');
+        el.value = str;
+        el.setAttribute('readonly', '');
+        el.style.position = 'absolute';
+        el.style.left = '-9999px';
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand('copy');
+        document.body.removeChild(el);
+        $("#copy-msg").css("visibility", "visible");
+        $("#copy-msg").css("opacity", 1);
+        setTimeout(function() {
+            $("#copy-msg").css("opacity", 0);
+            //$("#copy-msg").css("visibility","hidden"); 
+        }, 1000);
 
+    };
 //-------------------------------------------------------------------
 //scroll class  controls navbar when scroll down and a button to scroll up
 class Scroll {
