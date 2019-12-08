@@ -1,0 +1,81 @@
+<h1>Encryption Study</h1>
+<h2>Intro</h2>
+<p>The purpose of this post is to study basic encryption and implement some of thems.</p>
+<h2>App</h2>
+<div>
+<h3>Decrypted</h3>
+<textarea id="decrypted" style="width:100%;height:100px">Insert text here to encrypt </textarea><br><br>
+<button id="enc_btn">Encrypt</button>&nbsp;&nbsp;<button id="dec_btn">Decrypt</button>&nbsp;&nbsp;Password:<input id="pass" type="text">
+&nbsp;&nbsp;
+<select id="encryption_options">
+  <option value="cesar">Cesar Cipher one character</option>
+  <option value="cesar_with_pass">Cesar Cipher with password</option>
+  <!--<option value="opel">Opel</option>-->
+</select><br>
+<h3>Encypted</h3>
+<textarea id="encrypted" style="width:100%;height:100px"></textarea>
+<script>
+    var script_el = document.createElement("script")
+    script_el.src = 'SiteFolder/Js/encrypt.js'
+    document.body.appendChild(script_el)
+
+</script>
+</div>
+<h2>Implementations</h2>
+<h3>Cesar Cipher one character</h3>
+<p>Js Code:</p>
+<xmp>
+function cesarEncryption(text,key){
+	let text_codes=stringToCodes(text)
+	let key_code=characterToCode(key)
+	let final_codes=text_codes.map(el=>el+(key_code-96)) // 96 is the code right before a
+	let final_text=codesToString(final_codes)
+	setEncryptionText(final_text)
+	
+}
+function cesarDecryption(text,key){
+	let text_codes=stringToCodes(text)
+	let key_code=characterToCode(key)
+	let final_codes=text_codes.map(el=>el-(key_code-96)) // 96 is the code right before a
+	let final_text=codesToString(final_codes)
+	setDecryptionText(final_text)
+}
+</xmp>
+<h3>Cesar Cipher with password</h3>
+<p>Js Code:</p>
+<xmp>
+function cesarPassEncryption(text,key){
+	let text_codes=stringToCodes(text)
+	let key_code=stringToCodes(key)
+	var final_codes=[]
+	for (var i=0;i<text_codes.length;i+=key_code.length){
+		var el=text_codes[i]
+		var subset=text_codes.slice(i,i+key_code.length)
+		for (var j=0;j<key_code.length;j++){
+			var kel=key_code[j]
+			var nel=subset[j]
+			final_codes.push(nel+(kel-96))// 96 is the code right before a
+		}
+	}
+	let final_text=codesToString(final_codes)
+	setEncryptionText(final_text)
+	
+}
+function cesarPassDecryption(text,key){
+	let text_codes=stringToCodes(text)
+	let key_code=stringToCodes(key)
+	var final_codes=[]
+	for (var i=0;i<text_codes.length;i+=key_code.length){
+		var el=text_codes[i]
+		var subset=text_codes.slice(i,i+key_code.length)
+		for (var j=0;j<key_code.length;j++){
+			var kel=key_code[j]
+			var nel=subset[j]
+			final_codes.push(nel-(kel-96))// 96 is the code right before a
+		}
+	}
+	let final_text=codesToString(final_codes)
+	setDecryptionText(final_text)
+}
+</xmp>
+
