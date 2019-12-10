@@ -141,6 +141,20 @@ ls -d */
 </xmp>
 <h3>List files with excluding some</h3>
 <xmp>ls -I "*.txt" # exclude txt files </xmp>
+<h3>Make get to an url (curl)</h3>
+<xmp>
+#normal get to url will get html from page
+curl https://www.google.com
+
+#only get the html without extra debug prints
+curl -s https://www.google.com
+    
+#get html from page with authentication first    
+curl -s -u user:pass <url>
+    
+#check other curl options
+curl -help
+</xmp>
 <h2>Variables</h2>
 <h3>Declaration</h3>
 <xmp>
@@ -153,7 +167,7 @@ str="Hi how are you"
 echo $str
 
 </xmp>
-<h3>Calculations (Sum subtractand more)</h3>
+<h3>Calculations (Sum subtract and more)</h3>
 <xmp>
 # sum
 echo $(expr 1 + 2 )
@@ -253,7 +267,34 @@ elif [ -z $z ] || [ -z $a ];then #if z or a empty
 fi
 
 </xmp>
-
+<h3> Equal, lower, greater &lt;,&gt;,&gt;=,&lt;= </h3>
+<xmp>
+if [ 1 -lt 10 ];then
+    echo "1 < 10"
+fi
+if [ 4 -gt 2 ];then
+    echo "4 > 2"
+fi
+if [ 10 -eq 10 ];then
+    echo "10 == 10"
+fi
+if [ 4 -ge 4 ];then
+    echo "4 >= 4"
+fi
+if [ 10 -lt 100 ];then
+    echo "10 < 100"
+fi
+if [ 1 -le 10 ];then
+    echo "1 <= 10"
+fi
+</xmp>
+<h3>find word in text</h3>
+<xmp>
+text="Hi there my name is Tiago and I am from Portugal"
+if [[ $text == *"Tiago"* ]];then
+    echo "word 'Tiago' exists on text"
+fi
+</xmp>
 <h2>Cycles and Arrays</h2>
 <h3>Basic For</h3>
 <xmp>
@@ -529,5 +570,13 @@ d_diff=30
 
 echo $(date --date="${d} -${d_diff} day" +%Y-%m-%d)    
     
+</xmp>
+<h3>Get Last Year Date</h3>
+<xmp>
+ actual_day=$(date +%Y-%m-%d)
+ echo $actual_day
+ #this way you don't need to worry about leap years    
+ last_year_day=$(date "+%Y-%m-%d" -d "$actual_day -12 month");
+ echo $last_year_day
 </xmp>
 <h2>...</h2>    
