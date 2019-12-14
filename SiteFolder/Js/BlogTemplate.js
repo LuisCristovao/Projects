@@ -66,6 +66,13 @@ let blog_configs = {
             el.outerHTML=html
         }
         
+    },
+    "IMG":{
+        "action":(el)=>{
+            if(el.getAttribute("class")!="hcb-icon"){
+                el.setAttribute("class","img_template")
+            }
+        }
     }
 }
 //functions-----------------------------------------------------

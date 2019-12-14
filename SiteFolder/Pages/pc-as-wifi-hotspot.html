@@ -1,0 +1,38 @@
+<h1>PC working as wifi hotspot</h1>
+<h2>Windows</h2>
+<h3>Sources</h3>
+<p>This post is just a practical summary of the information on this <a href="https://www.windowscentral.com/how-turn-your-windows-10-pc-wireless-hotspot"><b>SITE</b></a></p>
+<p>The following subtopics will show step by step how to turn your pc into a <b>wifi router even without an internet connection</b></p>
+
+<h3>Check if is possible</h3>
+<p>Open a command line as Admin a execute the following code</p>
+<xmp>
+ NETSH WLAN show drivers
+</xmp><br><br>
+<img src="SiteFolder/Images/pc-as-wifi-hotspot/1.jpg">
+<p>Check if the result on your pc is similar</p>
+<h3>Create wifi hotspot</h3>
+<p>To create a wifi connection available to others with some <b>name</b> and <b>password</b> execute the following:</p>
+<xmp>
+NETSH WLAN set hostednetwork mode=allow ssid=<name> key=<password>
+</xmp>
+<h3>Start Wireless hotspot</h3>
+<p>Execute command:</p>
+<xmp>
+ NETSH WLAN start hostednetwork    
+</xmp>
+    <p><b>Open Control Panel > Network and Internet > Network Connectios</b> to see the newly created wifi connection </p>
+    <p>Now to see some fun things you can do with this go to the chapter <a href="#Fun-Application-Examples-windows">Fun Application Examples</a> </p>
+<h3>Close wifi hotspot</h3>
+<p>Execute commands by order</p>
+<xmp>
+NETSH WLAN stop hostednetwork
+</xmp>
+<p>If you see in <b>Open Control Panel > Network and Internet > Network Connectios</b> the newly created wifi hotspot is gone. </p>
+<p>But to complete closing execute:</p>
+<xmp>
+netsh wlan set hostednetwork mode=disallow    
+</xmp>
+<h3>Fun Application Examples windows</h3>
+<h2>Linux</h2>
+<h3>Fun Application Examples linux</h3>
