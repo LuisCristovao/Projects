@@ -21,18 +21,44 @@ NETSH WLAN set hostednetwork mode=allow ssid=<name> key=<password>
 <xmp>
  NETSH WLAN start hostednetwork    
 </xmp>
-    <p><b>Open Control Panel > Network and Internet > Network Connectios</b> to see the newly created wifi connection </p>
+    <p><b>Open Control Panel > Network and Internet > Network Connections</b> to see the newly created wifi connection </p>
+    <img src="SiteFolder/Images/pc-as-wifi-hotspot/3.jpg">
     <p>Now to see some fun things you can do with this go to the chapter <a href="#Fun-Application-Examples-windows">Fun Application Examples</a> </p>
 <h3>Close wifi hotspot</h3>
 <p>Execute commands by order</p>
 <xmp>
 NETSH WLAN stop hostednetwork
 </xmp>
-<p>If you see in <b>Open Control Panel > Network and Internet > Network Connectios</b> the newly created wifi hotspot is gone. </p>
+<p>If you see in <b>Open Control Panel > Network and Internet > Network Connections</b> the newly created wifi hotspot is gone. </p>
 <p>But to complete closing execute:</p>
 <xmp>
 netsh wlan set hostednetwork mode=disallow    
 </xmp>
 <h3>Fun Application Examples windows</h3>
+<h4>PC as Wifi Hotspot</h4>
+    
+<h4>Transfer files from PC to phone (without internet)</h4>
+<p>First do this steps:</p>    
+<ul>
+    <li><a href="#Check-if-is-possible">Check if is possible</a></li>
+    <li><a href="#Create-wifi-hotspot">Create wifi hotspot</a></li>
+    <li><a href="#Start-Wireless-hotspot">Start Wireless hotspot</a></li>
+</ul>
+<p>Then create a one line server in python in the directory you want by executing the following command:</p>
+<xmp>
+    #python 3.x
+    python -m http.server 80
+    
+    #python 2.x
+    python -m SimpleHTTPServer 80
+</xmp>
+<p>Open localhost on any browser <a href="http://127.0.0.1/">localhost link</a></p>
+<p>It will appear a list of files and folders from your pc, which you can download.</p>
+<img src="SiteFolder/Images/pc-as-wifi-hotspot/2.png">
+<p>On the command line prompt execute the following code:</p>
+<xmp>
+ ipconfig    
+</xmp>
+<p>See the <b>IPv4 Address</b> for the newly created <b>Wireless LAN adapter</b> and insert that number in your phone browser <b>et voilà</b></p>
 <h2>Linux</h2>
 <h3>Fun Application Examples linux</h3>
