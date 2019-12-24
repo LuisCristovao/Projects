@@ -5,11 +5,17 @@ let project_configs = {
         "font-size": "2em",
         "name": "A",
         "action": (el) => {
+            var html=""
+            html+=`<div align="center">`
+            
             el.target="_blank"
             let text=el.innerText
             el.innerHTML=`<button class="btn btn-default btn-lg" style="font-size:2em">${text}</button><br><br>`
             //el.setAttribute("class", "btn btn-default btn-lg")
             //el.style["font-size"] = "2em"
+            html+=el.outerHTML
+            html+=`</div>`
+            el.outerHTML=html
         }
     },
     "IFRAME": {
@@ -17,9 +23,15 @@ let project_configs = {
         "height": "250px",
         "name": "IFRAME",
         "action": (el) => {
+            var html=""
+            html+=`<div align="center">`
+            
             el.style.width = "70%"
             el.style.height = "250px"
             el.style["padding-top"]="2%"
+            html+=el.outerHTML
+            html+=`</div>`
+            el.outerHTML=html
         }
     },
     "P":{
@@ -29,12 +41,34 @@ let project_configs = {
     },
     "H1":{
         "action":(el)=>{
+            var html=""
+            html+=`<div align="center">`
             el.style["padding-bottom"]="2%"
+            html+=el.outerHTML
+            html+=`</div>`
+            el.outerHTML=html
         }
+    },
+    "XMP":{
+        "action":(el)=>{
+            var html=""
+            html+=`<div style="overflow:auto;background-color:hsl(1, 0%, 90%);border-radius:5px">`
+            html+=el.outerHTML
+            html+=`<button onclick="copyCode(this)" class="ripple">Copy</button>`
+            html+=`</div>`
+            el.outerHTML=html
+     }
     }
+        
 }
 
 //functions--------------------------------
+function copyCode(btn){
+    var div=btn.parentElement
+    var codeText=div.children[0]
+    copyToClipboard(codeText.innerText)
+}
+
 function adaptProjectContent() {
     let page_body = document.getElementById("project_body")
     let body_elements = Array.from(page_body.children)

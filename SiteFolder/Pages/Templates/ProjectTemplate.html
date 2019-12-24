@@ -18,13 +18,44 @@
             padding-top: 5%;
 
         }
+
+        xmp {
+            font-size: 1.7em;
+        }
+
+        /* Ripple effect */
+        .ripple {
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+            padding: 12px 18px;
+            font-size: 1.5em;
+            text-transform: uppercase;
+            cursor: pointer;
+            color: white;
+            background-color: rgb(100, 100, 100, 0.8);
+            box-shadow: 0 0 4px rgb(50, 50, 50, 0.8);
+            outline: none;
+            background-position: center;
+            transition: background 0.8s;
+        }
+
+        .ripple:hover {
+            background: #47a7f5 radial-gradient(circle, transparent 1%, white 1%) center/15000%;
+        }
+
+        .ripple:active {
+            background-color: rgb(100, 100, 100, 0.8);
+            background-size: 100%;
+            transition: background 0s;
+        }
     </style>
 
 </head>
 
 <body>
 
-    <div id="project_body" class="page_body" align="center">
+    <div id="project_body" class="page_body" >
 
         <!--<h1>Dash Game Description:</h1>
         <br>
