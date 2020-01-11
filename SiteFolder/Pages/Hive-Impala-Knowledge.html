@@ -1,6 +1,76 @@
 <h1>Hive Impala Knowledge Base</h1>
 <h2>Intro</h2>
 <p>The purpose of this document is to store some knowledge that I acquire on Hive and Impala and SQL in general. To use Hive/Impala I will be using <b>Cloudera QuickStart Virtual Machine</b>. Later I will make a tutorial on how to install this but for now, just search in google.</p>
-<h2>Create/Edit/Delete Table From CSV</h2>
+
+<p><font color="red">Make sure to use <b>Hive</b> editor instead of <b>Impala   </b> if you are a beginner!!!</font></p>
+
+
+<h2>Create/Edit/Delete</h2>
+
+<h3>Create the generic form </h3>
+<xmp>
+    create table <table-name> (
+        column-name1 type,
+        column-name2 type
+        )
+</xmp>
+<h3>Example</h3>
+<xmp>
+
+    create table names (
+    name string
+    )
+
+</xmp>
+<h3>Insert values to table</h3>
+<xmp>
+    -- insert 3 names in table names
+    insert into table names values("Pedro"),("Tiago"),("João")
+</xmp>
+<h3>Show values from table</h3>
+<xmp>
+select * from default.names    
+</xmp>
+<h3>With images</h3>
+<img src="SiteFolder/Images/Hive-Impala_Knowledge/1.PNG"><br>
+<p style="font-size:5em;text-align: center">&#8595;</p>
+<img src="SiteFolder/Images/Hive-Impala_Knowledge/2.PNG"><br>
+<p style="font-size:5em;text-align: center">&#8595;</p>
+<img src="SiteFolder/Images/Hive-Impala_Knowledge/3.PNG"><br>
+<p style="font-size:5em;text-align: center">&#8595;</p>
+<img src="SiteFolder/Images/Hive-Impala_Knowledge/4.PNG"><br>
+<h3>Delete Drop table</h3>
+<xmp>
+-- drop table <data-base-name>.<table-name>
+drop table default.names
+</xmp>
+<h3>Create Table from csv </h3>
+<p><font color="red">Use <b>Hive</b> to work the next procedure</font></p>
+<p>Drop table <b>names</b> and do the following:</p>
+<p style="font-size:5em;text-align: center">&#8595;</p>
+<img src="SiteFolder/Images/Hive-Impala_Knowledge/5.PNG"><br>
+<p style="font-size:5em;text-align: center">&#8595;</p>
+<img src="SiteFolder/Images/Hive-Impala_Knowledge/6_2.PNG"><br>
+<p style="font-size:5em;text-align: center">&#8595;</p>
+<img src="SiteFolder/Images/Hive-Impala_Knowledge/7.PNG"><br>
+<p style="font-size:5em;text-align: center">&#8595;</p>
+<img src="SiteFolder/Images/Hive-Impala_Knowledge/8.PNG"><br>
+<p style="font-size:5em;text-align: center">&#8595;</p>
+<img src="SiteFolder/Images/Hive-Impala_Knowledge/8_2.PNG"><br>   
+<p style="font-size:5em;text-align: center">&#8595;</p>
+<img src="SiteFolder/Images/Hive-Impala_Knowledge/10.PNG"><br>
+<p style="font-size:5em;text-align: center">&#8595;</p>
+<img src="SiteFolder/Images/Hive-Impala_Knowledge/9_2.PNG"><br>   
+<p style="font-size:5em;text-align: center">&#8595;</p>
+<img src="SiteFolder/Images/Hive-Impala_Knowledge/10_2.PNG"><br>
+    
+<p style="font-size:5em;text-align: center">&#8595;</p>
+<img src="SiteFolder/Images/Hive-Impala_Knowledge/12.PNG"><br> 
+<p style="font-size:5em;text-align: center">&#8595;</p>
+<img src="SiteFolder/Images/Hive-Impala_Knowledge/12_4.PNG"><br>
+<p style="font-size:5em;text-align: center">&#8595;</p>
+<img src="SiteFolder/Images/Hive-Impala_Knowledge/13.PNG"><br>    
+
 
 <h2>Queries</h2>
+select * from names
