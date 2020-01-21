@@ -490,7 +490,8 @@ echo " yaay ss "|sed 's/ /z/g' # output: zyaayzssz
 echo " yaay ss "|sed 's/ /z/' # output: zyaay ss
 </xmp>
 <p><strong>On a file</strong></p>
-<xmp>sed -i "s/a/_/g" &lt;filename&gt; # replace all 'a' by '_' in file...
+<xmp>
+    sed -i "s/a/_/g" <filename> # replace all 'a' by '_' in file...
 </xmp>
 <p>See <a href="http://tldp.org/LDP/abs/html/string-manipulation.html">this site</a> for more details.</p> 
 <h3>Split Function</h3>
