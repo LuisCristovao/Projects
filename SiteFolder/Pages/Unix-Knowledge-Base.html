@@ -178,13 +178,13 @@ EOF
 <h3>Show Processes running on pc</h3>
 <xmp>ps -a</xmp>
 <h3>Find Process By Name</h3>
-<xmp>ps -aux|grep "*name*"</xmp>
+<xmp>ps -aux|grep "sh *name*"</xmp>
 <h3>kill process</h3>
 <xmp>kill -9 <PID-number></xmp>
 <h3>Get PID number searching by name</h3>
 <xmp>
     # it can be -f2 or -f3 in the end.
-    pid=$(ps -aux|grep "*python test.py*"|cut -d" " -f2)
+    pid=$(ps -aux|grep "python *test.py*"|cut -d" " -f2)
     kill -9 $pid
 </xmp>
 <p>For more on this subject search in google or this <a href="https://www.tecmint.com/ps-command-examples-for-linux-process-monitoring/">link</a> </p>
