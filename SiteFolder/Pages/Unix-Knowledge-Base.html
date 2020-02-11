@@ -107,7 +107,8 @@ find . -type f -size -1M # find files smaller than 1 MegaByte in current directo
     du -hs ./*|sort -rh
 </xmp>
 <h3>Get actual directory of script</h3>
-<xmp>DIR="$( cd "$( dirname "${BASH:SOURCE[0]}" )")" >/dev/null 2>&1 && pwd )"
+<xmp>
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 echo $DIR
 </xmp>
 <h3>Get file name</h3>
