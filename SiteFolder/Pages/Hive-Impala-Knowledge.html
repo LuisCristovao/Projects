@@ -3,7 +3,9 @@
 <p>The purpose of this document is to store some knowledge that I acquire on Hive and Impala and SQL in general. To use Hive/Impala I will be using <b>Cloudera QuickStart Virtual Machine</b>. Later I will make a tutorial on how to install this but for now, just search in google.</p>
 
 <p>
-    <font color="red">Make sure to use <b>Hive</b> editor instead of <b>Impala </b> if you are a beginner!!!</font>
+    <font color="red">If using <b>Impala</b> service instead of <b>Hive</b> make sure to know what is Impala <b>Refresh</b> and <b>invalidate metadata</b></font>
+    <!--<font color="red">Make sure to use <b>Hive</b> editor instead of <b>Impala </b> if you are a beginner!!!</font>-->
+    
 </p>
 
 
@@ -11,27 +13,30 @@
 
 <h3>Create the generic form </h3>
 <xmp>
-    create table <table-name> (
-        column-name1 type,
-        column-name2 type
-        )
+create table <table-name> (
+    column-name1 type,
+    column-name2 type
+)
+stored as parquet -- compressed data
+    
 </xmp>
 <h3>Example</h3>
 <xmp>
 
-    create table names (
+create table names (
     name string
-    )
+)
+stored as parquet
 
 </xmp>
 <h3>Insert values to table</h3>
 <xmp>
-    -- insert 3 names in table names
-    insert into table names values("Pedro"),("Tiago"),("João")
+-- insert 3 names in table names
+insert into table names values("Pedro"),("Tiago"),("João")
 </xmp>
 <h3>Show values from table</h3>
 <xmp>
-    select * from default.names
+select * from default.names
 </xmp>
 <h3>With images</h3>
 <img src="SiteFolder/Images/Hive-Impala_Knowledge/1.PNG"><br>
@@ -43,8 +48,8 @@
 <img src="SiteFolder/Images/Hive-Impala_Knowledge/4.PNG"><br>
 <h3>Delete Drop table</h3>
 <xmp>
-    -- drop table <data-base-name>.<table-name>
-            drop table default.names
+-- drop table <data-base-name>.<table-name>
+drop table default.names
 </xmp>
 <h3>Create Table from csv </h3>
 <p >
@@ -98,15 +103,71 @@
 <div style="padding-left:10%;padding-right:10%;" align="center">
 <img src="SiteFolder/Images/Hive-Impala_Knowledge/13.PNG" class="img_template">
 </div><br>
+<h3>Create table from CSV with code</h3>
+<p>To do ...</p>
 <h3>Create table with partitions</h3>
+<xmp>
+create table <table-name> (
+    <col1> <type>,
+    <col2> <type>
+)
+partitioned by (<col3> <type>) -- col3 must be different from col1 and col2
+stored as parquet
+</xmp>
 <h3>Insert into partition</h3>
+<xmp>
+-- replace variables between <> with actual values
+insert into table <table-name>
+partition(<column-partition>=<value>)
+values (<col1-value>,<col2-value>)
+</xmp>
 <h3>Create table like Other</h3>
+<p>This will create a table with exactly same properties(columns, partitions, format,...) as another</p>
+<xmp>
+-- replace variables between <> with actual values
+create table <table1> like <table2>
+</xmp>
 <h3>Duplicate table to other</h3>
+<xmp>
+-- This does NOT works with partitioned tables
+create table <table1> as
+select * from <table2>
+</xmp>
+<p>To Duplicate a partitioned table, first use query to <b>create table like</b> and then insert partition by partition on the new table</p>
+<xmp>
+insert into table <table1>
+partition(<partition-column>=<value>)
+select <col1>,<col2> from <table2> where <partition-column>=<value>
+</xmp>
 <h3>Drop partition</h3>
+<xmp>
+alter table <table-name> drop partition(<column-partition>=<value-to-delete>)
+</xmp>
 <h3>Delete table data without deleting table (truncate)</h3>
+<xmp>
+truncate table <table-name>
+</xmp>
 <h3>Alter table</h3>
+<h4>Change Column Properties</h4>
+<xmp>
+alter table <table-name> change <column-to-change> <renamed-column> <new-column-type>
+</xmp>
+<h4>Add column</h4>
+<xmp>
+-- this will add a new column at the end 
+ALTER TABLE <table-name> ADD COLUMNS (<new-column-name> <type> COMMENT 'a new addr column')
+</xmp>
+<h4>Change Columns Order</h4>
+<xmp>
+-- if you dont want to change name and type rewrite it with the same values
+alter table <table-name> change <column-to-change> <renamed-column> <new-column-type> after <column-1>
+</xmp>
 <h3>Rename table</h3>
-
+<xmp>
+alter table <table-name> rename to <new-name>
+</xmp>
+<h3>Repair Table</h3>
+<xmp>MSCK REPAIR TABLE <table-name></xmp>
 <h2>Queries</h2>
 <h3>Show Data</h3>
 <xmp>
