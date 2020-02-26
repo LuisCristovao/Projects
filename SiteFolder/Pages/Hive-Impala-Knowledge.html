@@ -133,7 +133,20 @@ create table <table1> like <table2>
 create table <table1> as
 select * from <table2>
 </xmp>
-<p>To Duplicate a partitioned table, first use query to <b>create table like</b> and then insert partition by partition on the new table</p>
+<p>To Duplicate a <b>partitioned</b> table, do the following:</p>
+<div>
+
+    <ul style="font-size:1.4em">
+    <li>Check where I found this info <a href="https://etl.svbtle.com/how-to-add-new-partitions-to-hive-tables-externally">Here</a></li>
+    <li>first use query to <b>create table like</b>
+    <li>then copy partitions through <b>hdfs</b> to the newly created table folder (something like <b>/user/hive/warehouse/database_name/table_name</b>)</li>
+    <li>To copy on hdfs use: <b>hdfs dfs -cp source-path target-path</b></li>
+    <li>Then in hive use query: <b>MSCK REPAIR TABLE duplicated-table</b></li>
+    <li>The end, you have now duplicated a partitioned table</li>
+
+</div>
+
+</ul>
 <xmp>
 insert into table <table1>
 partition(<partition-column>=<value>)
