@@ -414,9 +414,12 @@ class SearchEngine {
                 missMatches++;
             }
         }
+        //adding a new compare index
+        var index_supplement=word.search(search_word)>=0?0.2:0
+
         var compare_index = matches / (matches + missMatches)
         //
-        return compare_index;
+        return compare_index+index_supplement;
 
     }
 
