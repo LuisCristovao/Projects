@@ -6,17 +6,17 @@ let enc_btn=document.getElementById("enc_btn")
 let dec_btn=document.getElementById("dec_btn")
 let password=document.getElementById("pass")
 let options={
-				"cesar":{
-					"encrypt":(text,key)=>{cesarEncryption(text,key)},
-					"decrypt":(text,key)=>{cesarDecryption(text,key)}
-				},
-				"cesar_with_pass":{
-					"encrypt":(text,key)=>{cesarPassEncryption(text,key)},
-					"decrypt":(text,key)=>{cesarPassDecryption(text,key)}
-				}
+	"cesar_with_pass":{
+		"encrypt":(text,key)=>{cesarPassEncryption(text,key)},
+		"decrypt":(text,key)=>{cesarPassDecryption(text,key)}
+	},			
+	"cesar":{
+		"encrypt":(text,key)=>{cesarEncryption(text,key)},
+		"decrypt":(text,key)=>{cesarDecryption(text,key)}
+		}
 				
 				
-			
+				
 			}
 //events
 enc_btn.onclick=()=>{
