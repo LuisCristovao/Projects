@@ -321,12 +321,14 @@ class SearchEngine {
         var final_suggestions = []
         var suggestions = []
         var compare_index = 0.5
+        let show_suggestions_length = 5
         if (search_query != "") {
 
             //for(var i =0 ;i<search_query_tags.length;i++,compare_index=0.5){
             //var search_query=search_query_tags[i]
             //var first_letter = search_query[0].toUpperCase()
-            while (suggestions.length == 0 && compare_index >= 0) {
+            while (!(suggestions.length >= show_suggestions_length) && compare_index >= 0) {
+                suggestions = []
                 for (var letter in this.tagsdb) {
 
                     for (var key in this.tagsdb[letter]) {
@@ -339,10 +341,10 @@ class SearchEngine {
                     }
 
                 }
-                if (suggestions.length <= 3) {
-                    compare_index -= 0.1
+                if (suggestions.length <= show_suggestions_length) {
+                    compare_index -= 0.05
                 } else {
-                    compare_index += 0.1
+                    compare_index += 0.05
                 }
             }
 
@@ -415,13 +417,35 @@ class SearchEngine {
             }
         }
         //adding a new compare index
-        var index_supplement=word.search(search_word)>=0?0.2:0
+        var index_supplement = this.indexSuplement(word,search_word)
 
         var compare_index = matches / (matches + missMatches)
         //
-        return compare_index+index_supplement;
+        return compare_index + index_supplement;
 
     }
+    indexSuplement(word, search_word) {
+        if(search_word.length>=3)
+            return (search_word[0] == word[0] && search_word[1] == word[1] && search_word[2] == word[2]) ? 0.3 : -0.3
+        else{
+            if(search_word.length>=2){
+                
+            return (search_word[0] == word[0] && search_word[1] == word[1]) ? 0.2 : -0.2
+            }else{
+                if(search_word.length>=1){
+                    
+                    return (search_word[0] == word[0] ) ? 0.1 : -0.1
+                }else{
+                    return 0
+                }
+            }
+        }
+            
+            
+            
+                    
+        }
+        
 
 }
 
