@@ -417,7 +417,7 @@ class SearchEngine {
             }
         }
         //adding a new compare index
-        var index_supplement = this.indexSuplement(word,search_word)
+        var index_supplement = this.indexSuplement(word, search_word)
 
         var compare_index = matches / (matches + missMatches)
         //
@@ -425,27 +425,26 @@ class SearchEngine {
 
     }
     indexSuplement(word, search_word) {
-        if(search_word.length>=3)
+        if (search_word.length >= 3)
             return (search_word[0] == word[0] && search_word[1] == word[1] && search_word[2] == word[2]) ? 0.3 : -0.3
-        else{
-            if(search_word.length>=2){
-                
-            return (search_word[0] == word[0] && search_word[1] == word[1]) ? 0.2 : -0.2
-            }else{
-                if(search_word.length>=1){
-                    
-                    return (search_word[0] == word[0] ) ? 0.1 : -0.1
-                }else{
+        else {
+            if (search_word.length >= 2) {
+
+                return (search_word[0] == word[0] && search_word[1] == word[1]) ? 0.2 : -0.2
+            } else {
+                if (search_word.length >= 1) {
+                    return (search_word[0] == word[0]) ? 0.1 : -0.1
+                } else {
                     return 0
                 }
             }
         }
-            
-            
-            
-                    
-        }
-        
+
+
+
+
+    }
+
 
 }
 
