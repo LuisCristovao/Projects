@@ -1,0 +1,27 @@
+<h1>FFMPEG Knowledge</h1>
+<h2>Turn image sequence to video</h2>
+<p>This command works if you are in a directory with images(jpg) with names such as 0.jpg,1.jpg,.... </p>
+<xmp>
+ffmpeg -r 60 -f image2 -i %d.jpg video.avi
+</xmp>
+
+<h2>Convert video to gif</h2>
+<p>-r is for the fps</p>
+<xmp>
+ffmpeg -r 50 -i video.avi -pix_fmt rgb24  out.gif
+</xmp>
+
+<h2>Change video or image size</h2>
+<p>Video example</p>
+<xmp>
+ffmpeg -i video.mp4 -filter:v scale=720:-1 -c:a copy videoLowRes.mp4
+</xmp>
+<p>Image example change to width:320; height:270</p>
+<xmp>
+ffmpeg -i in.gif -vf scale=320:270 outLowRes.gif    
+</xmp>
+
+<h2>Video to image sequence (24 fps)</h2>
+<xmp>
+ffmpeg -i video.mp4 -r 24 %d.jpg
+</xmp>
