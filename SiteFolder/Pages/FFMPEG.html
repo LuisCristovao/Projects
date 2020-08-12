@@ -21,7 +21,10 @@ ffmpeg -i video.mp4 -filter:v scale=720:-1 -c:a copy videoLowRes.mp4
 ffmpeg -i in.gif -vf scale=320:270 outLowRes.gif    
 </xmp>
 
-<h2>Video to image sequence (24 fps)</h2>
+<h2>Video/GIF to image sequence (24 fps)</h2>
 <xmp>
-ffmpeg -i video.mp4 -r 24 %d.jpg
+ffmpeg -i video.mp4 -start_number 0 -r 24 %d.jpg
+</xmp>
+<xmp>
+ffmpeg -i video.gif -start_number 0 -r 24 %d.png
 </xmp>
