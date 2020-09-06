@@ -170,11 +170,49 @@ curl -help
 <xmp>ssh some_user@some_address</xmp>
 <p>SSH and execute code</p>
 <xmp>
-ssh << EOF
+ssh some_user@some_address << EOF
     echo "Hello World"
     echo "run some script with sh script.sh"
 EOF
 </xmp>
+<h3>Get data (information) from some command</h3>
+<p>Example:</p>
+<xmp>
+
+    $ ll
+    total 7
+    -rw-r--r-- 1 User01 197121  28 Sep  6 10:09 1.txt
+    -rw-r--r-- 1 User01 197121  37 Sep  6 10:09 2.txt
+    -rw-r--r-- 1 User01 197121  57 Sep  6 10:12 3.txt
+    -rw-r--r-- 1 User01 197121 267 Aug  5  2019 dates_study.sh
+    -rw-r--r-- 1 User01 197121 450 Jul 27  2019 split.sh
+    -rw-r--r-- 1 User01 197121 678 Jul 27  2019 study.sh
+    -rw-r--r-- 1 User01 197121 146 Jul 29  2019 t.sh
+    
+    
+    $ ll | awk {'print $3'};
+    User01
+    User01
+    User01
+    User01
+    User01
+    User01
+    User01
+    
+    
+    $ ll| awk {'print $6'}
+    
+    Sep
+    Sep
+    Sep
+    Aug
+    Jul
+    Jul
+    Jul
+</xmp>
+
+<h3>Send output to nowhere</h3>
+<xmp>some-comand > /dev/null</xmp>
 <h3>Shutdown PC Now</h3>
 <xmp>sudo shutdown -h now</xmp>
 <h2>Linux Process Monitoring</h2>
@@ -187,10 +225,20 @@ EOF
 <h3>Get PID number searching by name</h3>
 <xmp>
     # it can be -f2 or -f3 in the end.
-    pid=$(ps -aux|grep "python *test.py*"|cut -d" " -f2)
+    pid=$(ps -aux|grep "python *test.py*"|grep -v "grep" |awk {'print $2'})
     kill -9 $pid
 </xmp>
 <p>For more on this subject search in google or this <a href="https://www.tecmint.com/ps-command-examples-for-linux-process-monitoring/">link</a> </p>
+<h2>Read Files</h2> 
+<h3>Read File line by line</h3>
+<xmp>
+while read line;do echo $line;done < file.txt
+</xmp>
+<h3>Read Two Files line by line at same time</h3>
+<p>Imagine we have two files, one with the first name and other with the second name, and we want to create a file with both names</p>
+<xmp>
+while read lineA <&3  && read lineB <&4;do f1=$(echo $lineA);f2=$(echo $lineB);echo "$f1 $f2" >> both_names.txt;done 3<first_name.txt 4<second_name.txt
+</xmp>
 <h2>Variables</h2>
 <h3>Declaration</h3>
 <xmp>
@@ -329,6 +377,15 @@ fi
 text="Hi there my name is Tiago and I am from Portugal"
 if [[ $text == *"Tiago"* ]];then
     echo "word 'Tiago' exists on text"
+fi
+</xmp>
+<h3>Check if the previous operation executed with success or not</h3>
+<xmp>
+some_command
+if [ $? -eq 0 ]; then
+    echo OK
+else
+    echo FAIL
 fi
 </xmp>
 <h2>Cycles and Arrays</h2>
@@ -568,7 +625,12 @@ echo '!aaa!'|tr -d \! #output: aaa
 echo 'yaaay'|tr -d y #output: aaa
 echo ' aaa ss '|tr -d ' ' #output: aaass
 echo ' aaa ss '|sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//' #output: aaa ss        
-</xmp>    
+</xmp> 
+<h3>Substring</h3>
+<xmp>
+echo "abcdefghi" | cut -c2-6
+#result: bcdef
+</xmp>
 <h2>Dates manipulation</h2>
 <h3>Get date</h3>
 <xmp>
