@@ -25,7 +25,7 @@ async function buildTagsPage() {
         keys_stack.push(key)
         console.log(key)
     }
-
+    keys_stack=keys_stack.sort().filter(el=>!("0123456789".split("").includes(el)))
     for (var i = 0; i < keys_stack.length; i = j) {
 
         html += '<div class="row">'
