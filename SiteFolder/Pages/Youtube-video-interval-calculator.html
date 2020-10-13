@@ -1,37 +1,73 @@
 <h1>Youtube video interval calculator</h1>
 <p>Youtube link:</p>
-<input id="url" type="text">
+<input id="url" type="text" />
 <p>start time</p>
-minutes:<input id="start-min" type="number" value=0>seconds:<input id="start-sec" type="number" value=0>
+minutes:<input id="start-min" type="number" value="0" />seconds:<input
+  id="start-sec"
+  type="number"
+  value="0"
+/>
 <p>end time</p>
-minutes:<input id="end-min" type="number" >seconds:<input id="end-sec" type="number" ><br><br>
-<button onclick="calculate()">Calculate</button><br><br>
-<xmp id="output" style="width: 100%;">
-</xmp>
+minutes:<input id="end-min" type="number" />seconds:<input
+  id="end-sec"
+  type="number"
+/><br /><br />
+<button onclick="calculate()">Calculate</button><br /><br />
+<xmp id="output" style="width: 100%"></xmp>
+<div id="iframe"></div>
 <script>
-    function getElement(id){
-        return document.getElementById(id)
+  function getElement(id) {
+    return document.getElementById(id);
+  }
+  function calculate() {
+    let url = getElement("url").value;
+    let out = getElement("output");
+
+    let start_min = getElement("start-min").value;
+    let start_sec = getElement("start-sec").value;
+
+    let end_min = getElement("end-min").value;
+    let end_sec = getElement("end-sec").value;
+    // if url has this string
+    if (url.search("https://youtu.be/") != -1) {
+      url = url.replace("https://youtu.be/", "https://youtube.com/watch?v=");
     }
-function calculate(){
-let url=getElement("url").value
-let out=getElement("output")
 
-let start_min=getElement("start-min").value
-let start_sec=getElement("start-sec").value
+    let finalUrl = "";
+    const id = url.split("/watch?v=")[1];
+    const embedUrl = getEmbedUrl(id, start_min, start_sec, end_min, end_sec);
+    if ((end_min == 0 || end_min == "") && (end_sec == 0 || end_sec == "")) {
+      finalUrl = `https://youtu.be/${id}?t=${
+        parseInt(start_min) * 60 + parseInt(start_sec)
+      }`;
+    } else {
+      finalUrl = embedUrl;
+    }
+    out.innerText = finalUrl;
+    const iframe = document.getElementById("iframe");
+    iframe.querySelectorAll("*").forEach((n) => n.remove());
+    iframe.appendChild(getIframe(embedUrl));
+  }
 
-let end_min=getElement("end-min").value
-let end_sec=getElement("end-sec").value
-// if url has this string
-if(url.search("https://youtu.be/")!=-1){
-    url=url.replace("https://youtu.be/","https://youtube.com/watch?v=")
-}
+  function getIframe(url) {
+    const iframe = document.createElement("iframe");
+    iframe.setAttribute("width", "100%");
+    iframe.setAttribute("height", 500);
+    iframe.setAttribute("src", url);
+    iframe.setAttribute("allowfullscreen", true);
+    iframe.setAttribute("frameborder", 0);
+    iframe.setAttribute(
+      "allow",
+      "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    );
+    return iframe;
+  }
 
-if((end_min==0 ||end_min=="") && (end_sec==0 || end_sec=="")){
-    out.innerText=`https://youtu.be/${url.split("/watch?v=")[1]}?t=${(parseInt(start_min)*60+parseInt(start_sec))}`
-}else{
-    out.innerText=url.split("/watch?v=")[0]+"/embed/"+url.split("/watch?v=")[1]+"?start="+(parseInt(start_min)*60+parseInt(start_sec))+"&end="+(parseInt(end_min)*60+parseInt(end_sec))
-}
-
-}
-
+  function getEmbedUrl(id, start_min, start_sec, end_min, end_sec) {
+    return `https://www.youtube.com/embed/${id}?start=${
+      parseInt(start_min) * 60 + parseInt(start_sec)
+    }${
+      end_min ? `&end=${parseInt(end_min) * 60 + parseInt(end_sec || 0)}` : ""
+    }`;
+  }
 </script>
