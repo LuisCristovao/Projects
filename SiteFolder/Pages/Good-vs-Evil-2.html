@@ -13,7 +13,7 @@
 <li style="color:red">attack (red)</li>
 <li style="color: blue">defence (blue)</li>
 </ul>
-<p>Each player starts up with <b>100 points for resource</b>, and the most important resource is <b style="color: green;">health</b> because it determines who wins or loses the game.<br>
+<p>Each player starts up with <b>100 points for each resource</b>, and the most important resource is <b style="color: green;">health</b> because it determines who wins or loses the game.<br>
 </p><p><b>The first player to have 0 health points loses!</b></p>
 <h2 id="gameplay">Gameplay:</h2>
 <p>The player has <b>3 options</b> on each round: <font color="red">attack</font>, <font color="blue">defence</font> and <font color="grey">power up</font>.</p>
@@ -23,10 +23,23 @@
 <li><font color="grey">power up</font> beats <font color="blue">defence</font></li>
 </ul>
 <p><b>Each option will spend resource points!</b></p>
-<p>Example (<font color="lightskyblue">Good player</font> <font color="red">attacks</font>; <font color="purple">Evil player</font> <font color="blue">defends</font>):</p>
+<p> <b>Except the power-up option</b> which <b>restores 20</b> points of a resource of player choice.</p>
+<p style="border: lightslategray 2px doted;">Example (<font color="lightskyblue">Good player</font> <font color="red">attacks</font>; <font color="purple">Evil player</font> <font color="blue">defends</font>):</p>
 <img src="SiteFolder/Images/GoodVsEvilGame2/example1.gif">
 <h2 id="advance-gameplay">Advance gameplay:</h2>
 <p>1. When <font color="red">attack</font> or <font color="blue">defence</font> resources are <b>below 0</b> then the player loses <b><font color="green">health</font></b> points according to the negative value of the resource used.</p>
 <p>2. The <font color="red">attack</font> and <font color="blue">defence</font> options have 3 levels each to spice things up.</p>
-<p>insert image</p>
+<ul>
+    <li><strong>lv1:</strong> consumes 10 points and inflicts 10 points of damage to the other player</li>
+    <li><strong>lv2:</strong> consumes 20 points and inflicts 20 points of damage to the other player</li>
+    <li><strong>lv3:</strong> consumes 30 points and inflicts 30 points of damage to the other player</li>
+</ul>
+<p>Also is used to <strong>untie plays</strong>, for instance, if the good player chooses an <strong>lv3 attack, this will beat an lv2 defense</strong> from the evil player, however, the evil player <strong>will only lose 10 points of health (the difference)</strong>.</p>
+<p>If both players do the <strong>same level of attack or defense</strong> then it is a <strong>tie</strong>, none of the players <strong>lose health</strong>, however, <strong>both players lose resources</strong>.</p>
+
+
+    
+    
+    
+    
 
