@@ -1,6 +1,32 @@
 <h1>Good Vs Evil Game 2</h1>
-<p>
-    Same game as the previous version, but now with more animations, and it is possible to play with the evil character.
-    The game works as rock, paper, and scissors but with resource management.
-</p>
-<a href="https://luiscristovao.github.io/AnimationGame2/Game.html">Game</a>
+<div >
+    <a href="https://luiscristovao.github.io/AnimationGame2/Game.html" target="_blank">
+        <button class="btn btn-default btn-lg" style="font-size:2em">Play Game</button> 
+    </a>
+</div>
+
+<h2 id="how-to-play">How to play</h2>
+<p>The game plays like rock, paper, and scissors, but with resources.</p>
+<p>The player needs to manage 3 resources :</p>
+<ul>
+<li style="color: green;">health (green)</li>
+<li style="color:red">attack (red)</li>
+<li style="color: blue">defence (blue)</li>
+</ul>
+<p>Each player starts up with <b>100 points for resource</b>, and the most important resource is <b style="color: green;">health</b> because it determines who wins or loses the game.<br>
+</p><p><b>The first player to have 0 health points loses!</b></p>
+<h2 id="gameplay">Gameplay:</h2>
+<p>The player has <b>3 options</b> on each round: <font color="red">attack</font>, <font color="blue">defence</font> and <font color="grey">power up</font>.</p>
+<ul>
+<li><font color="red">attack</font> beats <font color="grey">power up</font></li>
+<li><font color="blue">defence</font> beats <font color="red">attack</font></li>
+<li><font color="grey">power up</font> beats <font color="blue">defence</font></li>
+</ul>
+<p><b>Each option will spend resource points!</b></p>
+<p>Example (<font color="lightskyblue">Good player</font> <font color="red">attacks</font>; <font color="purple">Evil player</font> <font color="blue">defends</font>):</p>
+<img src="/SiteFolder/Images/GoodVsEvilGame2/example1.gif">
+<h2 id="advance-gameplay">Advance gameplay:</h2>
+<p>1. When <font color="red">attack</font> or <font color="blue">defence</font> resources are <b>below 0</b> then the player loses <b><font color="green">health</font></b> points according to the negative value of the resource used.</p>
+<p>2. The <font color="red">attack</font> and <font color="blue">defence</font> options have 3 levels each to spice things up.</p>
+<p>insert image</p>
+
