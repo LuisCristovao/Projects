@@ -9,6 +9,7 @@ Goal:script to deal with get and write json to files
 import json
 import os
 
+
 def parse(json_string):
     return json.loads(json_string)
 
@@ -23,13 +24,23 @@ def get_dirpath_less(less=0):
               if we used get_dirpath_less(1) we would obtain: C/main/
               if we used get_dirpath_less(0) we would obtain: C/main/templates/
     '''
-    
-    out=""
-    dirpath = os.getcwd()
-    array=dirpath.split("\\")
+
+    out = ""
+    dirpath = os.path.dirname(__file__)
+
+    # check if working on windows or linux
+    split_character_for_diretories = "/"
+
+    if len(dirpath.split("\\")) > 1:
+        split_character_for_diretories = "\\" #windows directories separator
+    else:
+        split_character_for_diretories = "/" #linux windows directories separator
+
+    array = dirpath.split("/")
+
     for i in range(len(array)-less):
-        out+=array[i]+"\\"
-    
+        out += array[i]+split_character_for_diretories
+
     return out
 
 
@@ -43,17 +54,15 @@ def get_json_file(filepath):
      returns:
         json object
     '''
-    
-    print("open file:",filepath,"\n")
+
+    print("open file:", filepath, "\n")
     with open(filepath) as f:
         data = json.load(f)
-        
-    
+
     return data
 
 
-
-def dump_json_in_file(filepath,json_val):
+def dump_json_in_file(filepath, json_val):
     '''
     goal: 
         writes json object in file
@@ -63,7 +72,7 @@ def dump_json_in_file(filepath,json_val):
         json_val:
             json object
     '''
-    
+
     with open(filepath, mode='w', encoding='utf-8') as f:
         json.dump(json_val, f)
 

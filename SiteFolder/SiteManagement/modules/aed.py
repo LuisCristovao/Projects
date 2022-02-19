@@ -11,12 +11,13 @@ from datetime import datetime
 #import urls as pages # to import urls.py locally
 from importlib.machinery import SourceFileLoader
 
+
 #to import module in json_files.py when using server
-json_files=SourceFileLoader("json_files.py", "modules/json_files.py").load_module() 
+json_files=SourceFileLoader("json_files.py", os.path.join(os.path.dirname(__file__), 'json_files.py')).load_module() 
 #to import module in urls.py when using server
-pages=SourceFileLoader("urls.py", "modules/urls.py").load_module() 
+pages=SourceFileLoader("urls.py", os.path.join(os.path.dirname(__file__), 'urls.py')).load_module() 
 #to import module in tags.py when using server
-tags=SourceFileLoader("tags.py", "modules/tags.py").load_module() 
+tags=SourceFileLoader("tags.py", os.path.join(os.path.dirname(__file__), "tags.py")).load_module() 
 
 
 #config constants
@@ -79,7 +80,7 @@ def get_all_posts():
     '''
     
     #dirpath=get_dirpath_less(2) #to work locally
-    dirpath=json_files.get_dirpath_less(1)# to work as a module of server
+    dirpath=json_files.get_dirpath_less(2)# to work as a module of server
     return json_files.get_json_file(dirpath + "DB/all_posts.json")
     
 def update_position_index(db_array):

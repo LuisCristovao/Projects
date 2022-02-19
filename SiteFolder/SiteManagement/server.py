@@ -10,11 +10,11 @@ from importlib.machinery import SourceFileLoader
 import json
 import os
 #import module aed.py from folder modules
-aed = SourceFileLoader("aed.py", "modules/aed.py").load_module()
+aed = SourceFileLoader("aed.py", os.path.join(os.path.dirname(__file__), "modules/aed.py")).load_module()
 #aed.get_all_posts()
-index=SourceFileLoader("index.py", "modules/index.py").load_module()
+index=SourceFileLoader("index.py", os.path.join(os.path.dirname(__file__), "modules/index.py")).load_module()
 
-json_files=SourceFileLoader("json_files.py", "modules/json_files.py").load_module()
+json_files=SourceFileLoader("json_files.py", os.path.join(os.path.dirname(__file__), "modules/json_files.py")).load_module()
 #print(json.dumps(index.Menu()))
 #Start server-----------------------------
 app = fl.Flask(__name__, static_url_path='')
@@ -24,8 +24,7 @@ app = fl.Flask(__name__, static_url_path='')
 #static
 @app.route('/path/<path:path>')
 def send_js(path):
-    os.defpath
-    return fl.send_from_directory(os.getcwd()+'/modules/settings/', path)
+    return fl.send_from_directory(os.path.dirname(__file__)+'/modules/settings/', path)
 
 
 @app.route('/')

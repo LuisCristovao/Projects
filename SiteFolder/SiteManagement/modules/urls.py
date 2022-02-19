@@ -12,9 +12,10 @@ Goal:
 
 #import json_files #to import json_files module locally
 from importlib.machinery import SourceFileLoader
-
+import os
+filename = os.path.join(os.path.dirname(__file__), 'json_files.py')
 #to import module in json_files.py when using server
-json_files=SourceFileLoader("json_files.py", "modules/json_files.py").load_module() 
+json_files=SourceFileLoader("json_files.py", filename).load_module() 
 
 
 
