@@ -80,7 +80,7 @@ def get_all_posts():
     '''
     
     #dirpath=get_dirpath_less(2) #to work locally
-    dirpath=json_files.get_dirpath_less(2)# to work as a module of server
+    dirpath=json_files.get_dirpath_less(1)# to work as a module of server
     return json_files.get_json_file(dirpath + "DB/all_posts.json")
     
 def update_position_index(db_array):

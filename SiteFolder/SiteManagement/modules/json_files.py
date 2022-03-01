@@ -26,8 +26,8 @@ def get_dirpath_less(less=0):
     '''
 
     out = ""
-    dirpath = os.path.dirname(__file__)
-
+    dirpath = os.getcwd() 
+    
     # check if working on windows or linux
     split_character_for_diretories = "/"
 
@@ -37,7 +37,7 @@ def get_dirpath_less(less=0):
         split_character_for_diretories = "/" #linux windows directories separator
 
     array = dirpath.split("/")
-
+    
     for i in range(len(array)-less):
         out += array[i]+split_character_for_diretories
 

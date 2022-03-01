@@ -24,7 +24,7 @@ app = fl.Flask(__name__, static_url_path='')
 #static
 @app.route('/path/<path:path>')
 def send_js(path):
-    return fl.send_from_directory(os.path.dirname(__file__)+'/modules/settings/', path)
+    return fl.send_from_directory(os.getcwd()+'/modules/settings/', path)
 
 
 @app.route('/')
