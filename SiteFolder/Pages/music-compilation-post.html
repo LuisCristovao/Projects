@@ -870,8 +870,20 @@ uniq.forEach(music=>{
 out_html+="</ul>"
 </xmp>
 <h2>Page Maintenance</h2>
+<p>
+  Go to a youtube playlist, load all the videos list and then press Crt+Shift+I and enter on browser console.
+  Now write <b>document.body.innerHTML</b> and press enter
+  Copy the text and insert it on the textarea below.
+  Then after loading it will appear an html list to add in this page on git
+</p>
 <textarea id="maintenance" oninput="updatePage(this)"> </textarea>
 <script>
+  setTimeout(()=>{
+    const music_list_saved = Array.from(
+      document.getElementsByTagName("ul")[3].children
+    ).map((el) => el.innerText.replaceAll('"', "").replaceAll("\\", ""));
+    document.getElementById("Music-Name-Titles").innerText=`Music Name Titles (${music_list_saved.length})`
+  },1000)
   function showDiv(div) {
     /* let h2=Array.from(div.children).filter(el=>el.tagName=="P")[0]
     h2.classList.toggle("hide") */
