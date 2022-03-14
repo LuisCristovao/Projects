@@ -43,6 +43,7 @@
     <li>10 Kitchen Products That Will Simplify Food Prep</li>
     <li>150 Masterpieces of Films' Soundtracks #36 - Evey Reborn</li>
     <li>17 - Move Me - R4 / Ridge Racer Type 4 / Direct Audio</li>
+    <li>2WEI - Sequels - Funeral March (Official Chopin Epic Cover)</li>
     <li>2WEI - Battlefields (Escape Velocity, Mortal Engines Trailer Music)</li>
     <li>2WEI - Catapult (Official Wonder Woman Trailer Music)</li>
     <li>
@@ -313,6 +314,11 @@
     <li>Good vs Evil Game</li>
     <li>Goodbye Heartbreak THE LIGHTHOUSE FAMILY</li>
     <li>Goodbye Heartbreak THE LIGHTHOUSE FAMILY</li>
+    <li>Gran Turismo 6 Soundtrack - Yuki Oike - Red (Menu)</li>
+    <li>
+      Gran Turismo 6 Soundtrack - Yusuke Yamamoto (channel U) - Lunar Mare
+      (Menu)
+    </li>
     <li>Grand Theft Auto [GTA] V - Original Loading Screen Music Theme</li>
     <li>Grandia - Title Music</li>
     <li>Grandia 1 OST Disc 1 - 7. The Beautiful Women of Alent</li>
@@ -431,10 +437,6 @@
     <li>Magnetic Man - I Need Air (Post Effects Version)</li>
     <li>March of the White Knights</li>
     <li>Mariya Takeuchi - Plastic Love / プラスティック・ラブ - Audio (HD)</li>
-    <li>
-      Mega Man Battle & Chase OST - Chasers Future City Course Playstation
-      Version
-    </li>
     <li>
       Mega Man Battle & Chase OST - Chasers Future City Course Playstation
       Version
@@ -598,7 +600,6 @@
     </li>
     <li>Persona 5 OST 55 - Life Goes On</li>
     <li>Persona 5 Soundtrack - Confession Secret</li>
-    <li>Persona 5 Soundtrack - Confession Secret</li>
     <li>Planetarium</li>
     <li>Plastic Love - Mariya Takeuchi (HD Audio）</li>
     <li>Plastic Love | Hobbes Sakuga Edit</li>
@@ -758,6 +759,7 @@
       Lives
     </li>
     <li>Up 'N' At 'Em</li>
+    <li>VALORANT | Raze - Only good things!</li>
     <li>VOCES8 - Ubi Caritas (Live) - Abbey Road x Decca Classics Sessions</li>
     <li>Vagrant Story (DISC 2) / 08 - Abandoned Mine Second Level</li>
     <li>Vejo-te Aqui</li>
@@ -823,6 +825,10 @@
       dear Dragon [MusMus] Example of use: 100% Orange Juice[Sweet Breaker's
       Theme] etc.
     </li>
+    <li>
+      dear Dragon [MusMus] Example of use: 100% Orange Juice[Sweet Breaker's
+      Theme] etc.
+    </li>
     <li>dont let me be missunderstood - kill bill</li>
     <li>engelwood - crystal dolphin</li>
     <li>fantompower - we're merely intelligent primates</li>
@@ -871,19 +877,21 @@ out_html+="</ul>"
 </xmp>
 <h2>Page Maintenance</h2>
 <p>
-  Go to a youtube playlist, load all the videos list and then press Crt+Shift+I and enter on browser console.
-  Now write <b>document.body.innerHTML</b> and press enter
-  Copy the text and insert it on the textarea below.
-  Then after loading it will appear an html list to add in this page on git
+  Go to a youtube playlist, load all the videos list and then press Crt+Shift+I
+  and enter on browser console. Now write <b>document.body.innerHTML</b> and
+  press enter Copy the text and insert it on the textarea below. Then after
+  loading it will appear an html list to add in this page on git
 </p>
 <textarea id="maintenance" oninput="updatePage(this)"> </textarea>
 <script>
-  setTimeout(()=>{
+  setTimeout(() => {
     const music_list_saved = Array.from(
       document.getElementsByTagName("ul")[3].children
     ).map((el) => el.innerText.replaceAll('"', "").replaceAll("\\", ""));
-    document.getElementById("Music-Name-Titles").innerText=`Music Name Titles (${music_list_saved.length})`
-  },1000)
+    document.getElementById(
+      "Music-Name-Titles"
+    ).innerText = `Music Name Titles (${music_list_saved.length})`;
+  }, 1000);
   function showDiv(div) {
     /* let h2=Array.from(div.children).filter(el=>el.tagName=="P")[0]
     h2.classList.toggle("hide") */
