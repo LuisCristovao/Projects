@@ -68,9 +68,13 @@
 <script>
     class Calculator{
         
-        constructor(){
+        constructor(previous_score=null){
             this.lv1max=11,this.lv1min=-11,this.lv2max=11,this.lv2min=-11,this.lv3max=101,this.lv3min=-101;
-            
+            if(previous_score==null){
+                this.score={right:0,wrong:0}
+            }else{
+                this.score=previous_score
+            }
 
             //var numbers=[];
             this.operations=['+','-','*','/'];//0->+;1->-;2->x;3->/;
@@ -271,7 +275,7 @@
                 //this.move(1000*20,this.result);
                 this.time=90;
                 document.getElementById("level").innerHTML="Lv3";
-                var number_of_operations=1+Math.floor(Math.random()*4);
+                var number_of_operations=2+Math.floor(Math.random()*4);
                 for (var i=0;i<=number_of_operations;i++){
                     var num1=Math.floor(Math.random()*(this.lv3max-this.lv3min)+this.lv3min);
                     //var num2=Math.floor(Math.random()*(lv1max-lv1min)+lv1min);
@@ -341,19 +345,22 @@
         console.log("answer:"+document.getElementById("answer").value)
         if(calculator.result==document.getElementById("answer").value){
             document.getElementById("feedback").innerHTML="<font color='green'>You Found the Right Answer!</font>"
+            calculator.score.right+=1
             calculator.end=true;
         }else{
             document.getElementById("feedback").innerHTML="<font color='red'>Wrong Answer!</font>"
+            calculator.score.wrong+=1
             calculator.end=true;
         }
         
-        setTimeout(New,500);
-        calculator=null;
+        setTimeout(()=>{New(calculator)},500);
+        //calculator=null;
     }
     //var result=0;
-    function New(){
-        document.getElementById("feedback").innerHTML="";
-        var c=new Calculator();
+    function New(previous_calculator){
+        document.getElementById("feedback").innerHTML=`<p style="text-align:center"><font color="green">Right: ${previous_calculator.score.right}</font> ;
+            <font color="red">Wrong: ${previous_calculator.score.wrong}</font><p>`;
+        var c=new Calculator(previous_calculator.score);
         c.Run(Math.floor(Math.random()*3));
     }
     function Main(){
