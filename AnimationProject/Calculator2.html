@@ -1,4 +1,5 @@
 <html id="html" class="fullscreen">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <head>
 <title>Galculator!</title>    
 </head>
@@ -29,7 +30,7 @@
     .myProgress {
       position: absolute;
       width: 100%;
-      height: 20%;    
+      height: 10%;    
       top:15%;
       background-color: white;
     }
@@ -45,7 +46,7 @@
     }
     .number{
         position: relative;
-        width:10%,
+        width:10%;
         height: 10%;
     }
 
@@ -54,12 +55,12 @@
     <!--<div style="width:100%;height:100%;background-color:hsl(191,0%,93%)"></div>-->
     
     <div class="rectangle" >
-            <h1 id="level" style="position:absolute;left:45%;">Lv1</h1>
+            <h1 id="level" style="position:absolute;width: 100%;text-align: center;" >Lv1</h1>
             <div class="myProgress" style=""><div class="myBar" id="myBar">cdscs</div></div>
-            <h1 id="question" style="position:absolute;top:35%;left:45%;">2+2?</h1>
-            <input style="position:absolute;top:50%;width:100%;height:15%;font-size:400%;" id="answer" type="number" >
+            <h1 id="question" style="position:absolute;top:35%;width: 100%;text-align: center;">2+2?</h1>
+            <input style="position:absolute;top:60%;width:100%;height:10%;font-size:200%;text-align: center;" id="answer" type="number" >
             <!--<button id="submit_answer" style="position:relative;width:100%;height:22%;visibility='hidden';" onclick="Check()">Submit</button>-->
-             <h2 id="feedback" style="position:absolute;top:70%;left:40%;"></h2>  
+             <h2 id="feedback" style="position:absolute;top:70%;width: 100%;text-align: center;"></h2>  
     </div>   
     
 
@@ -268,7 +269,7 @@
             }
             if(level==2){
                 //this.move(1000*20,this.result);
-                this.time=20;
+                this.time=90;
                 document.getElementById("level").innerHTML="Lv3";
                 var number_of_operations=1+Math.floor(Math.random()*4);
                 for (var i=0;i<=number_of_operations;i++){
@@ -335,30 +336,7 @@
     }
     
     
-    /*function move(limit) {
-        var time=limit;
-        var dt=10;//miliseconds
-        var elem = document.getElementById("myBar");   
-        var width = 100;
-        var id = setInterval(frame, dt);
-        function frame() {
-            if (width <= 0) {
-                clearInterval(id);
-                Check();
-            } else {
-                time-=dt;
-                width=Math.round((time/limit)*100);
-                if(time<=1000*60){
-                    elem.innerHTML=Math.round(time/(1000))+"s";
-                }else{
-                    elem.innerHTML=Math.floor((time/(1000))/60)+"min"+" "+Math.round(time/(1000))+"s";
-                }
-                elem.style.width = width + '%'; 
-            }
-        }
-        
-    }*/
-    //move(1000*10);//*60*1);
+   
     function Check(calculator){
         console.log("answer:"+document.getElementById("answer").value)
         if(calculator.result==document.getElementById("answer").value){
@@ -381,225 +359,9 @@
     function Main(){
         
         var calculator=new Calculator();
-        /*var input = document.getElementById("answer");
-            // Execute a function when the user releases a key on the keyboard
-            input.addEventListener("keyup", function(event) {
-                  // Cancel the default action, if needed
-                  event.preventDefault();
-                  // Number 13 is the "Enter" key on the keyboard
-                  if (event.keyCode === 13) {
-                    // Trigger the button element with a click
-                    //document.getElementById("submit_answer").click();
-                      Check(calculator.result);
-                  }
-            });*/
         calculator.Run(Math.floor(Math.random()*3));
         
         
-        //setTimeout(New,(calculator.time+1)*1000);
-        
-        
-        
-        /*
-        var input = document.getElementById("answer");
-
-        // Execute a function when the user releases a key on the keyboard
-        input.addEventListener("keyup", function(event) {
-          // Cancel the default action, if needed
-          event.preventDefault();
-          // Number 13 is the "Enter" key on the keyboard
-          if (event.keyCode === 13) {
-            // Trigger the button element with a click
-            //document.getElementById("submit_answer").click();
-              Check();
-          }
-        });
-        
-        
-        var lv1max=11,lv1min=-11,lv2max=21,lv2min=-11,lv3max=11,lv3min=-11;
-        var random_level=Math.floor(Math.random()*3);
-        
-        //var numbers=[];
-        var operations=['+','-','*','/'];//0->+;1->-;2->x;3->/;
-        var equation=[];
-        var equation_op=[];
-        var equation_num=[];
-        var out="";
-        
-        if(random_level==0){
-            document.getElementById("level").innerHTML="Lv1";
-            var number_of_operations=1+Math.floor(Math.random()*1);
-            for (i=0;i<=number_of_operations;i++){
-                var num1=Math.floor(Math.random()*(lv1max-lv1min)+lv1min);
-                //var num2=Math.floor(Math.random()*(lv1max-lv1min)+lv1min);
-                if(num1<0){
-                    equation_num.push(num1);
-                    equation.push("("+num1+")");
-                }
-                else{
-                    equation_num.push(num1);
-                   equation.push(num1); 
-                }
-                
-                if(i<number_of_operations){
-                    var random_operation=operations[Math.floor(Math.random()*2)];//just sum and subtraction
-                    equation.push(random_operation);
-                    equation_op.push(random_operation);
-                }
-            }
-            for(i=0;i<equation.length;i++){
-                out+=equation[i];
-                
-            }
-            var next_operation=[];
-            for(i=0,j=0;i<equation.length;i++){
-                
-                //is a number
-                if(equation[i]!='+' && equation[i]!='-' &&equation[i]!='*' && equation[i]!='/'){
-                    var op=next_operation.pop();
-                    if(i==0){
-                        result+=equation_num[i];
-                    }else{
-                        if(op=='+'){
-                            result+=equation_num[j];   
-                        }
-                        if(op=='-'){
-                            result-=equation_num[j];
-                        }
-                        if(op=='*'){
-                            result*=equation_num[j];
-                        }
-                        if(op=='/'){
-                            result/=equation_num[j];
-                        }
-                    }
-                    j++;
-                }
-                else{//operation
-                    next_operation.push(equation[i]);
-                }
-                
-            }
-            console.log("result:"+result);
-            document.getElementById("question").innerHTML=out+"?";
-        }
-        if(random_level==1){
-            document.getElementById("level").innerHTML="Lv2";
-            var number_of_operations=1+Math.floor(Math.random()*3);
-            for (i=0;i<=number_of_operations;i++){
-                var num1=Math.floor(Math.random()*(lv1max-lv1min)+lv1min);
-                //var num2=Math.floor(Math.random()*(lv1max-lv1min)+lv1min);
-                if(num1<0){
-                    equation_num.push(num1);
-                    equation.push("("+num1+")");
-                }
-                else{
-                    equation_num.push(num1);
-                   equation.push(num1); 
-                }
-                
-                if(i<number_of_operations){
-                    var random_operation=operations[Math.floor(Math.random()*2)];//just sum and subtraction
-                    equation.push(random_operation);
-                    equation_op.push(random_operation);
-                }
-            }
-            for(i=0;i<equation.length;i++){
-                out+=equation[i];
-                
-            }
-            var next_operation=[];
-            for(i=0,j=0;i<equation.length;i++){
-                
-                //is a number
-                if(equation[i]!='+' && equation[i]!='-' &&equation[i]!='*' && equation[i]!='/'){
-                    var op=next_operation.pop();
-                    if(i==0){
-                        result+=equation_num[i];
-                    }else{
-                        if(op=='+'){
-                            result+=equation_num[j];   
-                        }
-                        if(op=='-'){
-                            result-=equation_num[j];
-                        }
-                        if(op=='*'){
-                            result*=equation_num[j];
-                        }
-                        if(op=='/'){
-                            result/=equation_num[j];
-                        }
-                    }
-                    j++;
-                }
-                else{//operation
-                    next_operation.push(equation[i]);
-                }
-                
-            }
-            console.log("result:"+result);
-            document.getElementById("question").innerHTML=out+"?";
-            
-        }
-        if(random_level==2){
-            document.getElementById("level").innerHTML="Lv3";
-            var number_of_operations=1+Math.floor(Math.random()*1);
-            for (i=0;i<=number_of_operations;i++){
-                var num1=Math.floor(Math.random()*(lv3max-lv3min)+lv3min);
-                //var num2=Math.floor(Math.random()*(lv1max-lv1min)+lv1min);
-                if(num1<0){
-                    equation_num.push(num1);
-                    equation.push("("+num1+")");
-                }
-                else{
-                    equation_num.push(num1);
-                   equation.push(num1); 
-                }
-                
-                if(i<number_of_operations){
-                    var random_operation=operations[Math.floor(Math.random()*4)];//just sum and subtraction and multiplication
-                    equation.push(random_operation);
-                    equation_op.push(random_operation);
-                }
-            }
-            for(i=0;i<equation.length;i++){
-                out+=equation[i];
-                
-            }
-            var next_operation=[];
-            for(i=0,j=0;i<equation.length;i++){
-                
-                //is a number
-                if(equation[i]!='+' && equation[i]!='-' &&equation[i]!='*' && equation[i]!='/'){
-                    var op=next_operation.pop();
-                    if(i==0){
-                        result+=equation_num[i];
-                    }else{
-                        if(op=='+'){
-                            result+=equation_num[j];   
-                        }
-                        if(op=='-'){
-                            result-=equation_num[j];
-                        }
-                        if(op=='*'){
-                            result*=equation_num[j];
-                        }
-                        if(op=='/'){
-                            result/=equation_num[j];
-                        }
-                    }
-                    j++;
-                }
-                else{//operation
-                    next_operation.push(equation[i]);
-                }
-                
-            }
-            console.log("result:"+result);
-            document.getElementById("question").innerHTML=out+"?";
-        }
-        
-      */  
     }
     document.getElementById('html').style.width=window.innerWidth;
     document.getElementById('html').style.height=window.innerHeight;
