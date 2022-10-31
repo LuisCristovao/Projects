@@ -342,18 +342,20 @@
     
    
     function Check(calculator){
+        let setTimeoutValue=500
         console.log("answer:"+document.getElementById("answer").value)
         if(calculator.result==document.getElementById("answer").value){
             document.getElementById("feedback").innerHTML="<font color='green'>You Found the Right Answer!</font>"
             calculator.score.right+=1
             calculator.end=true;
         }else{
-            document.getElementById("feedback").innerHTML="<font color='red'>Wrong Answer!</font>"
+            document.getElementById("feedback").innerHTML=`<font color='red'>Wrong Answer! correct: <strong>${calculator.result}</strong> </font>`
             calculator.score.wrong+=1
             calculator.end=true;
+            setTimeoutValue=1300
         }
         
-        setTimeout(()=>{New(calculator)},500);
+        setTimeout(()=>{New(calculator)},setTimeoutValue);
         //calculator=null;
     }
     //var result=0;
