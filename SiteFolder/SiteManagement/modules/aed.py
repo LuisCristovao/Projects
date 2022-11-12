@@ -161,21 +161,20 @@ def add_posts_row(data):
     try:
         db=get_all_posts()
         url="?"+data["title"].replace(" ","-")
-        page=json_files.parse(data["page location"])
-        data["page location"]=json_files.parse(data["page location"])
         #data["id"]=len(db)
         if detect_if_unique(db,data["title"]):
             if data["page location"]!="":
                 data["link"]=url
+                page=json_files.parse(data["page location"])
+                data["page location"]=json_files.parse(data["page location"])
                 pages.writeRowDB(url,page)
+                addSitePage(data["page location"]["page content"])
             new_db=insertByDate(db,data)
-            addSitePage(data["page location"]["page content"])
             
             
             #add tags to tags db
             tags.writeTags(data["search tags"])
             tags.writeTags(data["secondary search tags"])
-            
             #db.append(data)
             #dump json object in db all_post.json
             dirpath=json_files.get_dirpath_less(1)# to work as a module of server
