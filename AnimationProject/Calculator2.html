@@ -275,7 +275,11 @@
                 //this.move(1000*20,this.result);
                 this.time=90;
                 document.getElementById("level").innerHTML="Lv3";
-                var number_of_operations=2+Math.floor(Math.random()*2);
+                var number_of_operations=1+Math.floor(Math.random()*3);
+                let multiply_division=false
+                if(number_of_operations==1){
+                    multiply_division=true  
+                }
                 for (var i=0;i<=number_of_operations;i++){
                     var num1=Math.floor(Math.random()*(this.lv3max-this.lv3min)+this.lv3min);
                     //var num2=Math.floor(Math.random()*(lv1max-lv1min)+lv1min);
@@ -289,9 +293,13 @@
                     }
 
                     if(i<number_of_operations){
-                        var random_operation=this.operations[Math.floor(Math.random()*2)];//just sum and subtraction 
+                        var random_operation=this.operations[Math.floor(Math.random()*2)];//only sum and subtractions 
+                        if(multiply_division){
+                            var random_operation=this.operations[2];// *
+                        }
                         this.equation.push(random_operation);
                         this.equation_op.push(random_operation);
+                        
                     }
                 }
                 for(var i=0;i<this.equation.length;i++){
