@@ -36,7 +36,7 @@ def get_dirpath_less(less=0):
     else:
         split_character_for_diretories = "/" #linux windows directories separator
 
-    array = dirpath.split("/")
+    array = dirpath.split(split_character_for_diretories)
     
     for i in range(len(array)-less):
         out += array[i]+split_character_for_diretories
