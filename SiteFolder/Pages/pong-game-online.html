@@ -1,0 +1,32 @@
+<h1>Local Multiplayer Pong Game</h1>
+<p>
+    I created a classic Pong game with local multiplayer using WebRTC favorite library, PeerJS. 
+    Feel free to try the game yourself and play with a friend!  
+</p>
+<a href="https://gametesis.github.io/pong-game-local-multiplayer/">Play Game</a>
+<video src="SiteFolder\Images\pong-online\pong-game.mp4" controls autoplay muted width="100%" height="600"></video>
+
+<h2 style="margin: 20px;">Developer Notes:</h2>
+<ul style="font-size: larger;">
+    <li>The main game loop was created with the help of AI (Grok3), so there were no major issues here.</li>
+    <li>The multiplayer part, however, was not implemented as I intended, so I had to assist the AI:</li>
+    <ul>
+        <li>I used another project, where I built a chat application using PeerJS, as a template for this project.</li>
+        <li>Basically, if both players are on the same network, PeerJS only needs a connection string 
+            to establish the connection between them.</li>
+        <li>One issue to consider is implementing multiple connection attempts in case of failure.</li>
+        <li>
+            Another challenge was determining when the connection was successfully established 
+            and preventing PeerJS from initiating additional connections with other players afterward.
+        </li>
+        <li>Fixing game bugs, such as an issue where the game speed was increasing exponentially.</li>
+    </ul>
+    <li>
+        Although the game runs well for the non-host player when there is a good connection, 
+        some lag is inevitable. However, it is still playable.
+    </li>
+    <li>
+        Unfortunately, while PeerJS is a great tool, achieving smooth performance requires 
+        further optimizations.
+    </li>
+</ul>
