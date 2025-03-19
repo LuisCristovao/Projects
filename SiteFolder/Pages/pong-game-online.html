@@ -19,6 +19,18 @@
             Another challenge was determining when the connection was successfully established 
             and preventing PeerJS from initiating additional connections with other players afterward.
         </li>
+        <li>
+            The comunication was made in the following manner:
+        </li>
+        <ul>
+            <li>Host simulates the game and sends data to the non-host player about: ball position, paddle position, 
+                actual score and canvas width height in case of screen resizing
+            </li>
+            <li>The non host player sends just its paddle position and canvas size</li>
+            <li>The non host player every time it receives info from the host, it updates the ball, host player paddle position, score and canvas size</li>
+            <li>The host player just updates canvas resize and non-host player paddle position</li>
+            
+        </ul>
         <li>Fixing game bugs, such as an issue where the game speed was increasing exponentially.</li>
     </ul>
     <li>
