@@ -1,0 +1,113 @@
+<h1><b>Ollama Web Server</b></h1>
+
+<h2><b>Introduction and Goals</b></h2>
+<p>
+  As part of my exploration into how to harness the power of
+  <b>AI models</b> for practical use, I decided to experiment with one of the
+  most well-known free local models available: <b>Ollama</b>.
+</p>
+<p>So, what was I trying to achieve?</p>
+<p>
+  My goal was to build a simple <b>chatbot</b> capable of answering questions
+  about specific knowledge that isn't available on the internet—in short, to
+  make an AI that can respond to questions based on <b>local information</b>.
+</p>
+<h2><b>Code and Video </b></h2>
+<div style="display: flex; flex-direction: column; align-items: center">
+  <button
+    class="btn btn-default btn-lg"
+    style="font-size: 2em;margin-bottom: 30px;"
+    onclick="window.location.href='https://github.com/LuisCristovao/ollama/tree/main'"
+  >
+    Source Code
+  </button>
+
+  <video
+    src="/SiteFolder/Images/ollama/ollama.mp4"
+    style="width: 100%; height: 400px"
+    controls
+  autoplay
+  ></video>
+</div>
+
+<h2><b>Development</b></h2>
+<p>
+  To get started, I installed <b>Ollama</b> on my local machine and looked into
+  how to interact with it via an <b>API</b>.
+</p>
+<p>
+  Fortunately, <b>Ollama</b> already provides a built-in <b>API</b> that runs on
+  a local port.
+</p>
+<p>
+  With that in place, I created a simple <b>proxy server</b> to act as a bridge
+  between the <b>user</b> (via an <b>HTML interface</b>) and the
+  <b>Ollama model</b>.
+</p>
+<p>
+  To feed <b>custom knowledge</b> into the model, the fastest method is by
+  including it in the <b>context</b> provided to the <b>AI</b> during each
+  interaction.
+</p>
+<p>
+  However, this approach comes with <b>limitations</b>. First, there’s a limit
+  to how much <b>context</b> you can include—especially with these lightweight,
+  local models. Second, the model doesn’t really <b>"learn"</b> from
+  <b>context alone</b>. For example, I once provided a chunk of a
+  <b>wiki</b> about a fictional character the model was somewhat familiar with.
+  But due to the way the text was structured, it struggled to answer even basic
+  questions about the character.
+</p>
+<p>
+  To solve this, I reformatted the content into a <b>Q&A-style format</b>, and
+  that significantly improved the model’s ability to give accurate answers. The
+  more explicitly structured the <b>context</b>, the better the
+  <b>performance</b>.
+</p>
+
+<h2><b>Conclusions</b></h2>
+
+<p>
+  From what I’ve observed, the <b>Ollama model</b> (<b>llama3</b>) doesn’t truly
+  <b>learn</b> or <b>reason</b> over new information provided in <b>context</b>.
+  Ideally, I’d love to be able to just dump an entire <b>wiki</b> into it and
+  have the model intelligently <b>retrieve information</b>—recognizing
+  <b>patterns</b> and even drawing some <b>logical conclusions</b> from the
+  text. Unfortunately, that’s not quite how it works.
+</p>
+
+<p>
+  Instead, <b>Ollama</b> functions more like an
+  <b>advanced search engine</b> that can interpret
+  <b>natural language queries</b>. It searches through the given
+  <b>context</b> for potentially relevant content and, if it finds a match, it
+  just pulls that information out and repeats it more or less as it is, without
+  really processing it in a deeper way.
+</p>
+
+<p>
+  That said, it performs quite well when the right <b>context</b> is provided.
+  If it encounters something similar to the input within the supplied material,
+  it can <b>retrieve</b> and <b>reproduce</b> that information accurately,
+  almost as if recalling it directly.
+</p>
+
+<p>
+  In my experience, one of the most effective <b>use cases</b> has been querying
+  <b>internal documentation</b>, like a <b>company wiki</b>. It’s especially
+  helpful when looking up information and answering questions based on that.
+  Moreover, the more <b>detailed</b> and <b>tailored</b> the <b>context</b>—such
+  as <b>simulated chat scenarios</b> with possible <b>user queries</b> and
+  expected <b>replies</b>—the better the model performs. Its ability to deliver
+  <b>accurate</b> and <b>relevant answers</b> improves noticeably with
+  <b>richer input</b>.
+</p>
+
+<h2><b>Future Possible Developments</b></h2>
+<p>
+  Replace the current <b>static context</b> with a <b>dynamic context</b> that
+  updates based on the <b>conversation flow</b> or <b>user input</b>. This would
+  allow the <b>chatbot</b> to respond in a more <b>adaptive</b> and
+  <b>intelligent</b> way, rather than relying on a
+  <b>fixed block of information</b>.
+</p>
