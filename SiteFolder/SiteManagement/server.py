@@ -9,6 +9,11 @@ import flask as fl
 from importlib.machinery import SourceFileLoader
 import json
 import os
+
+# Ensure the current working directory is the server script directory.
+# This keeps relative path helpers consistent when the server is launched from elsewhere.
+os.chdir(os.path.dirname(__file__))
+
 #import module aed.py from folder modules
 aed = SourceFileLoader("aed.py", os.path.join(os.path.dirname(__file__), "modules/aed.py")).load_module()
 #aed.get_all_posts()
